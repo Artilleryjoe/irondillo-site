@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>How to Tell If That “Tech Support” Call Is a Scam – IronDillo Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Learn how to recognize and shut down tech support scam calls before they get your info.">
+  <meta name="author" content="Kristopher McCoy">
+  <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+  <meta property="og:title" content="How to Tell If That “Tech Support” Call Is a Scam">
+  <meta property="og:description" content="Recognize the signs of tech support scams, stay calm, and protect yourself.">
+  <meta property="og:image" content="https://irondillo.com/assets/irondillo-preview.jpg">
+  <meta property="og:url" content="https://irondillo.com/posts/tech-support-scam-warning.html">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <style>
+    body {
+      background: #0e0e0e;
+      color: #f4f4f4;
+      font-family: Arial, sans-serif;
+      padding: 2rem;
+      max-width: 800px;
+      margin: auto;
+    }
+    h1, h2 {
+      color: #00ffc3;
+    }
+    p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+    li {
+      margin-bottom: 1rem;
+    }
+    a {
+      color: #00ffc3;
+      text-decoration: underline;
+    }
+    nav {
+      margin-bottom: 2rem;
+    }
+    nav a {
+      color: #00ffc3;
+      margin-right: 1rem;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <a href="/index.html">Home</a>
+    <a href="/blog.html">Blog</a>
+    <a href="/services.html">Services</a>
+  </nav>
+
+  <h1>How to Tell If That “Tech Support” Call Is a Scam</h1>
+
+  <p>You’re relaxing, minding your business, when the phone rings. It’s “Microsoft” or “Amazon” or “your bank”—and something’s urgent. Suspicious login. Hacked account. Refund needed. They’ll fix it… if you just give them remote access or read off a code.</p>
+
+  <p><strong>🚨 Stop right there.</strong> No legit company cold-calls you to fix a problem you didn’t know about.</p>
+
+  <p>Here’s how to spot the scam—and shut it down:</p>
+
+  <h2>1. They Call You</h2>
+  <p>Real tech support doesn’t call out of the blue. Ever. If you didn’t initiate contact, assume it’s fake.</p>
+
+  <h2>2. They Want Access</h2>
+  <p>If they ask to install software or take over your device, don’t do it. That’s how they plant malware or steal your info.</p>
+
+  <h2>3. They Push Panic</h2>
+  <p>Scammers want you to act fast so you don’t think. Stay calm. Ask questions. Say you'll call back—and then look up the company yourself.</p>
+
+  <h2>4. They Demand Weird Payment</h2>
+  <p>Gift cards? Crypto? Wire transfer? No real business demands payment like that.</p>
+
+  <h2>5. They Sound Official—but Aren’t</h2>
+  <p>They might know your name or spoof a legit number. Doesn’t matter. Anyone can fake a caller ID. It’s the request that matters.</p>
+
+  <hr>
+  <p><strong>Bottom Line:</strong> Hang up. Block the number. Report it if you want—but don’t engage. And definitely don’t feel bad. These scams catch everyone, from college kids to grandmas.</p>
+
+  <p>Your best defense? A healthy dose of skepticism and a refusal to panic.</p>
+
+  <p><strong>Iron Dillo Rule:</strong> If someone calls you about tech problems you didn’t report, it’s a trap.</p>
+
+</body>
+</html>
