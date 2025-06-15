@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Basic WordPress Security for Beginners – IronDillo</title>
+  <meta name="description" content="Simple, effective steps to secure your WordPress site without needing to be a tech expert.">
+  <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+  <link rel="canonical" href="https://irondillo.com/posts/wordpress-security-basics.html" />
+
+  <!-- SEO Meta -->
+  <meta name="keywords" content="WordPress security, beginner WordPress, website protection, cybersecurity tips">
+  <meta name="author" content="Kristopher McCoy">
+  <meta property="og:title" content="Basic WordPress Security for Beginners – IronDillo">
+  <meta property="og:description" content="Quick fixes and practical advice to secure your WordPress website.">
+  <meta property="og:image" content="https://irondillo.com/assets/irondillo-preview.jpg">
+  <meta property="og:url" content="https://irondillo.com/posts/wordpress-security-basics.html">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <style>
+    body {
+      background: #0e0e0e;
+      color: #f4f4f4;
+      font-family: Arial, sans-serif;
+      padding: 2rem;
+      max-width: 800px;
+      margin: auto;
+    }
+    h1 {
+      color: #00ffc3;
+    }
+    a {
+      color: #00ffc3;
+    }
+    code {
+      background: #222;
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+    }
+    footer {
+      margin-top: 3rem;
+      font-size: 0.9rem;
+      color: #888;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Basic WordPress Security for Beginners</h1>
+  <p><strong>Published:</strong> June 2025 by IronDillo</p>
+
+  <p>WordPress makes it easy to launch a website—but that simplicity comes with security risks. Don’t worry, you don’t need to be a developer to lock things down. Here are five easy wins you can implement today to make your WordPress site much harder to hack.</p>
+
+  <h2>1. Change the Default “admin” Username</h2>
+  <p>Hackers love to guess passwords for common usernames like <code>admin</code>. If you’re still using it, create a new user with admin rights, log in as that, and delete the old one.</p>
+
+  <h2>2. Use a Security Plugin</h2>
+  <p>Install a reputable security plugin like Wordfence or iThemes Security. These tools help block brute force attacks, monitor login attempts, and flag vulnerabilities.</p>
+
+  <h2>3. Keep Everything Updated</h2>
+  <p>Update WordPress core, themes, and plugins regularly. Most hacks happen through outdated software. Set auto-updates where possible or check once a week.</p>
+
+  <h2>4. Disable File Editing</h2>
+  <p>Add this line to your <code>wp-config.php</code> file to block anyone from editing theme/plugin code from the admin dashboard:</p>
+  <pre><code>define('DISALLOW_FILE_EDIT', true);</code></pre>
+
+  <h2>5. Use Strong Passwords + 2FA</h2>
+  <p>Use a password manager like Bitwarden to create unique passwords. Then, enable two-factor authentication (2FA) for your admin account using an app like Authy.</p>
+
+  <h2>Bonus: Backup Often</h2>
+  <p>If all else fails, having regular backups can save your bacon. Most good hosts offer this, or you can install a plugin like UpdraftPlus.</p>
+
+  <p><strong>Bottom Line:</strong> You don’t need to spend a dime to make your WordPress site safer. These free steps will already put you ahead of most site owners.</p>
+
+  <p>Want help reviewing your site setup? <a href="/services.html">I offer light diagnostics and setup advice</a>—no pressure, just clarity.</p>
+
+  <footer>
+    &copy; 2025 Iron Dillo. Veteran-Owned | <a href="/privacy.html">Privacy</a> | <a href="/terms.html">Terms</a> | <a href="/credits.html">Credits</a>
+  </footer>
+
+</body>
+</html>
