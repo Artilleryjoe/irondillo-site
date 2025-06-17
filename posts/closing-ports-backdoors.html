@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Are Open Ports a Backdoor?</title>
+  <meta name="description" content="Learn how open ports can leave your devices exposed—and how to close them securely.">
+  <link rel="canonical" href="https://irondillo.com/posts/closing-ports-backdoors.html" />
+  <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO Meta -->
+  <meta name="keywords" content="cybersecurity, open ports, network security, port scanning, secure your system, firewall">
+  <meta name="author" content="Kristopher McCoy">
+
+  <!-- Social Sharing -->
+  <meta property="og:title" content="Are Open Ports a Backdoor?" />
+  <meta property="og:description" content="Learn how open ports can leave your devices exposed—and how to close them securely." />
+  <meta property="og:image" content="https://irondillo.com/assets/irondillo-preview.jpg" />
+  <meta property="og:url" content="https://irondillo.com/posts/closing-ports-backdoors.html" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <style>
+    body {
+      background: #0e0e0e;
+      color: #f4f4f4;
+      font-family: Arial, sans-serif;
+      padding: 2rem;
+      max-width: 800px;
+      margin: auto;
+      line-height: 1.6;
+    }
+    h1 {
+      color: #00ffc3;
+      font-size: 2.5rem;
+      text-align: center;
+    }
+    h2 {
+      color: #00ffc3;
+      margin-top: 2rem;
+    }
+    a {
+      color: #00ffc3;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Are Open Ports a Backdoor?</h1>
+
+  <p>Open ports are like doors into your system—some are meant to be there, others shouldn’t be. But how do you know which is which?</p>
+
+  <h2>First, What’s a Port?</h2>
+  <p>A port is a digital channel that allows software on your device to send or receive data. Common ones include:</p>
+  <ul>
+    <li>Port 80 (HTTP)</li>
+    <li>Port 443 (HTTPS)</li>
+    <li>Port 22 (SSH)</li>
+    <li>Port 3389 (RDP)</li>
+  </ul>
+
+  <p>If these ports are open and exposed to the internet—and not protected by a firewall or access rules—they can be an easy way in for attackers.</p>
+
+  <h2>How Do Attackers Exploit Open Ports?</h2>
+  <p>They scan for common ports using tools like Nmap, then try to exploit known vulnerabilities on whatever service is running. If that service is misconfigured or outdated? You're at risk.</p>
+
+  <h2>How to Check for Open Ports</h2>
+  <p>You can use simple tools like:</p>
+  <ul>
+    <li><strong>ShieldsUP!</strong> – A free external scan tool</li>
+    <li><strong>Nmap</strong> – Command-line port scanner</li>
+    <li><strong>Netstat</strong> – Built into most systems to view local ports</li>
+  </ul>
+
+  <h2>Best Practices</h2>
+  <ul>
+    <li>Close any ports you’re not actively using</li>
+    <li>Restrict remote access to trusted IPs</li>
+    <li>Use strong passwords and 2FA on exposed services</li>
+    <li>Patch systems regularly</li>
+  </ul>
+
+  <p>Every open port is a possible vector. The fewer you leave open, the less chance someone walks in uninvited.</p>
+
+  <p><a href="/blog.html">← Back to Blog</a></p>
+
+</body>
+</html>
