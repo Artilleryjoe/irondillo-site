@@ -1,54 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
   <title>IronDillo Cybersecurity – Veteran-Owned Online Protection</title>
-  <meta name="description" content="Cybersecurity services built for real people and small businesses. Veteran-owned, trustworthy, and hands-on digital safety expertise.">
+  <meta name="description" content="Cybersecurity services built for real people and small businesses. Veteran-owned, trustworthy, and hands-on digital safety expertise." />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
-
-  <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- Custom Styles -->
-  <style>
-    body {
-      background-color: #0e0e0e;
-      color: #f4f4f4;
-      font-family: Arial, sans-serif;
-    }
-    a {
-      color: #00ffc3;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-    input, textarea {
-      background-color: #222;
-      color: #eee;
-      border: none;
-      border-radius: 5px;
-      padding: 0.7rem;
-      width: 100%;
-      max-width: 500px;
-      margin-top: 0.5rem;
-    }
-    button {
-      background-color: #00ffc3;
-      color: #000;
-      font-weight: bold;
-      padding: 0.7rem 1.5rem;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      margin-top: 1rem;
-    }
-  </style>
 </head>
+<body class="flex flex-col min-h-screen bg-gray-900 text-gray-100 font-sans">
 
-<body class="flex flex-col min-h-screen">
-
+  <!-- Header with logo and intro -->
   <header class="p-6 text-center">
     <img src="/assets/IronDilloLogo.png" alt="IronDillo cybersecurity armadillo logo" class="mx-auto mb-6 w-36 h-auto" />
     <h1 class="text-4xl font-extrabold text-teal-400 mb-2">Iron Dillo Cybersecurity</h1>
@@ -61,14 +23,17 @@
     </p>
   </header>
 
-  <nav class="bg-gray-900 py-3 text-center space-x-6">
+  <!-- Navigation -->
+  <nav class="bg-gray-900 py-3 text-center space-x-6 mb-10">
     <a href="/index.html" class="hover:underline">Home</a>
     <a href="/services.html" class="hover:underline">Services</a>
     <a href="/about.html" class="hover:underline">About</a>
     <a href="/blog.html" class="hover:underline">Blog</a>
+    <a href="/contact.html" class="hover:underline">Contact</a>
   </nav>
 
-  <main class="flex-grow px-6 py-12 max-w-5xl mx-auto space-y-16">
+  <!-- Main content -->
+  <main class="flex-grow max-w-5xl mx-auto px-6 py-12 space-y-16">
 
     <section class="text-center">
       <div class="space-x-6 mb-6">
@@ -138,9 +103,11 @@
         Have questions? Not sure what you need? <a href="#" class="underline">Contact me</a> or <a href="#" class="underline">book a free intro call</a> and let’s figure it out—no pressure.
       </p>
     </section>
+
   </main>
 
-  <footer class="bg-gray-900 text-gray-500 text-center p-6 mt-12">
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-gray-500 text-center p-6 mt-12 text-sm">
     &copy; 2025 Iron Dillo. All rights reserved. | Veteran-Owned | 
     <a href="/privacy.html" class="hover:underline">Privacy</a> | 
     <a href="/terms.html" class="hover:underline">Terms</a>
