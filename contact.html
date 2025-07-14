@@ -48,24 +48,61 @@
       color: #999;
       margin-top: 1rem;
     }
+    .success-message {
+      margin-top: 1rem;
+      color: #00b4b6;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
   <h1>Contact IronDillo</h1>
   <p>Have a cybersecurity question? Want to schedule a consult? Reach out below and we’ll get back to you soon.</p>
 
-  <form action="mailto:your@email.com" method="POST" enctype="text/plain">
+  <form id="contact-form" action="https://formspree.io/f/xldnbpdg" method="POST">
     <label for="name">Your Name</label>
     <input type="text" name="name" id="name" required />
 
     <label for="email">Your Email</label>
-    <input type="email" name="email" id="email" required />
+    <input type="email" name="_replyto" id="email" required />
 
     <label for="message">Message</label>
     <textarea name="message" id="message" rows="6" required></textarea>
 
     <button type="submit">Send Message</button>
-    <p class="note">* This form uses your email client to send. For better delivery and spam filtering, use a backend or a service like Formspree or Netlify Forms.</p>
+    <p class="note">* This form uses Formspree to handle your message securely and reliably.</p>
   </form>
+
+  <p id="success" class="success-message" style="display:none;">Thanks for reaching out! We'll get back to you soon.</p>
+
+  <script>
+    const form = document.getElementById('contact-form');
+    const successMessage = document.getElementById('success');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(form);
+
+      try {
+        const response = await fetch(form.action, {
+          method: form.method,
+          body: formData,
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+
+        if (response.ok) {
+          form.style.display = 'none';
+          successMessage.style.display = 'block';
+        } else {
+          alert('Oops! There was a problem submitting your form.');
+        }
+      } catch (error) {
+        alert('Oops! There was a problem submitting your form.');
+      }
+    });
+  </script>
 </body>
 </html>
