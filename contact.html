@@ -5,6 +5,70 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact – IronDillo Cybersecurity</title>
   <style>
+    form {
+  max-width: 600px;
+  margin-top: 1.5rem;
+  background-color: #121212;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 180, 182, 0.3);
+}
+
+label {
+  display: block;
+  margin-top: 1.25rem;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #00b4b6;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  margin-top: 0.5rem;
+  background: #1a1a1a;
+  border: 2px solid #444;
+  color: #eee;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+  font-family: inherit;
+}
+
+input:focus,
+textarea:focus {
+  border-color: #00b4b6;
+  outline: none;
+  box-shadow: 0 0 6px #00b4b6;
+}
+
+button {
+  margin-top: 2rem;
+  background-color: #00b4b6;
+  color: #0e0e0e;
+  padding: 0.85rem 2rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.25s ease;
+}
+
+button:hover,
+button:focus {
+  background-color: #009393;
+}
+
+.success-message {
+  margin-top: 1.5rem;
+  color: #00b4b6;
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-align: center;
+}
+
     body {
       background-color: #0e0e0e;
       color: #ffffff;
