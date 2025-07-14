@@ -1,125 +1,103 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
   <title>IronDillo Blog – Cyber Hygiene Tips & Updates</title>
   <meta name="description" content="Cybersecurity guidance, threat breakdowns, and plain-English advice for real-world digital safety.">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+  <link rel="icon" href="/assets/favicon.ico" />
   <link rel="canonical" href="https://irondillo.com/blog.html" />
 
-  <!-- SEO Meta -->
-  <meta name="description" content="Read cybersecurity tips, updates, and advice from IronDillo. Learn how to protect your systems and stay safe online.">
+  <!-- SEO + Open Graph -->
   <meta name="keywords" content="cybersecurity blog, IT tips, threat awareness, cyber hygiene, small business security">
   <meta name="author" content="Kristopher McCoy">
-
-  <!-- Open Graph / Social -->
   <meta property="og:title" content="IronDillo Blog">
   <meta property="og:description" content="Cyber hygiene tips, threat breakdowns, and security insights for small businesses and individuals.">
   <meta property="og:image" content="https://irondillo.com/assets/irondillo-preview.jpg">
   <meta property="og:url" content="https://irondillo.com/blog.html">
   <meta name="twitter:card" content="summary_large_image">
 
-  <style>
-    body {
-      background: #0e0e0e;
-      color: #f4f4f4;
-      font-family: Arial, sans-serif;
-      padding: 2rem;
-      text-align: center;
-    }
-    header img {
-      max-width: 150px;
-      height: auto;
-    }
-    h1 {
-      font-size: 2.5rem;
-      color: #00ffc3;
-    }
-    .post {
-      background: #1a1a1a;
-      margin: 1.5rem auto;
-      padding: 1.5rem;
-      max-width: 700px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0, 255, 195, 0.1);
-      text-align: left;
-    }
-    .post h2 {
-      color: #00ffc3;
-    }
-    .post p {
-      font-size: 1rem;
-    }
-    nav {
-      background: #111;
-      padding: 1rem 0;
-    }
-    nav a {
-      margin: 0 1rem;
-      color: #00ffc3;
-      text-decoration: none;
-    }
-    @media (max-width: 600px) {
-      h1 { font-size: 2rem; }
-      nav a { display: block; margin: 0.5rem 0; }
-      header img { max-width: 100px; }
-    }
-  </style>
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body>
+<body class="bg-gray-900 text-gray-100 font-sans">
 
-  <header>
-    <img src="/assets/IronDilloLogo.png" alt="IronDillo Logo">
-  </header>
-
-  <nav>
-    <a href="/index.html">Home</a>
-    <a href="/services.html">Services</a>
-    <a href="/about.html">About</a>
-    <a href="/blog.html">Blog</a>
+  <!-- Navigation -->
+  <nav class="bg-gray-800 py-4 text-center space-x-6">
+    <a href="/index.html" class="text-teal-400 hover:underline font-semibold">Home</a>
+    <a href="/services.html" class="text-teal-400 hover:underline font-semibold">Services</a>
+    <a href="/about.html" class="text-teal-400 hover:underline font-semibold">About</a>
+    <a href="/blog.html" class="text-teal-400 hover:underline font-semibold">Blog</a>
+    <a href="/contact.html" class="text-teal-400 hover:underline font-semibold">Contact</a>
   </nav>
 
-  <h1>Iron Dillo Blog</h1>
-  <p>Cybersecurity guidance, digital hygiene tips, and insights for real people and small businesses.</p>
+  <header class="text-center py-12 px-4">
+    <img src="/assets/IronDilloLogo.png" alt="IronDillo Logo" class="mx-auto w-32 mb-6" />
+    <h1 class="text-4xl font-extrabold text-teal-400 mb-2">Iron Dillo Blog</h1>
+    <p class="text-gray-300 max-w-xl mx-auto">
+      Cybersecurity guidance, digital hygiene tips, and insights for real people and small businesses.
+    </p>
+  </header>
 
-  <div class="post">
-  <h2><a href="/posts/safer-online-now.html">5 Ways to Stay Safer Online Right Now</a></h2>
-  <p>Quick, actionable cybersecurity advice for real people and small businesses. Start here.</p>
-  </div>
+  <!-- Blog Posts Grid -->
+  <main class="max-w-6xl mx-auto px-4 pb-20 grid gap-10 md:grid-cols-2 lg:grid-cols-3">
+    <!-- Blog Post Card -->
+    <article class="bg-gray-800 rounded-lg overflow-hidden shadow-lg">
+      <img src="/assets/blog/thumb-safer-online.jpg" alt="5 Ways to Stay Safer Online" class="w-full h-48 object-cover">
+      <div class="p-6">
+        <h2 class="text-xl font-bold text-teal-300 mb-2"><a href="/posts/safer-online-now.html">5 Ways to Stay Safer Online Right Now</a></h2>
+        <p class="text-gray-300 text-sm">Quick, actionable cybersecurity advice for real people and small businesses. Start here.</p>
+      </div>
+    </article>
 
-  <div class="post">
-  <h2><a href="/posts/tech-support-scam-warning.html">How to Tell If That “Tech Support” Call Is a Scam</a></h2>
-  <p>Don’t get tricked by cold-callers claiming your account was hacked. Learn how to spot the red flags and protect yourself from remote-access scams.</p>
-  </div>
+    <article class="bg-gray-800 rounded-lg overflow-hidden shadow-lg">
+      <img src="/assets/blog/thumb-tech-support.jpg" alt="Tech Support Scam" class="w-full h-48 object-cover">
+      <div class="p-6">
+        <h2 class="text-xl font-bold text-teal-300 mb-2"><a href="/posts/tech-support-scam-warning.html">How to Tell If That Tech Support Call Is a Scam</a></h2>
+        <p class="text-gray-300 text-sm">Don’t get tricked by cold-callers claiming your account was hacked. Learn how to spot the red flags.</p>
+      </div>
+    </article>
 
-  <div class="post">
-  <h2><a href="/posts/wordpress-security-basics.html">Basic WordPress Security for Beginners</a></h2>
-  <p>WordPress makes it easy to launch a website, but that simplicity comes with security risks.</p>
-  </div>
+    <article class="bg-gray-800 rounded-lg overflow-hidden shadow-lg">
+      <img src="/assets/blog/thumb-wordpress.jpg" alt="WordPress Security" class="w-full h-48 object-cover">
+      <div class="p-6">
+        <h2 class="text-xl font-bold text-teal-300 mb-2"><a href="/posts/wordpress-security-basics.html">Basic WordPress Security for Beginners</a></h2>
+        <p class="text-gray-300 text-sm">WordPress makes it easy to launch a site, but simplicity comes with security risks.</p>
+      </div>
+    </article>
 
-  <div class="post">
-  <h2><a href="/posts/free-tools-i-trust.html">Free Tools I Trust</a></h2>
-  <p>Not every cybersecurity tool costs money—or your sanity.</p>
-  </div>
+    <article class="bg-gray-800 rounded-lg overflow-hidden shadow-lg">
+      <img src="/assets/blog/thumb-tools.jpg" alt="Free Tools I Trust" class="w-full h-48 object-cover">
+      <div class="p-6">
+        <h2 class="text-xl font-bold text-teal-300 mb-2"><a href="/posts/free-tools-i-trust.html">Free Tools I Trust</a></h2>
+        <p class="text-gray-300 text-sm">Not every cybersecurity tool costs money—or your sanity.</p>
+      </div>
+    </article>
 
-  <div class="post">
-  <h2><a href="/posts/closing-ports-backdoors.html">Are Open Ports a backdoor?</h2>
-  <p>Open ports are like doors into your system; some are meant to be there, others shouldn’t be.</p>
-  </div>
+    <article class="bg-gray-800 rounded-lg overflow-hidden shadow-lg">
+      <img src="/assets/blog/thumb-ports.jpg" alt="Open Ports Explained" class="w-full h-48 object-cover">
+      <div class="p-6">
+        <h2 class="text-xl font-bold text-teal-300 mb-2"><a href="/posts/closing-ports-backdoors.html">Are Open Ports a Backdoor?</a></h2>
+        <p class="text-gray-300 text-sm">Open ports are like doors into your system. Some are needed. Some aren't.</p>
+      </div>
+    </article>
 
-  <div class="post">
-  <h2><a href="posts/rural-cybersecurity.html">Why Rural Businesses Can’t Ignore Cybersecurity Anymore</h2>
-  <p>When folks think about hackers, they picture big cities and giant companies.</p>
-  </div>
+    <article class="bg-gray-800 rounded-lg overflow-hidden shadow-lg">
+      <img src="/assets/blog/thumb-rural.jpg" alt="Rural Cybersecurity" class="w-full h-48 object-cover">
+      <div class="p-6">
+        <h2 class="text-xl font-bold text-teal-300 mb-2"><a href="/posts/rural-cybersecurity.html">Why Rural Businesses Can’t Ignore Cybersecurity</a></h2>
+        <p class="text-gray-300 text-sm">When folks think about hackers, they picture big cities. That’s a mistake.</p>
+      </div>
+    </article>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-gray-500 text-center p-6 text-sm mt-12">
+    &copy; 2025 Iron Dillo. All rights reserved. | Veteran-Owned |
+    <a href="/privacy.html" class="hover:underline text-teal-400">Privacy</a> |
+    <a href="/terms.html" class="hover:underline text-teal-400">Terms</a>
+  </footer>
 
 </body>
 </html>
-
-<footer style="margin-top:3rem; padding:1rem; color:#888; font-size:0.9rem;">
-  &copy; 2025 Iron Dillo. All rights reserved. | Veteran-Owned | 
-  <a href="/privacy.html" style="color:#00ffc3; text-decoration:none;">Privacy</a> | 
-  <a href="/terms.html" style="color:#00ffc3; text-decoration:none;">Terms</a> | 
-  <a href="/credits.html" style="color:#00ffc3; text-decoration:none;">Credits</a>
-</footer>
