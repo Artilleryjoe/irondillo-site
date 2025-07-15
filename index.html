@@ -5,13 +5,18 @@
   <title>Iron Dillo Cybersecurity – Veteran-Owned Online Protection</title>
   <meta name="description" content="Cybersecurity services for individuals and small businesses. Veteran-owned, trustworthy, and mission-driven." />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
+  <link rel="icon" href="/assets/favicon.ico" />
   <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <style>
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    .fade-in { animation: fadeIn 1.2s ease-out both; }
+  </style>
 </head>
 <body class="flex flex-col min-h-screen bg-gray-900 text-gray-100 font-sans">
 
   <!-- Header -->
-  <header class="p-6 text-center max-w-3xl mx-auto">
+  <header class="p-6 text-center max-w-3xl mx-auto fade-in">
     <img src="/assets/IronDilloLogo.png" alt="IronDillo logo" class="mx-auto mb-6 w-28 h-auto" />
     <h1 class="text-4xl font-extrabold text-teal-400 mb-2">Iron Dillo Cybersecurity</h1>
     <h2 class="text-lg text-gray-400 mb-4">Digital Defense with Texas Grit</h2>
@@ -21,19 +26,19 @@
   </header>
 
   <!-- Navigation -->
-  <nav class="bg-gray-800 py-3 text-center max-w-3xl mx-auto rounded-md mb-10">
+  <nav class="bg-gray-800 py-3 text-center max-w-3xl mx-auto rounded-md mb-10 fade-in">
     <a href="/services.html" class="text-teal-400 font-semibold hover:underline mx-4">Services</a>
     <a href="/about.html" class="text-teal-400 font-semibold hover:underline mx-4">About</a>
     <a href="/blog.html" class="text-teal-400 font-semibold hover:underline mx-4">Blog</a>
     <a href="/contact.html" class="text-teal-400 font-semibold hover:underline mx-4">Contact</a>
   </nav>
 
-  <!-- Client Notice & Social Links -->
-  <main class="flex-grow max-w-3xl mx-auto px-6 py-12 text-center space-y-12">
-    <section>
-      <p class="text-teal-400 font-semibold text-lg mb-4">
-        Now accepting new clients.
-      </p>
+  <!-- Main -->
+  <main class="flex-grow max-w-3xl mx-auto px-6 py-12 text-center space-y-16">
+
+    <!-- Client Notice -->
+    <section class="fade-in">
+      <p class="text-teal-400 font-semibold text-lg mb-4">Now accepting new clients.</p>
       <div class="space-x-6">
         <a href="https://www.fiverr.com/artilleryjoe" target="_blank" class="text-teal-400 hover:underline font-medium">Fiverr</a>
         <a href="https://ko-fi.com/kris98630" target="_blank" class="text-teal-400 hover:underline font-medium">Ko-fi</a>
@@ -41,15 +46,40 @@
       </div>
     </section>
 
-    <!-- CTA Section -->
-    <section>
+    <!-- Call to Action -->
+    <section class="fade-in">
       <h2 class="text-2xl font-semibold text-teal-400 mb-4">Get Started</h2>
-      <p class="mb-6">Need security help? Not sure what you need? Start with:</p>
+      <p class="mb-6">Need security help? Not sure what you need? Start here:</p>
       <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
         <a href="/services.html" class="bg-teal-500 hover:bg-teal-600 text-white font-semibold px-6 py-2 rounded-md transition">Explore Services</a>
         <a href="/contact.html" class="border border-teal-500 text-teal-400 hover:bg-teal-500 hover:text-white font-semibold px-6 py-2 rounded-md transition">Contact Me</a>
       </div>
     </section>
+
+    <!-- Optional Blog Preview -->
+    <section class="fade-in" x-data="{ latestPost: null }" x-init="
+      fetch('/blog.json')  // or call an endpoint if using a CMS
+        .then(res => res.json())
+        .then(data => latestPost = data[0])
+    ">
+      <template x-if="latestPost">
+        <div class="bg-gray-800 rounded-lg p-6 text-left max-w-xl mx-auto shadow">
+          <h3 class="text-teal-400 text-xl font-semibold mb-2" x-text="latestPost.title"></h3>
+          <p class="text-gray-300 text-sm mb-4" x-text="latestPost.excerpt"></p>
+          <a :href="latestPost.url" class="text-teal-300 font-semibold hover:underline">Read more →</a>
+        </div>
+      </template>
+    </section>
+
+    <!-- Optional Scheduling CTA -->
+    <section class="fade-in text-center">
+      <h2 class="text-xl font-semibold text-teal-400 mb-2">Want to Talk?</h2>
+      <p class="mb-4">Book a free 15-minute intro call. No pressure.</p>
+      <a href="https://ko-fi.com/kris98630/commissions" target="_blank" class="bg-gray-800 border border-teal-500 px-6 py-2 rounded hover:bg-teal-500 hover:text-white text-teal-400 font-semibold transition">
+        Schedule Now
+      </a>
+    </section>
+
   </main>
 
   <!-- Footer -->
