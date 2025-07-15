@@ -1,54 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
   <title>Terms of Use – IronDillo</title>
-  <meta name="description" content="Understand the rules and disclaimers for using IronDillo's content, contact form, and services.">
+  <meta name="description" content="Understand the rules and disclaimers for using IronDillo's content, contact form, and services." />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+  <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
   <link rel="canonical" href="https://irondillo.com/terms.html" />
-
-  <style>
-    body {
-      background: #0e0e0e;
-      color: #f4f4f4;
-      font-family: Arial, sans-serif;
-      padding: 2rem;
-      max-width: 800px;
-      margin: auto;
-    }
-    h1 {
-      color: #00ffc3;
-    }
-    a {
-      color: #00ffc3;
-      text-decoration: none;
-    }
-  </style>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="flex flex-col min-h-screen bg-gray-900 text-gray-100 font-sans">
 
-  <header>
-    <h1>Terms of Use</h1>
-    <p>Effective Date: June 12, 2025</p>
+  <!-- Logo and Header -->
+  <header class="text-center p-6">
+    <img src="/assets/IronDilloLogo.png" alt="IronDillo cybersecurity armadillo logo" class="mx-auto mb-6 w-36 h-auto" />
+    <h1 class="text-4xl font-extrabold text-teal-400 mb-2">Terms of Use</h1>
+    <p class="text-gray-400">Effective Date: June 12, 2025</p>
   </header>
 
-  <section>
-    <p>By using this website (irondillo.com), you agree to the following terms and conditions:</p>
+  <!-- Navigation -->
+  <nav class="bg-gray-800 py-3 text-center space-x-8 mb-10">
+    <a href="/index.html" class="text-teal-400 hover:underline font-semibold">Home</a>
+    <a href="/services.html" class="text-teal-400 hover:underline font-semibold">Services</a>
+    <a href="/about.html" class="text-teal-400 hover:underline font-semibold">About</a>
+    <a href="/blog.html" class="text-teal-400 hover:underline font-semibold">Blog</a>
+    <a href="/contact.html" class="text-teal-400 hover:underline font-semibold">Contact</a>
+  </nav>
 
-    <ul>
-      <li>This site provides cybersecurity-related information, services, and commentary for educational and informational purposes only.</li>
-      <li>No guarantees are made regarding the accuracy, completeness, or effectiveness of any advice provided. Use at your own discretion.</li>
-      <li>Engaging in services offered through this site (such as consulting) does not establish any legal partnership or contract unless explicitly agreed upon in writing.</li>
-      <li>You agree not to misuse this site for unlawful purposes, including attempts to exploit, hack, or deface its contents.</li>
-      <li>Iron Dillo is not responsible for the content of external sites linked from this domain.</li>
-    </ul>
+  <!-- Main Content -->
+  <main class="flex-grow max-w-3xl mx-auto px-6 py-8 space-y-8">
+    <section class="bg-gray-800 rounded-lg shadow-lg p-8">
+      <p class="mb-4">By using this website (<span class="text-teal-300">irondillo.com</span>), you agree to the following terms and conditions:</p>
 
-    <p>For questions, concerns, or formal inquiries, please use the <a href="/index.html#contact">contact form</a>.</p>
-  </section>
+      <ul class="list-disc list-inside space-y-2">
+        <li>This site provides cybersecurity-related information, services, and commentary for educational and informational purposes only.</li>
+        <li>No guarantees are made regarding the accuracy, completeness, or effectiveness of any advice provided. Use at your own discretion.</li>
+        <li>Engaging in services offered through this site (such as consulting) does not establish any legal partnership or contract unless explicitly agreed upon in writing.</li>
+        <li>You agree not to misuse this site for unlawful purposes, including attempts to exploit, hack, or deface its contents.</li>
+        <li>Iron Dillo is not responsible for the content of external sites linked from this domain.</li>
+      </ul>
 
-  <footer style="margin-top:3rem; font-size:0.9rem; color:#888;">
-    &copy; 2025 Iron Dillo. All rights reserved.
+      <p class="mt-6">For questions, concerns, or formal inquiries, please use the <a href="/index.html#contact" class="text-teal-400 underline hover:text-teal-300">contact form</a>.</p>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-gray-500 text-center p-6 mt-12 text-sm">
+    &copy; 2025 Iron Dillo. All rights reserved. | Veteran-Owned | 
+    <a href="/privacy.html" class="hover:underline">Privacy</a> | 
+    <a href="/terms.html" class="hover:underline">Terms</a>
   </footer>
 
 </body>
