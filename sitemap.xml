@@ -1,12 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://irondillo.com/</loc></url>
-  <url><loc>https://irondillo.com/services.html</loc></url>
-  <url><loc>https://irondillo.com/about.html</loc></url>
-  <url><loc>https://irondillo.com/blog.html</loc></url>
-  <url><loc>https://irondillo.com/posts/safer-online-now.html</loc></url>
-  <url><loc>https://irondillo.com/privacy.html</loc></url>
-  <url><loc>https://irondillo.com/terms.html</loc></url>
-  <url><loc>https://irondillo.com/404.html</loc></url>
-</urlset>
+  <!-- Main Pages -->
+  <url>
+    <loc>https://irondillo.com/</loc>
+    <priority>1.0</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://irondillo.com/services.html</loc>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://irondillo.com/about.html</loc>
+    <priority>0.7</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
+    <loc>https://irondillo.com/contact.html</loc>
+    <priority>0.7</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
+    <loc>https://irondillo.com/blog.html</loc>
+    <priority>0.6</priority>
+    <changefreq>weekly</changefreq>
+  </url>
 
+  <!-- Blog Posts -->
+  <url>
+    <loc>https://irondillo.com/posts/safer-online-now.html</loc>
+    <priority>0.5</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://irondillo.com/posts/password-safety.html</loc>
+    <priority>0.5</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
+    <loc>https://irondillo.com/posts/phishing-awareness.html</loc>
+    <priority>0.5</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
+    <loc>https://irondillo.com/posts/network-basics.html</loc>
+    <priority>0.5</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+
+  <!-- Legal Pages -->
+  <url>
+    <loc>https://irondillo.com/privacy.html</loc>
+    <priority>0.3</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
+    <loc>https://irondillo.com/terms.html</loc>
+    <priority>0.3</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+
+  <!-- Other -->
+  <url>
+    <loc>https://irondillo.com/404.html</loc>
+    <priority>0.1</priority>
+    <changefreq>never</changefreq>
+  </url>
+</urlset>
