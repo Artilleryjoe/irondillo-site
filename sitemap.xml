@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
   <!-- Main Pages -->
   <url>
     <loc>https://irondillo.com/</loc>
@@ -29,24 +30,39 @@
 
   <!-- Blog Posts -->
   <url>
+    <loc>https://irondillo.com/posts/closing-ports-backdoors.html</loc>
+    <priority>0.5</priority>
+    <changefreq>monthly</changefreq>
+    <lastmod>2025-06-15</lastmod> <!-- last month -->
+  </url>
+  <url>
+    <loc>https://irondillo.com/posts/free-tools-i-trust.html</loc>
+    <priority>0.5</priority>
+    <changefreq>monthly</changefreq>
+    <lastmod>2025-06-15</lastmod> <!-- last month -->
+  </url>
+  <url>
+    <loc>https://irondillo.com/posts/rural-cybersecurity.html</loc>
+    <priority>0.5</priority>
+    <changefreq>monthly</changefreq>
+    <lastmod>2025-07-01</lastmod> <!-- 2 weeks ago -->
+  </url>
+  <url>
     <loc>https://irondillo.com/posts/safer-online-now.html</loc>
     <priority>0.5</priority>
     <changefreq>monthly</changefreq>
+    <lastmod>2025-06-15</lastmod> <!-- last month -->
   </url>
   <url>
-    <loc>https://irondillo.com/posts/password-safety.html</loc>
+    <loc>https://irondillo.com/posts/tech-support-scam-warning.html</loc>
     <priority>0.5</priority>
-    <changefreq>yearly</changefreq>
+    <changefreq>monthly</changefreq>
+    <lastmod>2025-06-15</lastmod> <!-- last month -->
   </url>
   <url>
-    <loc>https://irondillo.com/posts/phishing-awareness.html</loc>
+    <loc>https://irondillo.com/posts/wordpress-security-basics.html</loc>
     <priority>0.5</priority>
-    <changefreq>yearly</changefreq>
-  </url>
-  <url>
-    <loc>https://irondillo.com/posts/network-basics.html</loc>
-    <priority>0.5</priority>
-    <changefreq>yearly</changefreq>
+    <changefreq>monthly</changefreq>
   </url>
 
   <!-- Legal Pages -->
@@ -67,4 +83,5 @@
     <priority>0.1</priority>
     <changefreq>never</changefreq>
   </url>
+
 </urlset>
