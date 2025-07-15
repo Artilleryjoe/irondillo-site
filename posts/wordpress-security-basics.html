@@ -1,82 +1,84 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
-  <title>Basic WordPress Security for Beginners – IronDillo</title>
-  <meta name="description" content="Simple, effective steps to secure your WordPress site without needing to be a tech expert.">
-  <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+  <title>Basic WordPress Security for Beginners | IronDillo</title>
+  <meta name="description" content="Simple, effective steps to secure your WordPress site without needing to be a tech expert." />
   <link rel="canonical" href="https://irondillo.com/posts/wordpress-security-basics.html" />
+  <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- SEO Meta -->
-  <meta name="keywords" content="WordPress security, beginner WordPress, website protection, cybersecurity tips">
-  <meta name="author" content="Kristopher McCoy">
-  <meta property="og:title" content="Basic WordPress Security for Beginners – IronDillo">
-  <meta property="og:description" content="Quick fixes and practical advice to secure your WordPress website.">
-  <meta property="og:image" content="https://irondillo.com/assets/irondillo-preview.jpg">
-  <meta property="og:url" content="https://irondillo.com/posts/wordpress-security-basics.html">
-  <meta name="twitter:card" content="summary_large_image">
+  <!-- SEO -->
+  <meta name="keywords" content="WordPress security, beginner WordPress, website protection, cybersecurity tips" />
+  <meta name="author" content="Kristopher McCoy" />
+  <meta property="og:title" content="Basic WordPress Security for Beginners | IronDillo" />
+  <meta property="og:description" content="Quick fixes and practical advice to secure your WordPress website." />
+  <meta property="og:image" content="https://irondillo.com/assets/irondillo-preview.jpg" />
+  <meta property="og:url" content="https://irondillo.com/posts/wordpress-security-basics.html" />
+  <meta name="twitter:card" content="summary_large_image" />
 
-  <style>
-    body {
-      background: #0e0e0e;
-      color: #f4f4f4;
-      font-family: Arial, sans-serif;
-      padding: 2rem;
-      max-width: 800px;
-      margin: auto;
-    }
-    h1 {
-      color: #00ffc3;
-    }
-    a {
-      color: #00ffc3;
-    }
-    code {
-      background: #222;
-      padding: 0.2rem 0.4rem;
-      border-radius: 4px;
-    }
-    footer {
-      margin-top: 3rem;
-      font-size: 0.9rem;
-      color: #888;
-      text-align: center;
-    }
-  </style>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
+<body class="bg-gray-900 text-gray-100 font-sans leading-relaxed">
 
-<body>
+  <!-- Header -->
+  <header class="text-center py-10 px-6 max-w-3xl mx-auto">
+    <img src="/assets/IronDilloLogo.png" alt="IronDillo Logo" class="mx-auto w-28 mb-6" />
+    <h1 class="text-4xl font-extrabold text-teal-400 mb-4">Basic WordPress Security for Beginners</h1>
+    <p class="text-gray-300 max-w-xl mx-auto">Launching a WordPress site is easy — securing it doesn't have to be complicated. These five practical steps will protect your site from common attacks without needing to be a tech expert.</p>
+    <p class="text-sm text-gray-500 mt-2">Published June 2025 by IronDillo</p>
+  </header>
 
-  <h1>Basic WordPress Security for Beginners</h1>
-  <p><strong>Published:</strong> June 2025 by IronDillo</p>
+  <!-- Main Content -->
+  <main class="max-w-3xl mx-auto px-6 pb-24 space-y-10">
 
-  <p>WordPress makes it easy to launch a website—but that simplicity comes with security risks. Don’t worry, you don’t need to be a developer to lock things down. Here are five easy wins you can implement today to make your WordPress site much harder to hack.</p>
+    <section class="bg-gray-800 rounded-lg p-6 shadow-lg space-y-6">
+      <article>
+        <h2 class="text-2xl text-teal-300 font-semibold mb-2">1. Change the Default <code class="bg-gray-700 px-1 rounded">admin</code> Username</h2>
+        <p>Using <code class="bg-gray-700 px-1 rounded">admin</code> as your WordPress username is one of the most common ways hackers try to brute-force their way in. Change it to something unique and hard to guess. To do this safely, create a new admin user with a strong username and password, then delete the old <code class="bg-gray-700 px-1 rounded">admin</code> account to close this easy attack vector.</p>
+      </article>
 
-  <h2>1. Change the Default “admin” Username</h2>
-  <p>Hackers love to guess passwords for common usernames like <code>admin</code>. If you’re still using it, create a new user with admin rights, log in as that, and delete the old one.</p>
+      <article>
+        <h2 class="text-2xl text-teal-300 font-semibold mb-2">2. Use a Trusted Security Plugin</h2>
+        <p>Security plugins like <a href="https://www.wordfence.com" target="_blank" rel="noopener" class="text-teal-400 underline hover:text-teal-300">Wordfence</a> or <a href="https://ithemes.com/security" target="_blank" rel="noopener" class="text-teal-400 underline hover:text-teal-300">iThemes Security</a> add a powerful layer of protection. They can block brute force login attempts, scan for malware, monitor file changes, and notify you about vulnerabilities. They’re easy to install and configure—even if you’re new to WordPress.</p>
+      </article>
 
-  <h2>2. Use a Security Plugin</h2>
-  <p>Install a reputable security plugin like Wordfence or iThemes Security. These tools help block brute force attacks, monitor login attempts, and flag vulnerabilities.</p>
+      <article>
+        <h2 class="text-2xl text-teal-300 font-semibold mb-2">3. Keep WordPress, Themes, and Plugins Updated</h2>
+        <p>Outdated software is the most common cause of WordPress site hacks. Developers regularly release patches that fix security flaws, so keeping your core WordPress files, themes, and plugins up to date is critical. Consider enabling automatic updates or check for updates at least once a week to stay ahead of threats.</p>
+      </article>
 
-  <h2>3. Keep Everything Updated</h2>
-  <p>Update WordPress core, themes, and plugins regularly. Most hacks happen through outdated software. Set auto-updates where possible or check once a week.</p>
+      <article>
+        <h2 class="text-2xl text-teal-300 font-semibold mb-2">4. Disable File Editing in the Dashboard</h2>
+        <p>By default, WordPress lets admins edit plugin and theme files directly through the dashboard. This is convenient but risky if an attacker gains access. To disable this, add the following line to your <code class="bg-gray-700 px-1 rounded">wp-config.php</code> file:</p>
+        <pre class="bg-gray-700 rounded p-4 overflow-x-auto text-sm font-mono"><code>define('DISALLOW_FILE_EDIT', true);</code></pre>
+        <p>This simple step closes off a critical attack surface.</p>
+      </article>
 
-  <h2>4. Disable File Editing</h2>
-  <p>Add this line to your <code>wp-config.php</code> file to block anyone from editing theme/plugin code from the admin dashboard:</p>
-  <pre><code>define('DISALLOW_FILE_EDIT', true);</code></pre>
+      <article>
+        <h2 class="text-2xl text-teal-300 font-semibold mb-2">5. Use Strong Passwords and Enable Two-Factor Authentication (2FA)</h2>
+        <p>Passwords are your first line of defense—make them strong and unique. Password managers like <a href="https://bitwarden.com" target="_blank" rel="noopener" class="text-teal-400 underline hover:text-teal-300">Bitwarden</a> can help generate and store complex passwords easily.</p>
+        <p>For even stronger security, enable 2FA on your admin accounts using apps like <a href="https://authy.com" target="_blank" rel="noopener" class="text-teal-400 underline hover:text-teal-300">Authy</a> or Google Authenticator. This means even if your password is compromised, attackers need your phone to get in.</p>
+      </article>
 
-  <h2>5. Use Strong Passwords + 2FA</h2>
-  <p>Use a password manager like Bitwarden to create unique passwords. Then, enable two-factor authentication (2FA) for your admin account using an app like Authy.</p>
+      <article>
+        <h2 class="text-2xl text-teal-300 font-semibold mb-2">Bonus: Backup Your Site Regularly</h2>
+        <p>Sometimes, despite best efforts, things go wrong. Regular backups ensure you can restore your site quickly after an attack or error. Most hosts offer automatic backups, but you can also use plugins like <a href="https://updraftplus.com" target="_blank" rel="noopener" class="text-teal-400 underline hover:text-teal-300">UpdraftPlus</a> for hassle-free backups to cloud storage.</p>
+      </article>
+    </section>
 
-  <h2>Bonus: Backup Often</h2>
-  <p>If all else fails, having regular backups can save your bacon. Most good hosts offer this, or you can install a plugin like UpdraftPlus.</p>
+    <section class="bg-gray-800 rounded-lg p-6 shadow-lg">
+      <p class="text-gray-300">Securing your WordPress site is a marathon, not a sprint—but starting with these essential steps puts you way ahead of most site owners. Need help? <a href="/services.html" class="text-teal-400 underline hover:text-teal-300 font-semibold">I offer light diagnostics and setup advice</a> tailored to beginners.</p>
+    </section>
 
-  <p><strong>Bottom Line:</strong> You don’t need to spend a dime to make your WordPress site safer. These free steps will already put you ahead of most site owners.</p>
+    <div class="text-center pt-8">
+      <a href="/blog.html" class="text-teal-400 underline hover:text-teal-300">&larr; Back to Blog</a>
+    </div>
+  </main>
 
-  <p>Want help reviewing your site setup? <a href="/services.html">I offer light diagnostics and setup advice</a>—no pressure, just clarity.</p>
-
-  <footer>
-    &copy; 2025 Iron Dillo. Veteran-Owned | <a href="/privacy.html">Privacy</a> | <a href="/terms.html">Terms</a> | <a href="/credits.html">Credits</a>
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-gray-500 text-center p-6 text-sm mt-auto">
+    &copy; 2025 Iron Dillo. Veteran-Owned | <a href="/privacy.html" class="hover:underline text-teal-400">Privacy</a> | <a href="/terms.html" class="hover:underline text-teal-400">Terms</a> | <a href="/credits.html" class="hover:underline text-teal-400">Credits</a>
   </footer>
 
 </body>
