@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>Iron Dillo Cybersecurity – Veteran-Owned Online Protection</title>
-  <meta name="description" content="Cybersecurity services for individuals and small businesses. Veteran-owned, trustworthy, and mission-driven." />
+  <meta name="description" content="Iron Dillo Cybersecurity provides honest, hands-on protection for individuals, small businesses, and rural operations. Veteran-owned and mission-driven, offering remote diagnostics, documentation, and guidance you can trust." />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="icon" href="/assets/favicon.ico" />
   <script src="https://cdn.tailwindcss.com"></script>
@@ -15,75 +15,45 @@
 </head>
 <body class="flex flex-col min-h-screen bg-gray-900 text-gray-100 font-sans">
 
-  <!-- Header -->
-  <header class="p-6 text-center max-w-3xl mx-auto fade-in">
-    <img src="/assets/IronDilloLogo.png" alt="IronDillo logo" class="mx-auto mb-6 w-28 h-auto" />
-    <h1 class="text-4xl font-extrabold text-teal-400 mb-2">Iron Dillo Cybersecurity</h1>
-    <h2 class="text-lg text-gray-400 mb-4">Digital Defense with Texas Grit</h2>
-    <p class="text-lg leading-relaxed px-4">
-      Veteran-owned cybersecurity support for real people and small businesses. Ethical, remote, and ready to help.
+  <!-- Header with logo and title -->
+  <header class="p-8 text-center max-w-3xl mx-auto fade-in">
+    <img src="/assets/IronDilloLogo.png" alt="IronDillo logo" class="mx-auto mb-6 w-32 h-auto" />
+    <h1 class="text-4xl font-extrabold text-teal-400 mb-4">Iron Dillo Cybersecurity</h1>
+    <p class="text-lg leading-relaxed max-w-xl mx-auto text-gray-300">
+      Iron Dillo Cybersecurity provides honest, hands-on protection for individuals, small businesses, and rural operations—like farms, ranches, and independent shops. Veteran-owned and mission-driven, we offer remote diagnostics, documentation, and guidance you can trust. Digital defense with Texas grit.
     </p>
   </header>
 
   <!-- Navigation -->
-  <nav class="bg-gray-800 py-3 text-center max-w-3xl mx-auto rounded-md mb-10 fade-in">
-    <a href="/services.html" class="text-teal-400 font-semibold hover:underline mx-4">Services</a>
-    <a href="/about.html" class="text-teal-400 font-semibold hover:underline mx-4">About</a>
-    <a href="/blog.html" class="text-teal-400 font-semibold hover:underline mx-4">Blog</a>
-    <a href="/contact.html" class="text-teal-400 font-semibold hover:underline mx-4">Contact</a>
+  <nav class="bg-gray-800 py-3 text-center max-w-3xl mx-auto rounded-md mb-12 fade-in">
+    <a href="/services.html" class="text-teal-400 font-semibold hover:underline mx-5">Services</a>
+    <a href="/about.html" class="text-teal-400 font-semibold hover:underline mx-5">About</a>
+    <a href="/blog.html" class="text-teal-400 font-semibold hover:underline mx-5">Blog</a>
+    <a href="/contact.html" class="text-teal-400 font-semibold hover:underline mx-5">Contact</a>
   </nav>
 
-  <!-- Main -->
-  <main class="flex-grow max-w-3xl mx-auto px-6 py-12 text-center space-y-16">
-
-    <!-- Client Notice -->
-    <section class="fade-in">
-      <p class="text-teal-400 font-semibold text-lg mb-4">Now accepting new clients.</p>
-      <div class="space-x-6">
-        <a href="https://www.fiverr.com/artilleryjoe" target="_blank" class="text-teal-400 hover:underline font-medium">Fiverr</a>
-        <a href="https://ko-fi.com/kris98630" target="_blank" class="text-teal-400 hover:underline font-medium">Ko-fi</a>
-        <a href="https://github.com/Artilleryjoe" target="_blank" class="text-teal-400 hover:underline font-medium">GitHub</a>
-      </div>
-    </section>
-
-    <!-- Call to Action -->
-    <section class="fade-in">
-      <h2 class="text-2xl font-semibold text-teal-400 mb-4">Get Started</h2>
-      <p class="mb-6">Need security help? Not sure what you need? Start here:</p>
-      <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
-        <a href="/services.html" class="bg-teal-500 hover:bg-teal-600 text-white font-semibold px-6 py-2 rounded-md transition">Explore Services</a>
-        <a href="/contact.html" class="border border-teal-500 text-teal-400 hover:bg-teal-500 hover:text-white font-semibold px-6 py-2 rounded-md transition">Contact Me</a>
-      </div>
-    </section>
-
-    <!-- Optional Blog Preview -->
-    <section class="fade-in" x-data="{ latestPost: null }" x-init="
-      fetch('/blog.json')  // or call an endpoint if using a CMS
-        .then(res => res.json())
-        .then(data => latestPost = data[0])
-    ">
-      <template x-if="latestPost">
-        <div class="bg-gray-800 rounded-lg p-6 text-left max-w-xl mx-auto shadow">
-          <h3 class="text-teal-400 text-xl font-semibold mb-2" x-text="latestPost.title"></h3>
-          <p class="text-gray-300 text-sm mb-4" x-text="latestPost.excerpt"></p>
-          <a :href="latestPost.url" class="text-teal-300 font-semibold hover:underline">Read more →</a>
-        </div>
-      </template>
-    </section>
-
-    <!-- Optional Scheduling CTA -->
-    <section class="fade-in text-center">
-      <h2 class="text-xl font-semibold text-teal-400 mb-2">Want to Talk?</h2>
-      <p class="mb-4">Book a free 15-minute intro call. No pressure.</p>
-      <a href="https://ko-fi.com/kris98630/commissions" target="_blank" class="bg-gray-800 border border-teal-500 px-6 py-2 rounded hover:bg-teal-500 hover:text-white text-teal-400 font-semibold transition">
-        Schedule Now
+  <!-- Social icons -->
+  <section class="fade-in max-w-3xl mx-auto mb-12 text-center">
+    <p class="text-teal-400 font-semibold mb-4">Connect with me</p>
+    <div class="flex justify-center gap-8">
+      <!-- GitHub -->
+      <a href="https://github.com/Artilleryjoe" target="_blank" aria-label="GitHub" class="hover:scale-110 transition transform">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-9 h-9 text-teal-400 hover:text-white" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 0.5C5.73 0.5.5 5.73.5 12.02c0 5.1 3.29 9.42 7.86 10.96.58.1.79-.25.79-.56v-2.2c-3.2.7-3.87-1.54-3.87-1.54-.53-1.35-1.3-1.71-1.3-1.71-1.06-.73.08-.72.08-.72 1.17.08 1.79 1.2 1.79 1.2 1.04 1.78 2.73 1.27 3.4.97.1-.75.4-1.27.72-1.56-2.56-.3-5.26-1.28-5.26-5.7 0-1.26.45-2.3 1.2-3.12-.12-.3-.52-1.52.11-3.17 0 0 .97-.31 3.18 1.2a11.07 11.07 0 0 1 2.9-.39c.99 0 1.98.13 2.9.39 2.21-1.51 3.18-1.2 3.18-1.2.63 1.65.24 2.87.12 3.17.75.82 1.2 1.86 1.2 3.12 0 4.43-2.7 5.4-5.27 5.7.41.35.77 1.04.77 2.1v3.12c0 .31.21.67.8.56A10.5 10.5 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5Z"/>
+        </svg>
       </a>
-    </section>
 
-  </main>
+      <!-- LinkedIn -->
+      <a href="https://www.linkedin.com/in/YOUR-LINKEDIN-ID" target="_blank" aria-label="LinkedIn" class="hover:scale-110 transition transform">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-9 h-9 text-teal-400 hover:text-white" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M4.98 3.5A2.5 2.5 0 1 1 5 8.5 2.5 2.5 0 0 1 4.98 3.5ZM3 9h4v12H3zm7.5 0H15v1.7c.68-1.14 2-2.2 4.3-2.2 4.3 0 5.2 2.84 5.2 6.5V21h-4v-5.2c0-1.2-.02-2.8-1.7-2.8s-2 1.3-2 2.7V21h-4z"/>
+        </svg>
+      </a>
+    </div>
+  </section>
 
   <!-- Footer -->
-  <footer class="bg-gray-800 text-gray-500 text-center p-6 mt-12 text-sm max-w-3xl mx-auto rounded-md">
+  <footer class="bg-gray-800 text-gray-500 text-center p-6 mt-auto text-sm max-w-3xl mx-auto rounded-md">
     &copy; 2025 Iron Dillo. All rights reserved. | 
     <a href="/privacy.html" class="hover:underline">Privacy</a> | 
     <a href="/terms.html" class="hover:underline">Terms</a>
