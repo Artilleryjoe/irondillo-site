@@ -75,6 +75,10 @@
     <loc>https://irondillo.com/terms.html</loc>
     <priority>0.3</priority>
     <changefreq>yearly</changefreq>
+     <url>
+    <loc>https://irondillo.com/commitment.html</loc>
+    <priority>0.3</priority>
+    <changefreq>yearly</changefreq>
   </url>
 
   <!-- Other -->
