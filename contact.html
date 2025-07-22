@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   <style>
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     .fade-in { animation: fadeIn 1s ease-out both; }
@@ -37,7 +38,21 @@
         Have a cybersecurity question? Want to schedule a consult? Reach out below and we’ll get back to you soon.
       </p>
 
-      <form id="contact-form" action="https://formspree.io/f/xldnbpdg" method="POST" class="space-y-6">
+      <form
+        id="contact-form"
+        action="https://formspree.io/f/xldnbpdg"
+        method="POST"
+        class="space-y-6 g-recaptcha"
+        data-sitekey="6LdCtosrAAAAAGddw60skAwbV91b2UmEAuLaSLYb"
+        data-callback="onSubmit"
+        data-size="invisible"
+      >
+        <!-- Honeypot Field - Invisible to humans -->
+        <div style="display:none;">
+          <label for="phone">Leave this empty</label>
+          <input type="text" name="phone" id="phone" autocomplete="off" />
+        </div>
+
         <div>
           <label for="name" class="block text-teal-400 font-semibold mb-2">Your Name</label>
           <input type="text" name="name" id="name" required autocomplete="name" 
@@ -70,5 +85,10 @@
     <a href="/terms.html" class="hover:underline text-teal-400">Terms</a>
   </footer>
 
+  <script>
+    function onSubmit(token) {
+      document.getElementById("contact-form").submit();
+    }
+  </script>
 </body>
 </html>
