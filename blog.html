@@ -2,7 +2,7 @@
 <html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
-  <title>IronDillo Blog – Cyber Hygiene Tips & Updates</title>
+  <title>Iron Dillo Blog – Cyber Hygiene Tips & Updates</title>
   <meta name="description" content="Cybersecurity guidance, threat breakdowns, and plain-English advice for real-world digital safety." />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" href="/assets/favicon.ico" />
@@ -19,22 +19,29 @@
 
   <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    .fade-in { animation: fadeIn 1s ease-out both; }
+  </style>
 </head>
 
-<body class="bg-gray-900 text-gray-100 font-sans">
+<body class="bg-gray-900 text-gray-100 font-sans flex flex-col min-h-screen">
 
-  <!-- Navigation -->
-  <nav class="bg-gray-800 py-4 text-center space-x-6">
-    <a href="/index.html" class="text-teal-400 hover:underline font-semibold">Home</a>
-    <a href="/services.html" class="text-teal-400 hover:underline font-semibold">Services</a>
-    <a href="/about.html" class="text-teal-400 hover:underline font-semibold">About</a>
-    <a href="/blog.html" class="text-teal-400 hover:underline font-semibold">Blog</a>
-    <a href="/contact.html" class="text-teal-400 hover:underline font-semibold">Contact</a>
-  </nav>
-
-  <header class="text-center py-12 px-4">
+  <!-- Header with logo and nav -->
+  <header class="p-8 text-center max-w-3xl mx-auto fade-in">
     <img src="/assets/IronDilloLogo.png" alt="IronDillo Logo" class="mx-auto w-32 mb-6" />
-    <h1 class="text-4xl font-extrabold text-teal-400 mb-2">Iron Dillo Blog</h1>
+    <h1 class="text-4xl font-extrabold text-teal-400 mb-4">Iron Dillo Blog</h1>
+
+    <nav class="bg-gray-800 py-3 rounded-md mb-8 max-w-xl mx-auto">
+      <div class="flex justify-between">
+        <a href="/index.html" class="text-teal-400 font-semibold hover:underline px-4 tracking-wide uppercase">Home</a>
+        <a href="/services.html" class="text-teal-400 font-semibold hover:underline px-4 tracking-wide uppercase">Services</a>
+        <a href="/about.html" class="text-teal-400 font-semibold hover:underline px-4 tracking-wide uppercase">About</a>
+        <a href="/blog.html" class="text-teal-400 font-semibold hover:underline px-4 tracking-wide uppercase">Blog</a>
+        <a href="/contact.html" class="text-teal-400 font-semibold hover:underline px-4 tracking-wide uppercase">Contact</a>
+      </div>
+    </nav>
+
     <p class="text-gray-300 max-w-xl mx-auto">
       Cybersecurity guidance, digital hygiene tips, and insights for real people and small businesses.
     </p>
@@ -42,43 +49,35 @@
 
   <!-- Blog Posts Grid -->
   <main class="max-w-6xl mx-auto px-4 pb-20 grid gap-10 md:grid-cols-2 lg:grid-cols-3">
-
+    <!-- Individual blog post cards -->
     <article class="bg-gray-800 rounded-lg overflow-hidden shadow-lg">
-      <img src="/assets/thumb-safer-online.jpg" alt="5 Ways to Stay Safer Online" class="w-full h-48 object-cover" />
+      <img src="/assets/thumb-safer-online.jpg" alt="5 Ways to Stay Safer Online" class="w-full h-auto" />
       <div class="p-6">
-        <h2 class="text-xl font-bold text-teal-300 mb-2">
-          <a href="/posts/safer-online-now.html">5 Ways to Stay Safer Online Right Now</a>
-        </h2>
+        <h2 class="text-xl font-bold text-teal-300 mb-2"><a href="/posts/safer-online-now.html">5 Ways to Stay Safer Online Right Now</a></h2>
         <p class="text-gray-300 text-sm">Quick, actionable cybersecurity advice for real people and small businesses. Start here.</p>
       </div>
     </article>
 
     <article class="bg-gray-800 rounded-lg overflow-hidden shadow-lg">
-      <img src="/assets/thumb-tech-support.png" alt="Tech Support Scam" class="w-full h-48 object-cover" />
+      <img src="/assets/thumb-tech-support.png" alt="Tech Support Scam" class="w-full h-auto" />
       <div class="p-6">
-        <h2 class="text-xl font-bold text-teal-300 mb-2">
-          <a href="/posts/tech-support-scam-warning.html">How to Tell If That Tech Support Call Is a Scam</a>
-        </h2>
+        <h2 class="text-xl font-bold text-teal-300 mb-2"><a href="/posts/tech-support-scam-warning.html">How to Tell If That Tech Support Call Is a Scam</a></h2>
         <p class="text-gray-300 text-sm">Don’t get tricked by cold-callers claiming your account was hacked. Learn how to spot the red flags.</p>
       </div>
     </article>
 
     <article class="bg-gray-800 rounded-lg overflow-hidden shadow-lg">
-      <img src="/assets/thumb-wordpress.jpg" alt="WordPress Security" class="w-full h-48 object-cover" />
+      <img src="/assets/thumb-wordpress.jpg" alt="WordPress Security" class="w-full h-auto" />
       <div class="p-6">
-        <h2 class="text-xl font-bold text-teal-300 mb-2">
-          <a href="/posts/wordpress-security-basics.html">Basic WordPress Security for Beginners</a>
-        </h2>
+        <h2 class="text-xl font-bold text-teal-300 mb-2"><a href="/posts/wordpress-security-basics.html">Basic WordPress Security for Beginners</a></h2>
         <p class="text-gray-300 text-sm">WordPress makes it easy to launch a site, but simplicity comes with security risks.</p>
       </div>
     </article>
 
     <article class="bg-gray-800 rounded-lg overflow-hidden shadow-lg">
-      <img src="/assets/thumb-tools.jpg" alt="Free Tools I Trust" class="w-full h-48 object-cover" />
+      <img src="/assets/thumb-tools.jpg" alt="Free Tools I Trust" class="w-full h-auto" />
       <div class="p-6">
-        <h2 class="text-xl font-bold text-teal-300 mb-2">
-          <a href="/posts/free-tools-i-trust.html">Free Tools I Trust</a>
-        </h2>
+        <h2 class="text-xl font-bold text-teal-300 mb-2"><a href="/posts/free-tools-i-trust.html">Free Tools I Trust</a></h2>
         <p class="text-gray-300 text-sm">Not every cybersecurity tool costs money—or your sanity.</p>
       </div>
     </article>
@@ -86,28 +85,31 @@
     <article class="bg-gray-800 rounded-lg overflow-hidden shadow-lg">
       <img src="/assets/thumb-ports.png" alt="Open Ports Explained" class="w-full h-48 object-cover" />
       <div class="p-6">
-        <h2 class="text-xl font-bold text-teal-300 mb-2">
-          <a href="/posts/closing-ports-backdoors.html">Are Open Ports a Backdoor?</a>
-        </h2>
+        <h2 class="text-xl font-bold text-teal-300 mb-2"><a href="/posts/closing-ports-backdoors.html">Are Open Ports a Backdoor?</a></h2>
         <p class="text-gray-300 text-sm">Open ports are like doors into your system. Some are needed. Some aren't.</p>
       </div>
     </article>
 
     <article class="bg-gray-800 rounded-lg overflow-hidden shadow-lg">
-      <img src="/assets/thumb-rural.jpg" alt="Rural Cybersecurity" class="w-full h-48 object-cover" />
+      <img src="/assets/thumb-rural.jpg" alt="Rural Cybersecurity" class="w-full h-auto" />
       <div class="p-6">
-        <h2 class="text-xl font-bold text-teal-300 mb-2">
-          <a href="/posts/rural-cybersecurity.html">Why Rural Businesses Can’t Ignore Cybersecurity</a>
-        </h2>
+        <h2 class="text-xl font-bold text-teal-300 mb-2"><a href="/posts/rural-cybersecurity.html">Why Rural Businesses Can’t Ignore Cybersecurity</a></h2>
         <p class="text-gray-300 text-sm">When folks think about hackers, they picture big cities. That’s a mistake.</p>
       </div>
     </article>
-
   </main>
 
+   <article class="bg-gray-800 rounded-lg overflow-hidden shadow-lg">
+      <img src="/assets/thumb-vendor.jpg" alt="Rural Cybersecurity" class="w-full h-auto" />
+      <div class="p-6">
+        <h2 class="text-xl font-bold text-teal-300 mb-2"><a href="/posts/third_party_vendors.html">Why Rural Businesses Can’t Ignore Cybersecurity</a></h2>
+        <p class="text-gray-300 text-sm">Not all armadillos protect your data. Iron Dillo does.</p>
+      </div>
+    </article>
+  </main>
   <!-- Footer -->
-  <footer class="bg-gray-800 text-gray-500 text-center p-6 text-sm mt-12">
-    &copy; 2025 Iron Dillo. All rights reserved. | Veteran-Owned |
+  <footer class="bg-gray-800 text-gray-500 text-center p-6 text-sm mt-auto max-w-3xl mx-auto rounded-md">
+    &copy; 2025 Iron Dillo. All rights reserved. |
     <a href="/privacy.html" class="hover:underline text-teal-400">Privacy</a> |
     <a href="/terms.html" class="hover:underline text-teal-400">Terms</a>
   </footer>
