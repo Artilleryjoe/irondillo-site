@@ -22,6 +22,10 @@
   <style>
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     .fade-in { animation: fadeIn 1s ease-out both; }
+
+    /* Optional: Hide scrollbar but keep scrolling */
+    .scrollbar-hide::-webkit-scrollbar { display: none; }
+    .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
   </style>
 </head>
 
@@ -48,10 +52,9 @@
   </header>
 
   <!-- Blog Posts Grid -->
-  <main class="max-w-6xl mx-auto px-4 pb-20 grid gap-10 md:grid-cols-2 lg:grid-cols-3">
-    <!-- Individual blog post cards -->
+  <main class="max-w-6xl mx-auto px-4 pb-8 grid gap-10 md:grid-cols-2 lg:grid-cols-3">
     <article class="bg-gray-800 rounded-lg overflow-hidden shadow-lg">
-      <img src="/assets/thumb-safer-online.jpg" alt="5 Ways to Stay Safer Online" class="w-full h-auto" />
+      <img src="/assets/thumb-safer-online.jpg" alt="5 Ways to Stay Safer Online" class="w-full h-48 object-cover" />
       <div class="p-6">
         <h2 class="text-xl font-bold text-teal-300 mb-2"><a href="/posts/safer-online-now.html">5 Ways to Stay Safer Online Right Now</a></h2>
         <p class="text-gray-300 text-sm">Quick, actionable cybersecurity advice for real people and small businesses. Start here.</p>
@@ -59,7 +62,7 @@
     </article>
 
     <article class="bg-gray-800 rounded-lg overflow-hidden shadow-lg">
-      <img src="/assets/thumb-tech-support.png" alt="Tech Support Scam" class="w-full h-auto" />
+      <img src="/assets/thumb-tech-support.png" alt="Tech Support Scam" class="w-full h-48 object-cover" />
       <div class="p-6">
         <h2 class="text-xl font-bold text-teal-300 mb-2"><a href="/posts/tech-support-scam-warning.html">How to Tell If That Tech Support Call Is a Scam</a></h2>
         <p class="text-gray-300 text-sm">Don’t get tricked by cold-callers claiming your account was hacked. Learn how to spot the red flags.</p>
@@ -67,7 +70,7 @@
     </article>
 
     <article class="bg-gray-800 rounded-lg overflow-hidden shadow-lg">
-      <img src="/assets/thumb-wordpress.jpg" alt="WordPress Security" class="w-full h-auto" />
+      <img src="/assets/thumb-wordpress.jpg" alt="WordPress Security" class="w-full h-48 object-cover" />
       <div class="p-6">
         <h2 class="text-xl font-bold text-teal-300 mb-2"><a href="/posts/wordpress-security-basics.html">Basic WordPress Security for Beginners</a></h2>
         <p class="text-gray-300 text-sm">WordPress makes it easy to launch a site, but simplicity comes with security risks.</p>
@@ -75,7 +78,7 @@
     </article>
 
     <article class="bg-gray-800 rounded-lg overflow-hidden shadow-lg">
-      <img src="/assets/thumb-tools.jpg" alt="Free Tools I Trust" class="w-full h-auto" />
+      <img src="/assets/thumb-tools.jpg" alt="Free Tools I Trust" class="w-full h-48 object-cover" />
       <div class="p-6">
         <h2 class="text-xl font-bold text-teal-300 mb-2"><a href="/posts/free-tools-i-trust.html">Free Tools I Trust</a></h2>
         <p class="text-gray-300 text-sm">Not every cybersecurity tool costs money—or your sanity.</p>
@@ -91,7 +94,7 @@
     </article>
 
     <article class="bg-gray-800 rounded-lg overflow-hidden shadow-lg">
-      <img src="/assets/thumb-rural.jpg" alt="Rural Cybersecurity" class="w-full h-auto" />
+      <img src="/assets/thumb-rural.jpg" alt="Rural Cybersecurity" class="w-full h-48 object-cover" />
       <div class="p-6">
         <h2 class="text-xl font-bold text-teal-300 mb-2"><a href="/posts/rural-cybersecurity.html">Why Rural Businesses Can’t Ignore Cybersecurity</a></h2>
         <p class="text-gray-300 text-sm">When folks think about hackers, they picture big cities. That’s a mistake.</p>
@@ -99,14 +102,87 @@
     </article>
   </main>
 
-   <article class="bg-gray-800 rounded-lg overflow-hidden shadow-lg">
-      <img src="/assets/thumb-vendor.png" alt="Rural Cybersecurity" class="w-full h-auto" />
-      <div class="p-6">
-        <h2 class="text-xl font-bold text-teal-300 mb-2"><a href="/posts/third_party_vendors.html">Why Rural Businesses Can’t Ignore Cybersecurity</a></h2>
-        <p class="text-gray-300 text-sm">Not all armadillos protect your data. Iron Dillo does.</p>
+  <!-- More Posts Slider -->
+  <section class="max-w-6xl mx-auto px-4 pb-12">
+    <h3 class="text-teal-300 font-bold text-xl mb-4">More Posts</h3>
+
+    <div class="relative">
+      <button
+        id="slider-prev"
+        aria-label="Scroll previous"
+        class="absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-teal-600 hover:bg-teal-700 text-white rounded-full p-2 shadow-md"
+      >
+        ‹
+      </button>
+
+      <div
+        id="thumbnail-slider"
+        class="flex space-x-4 overflow-x-auto scroll-smooth scrollbar-hide px-8"
+        style="scroll-padding-left: 2rem;"
+      >
+        <a
+          href="/posts/third_party_vendors.html"
+          class="flex-shrink-0 w-48 rounded overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
+        >
+          <img
+            src="/assets/thumb-vendor.png"
+            alt="Vendor Vetting"
+            class="w-full h-28 object-cover"
+            loading="lazy"
+          />
+          <p class="text-gray-300 text-sm p-2">Why Rural Businesses Can’t Ignore Cybersecurity</p>
+        </a>
+
+        <a
+          href="/posts/post-7.html"
+          class="flex-shrink-0 w-48 rounded overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
+        >
+          <img
+            src="/assets/thumb-post7.jpg"
+            alt="Post 7"
+            class="w-full h-28 object-cover"
+            loading="lazy"
+          />
+          <p class="text-gray-300 text-sm p-2">How to Spot Phishing Emails</p>
+        </a>
+
+        <a
+          href="/posts/post-8.html"
+          class="flex-shrink-0 w-48 rounded overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
+        >
+          <img
+            src="/assets/thumb-post8.jpg"
+            alt="Post 8"
+            class="w-full h-28 object-cover"
+            loading="lazy"
+          />
+          <p class="text-gray-300 text-sm p-2">Best Password Managers for 2025</p>
+        </a>
+
+        <a
+          href="/posts/post-9.html"
+          class="flex-shrink-0 w-48 rounded overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
+        >
+          <img
+            src="/assets/thumb-post9.jpg"
+            alt="Post 9"
+            class="w-full h-28 object-cover"
+            loading="lazy"
+          />
+          <p class="text-gray-300 text-sm p-2">Securing Remote Work Networks</p>
+        </a>
       </div>
-    </article>
-  </main>
+
+      <button
+        id="slider-next"
+        aria-label="Scroll next"
+        class="absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-teal-600 hover:bg-teal-700 text-white rounded-full p-2 shadow-md"
+      >
+        ›
+      </button>
+    </div>
+  </section>
+
   <!-- Footer -->
   <footer class="bg-gray-800 text-gray-500 text-center p-6 text-sm mt-auto max-w-3xl mx-auto rounded-md">
     &copy; 2025 Iron Dillo. All rights reserved. |
@@ -114,5 +190,19 @@
     <a href="/terms.html" class="hover:underline text-teal-400">Terms</a>
   </footer>
 
+  <script>
+    const slider = document.getElementById('thumbnail-slider');
+    const prevBtn = document.getElementById('slider-prev');
+    const nextBtn = document.getElementById('slider-next');
+    const scrollAmount = 320;
+
+    prevBtn.addEventListener('click', () => {
+      slider.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+    });
+
+    nextBtn.addEventListener('click', () => {
+      slider.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    });
+  </script>
 </body>
 </html>
