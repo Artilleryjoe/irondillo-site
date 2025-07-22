@@ -54,12 +54,21 @@
 <!-- Blog Posts Grid -->
 <main class="max-w-6xl mx-auto px-4 pb-8 grid gap-10 md:grid-cols-2 lg:grid-cols-3">
 
-  <!-- Newest 6 posts -->
+  <!-- Newest 6 posts with vendors first -->
+  <article class="bg-gray-800 rounded-lg overflow-hidden shadow-lg">
+    <img src="/assets/thumb-vendor.png" alt="Vendor Vetting" class="w-full h-48 object-cover" />
+    <div class="p-6">
+      <h2 class="text-xl font-bold text-teal-300 mb-1"><a href="/posts/third_party_vendors.html">Why Rural Businesses Can’t Ignore Cybersecurity</a></h2>
+      <p class="text-gray-400 text-xs mb-2">July 22, 2025</p>
+      <p class="text-gray-300 text-sm">Not all armadillos protect your data. Iron Dillo does.</p>
+    </div>
+  </article>
+
   <article class="bg-gray-800 rounded-lg overflow-hidden shadow-lg">
     <img src="/assets/thumb-safer-online.jpg" alt="5 Ways to Stay Safer Online" class="w-full h-48 object-cover" />
     <div class="p-6">
       <h2 class="text-xl font-bold text-teal-300 mb-1"><a href="/posts/safer-online-now.html">5 Ways to Stay Safer Online Right Now</a></h2>
-      <p class="text-gray-400 text-xs mb-2">July 22, 2025</p>
+      <p class="text-gray-400 text-xs mb-2">July 20, 2025</p>
       <p class="text-gray-300 text-sm">Quick, actionable cybersecurity advice for real people and small businesses. Start here.</p>
     </div>
   </article>
@@ -100,15 +109,6 @@
     </div>
   </article>
 
-  <article class="bg-gray-800 rounded-lg overflow-hidden shadow-lg">
-    <img src="/assets/thumb-rural.jpg" alt="Rural Cybersecurity" class="w-full h-48 object-cover" />
-    <div class="p-6">
-      <h2 class="text-xl font-bold text-teal-300 mb-1"><a href="/posts/rural-cybersecurity.html">Why Rural Businesses Can’t Ignore Cybersecurity</a></h2>
-      <p class="text-gray-400 text-xs mb-2">June 30, 2025</p>
-      <p class="text-gray-300 text-sm">When folks think about hackers, they picture big cities. That’s a mistake.</p>
-    </div>
-  </article>
-
 </main>
 
 <!-- More Posts Slider -->
@@ -130,21 +130,18 @@
       style="scroll-padding-left: 2rem;"
     >
       <a
-        href="/posts/third_party_vendors.html"
+        href="/posts/rural-cybersecurity.html"
         class="flex-shrink-0 w-48 rounded overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
       >
         <img
-          src="/assets/thumb-vendor.png"
-          alt="Vendor Vetting"
+          src="/assets/thumb-rural.jpg"
+          alt="Rural Cybersecurity"
           class="w-full h-28 object-cover"
           loading="lazy"
         />
-        <p class="text-gray-400 text-xs mb-1 mt-2">May 20, 2025</p>
-        <p class="text-gray-300 text-sm p-2">Not all armadillos protect your data. Iron Dillo does.</p>
+        <p class="text-gray-400 text-xs mb-1 mt-2">June 30, 2025</p>
+        <p class="text-gray-300 text-sm p-2">When folks think about hackers, they picture big cities. That’s a mistake.</p>
       </a>
-
-      <!-- Add more older posts here if you have them -->
-
     </div>
 
     <button
