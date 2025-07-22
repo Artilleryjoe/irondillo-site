@@ -2,64 +2,98 @@
 <html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
-  <title>Free Tools I Trust (and Why You Should Too)</title>
-  <meta name="description" content="A shortlist of battle-tested, free cybersecurity tools that actually help. No fluff, no upsells—just solid digital safety." />
+  <title>Why Vetting Third-Party Vendors Isn’t Optional — It’s Critical for Small and Rural Businesses</title>
+  <meta name="description" content="Why small and rural businesses must vet third-party vendors to avoid cybersecurity risks. Practical tips for managing vendor risk." />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="canonical" href="https://irondillo.com/posts/free-tools-i-trust.html" />
+  <link rel="canonical" href="https://irondillo.com/posts/third_party_vendors.html" />
   <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
-  <meta name="author" content="Kristopher McCoy">
+  <meta name="author" content="Kristopher McCoy" />
+
+  <!-- Tailwind CSS with Typography plugin -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      plugins: [tailwind.typography],
+    }
+  </script>
+
+  <style>
+    /* Custom fade-in animation for header */
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    .fade-in { animation: fadeIn 1s ease-out both; }
+  </style>
 </head>
-<body class="bg-gray-900 text-gray-100 font-sans leading-relaxed">
+
+<body class="bg-gray-900 text-gray-100 font-sans min-h-screen flex flex-col">
 
   <!-- Header -->
-  <header class="text-center py-10 px-4 max-w-3xl mx-auto">
-    <img src="/assets/IronDilloLogo.png" alt="IronDillo Logo" class="mx-auto w-28 mb-6">
-    <h1 class="text-4xl font-extrabold text-teal-400 mb-4">Free Tools I Trust (and Why You Should Too)</h1>
-    <p class="text-gray-300 max-w-xl mx-auto">Not every cybersecurity tool needs to come with a price tag—or an agenda. These are the ones I actually use, recommend, and trust to get the job done right.</p>
+  <header class="p-8 text-center max-w-3xl mx-auto fade-in">
+    <img src="/assets/IronDilloLogo.png" alt="IronDillo Logo" class="mx-auto w-32 mb-6" />
+    <h1 class="text-4xl font-extrabold text-teal-400 mb-4">Why Vetting Third-Party Vendors Isn’t Optional — It’s Critical for Small and Rural Businesses</h1>
   </header>
 
   <!-- Main Content -->
-  <main class="max-w-3xl mx-auto px-6 space-y-12 pb-24">
+  <main class="prose prose-invert max-w-4xl mx-auto px-6 py-12">
+    <p>
+      When people hear “cybersecurity risk,” their minds jump to giant tech firms or massive banks. But the truth is, the weakest link in your security chain is often <strong>someone else</strong>—your vendors.
+    </p>
+    <p>
+      If you run a farm supply store, a small clinic, or a local business in rural Texas, you probably rely on third-party vendors for everything from payment processing to cloud storage. Each one of those connections is a door hackers want to pry open.
+    </p>
 
-    <section class="bg-gray-800 rounded-lg p-6 shadow-lg">
-      <h2 class="text-2xl text-teal-300 font-semibold mb-2">Bitwarden – Password Manager</h2>
-      <p class="mb-2 text-gray-300">If you're still reusing the same passwords—or keeping them in a notebook—it's time to level up. Bitwarden is open-source, zero-knowledge, and works across all your devices.</p>
-      <a href="https://bitwarden.com" target="_blank" class="text-teal-400 underline hover:text-teal-300">bitwarden.com</a>
-    </section>
+    <h2>Why Third-Party Vendors Matter</h2>
+    <p>
+      Hackers don’t need to attack you directly if they can exploit a vendor with weaker security. Once inside, they can move laterally into your systems. In recent years, major breaches have been traced back to vendors or suppliers with poor cybersecurity hygiene. If those big companies are vulnerable, what chance do smaller businesses have?
+    </p>
+    <p>
+      Rural businesses tend to skip detailed vendor vetting because:
+    </p>
+    <ul>
+      <li>They assume smaller vendors aren’t a risk</li>
+      <li>They don’t have the resources or expertise to audit partners</li>
+      <li>They prioritize cost or convenience over security</li>
+    </ul>
+    <p>That’s a recipe for disaster.</p>
 
-    <section class="bg-gray-800 rounded-lg p-6 shadow-lg">
-      <h2 class="text-2xl text-teal-300 font-semibold mb-2">uBlock Origin – Browser Protection</h2>
-      <p class="mb-2 text-gray-300">This isn’t just an ad blocker—it’s a privacy wall. uBlock Origin filters out trackers, malware scripts, and telemetry so you can browse faster, lighter, and safer.</p>
-      <a href="https://ublockorigin.com" target="_blank" class="text-teal-400 underline hover:text-teal-300">ublockorigin.com</a>
-    </section>
+    <h2>Real Risks from Neglecting Vendor Vetting</h2>
+    <ul>
+      <li><strong>Data leaks</strong> through poorly secured vendor portals</li>
+      <li><strong>Ransomware infections</strong> via compromised vendor software updates</li>
+      <li><strong>Unauthorized access</strong> from vendors with overly broad permissions</li>
+      <li><strong>Compliance failures</strong> risking fines and legal headaches</li>
+    </ul>
+    <p>You can’t afford to treat your vendors like trusted friends. They are an extension of your attack surface.</p>
 
-    <section class="bg-gray-800 rounded-lg p-6 shadow-lg">
-      <h2 class="text-2xl text-teal-300 font-semibold mb-2">Have I Been Pwned – Breach Checker</h2>
-      <p class="mb-2 text-gray-300">Your email might already be floating around hacker forums. This tool lets you check if your accounts have been exposed in known breaches—and prompts you to act before it’s too late.</p>
-      <a href="https://haveibeenpwned.com" target="_blank" class="text-teal-400 underline hover:text-teal-300">haveibeenpwned.com</a>
-    </section>
+    <h2>How to Vet Vendors—Without Breaking the Bank</h2>
+    <ol>
+      <li><strong>Ask for Security Policies and Certifications</strong><br>Do they follow industry best practices? Are they compliant with standards relevant to your business (HIPAA, PCI, etc.)?</li>
+      <li><strong>Understand Their Access</strong><br>What systems and data do they actually access? Limit permissions strictly to what’s necessary.</li>
+      <li><strong>Check Their Patch and Update Practices</strong><br>Are they staying on top of security updates and patches? Outdated software is hacker bait.</li>
+      <li><strong>Request References or Security Reports</strong><br>Ask for evidence of past security audits or penetration tests.</li>
+      <li><strong>Include Security Requirements in Contracts</strong><br>Make security obligations, incident reporting, and liability clear upfront.</li>
+      <li><strong>Monitor Vendor Access Continuously</strong><br>Don’t just set and forget. Regularly review vendor access and activity logs.</li>
+    </ol>
 
-    <section class="bg-gray-800 rounded-lg p-6 shadow-lg">
-      <h2 class="text-2xl text-teal-300 font-semibold mb-2">VirusTotal – File & Link Scanner</h2>
-      <p class="mb-2 text-gray-300">Get a second opinion—actually, get 70. VirusTotal checks suspicious links or files against dozens of antivirus engines before you ever click “open.”</p>
-      <a href="https://www.virustotal.com" target="_blank" class="text-teal-400 underline hover:text-teal-300">virustotal.com</a>
-    </section>
+    <h2>Don’t Wait for a Breach to Start Caring</h2>
+    <p>
+      Rural businesses often assume “we’re too small to be targeted.” That’s naive and dangerous. Attackers know small companies have less security, and they automate attacks that hunt for exactly those weaknesses.
+    </p>
+    <p>
+      Start treating your vendors like an integral part of your security program. If they can’t prove they’re secure, <strong>don’t do business with them.</strong>
+    </p>
 
-    <section class="bg-gray-800 rounded-lg p-6 shadow-lg">
-      <h2 class="text-2xl text-teal-300 font-semibold mb-2">SimpleLogin – Email Aliases</h2>
-      <p class="mb-2 text-gray-300">Tired of giving your real email to every site? SimpleLogin lets you create masked aliases—so you can sign up, test things out, or block spam without exposing your inbox.</p>
-      <a href="https://simplelogin.io" target="_blank" class="text-teal-400 underline hover:text-teal-300">simplelogin.io</a>
-    </section>
+    <h2>Iron Dillo Can Help You Vet with Confidence</h2>
+    <p>
+      Vetting vendors may seem daunting, especially when you’re focused on running your business. I help rural businesses and local organizations build practical, manageable cybersecurity practices—including vendor risk management—without drowning in jargon or expensive consultants.
+    </p>
+    <p>
+      Need a free vendor vetting checklist or a quick consultation? Let’s get your third-party risks locked down.
+    </p>
 
-    <section class="text-center pt-8 border-t border-gray-700">
-      <p class="text-lg text-gray-300 mb-4">These aren’t flashy tools. They’re reliable, transparent, and genuinely helpful—just like the kind of cybersecurity Iron Dillo stands for.</p>
-      <p class="italic text-sm text-gray-500">No sponsorships. No kickbacks. Just solid tools I use myself.</p>
-    </section>
-
-    <div class="text-center pt-6">
-      <a href="/blog.html" class="text-teal-400 hover:text-teal-300 underline">&larr; Back to Blog</a>
-    </div>
+    <p class="mt-8 font-semibold text-indigo-400 cursor-pointer hover:underline">
+      <a href="mailto:contact@irondillo.com" rel="noopener noreferrer">Get in touch with Iron Dillo Cybersecurity</a>—because your business deserves more than just hope when it comes to security.
+    </p>
   </main>
 
   <!-- Footer -->
