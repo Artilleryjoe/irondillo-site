@@ -86,9 +86,18 @@
   </footer>
 
   <script>
-    function onSubmit(token) {
-      document.getElementById("contact-form").submit();
-    }
-  </script>
-</body>
-</html>
+  document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("contact-form");
+    const button = form.querySelector("button[type=submit]");
+
+    button.addEventListener("click", function (e) {
+      e.preventDefault(); // Stop form from submitting immediately
+      grecaptcha.execute(); // Trigger invisible reCAPTCHA
+    });
+  });
+
+  function onSubmit(token) {
+    // CAPTCHA passed, now submit form
+    document.getElementById("contact-form").submit();
+  }
+</script>
