@@ -92,12 +92,28 @@
 
     button.addEventListener("click", function (e) {
       e.preventDefault(); // Stop form from submitting immediately
-      grecaptcha.execute(); // Trigger invisible reCAPTCHA
-    });
-  });
+      grecaptcha.execute();
+      <script>
+function submitForm() {
+  grecaptcha.execute();
+}
 
-  function onSubmit(token) {
-    // CAPTCHA passed, now submit form
-    document.getElementById("contact-form").submit();
-  }
+function onSubmit(token) {
+  document.getElementById("contact-form").submit();
+}<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("contact-form");
+  const button = form.querySelector("button[type=submit]");
+
+  button.addEventListener("click", function (e) {
+    e.preventDefault(); // Prevent normal form submission
+    grecaptcha.execute(); // Trigger invisible reCAPTCHA
+  });
+});
+
+// This function is called by reCAPTCHA after the user passes the challenge
+function onSubmit(token) {
+  document.getElementById("contact-form").submit();
+}
 </script>
+
