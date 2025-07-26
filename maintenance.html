@@ -1,64 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Iron Dillo | Cyberstasis Mode</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-      @keyframes matrixScroll {
-        0% { transform: translateY(100%); opacity: 0; }
-        20% { opacity: 1; }
-        80% { opacity: 1; }
-        100% { transform: translateY(-100%); opacity: 0; }
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Iron Dillo | Cyberstasis Mode</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes matrixScroll {
+      0% { transform: translateY(100%); opacity: 0; }
+      20% { opacity: 1; }
+      80% { opacity: 1; }
+      100% { transform: translateY(-100%); opacity: 0; }
+    }
+    .matrix-line {
+      animation: matrixScroll 10s linear infinite;
+      white-space: nowrap;
+      color: #00ff00;
+      font-family: monospace;
+      text-shadow: 0 0 5px #00ff00;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body class="relative h-screen w-screen bg-black text-white overflow-hidden">
 
-      .matrix-line {
-        animation: matrixScroll 10s linear infinite;
-        white-space: nowrap;
-        color: #00ff00;
-        font-family: monospace;
-        text-shadow: 0 0 5px #00ff00;
-        opacity: 0.8;
-      }
-    </style>
-  </head>
-  <body class="relative h-screen w-screen bg-black text-white overflow-hidden">
-    <!-- Background Image -->
- <div class="absolute inset-0 overflow-hidden">
+  <!-- Background Image -->
   <img
-    src="assets/Cyber-stasis.png"
-    alt="Background Cyberstasis"
-    class="object-cover w-full h-full opacity-30"
+    src="/irondillo-site/assets/Cyber-stasis.png"
+    alt="Cyberstasis Background"
+    class="absolute inset-0 w-full h-full object-cover opacity-30 -z-10"
   />
-</div>
 
+  <!-- Dark Overlay -->
+  <div class="absolute inset-0 bg-black bg-opacity-70 z-10"></div>
 
-    <!-- Dark Overlay -->
-    <div class="absolute inset-0 bg-black bg-opacity-70 z-10"></div>
-
-    <!-- Scrolling Matrix Text -->
-    <div class="absolute z-20 w-full h-full flex flex-col items-center justify-center space-y-4 overflow-hidden">
-      <div class="h-full w-64 relative">
-        <div class="absolute inset-0 flex flex-col items-start justify-start space-y-6 animate-pulse">
-          <div class="matrix-line">Iron Dillo Offline...</div>
-          <div class="matrix-line">Systems Recalibrating...</div>
-          <div class="matrix-line">Threat Matrix Updating...</div>
-          <div class="matrix-line">Firewall Core Realigning...</div>
-          <div class="matrix-line">GRIT Protocol: Active...</div>
-          <div class="matrix-line">Reinitializing Shell Armor...</div>
-          <div class="matrix-line">Uplink Pending...</div>
-        </div>
+  <!-- Scrolling Matrix Text -->
+  <div class="absolute z-20 w-full h-full flex flex-col items-center justify-center space-y-4 overflow-hidden">
+    <div class="h-full w-64 relative">
+      <div class="absolute inset-0 flex flex-col items-start justify-start space-y-6 animate-pulse">
+        <div class="matrix-line">Iron Dillo Offline...</div>
+        <div class="matrix-line">Systems Recalibrating...</div>
+        <div class="matrix-line">Threat Matrix Updating...</div>
+        <div class="matrix-line">Firewall Core Realigning...</div>
+        <div class="matrix-line">GRIT Protocol: Active...</div>
+        <div class="matrix-line">Reinitializing Shell Armor...</div>
+        <div class="matrix-line">Uplink Pending...</div>
       </div>
     </div>
+  </div>
 
-    <!-- Center Message -->
-    <div class="absolute z-30 inset-0 flex items-center justify-center">
-      <div class="text-center px-6 py-4 bg-black bg-opacity-60 rounded-2xl shadow-lg">
-        <h1 class="text-3xl md:text-4xl font-bold mb-4">Cyberstasis Mode</h1>
-        <p class="text-lg">Iron Dillo is currently in maintenance mode.<br />
-        Please check back soon.</p>
-      </div>
+  <!-- Center Message -->
+  <div class="absolute z-30 inset-0 flex items-center justify-center">
+    <div class="text-center px-6 py-4 bg-black bg-opacity-60 rounded-2xl shadow-lg">
+      <h1 class="text-3xl md:text-4xl font-bold mb-4">Cyberstasis Mode</h1>
+      <p class="text-lg">
+        Iron Dillo is currently in maintenance mode.<br />
+        Please check back soon.
+      </p>
     </div>
-  </body>
+  </div>
+
+</body>
 </html>
