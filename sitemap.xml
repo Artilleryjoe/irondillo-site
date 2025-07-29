@@ -32,6 +32,11 @@
     <priority>0.6</priority>
     <changefreq>weekly</changefreq>
   </url>
+  <url>
+    <loc>https://irondillo.com/lindale-tyler-cybersecurity.html</loc>
+    <priority>0.6</priority>
+    <changefreq>monthly</changefreq>
+  </url>
 
   <!-- Blog Posts -->
   <url>
