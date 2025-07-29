@@ -23,6 +23,11 @@
     <changefreq>yearly</changefreq>
   </url>
   <url>
+    <loc>https://irondillo.com/thank-you.html</loc>
+    <priority>0.5</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
     <loc>https://irondillo.com/blog.html</loc>
     <priority>0.6</priority>
     <changefreq>weekly</changefreq>
