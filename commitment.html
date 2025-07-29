@@ -54,10 +54,16 @@
 
   <!-- Footer -->
   <footer class="bg-gray-800 text-gray-500 text-center p-6 mt-auto text-sm max-w-3xl mx-auto rounded-md">
-    &copy; 2025 Iron Dillo. All rights reserved. | Veteran-Owned | 
+    &copy; <span class="current-year"></span> Iron Dillo. All rights reserved. | Veteran-Owned |
     <a href="/privacy.html" class="hover:underline text-teal-400">Privacy</a> | 
     <a href="/terms.html" class="hover:underline text-teal-400">Terms</a>
   </footer>
+
+  <script>
+    document.querySelectorAll('.current-year').forEach(el => {
+      el.textContent = new Date().getFullYear();
+    });
+  </script>
 
 </body>
 </html>

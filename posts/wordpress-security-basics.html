@@ -79,7 +79,15 @@
 
   <!-- Footer -->
   <footer class="bg-gray-800 text-gray-500 text-center p-6 text-sm mt-auto">
-    &copy; 2025 Iron Dillo. Veteran-Owned | <a href="/privacy.html" class="hover:underline text-teal-400">Privacy</a> | <a href="/terms.html" class="hover:underline text-teal-400">Terms</a> 
+    &copy; <span class="current-year"></span> Iron Dillo. Veteran-Owned | <a href="/privacy.html" class="hover:underline text-teal-400">Privacy</a> | <a href="/terms.html" class="hover:underline text-teal-400">Terms</a>
+
+  </footer>
+
+  <script>
+    document.querySelectorAll('.current-year').forEach(el => {
+      el.textContent = new Date().getFullYear();
+    });
+  </script>
 
 </body>
 </html>
