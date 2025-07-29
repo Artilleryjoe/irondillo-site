@@ -33,44 +33,6 @@
     <changefreq>monthly</changefreq>
   </url>
 
-  <!-- Blog Posts -->
-  <url>
-    <loc>https://irondillo.com/posts/closing-ports-backdoors.html</loc>
-    <priority>0.5</priority>
-    <changefreq>monthly</changefreq>
-    <lastmod>2025-07-29</lastmod>
-  </url>
-  <url>
-    <loc>https://irondillo.com/posts/free-tools-i-trust.html</loc>
-    <priority>0.5</priority>
-    <changefreq>monthly</changefreq>
-    <lastmod>2025-07-29</lastmod>
-  </url>
-  <url>
-    <loc>https://irondillo.com/posts/rural-cybersecurity.html</loc>
-    <priority>0.5</priority>
-    <changefreq>monthly</changefreq>
-    <lastmod>2025-07-29</lastmod>
-  </url>
-  <url>
-    <loc>https://irondillo.com/posts/safer-online-now.html</loc>
-    <priority>0.5</priority>
-    <changefreq>monthly</changefreq>
-    <lastmod>2025-07-29</lastmod>
-  </url>
-  <url>
-    <loc>https://irondillo.com/posts/tech-support-scam-warning.html</loc>
-    <priority>0.5</priority>
-    <changefreq>monthly</changefreq>
-    <lastmod>2025-07-29</lastmod>
-  </url>
-  <url>
-    <loc>https://irondillo.com/posts/wordpress-security-basics.html</loc>
-    <priority>0.5</priority>
-    <changefreq>monthly</changefreq>
-    <lastmod>2025-07-29</lastmod>
-  </url>
-
   <!-- Legal Pages -->
   <url>
     <loc>https://irondillo.com/privacy.html</loc>
