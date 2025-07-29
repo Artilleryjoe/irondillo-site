@@ -5,16 +5,26 @@
   <title>Are Open Ports a Backdoor? | Iron Dillo Blog</title>
   <meta name="description" content="Learn how open ports can leave your devices exposed, how attackers exploit them, and how to lock them down securely.">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="preconnect" href="https://cdn.tailwindcss.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- 🛡 Security Headers -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.tailwindcss.com https://unpkg.com https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; frame-src https://www.google.com; form-action 'self' https://formspree.io; object-src 'none'; base-uri 'self';">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="X-Frame-Options" content="DENY">
+<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+<meta http-equiv="Permissions-Policy" content="accelerometer=(), camera=(), geolocation=(), microphone=()">
+<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
   <link rel="icon" href="/assets/favicon.ico" />
   <link rel="canonical" href="https://irondillo.com/posts/closing-ports-backdoors.html" />
-  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.tailwindcss.com" defer></script>
 </head>
 
 <body class="bg-gray-900 text-gray-100 font-sans flex flex-col min-h-screen">
 
   <!-- Logo + Nav -->
   <header class="text-center py-8 max-w-3xl mx-auto fade-in">
-    <img src="/assets/IronDilloLogo.png" alt="IronDillo Logo" class="mx-auto w-32 mb-6" />
+    <img loading="lazy" src="/assets/IronDilloLogo.png" alt="IronDillo Logo" class="mx-auto w-32 mb-6" />
     <h1 class="text-4xl font-extrabold text-teal-400 mb-4">Are Open Ports a Backdoor?</h1>
     <nav class="bg-gray-800 py-3 rounded-md mb-6 inline-block w-full max-w-md mx-auto">
       <div class="flex justify-center space-x-6">
