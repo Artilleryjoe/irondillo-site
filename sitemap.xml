@@ -28,11 +28,6 @@
     <changefreq>yearly</changefreq>
   </url>
   <url>
-    <loc>https://irondillo.com/blog.html</loc>
-    <priority>0.6</priority>
-    <changefreq>weekly</changefreq>
-  </url>
-  <url>
     <loc>https://irondillo.com/lindale-tyler-cybersecurity.html</loc>
     <priority>0.6</priority>
     <changefreq>monthly</changefreq>
@@ -43,36 +38,37 @@
     <loc>https://irondillo.com/posts/closing-ports-backdoors.html</loc>
     <priority>0.5</priority>
     <changefreq>monthly</changefreq>
-    <lastmod>2025-06-15</lastmod> <!-- last month -->
+    <lastmod>2025-07-29</lastmod>
   </url>
   <url>
     <loc>https://irondillo.com/posts/free-tools-i-trust.html</loc>
     <priority>0.5</priority>
     <changefreq>monthly</changefreq>
-    <lastmod>2025-06-15</lastmod> <!-- last month -->
+    <lastmod>2025-07-29</lastmod>
   </url>
   <url>
     <loc>https://irondillo.com/posts/rural-cybersecurity.html</loc>
     <priority>0.5</priority>
     <changefreq>monthly</changefreq>
-    <lastmod>2025-07-01</lastmod> <!-- 2 weeks ago -->
+    <lastmod>2025-07-29</lastmod>
   </url>
   <url>
     <loc>https://irondillo.com/posts/safer-online-now.html</loc>
     <priority>0.5</priority>
     <changefreq>monthly</changefreq>
-    <lastmod>2025-06-15</lastmod> <!-- last month -->
+    <lastmod>2025-07-29</lastmod>
   </url>
   <url>
     <loc>https://irondillo.com/posts/tech-support-scam-warning.html</loc>
     <priority>0.5</priority>
     <changefreq>monthly</changefreq>
-    <lastmod>2025-06-15</lastmod> <!-- last month -->
+    <lastmod>2025-07-29</lastmod>
   </url>
   <url>
     <loc>https://irondillo.com/posts/wordpress-security-basics.html</loc>
     <priority>0.5</priority>
     <changefreq>monthly</changefreq>
+    <lastmod>2025-07-29</lastmod>
   </url>
 
   <!-- Legal Pages -->
