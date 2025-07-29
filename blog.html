@@ -5,6 +5,16 @@
   <title>Iron Dillo Blog – Cyber Hygiene Tips & Updates</title>
   <meta name="description" content="Cybersecurity guidance, threat breakdowns, and plain-English advice for real-world digital safety." />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="preconnect" href="https://cdn.tailwindcss.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- 🛡 Security Headers -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.tailwindcss.com https://unpkg.com https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; frame-src https://www.google.com; form-action 'self' https://formspree.io; object-src 'none'; base-uri 'self';">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="X-Frame-Options" content="DENY">
+<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+<meta http-equiv="Permissions-Policy" content="accelerometer=(), camera=(), geolocation=(), microphone=()">
+<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
   <link rel="icon" href="/assets/favicon.ico" />
   <link rel="canonical" href="https://irondillo.com/blog.html" />
 
@@ -18,7 +28,7 @@
   <meta name="twitter:card" content="summary_large_image" />
 
   <!-- Tailwind CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.tailwindcss.com" defer></script>
   <style>
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     .fade-in { animation: fadeIn 1s ease-out both; }
@@ -29,7 +39,7 @@
 
   <!-- Header with logo and nav -->
   <header class="p-8 text-center max-w-3xl mx-auto fade-in">
-    <img src="/assets/IronDilloLogo.png" alt="IronDillo Logo" class="mx-auto w-32 mb-6" />
+    <img loading="lazy" src="/assets/IronDilloLogo.png" alt="IronDillo Logo" class="mx-auto w-32 mb-6" />
     <h1 class="text-4xl font-extrabold text-teal-400 mb-4">Iron Dillo Blog</h1>
 
     <nav class="bg-gray-800 py-3 rounded-md mb-8 max-w-xl mx-auto">
@@ -51,7 +61,7 @@
  <main class="max-w-6xl mx-auto px-4 pb-20 grid gap-10 md:grid-cols-2 lg:grid-cols-3">
 
   <article class="bg-gray-800 rounded-lg overflow-hidden shadow-lg">
-    <img src="/assets/thumb-safer-online.jpg" alt="5 Ways to Stay Safer Online" class="w-full h-auto" />
+    <img loading="lazy" src="/assets/thumb-safer-online.jpg" alt="5 Ways to Stay Safer Online" class="w-full h-auto" />
     <div class="p-6">
       <h2 class="text-xl font-bold text-teal-300 mb-1">
         <a href="/posts/safer-online-now.html">5 Ways to Stay Safer Online Right Now</a>
@@ -62,7 +72,7 @@
   </article>
 
   <article class="bg-gray-800 rounded-lg overflow-hidden shadow-lg">
-    <img src="/assets/thumb-tech-support.png" alt="Tech Support Scam" class="w-full h-auto" />
+    <img loading="lazy" src="/assets/thumb-tech-support.png" alt="Tech Support Scam" class="w-full h-auto" />
     <div class="p-6">
       <h2 class="text-xl font-bold text-teal-300 mb-1">
         <a href="/posts/tech-support-scam-warning.html">How to Tell If That Tech Support Call Is a Scam</a>
@@ -73,7 +83,7 @@
   </article>
 
   <article class="bg-gray-800 rounded-lg overflow-hidden shadow-lg">
-    <img src="/assets/thumb-wordpress.jpg" alt="WordPress Security" class="w-full h-auto" />
+    <img loading="lazy" src="/assets/thumb-wordpress.jpg" alt="WordPress Security" class="w-full h-auto" />
     <div class="p-6">
       <h2 class="text-xl font-bold text-teal-300 mb-1">
         <a href="/posts/wordpress-security-basics.html">Basic WordPress Security for Beginners</a>
@@ -84,7 +94,7 @@
   </article>
 
   <article class="bg-gray-800 rounded-lg overflow-hidden shadow-lg">
-    <img src="/assets/thumb-tools.jpg" alt="Free Tools I Trust" class="w-full h-auto" />
+    <img loading="lazy" src="/assets/thumb-tools.jpg" alt="Free Tools I Trust" class="w-full h-auto" />
     <div class="p-6">
       <h2 class="text-xl font-bold text-teal-300 mb-1">
         <a href="/posts/free-tools-i-trust.html">Free Tools I Trust</a>
@@ -95,7 +105,7 @@
   </article>
 
   <article class="bg-gray-800 rounded-lg overflow-hidden shadow-lg">
-    <img src="/assets/thumb-ports.png" alt="Open Ports Explained" class="w-full h-48 object-cover" />
+    <img loading="lazy" src="/assets/thumb-ports.png" alt="Open Ports Explained" class="w-full h-48 object-cover" />
     <div class="p-6">
       <h2 class="text-xl font-bold text-teal-300 mb-1">
         <a href="/posts/closing-ports-backdoors.html">Are Open Ports a Backdoor?</a>
@@ -106,7 +116,7 @@
   </article>
 
   <article class="bg-gray-800 rounded-lg overflow-hidden shadow-lg">
-    <img src="/assets/thumb-rural.jpg" alt="Rural Cybersecurity" class="w-full h-auto" />
+    <img loading="lazy" src="/assets/thumb-rural.jpg" alt="Rural Cybersecurity" class="w-full h-auto" />
     <div class="p-6">
       <h2 class="text-xl font-bold text-teal-300 mb-1">
         <a href="/posts/rural-cybersecurity.html">Why Rural Businesses Can’t Ignore Cybersecurity</a>

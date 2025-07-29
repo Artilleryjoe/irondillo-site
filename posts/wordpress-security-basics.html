@@ -7,6 +7,16 @@
   <link rel="canonical" href="https://irondillo.com/posts/wordpress-security-basics.html" />
   <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="preconnect" href="https://cdn.tailwindcss.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- 🛡 Security Headers -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.tailwindcss.com https://unpkg.com https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; frame-src https://www.google.com; form-action 'self' https://formspree.io; object-src 'none'; base-uri 'self';">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="X-Frame-Options" content="DENY">
+<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+<meta http-equiv="Permissions-Policy" content="accelerometer=(), camera=(), geolocation=(), microphone=()">
+<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
 
   <!-- SEO -->
   <meta name="keywords" content="WordPress security, beginner WordPress, website protection, cybersecurity tips" />
@@ -17,13 +27,13 @@
   <meta property="og:url" content="https://irondillo.com/posts/wordpress-security-basics.html" />
   <meta name="twitter:card" content="summary_large_image" />
 
-  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.tailwindcss.com" defer></script>
 </head>
 <body class="bg-gray-900 text-gray-100 font-sans leading-relaxed">
 
   <!-- Header -->
   <header class="text-center py-10 px-6 max-w-3xl mx-auto">
-    <img src="/assets/IronDilloLogo.png" alt="IronDillo Logo" class="mx-auto w-28 mb-6" />
+    <img loading="lazy" src="/assets/IronDilloLogo.png" alt="IronDillo Logo" class="mx-auto w-28 mb-6" />
     <h1 class="text-4xl font-extrabold text-teal-400 mb-4">Basic WordPress Security for Beginners</h1>
     <time datetime="2025-07-05" class="text-gray-400 text-sm block mb-6">Published July 5, 2025</time>
     <p class="text-gray-300 max-w-xl mx-auto">Launching a WordPress site is easy — securing it doesn't have to be complicated. These five practical steps will protect your site from common attacks without needing to be a tech expert.</p>
