@@ -8,19 +8,25 @@
 <link rel="preconnect" href="https://cdn.tailwindcss.com">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-codex/configure-tailwind-with-iron-dillo-palette
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
   tailwind.config = {
     theme: {
       extend: {
+        colors: {
+          armadilloBlack: "#1A1A1A",
+          armadilloGray: "#4A4A4A",
+          oliveGreen: "#6B7B3C",
+          oliveDark: "#55622F",
+          offWhite: "#F8F9FA"
+        },
         fontFamily: {
-          sans: ['Inter', 'sans-serif']
+          inter: ["Inter", "sans-serif"]
         }
       }
     }
-  }
+  };
 </script>
 
 <!-- 🛡 Security Headers -->
@@ -33,10 +39,10 @@ codex/configure-tailwind-with-iron-dillo-palette
 <link rel="icon" type="image/x-icon" href="/assets/favicon.png">
 </head>
 
-<body class="min-h-screen flex flex-col items-center justify-center bg-[#F8F9FA] text-[#1A1A1A] font-sans text-center p-8">
+<body class="min-h-screen flex flex-col items-center justify-center bg-offWhite text-armadilloBlack font-inter text-center p-8">
   <img src="/assets/404Dillo.png" alt="Dizzy Armadillo - Couldn't Find This Burrow" class="max-w-xs w-72 h-auto mb-8">
-  <h1 class="text-2xl font-bold text-[#4A4A4A] mb-4">404 – Couldn't Find This Burrow</h1>
-  <p class="text-lg max-w-xl mb-4">Looks like the page you're digging for doesn't exist. Maybe it got buried, maybe it never existed at all. No worries—Iron Dillo is on the trail.</p>
-  <a href="/index.html" class="inline-block mt-6 px-4 py-2 bg-[#6B7B3C] text-white font-bold rounded hover:bg-[#55622F] transition">Back to Safety</a>
+  <h1 class="text-2xl font-bold text-armadilloGray mb-4">404 – Couldn't Find This Burrow</h1>
+  <p class="text-lg max-w-xl mb-4 text-armadilloGray">Looks like the page you're digging for doesn't exist. Maybe it got buried, maybe it never existed at all. No worries—Iron Dillo is on the trail.</p>
+  <a href="/index.html" class="inline-block mt-6 px-4 py-2 bg-oliveGreen text-white font-bold rounded hover:bg-oliveDark transition">Back to Safety</a>
 </body>
 </html>
