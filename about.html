@@ -7,8 +7,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <!-- Fonts & Tailwind -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -34,8 +32,13 @@
 </head>
 <body class="flex flex-col min-h-screen bg-offWhite text-armadilloGray font-inter">
 
+  <!-- Logo -->
+  <header class="text-center pt-8 max-w-3xl mx-auto fade-in">
+    <img src="/assets/irondillo-preview.png" alt="IronDillo cybersecurity logo" class="mx-auto mb-6 w-36 h-auto" />
+  </header>
+
   <!-- Navigation -->
-  <nav class="bg-armadilloBlack rounded-md mt-6 mb-8 w-full fade-in">
+  <nav class="bg-armadilloBlack rounded-md mb-8 w-full fade-in">
     <div class="flex justify-evenly flex-wrap">
       <a href="/index.html" class="py-3 px-5 text-offWhite font-semibold uppercase hover:text-oliveGreen hover:underline">Home</a>
       <a href="/services.html" class="py-3 px-5 text-offWhite font-semibold uppercase hover:text-oliveGreen hover:underline">Services</a>
@@ -45,10 +48,9 @@
   </nav>
 
   <!-- Page Title -->
-  <header class="text-center max-w-3xl mx-auto fade-in">
-    <img src="/assets/irondillo-preview.png" alt="IronDillo cybersecurity logo" class="mx-auto mb-6 w-36 h-auto" />
+  <div class="text-center mb-8 fade-in">
     <h1 class="text-4xl font-extrabold text-oliveGreen">About Iron Dillo Cybersecurity</h1>
-  </header>
+  </div>
 
   <!-- Main Content -->
   <main class="flex-grow max-w-4xl mx-auto px-6 py-12 space-y-12 fade-in">
@@ -85,9 +87,7 @@
       <h2 class="text-2xl font-semibold text-oliveGreen mb-4">Commitment to Professional Ethics</h2>
       <p class="text-armadilloBlack leading-relaxed mb-4">
         As a member of <span class="font-semibold">ISC2</span>, I keep their 
-        <a href="https://www.isc2.org/Ethics" target="_blank" class="text-oliveGreen hover:underline">
-          Code of Ethics
-        </a> close to heart in this work. 
+        <a href="https://www.isc2.org/Ethics" target="_blank" class="text-oliveGreen hover:underline">Code of Ethics</a> close to heart in this work. 
         These principles emphasize protecting society, acting with honesty and diligence, 
         delivering competent service, and advancing the cybersecurity profession for the future.
       </p>
