@@ -5,60 +5,64 @@
   <title>Terms and Conditions – Iron Dillo</title>
   <meta name="description" content="Read the terms and conditions for using Iron Dillo Cybersecurity's website and services." />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="preconnect" href="https://cdn.tailwindcss.com">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-<!-- 🛡 Security Headers -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.tailwindcss.com https://unpkg.com https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; frame-src https://www.google.com; form-action 'self' https://formspree.io; object-src 'none'; base-uri 'self';">
-<meta http-equiv="X-Content-Type-Options" content="nosniff">
-<meta http-equiv="X-Frame-Options" content="DENY">
-<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
-<meta http-equiv="Permissions-Policy" content="accelerometer=(), camera=(), geolocation=(), microphone=()">
-<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
-  <link rel="icon" type="image/x-icon" href="/assets/favicon.png" />
-  <link rel="canonical" href="https://irondillo.com/terms.html" />
+  
+  <!-- Fonts & Tailwind -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
-  tailwind.config = {
-    theme: {
-      extend: {
-        colors: {
-          armadilloBlack: "#1A1A1A",
-          armadilloGray: "#4A4A4A",
-          oliveGreen: "#6B7B3C",
-          oliveDark: "#55622F",
-          offWhite: "#F8F9FA"
-        },
-        fontFamily: {
-          inter: ["Inter", "sans-serif"]
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            armadilloBlack: "#1A1A1A",
+            armadilloGray: "#4A4A4A",
+            oliveGreen: "#6B7B3C",
+            oliveDark: "#55622F",
+            offWhite: "#F8F9FA"
+          },
+          fontFamily: {
+            inter: ["Inter", "sans-serif"]
+          }
         }
       }
     }
-  };
-</script>
+  </script>
+
+  <!-- Security Headers -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.tailwindcss.com https://unpkg.com https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; frame-src https://www.google.com; form-action 'self' https://formspree.io; object-src 'none'; base-uri 'self';">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Permissions-Policy" content="accelerometer=(), camera=(), geolocation=(), microphone=()">
+  <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
+  
+  <link rel="icon" type="image/x-icon" href="/assets/favicon.png" />
+  <link rel="canonical" href="https://irondillo.com/terms.html" />
 </head>
 <body class="flex flex-col min-h-screen bg-offWhite text-armadilloGray font-inter">
 
   <!-- Logo Header -->
-  <header class="text-center pt-8">
-    <img loading="lazy" src="/assets/irondillo-preview.png" alt="IronDillo cybersecurity armadillo logo" class="mx-auto mb-6 w-36 h-auto" />
+  <header class="text-center pt-8 max-w-3xl mx-auto">
+    <img loading="lazy" src="/assets/irondillo-preview.png" alt="Iron Dillo cybersecurity armadillo logo" class="mx-auto mb-6 w-36 h-auto" />
     <h1 class="text-4xl font-extrabold text-oliveGreen mb-2">Terms and Conditions</h1>
     <p class="text-armadilloGray">Effective Date: 07/29/2025</p>
   </header>
 
   <!-- Navigation -->
-<nav class="bg-armadilloGray py-3 rounded-md mb-8 max-w-xl mx-auto">
-  <div class="flex justify-between">
-    <a href="/index.html" class="text-oliveGreen font-semibold hover:underline px-3">Home</a>
-    <a href="/services.html" class="text-oliveGreen font-semibold hover:underline px-3">Services</a>
-    <a href="/about.html" class="text-oliveGreen font-semibold hover:underline px-3">About</a>
-    <a href="/contact.html" class="text-oliveGreen font-semibold hover:underline px-3">Contact</a>
-  </div>
-</nav>
+  <nav class="bg-armadilloBlack py-3 rounded-md mb-8 max-w-xl mx-auto">
+    <div class="flex justify-between px-4">
+      <a href="/index.html" class="text-offWhite font-semibold hover:text-oliveGreen uppercase">Home</a>
+      <a href="/services.html" class="text-offWhite font-semibold hover:text-oliveGreen uppercase">Services</a>
+      <a href="/about.html" class="text-offWhite font-semibold hover:text-oliveGreen uppercase">About</a>
+      <a href="/contact.html" class="text-offWhite font-semibold hover:text-oliveGreen uppercase">Contact</a>
+    </div>
+  </nav>
 
   <!-- Main Content -->
   <main class="flex-grow max-w-3xl mx-auto px-6 py-8 space-y-8">
-    <section class="bg-armadilloGray rounded-lg shadow-lg p-8">
+    <section class="bg-white rounded-lg shadow-lg p-8">
       <p class="mb-4">Welcome to Iron Dillo Cybersecurity. This site reflects both our mission to provide plain-English cybersecurity education and our role as a veteran-owned consulting business. By using this site, you agree to the following terms, designed to protect both you and us.</p>
       
       <h2 class="text-xl font-semibold text-oliveGreen">1. What We Provide</h2>
@@ -66,12 +70,12 @@
         <li>Educational content to help individuals and small businesses understand today’s cybersecurity risks</li>
         <li>Professional consulting services, available through formal written agreements, to deliver assessments, recommendations, and tailored security solutions</li>
       </ul>
-      <p>Reading content on this site does not create a client relationship. A signed agreement is required for formal consulting services.</p>
+      <p class="mt-2">Reading content on this site does not create a client relationship. A signed agreement is required for formal consulting services.</p>
       
-      <h2 class="text-xl font-semibold text-oliveGreen">2. Our Commitment to Accuracy</h2>
+      <h2 class="text-xl font-semibold text-oliveGreen mt-6">2. Our Commitment to Accuracy</h2>
       <p>We work hard to ensure that all content is accurate and relevant. Cybersecurity changes quickly, so while the information here is trustworthy, no single resource can guarantee full protection from every threat. For advice specific to your situation, please contact us for a consulting engagement.</p>
       
-      <h2 class="text-xl font-semibold text-oliveGreen">3. Responsible Use of This Site</h2>
+      <h2 class="text-xl font-semibold text-oliveGreen mt-6">3. Responsible Use of This Site</h2>
       <p>To keep this site safe, secure, and useful for everyone, we ask that visitors use it responsibly. By accessing Iron Dillo Cybersecurity, you agree not to engage in activities that could harm the site, compromise its security, or misuse the content provided.</p>
       <ul class="list-disc list-inside space-y-2 text-armadilloGray">
         <li>Hack, disrupt, or exploit its content or functionality</li>
@@ -79,19 +83,19 @@
         <li>Copy, republish, or misrepresent content without permission</li>
       </ul>
       
-      <h2 class="text-xl font-semibold text-oliveGreen">4. External Links</h2>
+      <h2 class="text-xl font-semibold text-oliveGreen mt-6">4. External Links</h2>
       <p>Occasionally we link to outside sites for reference. We do not control or endorse third-party content and cannot guarantee its accuracy or security.</p>
       
-      <h2 class="text-xl font-semibold text-oliveGreen">5. Limitation of Liability</h2>
+      <h2 class="text-xl font-semibold text-oliveGreen mt-6">5. Limitation of Liability</h2>
       <p>Iron Dillo Cybersecurity is not liable for damages that may result from using or misapplying the educational content on this site. Professional services, when engaged through a written agreement, are governed by their own terms and deliverables.</p>
       
-      <h2 class="text-xl font-semibold text-oliveGreen">6. Contact Us</h2>
-      <p>If you’d like to learn more about our consulting services or have any concerns, please reach out through the <a href="/index.html#contact" class="text-oliveGreen underline hover:text-oliveGreen">Contact Form</a> or email us at waldeinsamkeit8213@gmail.com</p>
+      <h2 class="text-xl font-semibold text-oliveGreen mt-6">6. Contact Us</h2>
+      <p>If you’d like to learn more about our consulting services or have any concerns, please reach out through the <a href="/index.html#contact" class="text-oliveGreen underline hover:text-oliveDark">Contact Form</a> or email us at <span class="font-semibold text-armadilloBlack">waldeinsamkeit8213@gmail.com</span>.</p>
     </section>
   </main>
 
   <!-- Footer -->
-  <footer class="bg-armadilloGray text-armadilloGray text-center p-6 mt-auto text-sm max-w-4xl mx-auto rounded-md">
+  <footer class="bg-armadilloBlack text-offWhite text-center p-6 mt-auto text-sm max-w-4xl mx-auto rounded-md">
     &copy; 2025 Iron Dillo. All rights reserved. | Veteran-Owned | 
     <a href="/privacy.html" class="hover:underline text-oliveGreen">Privacy</a> | 
     <a href="/terms.html" class="hover:underline text-oliveGreen">Terms</a>
