@@ -27,89 +27,76 @@
       }
     }
   </script>
-
-  <!-- Security Headers -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.tailwindcss.com https://unpkg.com https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; frame-src https://www.google.com; form-action 'self' https://formspree.io; object-src 'none'; base-uri 'self';">
 </head>
 
-<body class="flex flex-col min-h-screen bg-offWhite text-armadilloGray font-inter">
+<body class="bg-offWhite text-armadilloGray font-inter flex flex-col min-h-screen">
 
-  <!-- Header Logo -->
-  <header class="text-center pt-12 max-w-3xl mx-auto">
-    <img loading="lazy" src="/assets/irondillo-preview.png" alt="Iron Dillo logo" class="mx-auto mb-8 w-40 h-auto" />
+  <!-- Logo -->
+  <header class="text-center pt-16 max-w-4xl mx-auto">
+    <img src="/assets/irondillo-preview.png" alt="Iron Dillo logo"
+         class="mx-auto mb-10 w-40 h-auto drop-shadow-md" />
   </header>
 
-  <!-- Navigation -->
-  <nav class="bg-armadilloBlack rounded-md w-full mb-12 shadow-md">
-    <div class="flex justify-evenly flex-wrap">
-      <a href="/index.html" class="py-4 px-6 text-offWhite font-semibold uppercase hover:text-oliveGreen hover:underline">Home</a>
-      <a href="/services.html" class="py-4 px-6 text-offWhite font-semibold uppercase hover:text-oliveGreen hover:underline">Services</a>
-      <a href="/about.html" class="py-4 px-6 text-offWhite font-semibold uppercase hover:text-oliveGreen hover:underline">About</a>
-      <a href="/contact.html" class="py-4 px-6 text-offWhite font-semibold uppercase hover:text-oliveGreen hover:underline">Contact</a>
+  <!-- Nav -->
+  <nav class="bg-armadilloBlack text-offWhite rounded-xl shadow-lg mb-16 w-11/12 md:w-3/4 mx-auto">
+    <div class="flex justify-around py-4 text-sm md:text-base">
+      <a href="/index.html" class="font-semibold uppercase hover:text-oliveGreen">Home</a>
+      <a href="/services.html" class="font-semibold uppercase hover:text-oliveGreen">Services</a>
+      <a href="/about.html" class="font-semibold uppercase hover:text-oliveGreen">About</a>
+      <a href="/contact.html" class="font-semibold uppercase hover:text-oliveGreen">Contact</a>
     </div>
   </nav>
 
-  <!-- Page Title & Intro -->
-  <section class="text-center max-w-3xl mx-auto mb-12 px-6">
-    <h1 class="text-5xl font-extrabold text-oliveGreen mb-6">Iron Dillo Cybersecurity</h1>
-    <p class="text-lg leading-relaxed text-armadilloGray">
+  <!-- Hero -->
+  <section class="text-center max-w-3xl mx-auto px-6 mb-20">
+    <h1 class="text-5xl font-extrabold text-oliveGreen mb-8">Iron Dillo Cybersecurity</h1>
+    <p class="text-lg leading-relaxed mb-12">
       <span class="text-oliveGreen font-medium">Iron Dillo Cybersecurity</span> protects
       <span class="font-semibold text-armadilloBlack">individuals</span>,
       <span class="font-semibold text-armadilloBlack">small businesses</span>, and
-      <span class="font-semibold text-armadilloBlack">rural operations</span> across East Texas.  
+      <span class="font-semibold text-armadilloBlack">rural operations</span> across East Texas.
       Founded by a <span class="text-oliveGreen font-medium">U.S. Army veteran</span> with a Master’s in Cybersecurity,
-      Iron Dillo provides remote diagnostics, documentation, and guidance you can <span class="font-semibold text-armadilloBlack">trust</span>.
+      Iron Dillo provides diagnostics, documentation, and guidance you can <span class="font-semibold text-armadilloBlack">trust</span>.
     </p>
-  </section>
-
-  <!-- Call to Action -->
-  <section class="flex flex-wrap gap-6 justify-center mb-20">
-    <a href="/contact.html"
-       class="inline-block bg-oliveGreen text-white px-8 py-4 rounded-lg shadow-lg hover:bg-oliveDark transition text-lg font-semibold">
-       Schedule Your $199 Security Check
-    </a>
-    <a href="/lindale-tyler-cybersecurity.html"
-       class="inline-block bg-armadilloGray text-offWhite px-8 py-4 rounded-lg shadow-lg hover:bg-oliveDark transition text-lg font-semibold">
-       Lindale & Tyler Cybersecurity
-    </a>
+    <div class="flex flex-wrap gap-6 justify-center">
+      <a href="/contact.html" 
+         class="bg-oliveGreen text-white px-8 py-4 rounded-lg shadow-lg hover:bg-oliveDark transition text-lg font-semibold">
+         Schedule Your $199 Security Check
+      </a>
+      <a href="/lindale-tyler-cybersecurity.html"
+         class="bg-white border border-armadilloGray text-armadilloBlack px-8 py-4 rounded-lg shadow hover:border-oliveDark hover:text-oliveGreen transition text-lg font-semibold">
+         Lindale & Tyler Cybersecurity
+      </a>
+    </div>
   </section>
 
   <!-- Footer -->
-  <footer class="bg-armadilloBlack text-offWhite text-center p-10 mt-auto text-sm max-w-3xl mx-auto rounded-md shadow-lg">
-    <!-- Social Icons -->
-    <div class="mb-8">
-      <p class="text-oliveGreen font-semibold mb-4">Connect with me</p>
-      <div class="inline-flex justify-center space-x-10">
-        <!-- GitHub -->
-        <a href="https://github.com/Artilleryjoe/Cybersecurity-Portfolio" target="_blank" aria-label="GitHub"
-           class="hover:scale-110 transition-transform duration-300 text-oliveGreen hover:text-oliveDark">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-9 h-9" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 .5C5.73.5.5 5.73.5 12.02c0 5.1 3.29 9.42 7.86 10.96..."/>
-          </svg>
-        </a>
-        <!-- Facebook -->
-        <a href="https://www.facebook.com/profile.php?id=61578181152347" target="_blank" aria-label="Facebook"
-           class="hover:scale-110 transition-transform duration-300 text-oliveGreen hover:text-oliveDark">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-9 h-9" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M22.675 0h-21.35C.6 0 0 .6 0 1.342..."/>
-          </svg>
-        </a>
-        <!-- LinkedIn -->
-        <a href="https://www.linkedin.com/in/kristophermccoy" target="_blank" aria-label="LinkedIn"
-           class="hover:scale-110 transition-transform duration-300 text-oliveGreen hover:text-oliveDark">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-9 h-9" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M20.447 20.452h-3.554v-5.569c0-1.328..."/>
-          </svg>
-        </a>
-      </div>
+  <footer class="bg-armadilloBlack text-offWhite text-center py-12 mt-auto">
+    <p class="text-oliveGreen font-semibold mb-6">Connect with me</p>
+    <div class="inline-flex justify-center space-x-10 mb-8">
+      <!-- GitHub -->
+      <a href="https://github.com/Artilleryjoe/Cybersecurity-Portfolio" target="_blank" aria-label="GitHub"
+         class="hover:scale-110 transition-transform duration-300 text-oliveGreen hover:text-oliveDark">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="..."/></svg>
+      </a>
+      <!-- Facebook -->
+      <a href="https://www.facebook.com/profile.php?id=61578181152347" target="_blank" aria-label="Facebook"
+         class="hover:scale-110 transition-transform duration-300 text-oliveGreen hover:text-oliveDark">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="..."/></svg>
+      </a>
+      <!-- LinkedIn -->
+      <a href="https://www.linkedin.com/in/kristophermccoy" target="_blank" aria-label="LinkedIn"
+         class="hover:scale-110 transition-transform duration-300 text-oliveGreen hover:text-oliveDark">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="..."/></svg>
+      </a>
     </div>
-    <p class="mt-4 italic">Trusted by East Texas businesses. Veteran-owned. Mission-driven.</p>
-    <div class="mt-4 space-x-4">
+    <p class="italic mb-4">Trusted by East Texas businesses. Veteran-owned. Mission-driven.</p>
+    <div class="space-x-4 mb-4">
       <a href="/privacy.html" class="hover:underline">Privacy</a>
       <a href="/terms.html" class="hover:underline">Terms</a>
       <a href="/commitment.html" class="hover:underline">Our Commitment</a>
     </div>
-    <p class="mt-6">&copy; 2025 Iron Dillo. All rights reserved.</p>
+    <p>&copy; 2025 Iron Dillo. All rights reserved.</p>
   </footer>
 
 </body>
