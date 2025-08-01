@@ -2,47 +2,80 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>404 – Page Not Found | IronDillo</title>
+  <title>404 – Page Not Found | Iron Dillo</title>
   <meta name="description" content="Uh-oh. This burrow doesn’t exist. Let’s get you back to safety.">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="preconnect" href="https://cdn.tailwindcss.com">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
-  tailwind.config = {
-    theme: {
-      extend: {
-        colors: {
-          armadilloBlack: "#1A1A1A",
-          armadilloGray: "#4A4A4A",
-          oliveGreen: "#6B7B3C",
-          oliveDark: "#55622F",
-          offWhite: "#F8F9FA"
-        },
-        fontFamily: {
-          inter: ["Inter", "sans-serif"]
+
+  <!-- Fonts & Tailwind -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            armadilloBlack: "#1A1A1A",
+            armadilloGray: "#4A4A4A",
+            oliveGreen: "#6B7B3C",
+            oliveDark: "#55622F",
+            offWhite: "#F8F9FA"
+          },
+          fontFamily: { inter: ["Inter", "sans-serif"] },
+          keyframes: {
+            fadeIn: { "0%": { opacity: 0 }, "100%": { opacity: 1 } }
+          },
+          animation: {
+            fadeIn: "fadeIn 1s ease-out forwards"
+          }
         }
       }
     }
-  };
-</script>
-
-<!-- 🛡 Security Headers -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.tailwindcss.com https://unpkg.com https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; frame-src https://www.google.com; form-action 'self' https://formspree.io; object-src 'none'; base-uri 'self';">
-<meta http-equiv="X-Content-Type-Options" content="nosniff">
-<meta http-equiv="X-Frame-Options" content="DENY">
-<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
-<meta http-equiv="Permissions-Policy" content="accelerometer=(), camera=(), geolocation=(), microphone=()">
-<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
-<link rel="icon" type="image/x-icon" href="/assets/favicon.png">
+  </script>
+  
+  <!-- 🛡 Security Headers -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.tailwindcss.com https://unpkg.com https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; frame-src https://www.google.com; form-action 'self' https://formspree.io; object-src 'none'; base-uri 'self';">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Permissions-Policy" content="accelerometer=(), camera=(), geolocation=(), microphone=()">
+  <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
+  <link rel="icon" type="image/x-icon" href="/assets/favicon.png">
 </head>
 
-<body class="min-h-screen flex flex-col items-center justify-center bg-offWhite text-armadilloBlack font-inter text-center p-8">
-  <img src="/assets/404Dillo.png" alt="Dizzy Armadillo - Couldn't Find This Burrow" class="max-w-xs w-72 h-auto mb-8">
-  <h1 class="text-2xl font-bold text-armadilloGray mb-4">404 – Couldn't Find This Burrow</h1>
-  <p class="text-lg max-w-xl mb-4 text-armadilloGray">Looks like the page you're digging for doesn't exist. Maybe it got buried, maybe it never existed at all. No worries—Iron Dillo is on the trail.</p>
-  <a href="/index.html" class="inline-block mt-6 px-4 py-2 bg-oliveGreen text-white font-bold rounded hover:bg-oliveDark transition">Back to Safety</a>
+<body class="min-h-screen flex flex-col bg-offWhite text-armadilloBlack font-inter">
+
+  <!-- Header with logo -->
+  <header class="text-center pt-8 max-w-3xl mx-auto">
+    <img src="/assets/irondillo-preview.png" alt="Iron Dillo logo" class="mx-auto mb-6 w-28 h-auto" />
+  </header>
+
+  <!-- Navigation -->
+  <nav class="bg-armadilloBlack py-3 rounded-md mb-8 max-w-xl mx-auto">
+    <div class="flex justify-between px-4">
+      <a href="/index.html" class="text-offWhite font-semibold hover:text-oliveGreen uppercase">Home</a>
+      <a href="/services.html" class="text-offWhite font-semibold hover:text-oliveGreen uppercase">Services</a>
+      <a href="/about.html" class="text-offWhite font-semibold hover:text-oliveGreen uppercase">About</a>
+      <a href="/contact.html" class="text-offWhite font-semibold hover:text-oliveGreen uppercase">Contact</a>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="flex-grow flex flex-col items-center justify-center text-center px-6">
+    <img src="/assets/404Dillo.png" alt="Dizzy Armadillo - Couldn't Find This Burrow" class="max-w-xs w-72 h-auto mb-8 animate-fadeIn">
+    <h1 class="text-3xl font-bold text-armadilloGray mb-4">404 – Couldn't Find This Burrow</h1>
+    <p class="text-lg max-w-xl mb-6 text-armadilloGray">
+      Looks like the page you're digging for doesn't exist. Maybe it got buried, maybe it never existed at all.  
+      No worries—Iron Dillo is on the trail.
+    </p>
+    <a href="/index.html" class="inline-block mt-6 px-6 py-3 bg-oliveGreen hover:bg-oliveDark text-white font-bold rounded-lg shadow-md transition">
+      Back to Safety
+    </a>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-armadilloBlack text-offWhite text-center p-6 mt-12 text-sm">
+    &copy; 2025 Iron Dillo. Veteran-Owned. Mission-Driven.
+  </footer>
+
 </body>
 </html>
