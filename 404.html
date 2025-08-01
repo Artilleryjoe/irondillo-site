@@ -8,7 +8,21 @@
 <link rel="preconnect" href="https://cdn.tailwindcss.com">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+codex/configure-tailwind-with-iron-dillo-palette
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          sans: ['Inter', 'sans-serif']
+        }
+      }
+    }
+  }
+</script>
+
 <!-- 🛡 Security Headers -->
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.tailwindcss.com https://unpkg.com https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; frame-src https://www.google.com; form-action 'self' https://formspree.io; object-src 'none'; base-uri 'self';">
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
@@ -16,49 +30,13 @@
 <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
 <meta http-equiv="Permissions-Policy" content="accelerometer=(), camera=(), geolocation=(), microphone=()">
 <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
-
-
-  <link rel="icon" type="image/x-icon" href="/assets/favicon.png">
-
-  <style>
-    body {
-      background: #f4e1c1;
-      font-family: Arial, sans-serif;
-      text-align: center;
-      padding: 2rem;
-      color: #333;
-    }
-    img {
-      max-width: 300px;
-      height: auto;
-      margin: 2rem auto;
-    }
-    h1 {
-      font-size: 2rem;
-      color: #444;
-    }
-    p {
-      font-size: 1.1rem;
-      margin: 1rem auto;
-      max-width: 600px;
-    }
-    a {
-      display: inline-block;
-      margin-top: 1.5rem;
-      padding: 0.5rem 1rem;
-      background: #00ffc3;
-      color: #000;
-      text-decoration: none;
-      font-weight: bold;
-      border-radius: 5px;
-    }
-  </style>
+<link rel="icon" type="image/x-icon" href="/assets/favicon.png">
 </head>
 
-<body>
-  <img src="/assets/404Dillo.png" alt="Dizzy Armadillo - Couldn't Find This Burrow">
-  <h1>404 – Couldn't Find This Burrow</h1>
-  <p>Looks like the page you're digging for doesn't exist. Maybe it got buried, maybe it never existed at all. No worries—Iron Dillo is on the trail.</p>
-  <a href="/index.html">Back to Safety</a>
+<body class="min-h-screen flex flex-col items-center justify-center bg-[#F8F9FA] text-[#1A1A1A] font-sans text-center p-8">
+  <img src="/assets/404Dillo.png" alt="Dizzy Armadillo - Couldn't Find This Burrow" class="max-w-xs w-72 h-auto mb-8">
+  <h1 class="text-2xl font-bold text-[#4A4A4A] mb-4">404 – Couldn't Find This Burrow</h1>
+  <p class="text-lg max-w-xl mb-4">Looks like the page you're digging for doesn't exist. Maybe it got buried, maybe it never existed at all. No worries—Iron Dillo is on the trail.</p>
+  <a href="/index.html" class="inline-block mt-6 px-4 py-2 bg-[#6B7B3C] text-white font-bold rounded hover:bg-[#55622F] transition">Back to Safety</a>
 </body>
 </html>
