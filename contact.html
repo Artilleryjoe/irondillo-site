@@ -70,11 +70,15 @@
           autocomplete="name"
         />
         <label for="email" class="block mb-2 font-semibold text-oliveGreen">Your Email</label>
+        <input
           type="email"
           name="_replyto"
           id="email"
           placeholder="you@example.com"
           autocomplete="email"
+          required
+          class="w-full p-3 rounded bg-armadilloBlack border border-armadilloGray text-offWhite focus:outline-none focus:ring-2 focus:ring-oliveGreen"
+        />
         <label for="message" class="block mb-2 font-semibold text-oliveGreen">Message</label>
         <textarea
           name="message"
