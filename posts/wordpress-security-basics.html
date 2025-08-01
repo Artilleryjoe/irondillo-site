@@ -10,7 +10,6 @@
 <link rel="preconnect" href="https://cdn.tailwindcss.com">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
 <!-- 🛡 Security Headers -->
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.tailwindcss.com https://unpkg.com https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; frame-src https://www.google.com; form-action 'self' https://formspree.io; object-src 'none'; base-uri 'self';">
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
@@ -27,49 +26,70 @@
   <meta property="og:image" content="https://irondillo.com/assets/irondillo-preview.png" />
   <meta property="og:url" content="https://irondillo.com/posts/wordpress-security-basics.html" />
   <meta name="twitter:card" content="summary_large_image" />
+
   <script src="https://cdn.tailwindcss.com"></script>
-<script>
- tailwind.config = { theme: { extend: { colors: { armadilloBlack: "#1A1A1A", armadilloGray: "#4A4A4A", oliveGreen: "#6B7B3C", oliveDark: "#55622F", offWhite: "#F8F9FA" }, fontFamily: { inter: ["Inter", "sans-serif"] } } } };
-</script>
 </head>
-<body class="flex flex-col min-h-screen bg-offWhite text-armadilloGray font-inter">
+<body class="bg-gray-900 text-gray-100 font-sans leading-relaxed">
+
   <!-- Header -->
   <header class="text-center py-10 px-6 max-w-3xl mx-auto">
     <img loading="lazy" src="/assets/irondillo-preview.png" alt="IronDillo Logo" class="mx-auto w-28 mb-6" />
-    <h1 class="text-4xl font-extrabold text-oliveGreen mb-4">Basic WordPress Security for Beginners</h1>
-    <time datetime="2025-07-05" class="text-armadilloGray text-sm block mb-6">Published July 5, 2025</time>
-    <p class="text-armadilloGray max-w-xl mx-auto">Launching a WordPress site is easy — securing it doesn't have to be complicated. These five practical steps will protect your site from common attacks without needing to be a tech expert.</p>
-    <p class="text-sm text-armadilloGray mt-2">Published June 2025 by IronDillo</p>
+    <h1 class="text-4xl font-extrabold text-teal-400 mb-4">Basic WordPress Security for Beginners</h1>
+    <time datetime="2025-07-05" class="text-gray-400 text-sm block mb-6">Published July 5, 2025</time>
+    <p class="text-gray-300 max-w-xl mx-auto">Launching a WordPress site is easy — securing it doesn't have to be complicated. These five practical steps will protect your site from common attacks without needing to be a tech expert.</p>
+    <p class="text-sm text-gray-500 mt-2">Published June 2025 by IronDillo</p>
   </header>
+
   <!-- Main Content -->
   <main class="max-w-3xl mx-auto px-6 pb-24 space-y-10">
-    <section class="bg-armadilloGray rounded-lg p-6 shadow-lg space-y-6">
+
+    <section class="bg-gray-800 rounded-lg p-6 shadow-lg space-y-6">
       <article>
-        <h2 class="text-2xl text-oliveGreen font-semibold mb-2">1. Change the Default <code class="bg-armadilloGray px-1 rounded">admin</code> Username</h2>
-        <p>Using <code class="bg-armadilloGray px-1 rounded">admin</code> as your WordPress username is one of the most common ways hackers try to brute-force their way in. Change it to something unique and hard to guess. To do this safely, create a new admin user with a strong username and password, then delete the old <code class="bg-armadilloGray px-1 rounded">admin</code> account to close this easy attack vector.</p>
+        <h2 class="text-2xl text-teal-300 font-semibold mb-2">1. Change the Default <code class="bg-gray-700 px-1 rounded">admin</code> Username</h2>
+        <p>Using <code class="bg-gray-700 px-1 rounded">admin</code> as your WordPress username is one of the most common ways hackers try to brute-force their way in. Change it to something unique and hard to guess. To do this safely, create a new admin user with a strong username and password, then delete the old <code class="bg-gray-700 px-1 rounded">admin</code> account to close this easy attack vector.</p>
       </article>
-        <h2 class="text-2xl text-oliveGreen font-semibold mb-2">2. Use a Trusted Security Plugin</h2>
-        <p>Security plugins like <a href="https://www.wordfence.com" target="_blank" rel="noopener" class="text-oliveGreen underline hover:text-oliveDark">Wordfence</a> or <a href="https://ithemes.com/security" target="_blank" rel="noopener" class="text-oliveGreen underline hover:text-oliveDark">iThemes Security</a> add a powerful layer of protection. They can block brute force login attempts, scan for malware, monitor file changes, and notify you about vulnerabilities. They’re easy to install and configure—even if you’re new to WordPress.</p>
-        <h2 class="text-2xl text-oliveGreen font-semibold mb-2">3. Keep WordPress, Themes, and Plugins Updated</h2>
+
+      <article>
+        <h2 class="text-2xl text-teal-300 font-semibold mb-2">2. Use a Trusted Security Plugin</h2>
+        <p>Security plugins like <a href="https://www.wordfence.com" target="_blank" rel="noopener" class="text-teal-400 underline hover:text-teal-300">Wordfence</a> or <a href="https://ithemes.com/security" target="_blank" rel="noopener" class="text-teal-400 underline hover:text-teal-300">iThemes Security</a> add a powerful layer of protection. They can block brute force login attempts, scan for malware, monitor file changes, and notify you about vulnerabilities. They’re easy to install and configure—even if you’re new to WordPress.</p>
+      </article>
+
+      <article>
+        <h2 class="text-2xl text-teal-300 font-semibold mb-2">3. Keep WordPress, Themes, and Plugins Updated</h2>
         <p>Outdated software is the most common cause of WordPress site hacks. Developers regularly release patches that fix security flaws, so keeping your core WordPress files, themes, and plugins up to date is critical. Consider enabling automatic updates or check for updates at least once a week to stay ahead of threats.</p>
-        <h2 class="text-2xl text-oliveGreen font-semibold mb-2">4. Disable File Editing in the Dashboard</h2>
-        <p>By default, WordPress lets admins edit plugin and theme files directly through the dashboard. This is convenient but risky if an attacker gains access. To disable this, add the following line to your <code class="bg-armadilloGray px-1 rounded">wp-config.php</code> file:</p>
-        <pre class="bg-armadilloGray rounded p-4 overflow-x-auto text-sm font-mono"><code>define('DISALLOW_FILE_EDIT', true);</code></pre>
+      </article>
+
+      <article>
+        <h2 class="text-2xl text-teal-300 font-semibold mb-2">4. Disable File Editing in the Dashboard</h2>
+        <p>By default, WordPress lets admins edit plugin and theme files directly through the dashboard. This is convenient but risky if an attacker gains access. To disable this, add the following line to your <code class="bg-gray-700 px-1 rounded">wp-config.php</code> file:</p>
+        <pre class="bg-gray-700 rounded p-4 overflow-x-auto text-sm font-mono"><code>define('DISALLOW_FILE_EDIT', true);</code></pre>
         <p>This simple step closes off a critical attack surface.</p>
-        <h2 class="text-2xl text-oliveGreen font-semibold mb-2">5. Use Strong Passwords and Enable Two-Factor Authentication (2FA)</h2>
-        <p>Passwords are your first line of defense—make them strong and unique. Password managers like <a href="https://bitwarden.com" target="_blank" rel="noopener" class="text-oliveGreen underline hover:text-oliveDark">Bitwarden</a> can help generate and store complex passwords easily.</p>
-        <p>For even stronger security, enable 2FA on your admin accounts using apps like <a href="https://authy.com" target="_blank" rel="noopener" class="text-oliveGreen underline hover:text-oliveDark">Authy</a> or Google Authenticator. This means even if your password is compromised, attackers need your phone to get in.</p>
-        <h2 class="text-2xl text-oliveGreen font-semibold mb-2">Bonus: Backup Your Site Regularly</h2>
-        <p>Sometimes, despite best efforts, things go wrong. Regular backups ensure you can restore your site quickly after an attack or error. Most hosts offer automatic backups, but you can also use plugins like <a href="https://updraftplus.com" target="_blank" rel="noopener" class="text-oliveGreen underline hover:text-oliveDark">UpdraftPlus</a> for hassle-free backups to cloud storage.</p>
+      </article>
+
+      <article>
+        <h2 class="text-2xl text-teal-300 font-semibold mb-2">5. Use Strong Passwords and Enable Two-Factor Authentication (2FA)</h2>
+        <p>Passwords are your first line of defense—make them strong and unique. Password managers like <a href="https://bitwarden.com" target="_blank" rel="noopener" class="text-teal-400 underline hover:text-teal-300">Bitwarden</a> can help generate and store complex passwords easily.</p>
+        <p>For even stronger security, enable 2FA on your admin accounts using apps like <a href="https://authy.com" target="_blank" rel="noopener" class="text-teal-400 underline hover:text-teal-300">Authy</a> or Google Authenticator. This means even if your password is compromised, attackers need your phone to get in.</p>
+      </article>
+
+      <article>
+        <h2 class="text-2xl text-teal-300 font-semibold mb-2">Bonus: Backup Your Site Regularly</h2>
+        <p>Sometimes, despite best efforts, things go wrong. Regular backups ensure you can restore your site quickly after an attack or error. Most hosts offer automatic backups, but you can also use plugins like <a href="https://updraftplus.com" target="_blank" rel="noopener" class="text-teal-400 underline hover:text-teal-300">UpdraftPlus</a> for hassle-free backups to cloud storage.</p>
+      </article>
     </section>
-    <section class="bg-armadilloGray rounded-lg p-6 shadow-lg">
-      <p class="text-armadilloGray">Securing your WordPress site is a marathon, not a sprint—but starting with these essential steps puts you way ahead of most site owners. Need help? <a href="/services.html" class="text-oliveGreen underline hover:text-oliveDark font-semibold">I offer light diagnostics and setup advice</a> tailored to beginners.</p>
+
+    <section class="bg-gray-800 rounded-lg p-6 shadow-lg">
+      <p class="text-gray-300">Securing your WordPress site is a marathon, not a sprint—but starting with these essential steps puts you way ahead of most site owners. Need help? <a href="/services.html" class="text-teal-400 underline hover:text-teal-300 font-semibold">I offer light diagnostics and setup advice</a> tailored to beginners.</p>
+    </section>
+
     <div class="text-center pt-8">
-      <a href="/blog.html" class="text-oliveGreen underline hover:text-oliveDark">&larr; Back to Blog</a>
+      <a href="/blog.html" class="text-teal-400 underline hover:text-teal-300">&larr; Back to Blog</a>
     </div>
   </main>
+
   <!-- Footer -->
-  <footer class="bg-armadilloGray text-armadilloGray text-center p-6 text-sm mt-auto">
-    &copy; 2025 Iron Dillo. Veteran-Owned | <a href="/privacy.html" class="hover:underline text-oliveGreen">Privacy</a> | <a href="/terms.html" class="hover:underline text-oliveGreen">Terms</a> 
+  <footer class="bg-gray-800 text-gray-500 text-center p-6 text-sm mt-auto">
+    &copy; 2025 Iron Dillo. Veteran-Owned | <a href="/privacy.html" class="hover:underline text-teal-400">Privacy</a> | <a href="/terms.html" class="hover:underline text-teal-400">Terms</a> 
+
 </body>
 </html>

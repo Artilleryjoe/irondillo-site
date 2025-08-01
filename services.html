@@ -8,7 +8,6 @@
 <link rel="preconnect" href="https://cdn.tailwindcss.com">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
 <!-- 🛡 Security Headers -->
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.tailwindcss.com https://unpkg.com https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; frame-src https://www.google.com; form-action 'self' https://formspree.io; object-src 'none'; base-uri 'self';">
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
@@ -18,59 +17,78 @@
 <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
   <link rel="icon" type="image/x-icon" href="/assets/favicon.png" />
   <script src="https://cdn.tailwindcss.com"></script>
-<script>
- tailwind.config = { theme: { extend: { colors: { armadilloBlack: "#1A1A1A", armadilloGray: "#4A4A4A", oliveGreen: "#6B7B3C", oliveDark: "#55622F", offWhite: "#F8F9FA" }, fontFamily: { inter: ["Inter", "sans-serif"] } } } };
-</script>
   <style>
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     .fade-in { animation: fadeIn 1s ease-out both; }
   </style>
 </head>
-<body class="flex flex-col min-h-screen bg-offWhite text-armadilloGray font-inter">
+<body class="flex flex-col min-h-screen bg-gray-900 text-gray-100 font-sans">
 
   <!-- Logo Header -->
   <header class="text-center pt-8 max-w-3xl mx-auto fade-in">
     <img loading="lazy" src="/assets/irondillo-preview.png" alt="IronDillo cybersecurity armadillo logo" class="mx-auto mb-6 w-36 h-auto" />
   </header>
+
   <!-- Navigation -->
-  <nav class="bg-armadilloGray py-3 rounded-md mb-8 max-w-xl mx-auto fade-in">
+  <nav class="bg-gray-800 py-3 rounded-md mb-8 max-w-xl mx-auto fade-in">
     <div class="flex justify-between">
-      <a href="/index.html" class="text-oliveGreen font-semibold hover:underline px-4 tracking-wide uppercase">Home</a>
-      <a href="/services.html" class="text-oliveGreen font-semibold hover:underline px-4 tracking-wide uppercase">Services</a>
-      <a href="/about.html" class="text-oliveGreen font-semibold hover:underline px-4 tracking-wide uppercase">About</a>
-      <a href="/contact.html" class="text-oliveGreen font-semibold hover:underline px-4 tracking-wide uppercase">Contact</a>
+      <a href="/index.html" class="text-teal-400 font-semibold hover:underline px-4 tracking-wide uppercase">Home</a>
+      <a href="/services.html" class="text-teal-400 font-semibold hover:underline px-4 tracking-wide uppercase">Services</a>
+      <a href="/about.html" class="text-teal-400 font-semibold hover:underline px-4 tracking-wide uppercase">About</a>
+      <a href="/contact.html" class="text-teal-400 font-semibold hover:underline px-4 tracking-wide uppercase">Contact</a>
     </div>
   </nav>
+
   <main class="flex-grow max-w-3xl mx-auto px-6 py-12 space-y-12 fade-in">
     <!-- Services Sections -->
-    <section class="bg-armadilloGray rounded-lg shadow-lg p-8">
-      <h2 class="text-2xl font-semibold text-oliveGreen mb-4">Security Consultations &amp; Risk Assessments</h2>
-      <p class="text-armadilloGray leading-relaxed">Identify your current vulnerabilities, understand cybersecurity threats in clear language, and receive actionable recommendations to strengthen your systems and protect your data.</p>
+    <section class="bg-gray-800 rounded-lg shadow-lg p-8">
+      <h2 class="text-2xl font-semibold text-teal-300 mb-4">Security Consultations &amp; Risk Assessments</h2>
+      <p class="text-gray-300 leading-relaxed">Identify your current vulnerabilities, understand cybersecurity threats in clear language, and receive actionable recommendations to strengthen your systems and protect your data.</p>
     </section>
-      <h2 class="text-2xl font-semibold text-oliveGreen mb-4">Cybersecurity Policy &amp; Documentation Support</h2>
-      <p class="text-armadilloGray leading-relaxed">Develop custom cybersecurity policies, standard operating procedures (SOPs), and incident response plans designed specifically for your operations to help you stay prepared and compliant.</p>
-      <h2 class="text-2xl font-semibold text-oliveGreen mb-4">Website &amp; Web Presence Security Audits</h2>
-      <p class="text-armadilloGray leading-relaxed">Audit your website, online forms, and public-facing content to find vulnerabilities such as cross-site scripting (XSS), misconfigurations, and other common security risks that could expose your business to cyberattacks.</p>
-      <h2 class="text-2xl font-semibold text-oliveGreen mb-4">Personal &amp; Small Business Digital Security Training</h2>
-      <p class="text-armadilloGray leading-relaxed">One-on-one or small group training sessions covering phishing prevention, password safety, operational security basics, and other essential topics—delivered in straightforward, easy-to-understand language.</p>
-      <h2 class="text-2xl font-semibold text-oliveGreen mb-4">Incident Response Guidance &amp; Remediation Assistance</h2>
-      <p class="text-armadilloGray leading-relaxed">If you experience a security incident, I’ll guide you through the response process, help identify the scope, and assist with remediation to minimize damage and restore security quickly.</p>
-      <h2 class="text-2xl font-semibold text-oliveGreen mb-4">Vulnerability Scanning &amp; Reporting</h2>
-      <p class="text-armadilloGray leading-relaxed">Thorough scans of your systems and networks to identify weaknesses, paired with clear, actionable reports outlining findings and recommended fixes.</p>
-      <h2 class="text-2xl font-semibold text-oliveGreen mb-4">Secure Configuration of Devices &amp; Networks</h2>
-      <p class="text-armadilloGray leading-relaxed">Ensure your devices, routers, and networks are set up with security best practices to reduce risks and protect your digital environment.</p>
+
+    <section class="bg-gray-800 rounded-lg shadow-lg p-8">
+      <h2 class="text-2xl font-semibold text-teal-300 mb-4">Cybersecurity Policy &amp; Documentation Support</h2>
+      <p class="text-gray-300 leading-relaxed">Develop custom cybersecurity policies, standard operating procedures (SOPs), and incident response plans designed specifically for your operations to help you stay prepared and compliant.</p>
+    </section>
+
+    <section class="bg-gray-800 rounded-lg shadow-lg p-8">
+      <h2 class="text-2xl font-semibold text-teal-300 mb-4">Website &amp; Web Presence Security Audits</h2>
+      <p class="text-gray-300 leading-relaxed">Audit your website, online forms, and public-facing content to find vulnerabilities such as cross-site scripting (XSS), misconfigurations, and other common security risks that could expose your business to cyberattacks.</p>
+    </section>
+
+    <section class="bg-gray-800 rounded-lg shadow-lg p-8">
+      <h2 class="text-2xl font-semibold text-teal-300 mb-4">Personal &amp; Small Business Digital Security Training</h2>
+      <p class="text-gray-300 leading-relaxed">One-on-one or small group training sessions covering phishing prevention, password safety, operational security basics, and other essential topics—delivered in straightforward, easy-to-understand language.</p>
+    </section>
+
+    <section class="bg-gray-800 rounded-lg shadow-lg p-8">
+      <h2 class="text-2xl font-semibold text-teal-300 mb-4">Incident Response Guidance &amp; Remediation Assistance</h2>
+      <p class="text-gray-300 leading-relaxed">If you experience a security incident, I’ll guide you through the response process, help identify the scope, and assist with remediation to minimize damage and restore security quickly.</p>
+    </section>
+
+    <section class="bg-gray-800 rounded-lg shadow-lg p-8">
+      <h2 class="text-2xl font-semibold text-teal-300 mb-4">Vulnerability Scanning &amp; Reporting</h2>
+      <p class="text-gray-300 leading-relaxed">Thorough scans of your systems and networks to identify weaknesses, paired with clear, actionable reports outlining findings and recommended fixes.</p>
+    </section>
+
+    <section class="bg-gray-800 rounded-lg shadow-lg p-8">
+      <h2 class="text-2xl font-semibold text-teal-300 mb-4">Secure Configuration of Devices &amp; Networks</h2>
+      <p class="text-gray-300 leading-relaxed">Ensure your devices, routers, and networks are set up with security best practices to reduce risks and protect your digital environment.</p>
+    </section>
+
     <section class="text-center mt-12">
-  <p class="text-oliveGreen font-semibold max-w-xl mx-auto">
+  <p class="text-teal-400 font-semibold max-w-xl mx-auto">
     Need more advanced support? From detailed risk assessments to full remediation assistance,
     pricing is customized to fit your needs.<br />
-    <a href="/contact.html" class="underline hover:text-oliveDark">Contact me</a> today for a free consultation and tailored quote.
+    <a href="/contact.html" class="underline hover:text-teal-300">Contact me</a> today for a free consultation and tailored quote.
   </p>
 </section>
     
-  <footer class="bg-armadilloGray text-armadilloGray text-center p-6 mt-auto text-sm max-w-3xl mx-auto rounded-md fade-in">
+  <footer class="bg-gray-800 text-gray-500 text-center p-6 mt-auto text-sm max-w-3xl mx-auto rounded-md fade-in">
     &copy; 2025 Iron Dillo. All rights reserved. | Veteran-Owned | 
-    <a href="/privacy.html" class="hover:underline text-oliveGreen">Privacy</a> | 
-    <a href="/terms.html" class="hover:underline text-oliveGreen">Terms</a>
+    <a href="/privacy.html" class="hover:underline text-teal-400">Privacy</a> | 
+    <a href="/terms.html" class="hover:underline text-teal-400">Terms</a>
   </footer>
+
 </body>
 </html>
