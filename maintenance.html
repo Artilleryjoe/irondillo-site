@@ -2,83 +2,63 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="preconnect" href="https://cdn.tailwindcss.com">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-
-  <!-- 🛡 Security Headers -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.tailwindcss.com https://unpkg.com https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; frame-src https://www.google.com; form-action 'self' https://formspree.io; object-src 'none'; base-uri 'self';">
-  <meta http-equiv="X-Content-Type-Options" content="nosniff">
-  <meta http-equiv="X-Frame-Options" content="DENY">
-  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
-  <meta http-equiv="Permissions-Policy" content="accelerometer=(), camera=(), geolocation=(), microphone=()">
-  <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
-  <link rel="icon" type="image/x-icon" href="/assets/favicon.png" />
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Iron Dillo | Cyberstasis Mode</title>
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CDN with Custom Config -->
   <script src="https://cdn.tailwindcss.com"></script>
-  tailwind.config = {
-    theme: {
-      extend: {
-        colors: {
-          armadilloBlack: "#1A1A1A",
-          armadilloGray: "#4A4A4A",
-          oliveGreen: "#6B7B3C",
-          oliveDark: "#55622F",
-          offWhite: "#F8F9FA"
-        },
-        fontFamily: {
-          inter: ["Inter", "sans-serif"]
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            armadilloBlack: "#1A1A1A",
+            armadilloGray: "#4A4A4A",
+            oliveGreen: "#6B7B3C",
+            oliveDark: "#55622F",
+            offWhite: "#F8F9FA"
+          },
+          fontFamily: {
+            inter: ["Inter", "sans-serif"]
+          }
         }
       }
     }
-  };
-</script>
+  </script>
+
+  <!-- Fade-in animation -->
   <style>
-    @keyframes matrixScroll {
-      0% { transform: translateY(100%); opacity: 0; }
-      20% { opacity: 1; }
-      80% { opacity: 1; }
-      100% { transform: translateY(-100%); opacity: 0; }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
-    .matrix-line {
-      animation: matrixScroll 10s linear infinite;
-      white-space: nowrap;
-      color: #00ff00;
-      font-family: monospace;
-      text-shadow: 0 0 5px #00ff00;
-      opacity: 0.8;
+    .fade-in {
+      animation: fadeIn 1.2s ease-out both;
     }
   </style>
 </head>
-<body class="relative h-screen w-screen bg-black text-white overflow-hidden">
+<body class="font-inter bg-offWhite text-armadilloGray flex items-center justify-center min-h-screen">
 
-  <!-- Scrolling Matrix Text -->
-  <div class="absolute z-20 w-full h-full flex flex-col items-center justify-center space-y-4 overflow-hidden">
-    <div class="h-full w-64 relative">
-      <div class="absolute inset-0 flex flex-col items-start justify-start space-y-6 animate-pulse">
-        <div class="matrix-line">Iron Dillo Offline...</div>
-        <div class="matrix-line">Systems Recalibrating...</div>
-        <div class="matrix-line">Threat Matrix Updating...</div>
-        <div class="matrix-line">Firewall Core Realigning...</div>
-        <div class="matrix-line">GRIT Protocol: Active...</div>
-        <div class="matrix-line">Reinitializing Shell Armor...</div>
-        <div class="matrix-line">Uplink Pending...</div>
-      </div>
-    </div>
-  </div>
+  <!-- Maintenance Content -->
+  <div class="text-center p-8 max-w-md fade-in">
+    <img src="/images/iron-dillo-logo.png" alt="Iron Dillo Logo" class="mx-auto mb-6 w-28" />
+    <h1 class="text-4xl font-bold text-armadilloBlack mb-4">Iron Dillo Cybersecurity</h1>
+    
+    <p class="text-lg text-armadilloGray mb-6 leading-relaxed">
+      We’re currently in 
+      <span class="text-oliveGreen font-semibold">Cyberstasis Mode</span> —
+      updating our site with a fresh new look and stronger protection for
+      <span class="font-semibold">East Texas small businesses</span>, 
+      <span class="font-semibold">rural operations</span>, and 
+      <span class="font-semibold">individuals</span>.
+    </p>
 
-  <!-- Center Message -->
-  <div class="absolute z-30 inset-0 flex items-center justify-center">
-    <div class="text-center px-6 py-4 bg-black bg-opacity-30 rounded-2xl shadow-lg">
-      <h1 class="text-3xl md:text-4xl font-bold mb-4">Cyberstasis Engaged</h1>
-      <p class="text-lg">
-        Iron Dillo is currently in maintenance mode.<br />
-        Please check back soon.
-      </p>
-    </div>
+    <p class="text-sm text-armadilloGray">
+      Veteran-owned. Mission-driven. Protecting East Texas with honesty and care.
+    </p>
   </div>
 
 </body>
