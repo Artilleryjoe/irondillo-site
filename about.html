@@ -5,36 +5,24 @@
   <title>About | Iron Dillo Cybersecurity</title>
   <meta name="description" content="Learn more about Iron Dillo Cybersecurity, a veteran-owned business protecting East Texas individuals and small businesses with practical, trustworthy security solutions." />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="preconnect" href="https://cdn.tailwindcss.com">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-<!-- 🛡 Security Headers -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.tailwindcss.com https://unpkg.com https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; frame-src https://www.google.com; form-action 'self' https://formspree.io; object-src 'none'; base-uri 'self';">
-<meta http-equiv="X-Content-Type-Options" content="nosniff">
-<meta http-equiv="X-Frame-Options" content="DENY">
-<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
-<meta http-equiv="Permissions-Policy" content="accelerometer=(), camera=(), geolocation=(), microphone=()">
-<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
-  <link rel="icon" type="image/x-icon" href="/assets/favicon.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
-  tailwind.config = {
-    theme: {
-      extend: {
-        colors: {
-          armadilloBlack: "#1A1A1A",
-          armadilloGray: "#4A4A4A",
-          oliveGreen: "#6B7B3C",
-          oliveDark: "#55622F",
-          offWhite: "#F8F9FA"
-        },
-        fontFamily: {
-          inter: ["Inter", "sans-serif"]
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            armadilloBlack: "#1A1A1A",
+            armadilloGray: "#4A4A4A",
+            oliveGreen: "#6B7B3C",
+            oliveDark: "#55622F",
+            offWhite: "#F8F9FA"
+          },
+          fontFamily: { inter: ["Inter", "sans-serif"] }
         }
       }
     }
-  };
-</script>
+  </script>
   <style>
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     .fade-in { animation: fadeIn 1s ease-out both; }
@@ -44,70 +32,69 @@
 
   <!-- Header -->
   <header class="text-center pt-8 max-w-3xl mx-auto fade-in">
-    <img loading="lazy" src="/assets/irondillo-preview.png" alt="IronDillo cybersecurity logo" class="mx-auto mb-6 w-36 h-auto" />
+    <img src="/assets/irondillo-preview.png" alt="IronDillo cybersecurity logo" class="mx-auto mb-6 w-36 h-auto" />
+    <h1 class="text-4xl font-extrabold text-oliveGreen">About Iron Dillo Cybersecurity</h1>
   </header>
 
   <!-- Navigation -->
-  <nav class="bg-armadilloGray py-3 rounded-md mb-8 max-w-xl mx-auto fade-in">
-    <div class="flex justify-between">
-      <a href="/index.html" class="text-oliveGreen font-semibold hover:underline px-4 tracking-wide uppercase">Home</a>
-      <a href="/services.html" class="text-oliveGreen font-semibold hover:underline px-4 tracking-wide uppercase">Services</a>
-      <a href="/about.html" class="text-oliveGreen font-semibold hover:underline px-4 tracking-wide uppercase">About</a>
-      <a href="/contact.html" class="text-oliveGreen font-semibold hover:underline px-4 tracking-wide uppercase">Contact</a>
+  <nav class="bg-armadilloBlack py-3 rounded-md mb-8 max-w-xl mx-auto fade-in">
+    <div class="flex justify-between px-4">
+      <a href="/index.html" class="text-offWhite font-semibold hover:text-oliveGreen uppercase">Home</a>
+      <a href="/services.html" class="text-offWhite font-semibold hover:text-oliveGreen uppercase">Services</a>
+      <a href="/about.html" class="text-offWhite font-semibold hover:text-oliveGreen uppercase">About</a>
+      <a href="/contact.html" class="text-offWhite font-semibold hover:text-oliveGreen uppercase">Contact</a>
     </div>
   </nav>
 
   <!-- Main Content -->
   <main class="flex-grow max-w-3xl mx-auto px-6 py-12 space-y-12 fade-in">
-    
+
     <!-- Intro -->
-    <section class="bg-armadilloGray rounded-lg shadow-lg p-8 text-center">
-      <h1 class="text-3xl font-bold text-oliveGreen mb-4">About Iron Dillo Cybersecurity</h1>
-      <p class="text-armadilloGray leading-relaxed">
+    <section class="bg-white rounded-lg shadow-lg p-8 text-center">
+      <p class="text-armadilloBlack leading-relaxed">
         Iron Dillo Cybersecurity is a veteran-owned business dedicated to protecting individuals,
         small businesses, and rural communities across East Texas with practical, trustworthy cybersecurity solutions.
       </p>
     </section>
 
     <!-- Story -->
-    <section class="bg-armadilloGray rounded-lg shadow-lg p-8 flex flex-col md:flex-row items-center md:items-start gap-8">
-  <!-- Image -->
-  <div class="w-40 h-40 md:w-56 md:h-56 flex-shrink-0">
-    <img 
-      src="/assets/Dilloman.png" 
-      alt="Kris McCoy" 
-      class="rounded-full object-cover w-full h-full shadow-md"
-    >
-  </div>
+    <section class="bg-white rounded-lg shadow-lg p-8 flex flex-col md:flex-row items-center gap-8">
+      <!-- Image -->
+      <div class="w-40 h-40 md:w-56 md:h-56 flex-shrink-0">
+        <img 
+          src="/assets/Dilloman.png" 
+          alt="Kris McCoy" 
+          class="rounded-full object-cover w-full h-full shadow-md"
+        >
+      </div>
 
-  <!-- Text -->
-  <div>
-    <h2 class="text-2xl font-semibold text-oliveGreen mb-4">Meet Kris McCoy</h2>
-    <p class="text-armadilloGray leading-relaxed">
-      I served in the U.S. Army in field artillery during Operation Enduring Freedom. After my service,
-      I earned a Master of Science in Cybersecurity with distinction and am continuing my education through
-      the WGU Business School. Today, I’m proud to be active in the East Texas business community!
-    </p>
-    <p class="text-armadilloGray leading-relaxed mt-4">
-      I am pursuing the CISSP in order to strengthen my ability to serve clients,
-      and I bring the same discipline, vigilance, and integrity from my military service into every project.
-    </p>
-  </div>
-</section>
-
+      <!-- Text -->
+      <div>
+        <h2 class="text-2xl font-semibold text-oliveGreen mb-4">Meet Kris McCoy</h2>
+        <p class="text-armadilloBlack leading-relaxed">
+          I served in the U.S. Army in field artillery during Operation Enduring Freedom. After my service,
+          I earned a Master of Science in Cybersecurity with distinction and am continuing my education through
+          the WGU Business School. Today, I’m proud to be active in the East Texas business community!
+        </p>
+        <p class="text-armadilloBlack leading-relaxed mt-4">
+          I am pursuing the CISSP to strengthen my ability to serve clients,
+          bringing the same discipline, vigilance, and integrity from my military service into every project.
+        </p>
+      </div>
+    </section>
 
     <!-- Ethics Commitment -->
-    <section class="bg-armadilloGray rounded-lg shadow-lg p-8">
+    <section class="bg-white rounded-lg shadow-lg p-8">
       <h2 class="text-2xl font-semibold text-oliveGreen mb-4">Commitment to Professional Ethics</h2>
-      <p class="text-armadilloGray leading-relaxed">
-        As a member of <span class="font-semibold text-armadilloBlack">ISC2</span>, I keep their 
+      <p class="text-armadilloBlack leading-relaxed">
+        As a member of <span class="font-semibold">ISC2</span>, I keep their 
         <a href="https://www.isc2.org/Ethics" target="_blank" class="text-oliveGreen hover:underline">
           Code of Ethics
         </a> close to heart in this work. 
-        These principles emphasize protecting society and the common good, acting with honesty and diligence, 
-        delivering competent service to those I serve, and advancing the cybersecurity profession for the future.
+        These principles emphasize protecting society, acting with honesty and diligence, 
+        delivering competent service, and advancing the cybersecurity profession for the future.
       </p>
-      <p class="text-armadilloGray leading-relaxed mt-4">
+      <p class="text-armadilloBlack leading-relaxed mt-4">
         For my clients, this means every engagement is conducted with transparency, responsibility, and 
         a commitment to solutions that put their security and trust first.
       </p>
@@ -115,35 +102,35 @@
 
     <!-- Values -->
     <section class="py-12 grid gap-6 md:grid-cols-3 text-center">
-      <div class="bg-armadilloGray p-6 rounded-lg shadow-lg">
+      <div class="bg-white p-6 rounded-lg shadow-lg">
         <h3 class="text-xl font-bold text-oliveGreen mb-2">Integrity</h3>
-        <p class="text-armadilloGray text-sm">Honest, ethical guidance in every engagement.</p>
+        <p class="text-armadilloBlack text-sm">Honest, ethical guidance in every engagement.</p>
       </div>
-      <div class="bg-armadilloGray p-6 rounded-lg shadow-lg">
+      <div class="bg-white p-6 rounded-lg shadow-lg">
         <h3 class="text-xl font-bold text-oliveGreen mb-2">Discipline</h3>
-        <p class="text-armadilloGray text-sm">A veteran’s focus on detail and thoroughness.</p>
+        <p class="text-armadilloBlack text-sm">A veteran’s focus on detail and thoroughness.</p>
       </div>
-      <div class="bg-armadilloGray p-6 rounded-lg shadow-lg">
+      <div class="bg-white p-6 rounded-lg shadow-lg">
         <h3 class="text-xl font-bold text-oliveGreen mb-2">Resilience</h3>
-        <p class="text-armadilloGray text-sm">Helping your business prepare, withstand, and recover from threats.</p>
+        <p class="text-armadilloBlack text-sm">Helping your business prepare, withstand, and recover from threats.</p>
       </div>
     </section>
 
     <!-- Call to Action -->
-    <section class="bg-armadilloBlack py-12 text-center">
-      <h2 class="text-2xl font-bold text-armadilloBlack mb-4">Ready to Secure Your Business</h2>
-      <p class="text-armadilloGray max-w-xl mx-auto">
+    <section class="bg-armadilloBlack py-12 text-center rounded-lg shadow-lg">
+      <h2 class="text-2xl font-bold text-offWhite mb-4">Ready to Secure Your Business?</h2>
+      <p class="text-offWhite max-w-xl mx-auto">
         Iron Dillo Cybersecurity is here to provide straightforward, hands-on support for East Texas 
         individuals and businesses. Let’s talk about the right plan for your needs.
       </p>
-      <a href="/contact.html" class="mt-6 inline-block bg-oliveGreen text-armadilloBlack px-6 py-3 rounded-lg shadow-lg hover:bg-oliveDark transition">
+      <a href="/contact.html" class="mt-6 inline-block bg-oliveGreen hover:bg-oliveDark text-white px-6 py-3 rounded-lg shadow-lg transition">
         Contact Me Today
       </a>
     </section>
   </main>
 
   <!-- Footer -->
-  <footer class="bg-armadilloGray text-armadilloGray text-center p-6 mt-auto text-sm max-w-3xl mx-auto rounded-md fade-in">
+  <footer class="bg-armadilloBlack text-offWhite text-center p-6 mt-auto text-sm rounded-md fade-in">
     &copy; 2025 Iron Dillo. All rights reserved. | Veteran-Owned | 
     <a href="/privacy.html" class="hover:underline text-oliveGreen">Privacy</a> | 
     <a href="/terms.html" class="hover:underline text-oliveGreen">Terms</a>
