@@ -11,7 +11,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- 🛡 Security Headers -->
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.tailwindcss.com https://unpkg.com https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; frame-src https://www.google.com; form-action 'self' https://formspree.io; object-src 'none'; base-uri 'self';">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
 <meta http-equiv="X-Frame-Options" content="DENY">
 <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
@@ -26,47 +25,66 @@
   <meta property="og:image" content="https://irondillo.com/assets/irondillo-preview.png">
   <meta property="og:url" content="https://irondillo.com/posts/safer-online-now.html">
   <meta name="twitter:card" content="summary_large_image">
+
   <script src="https://cdn.tailwindcss.com"></script>
-<script>
- tailwind.config = { theme: { extend: { colors: { armadilloBlack: "#1A1A1A", armadilloGray: "#4A4A4A", oliveGreen: "#6B7B3C", oliveDark: "#55622F", offWhite: "#F8F9FA" }, fontFamily: { inter: ["Inter", "sans-serif"] } } } };
-</script>
 </head>
-<body class="flex flex-col min-h-screen bg-offWhite text-armadilloGray font-inter">
+<body class="bg-gray-900 text-gray-100 font-sans leading-relaxed">
+
   <!-- Header -->
   <header class="text-center py-10 px-4 max-w-3xl mx-auto">
     <img loading="lazy" src="/assets/irondillo-preview.png" alt="IronDillo Logo" class="mx-auto w-28 mb-6">
-    <h1 class="text-4xl font-extrabold text-oliveGreen mb-4">5 Ways to Stay Safer Online Right Now</h1>
-    <time datetime="2025-07-15" class="text-armadilloGray text-xs mb-3 block">Published July 15, 2025</time>
-    <p class="text-armadilloGray max-w-xl mx-auto">You don’t need to be a tech wizard to defend yourself. Just build good habits—fast, simple, and Iron Dillo–approved.</p>
+    <h1 class="text-4xl font-extrabold text-teal-400 mb-4">5 Ways to Stay Safer Online Right Now</h1>
+    <time datetime="2025-07-15" class="text-gray-400 text-xs mb-3 block">Published July 15, 2025</time>
+    <p class="text-gray-300 max-w-xl mx-auto">You don’t need to be a tech wizard to defend yourself. Just build good habits—fast, simple, and Iron Dillo–approved.</p>
   </header>
+
   <!-- Main Content -->
   <main class="max-w-3xl mx-auto px-6 pb-24 space-y-10">
-    <section class="bg-armadilloGray rounded-lg p-6 shadow-lg space-y-6">
+
+    <section class="bg-gray-800 rounded-lg p-6 shadow-lg space-y-6">
       <div>
-        <h2 class="text-2xl text-oliveGreen font-semibold mb-2">1. Stop Reusing Passwords</h2>
-        <p>Each account needs its own strong, unique password. A breach at one site shouldn't compromise the rest of your digital life. Use a password manager like <a href="https://bitwarden.com" class="text-oliveGreen underline hover:text-oliveDark" target="_blank">Bitwarden</a> or <a href="https://keepass.info" class="text-oliveGreen underline hover:text-oliveDark" target="_blank">KeePass</a> to do the heavy lifting.</p>
+        <h2 class="text-2xl text-teal-300 font-semibold mb-2">1. Stop Reusing Passwords</h2>
+        <p>Each account needs its own strong, unique password. A breach at one site shouldn't compromise the rest of your digital life. Use a password manager like <a href="https://bitwarden.com" class="text-teal-400 underline hover:text-teal-300" target="_blank">Bitwarden</a> or <a href="https://keepass.info" class="text-teal-400 underline hover:text-teal-300" target="_blank">KeePass</a> to do the heavy lifting.</p>
       </div>
-        <h2 class="text-2xl text-oliveGreen font-semibold mb-2">2. Turn On Two-Factor Authentication (2FA)</h2>
-        <p>Even if someone guesses your password, 2FA can stop them cold. Opt for app-based methods like <a href="https://authy.com" class="text-oliveGreen underline hover:text-oliveDark" target="_blank">Authy</a> or Google Authenticator instead of SMS when possible. It’s one of the simplest ways to keep intruders out.</p>
-        <h2 class="text-2xl text-oliveGreen font-semibold mb-2">3. Update Your Devices</h2>
+
+      <div>
+        <h2 class="text-2xl text-teal-300 font-semibold mb-2">2. Turn On Two-Factor Authentication (2FA)</h2>
+        <p>Even if someone guesses your password, 2FA can stop them cold. Opt for app-based methods like <a href="https://authy.com" class="text-teal-400 underline hover:text-teal-300" target="_blank">Authy</a> or Google Authenticator instead of SMS when possible. It’s one of the simplest ways to keep intruders out.</p>
+      </div>
+
+      <div>
+        <h2 class="text-2xl text-teal-300 font-semibold mb-2">3. Update Your Devices</h2>
         <p>Most successful attacks exploit known vulnerabilities that were patched months (or years) ago. Enable auto-updates on your devices, software, apps, and browsers. Staying updated closes doors before attackers can walk through them.</p>
-        <h2 class="text-2xl text-oliveGreen font-semibold mb-2">4. Pause Before Clicking</h2>
+      </div>
+
+      <div>
+        <h2 class="text-2xl text-teal-300 font-semibold mb-2">4. Pause Before Clicking</h2>
         <p>Phishing remains the #1 way people get compromised. Don’t click on strange links or download unexpected files—especially from “urgent” emails or texts. Hover over links, verify senders, and when in doubt, don’t click.</p>
-        <h2 class="text-2xl text-oliveGreen font-semibold mb-2">5. Don’t Run as Admin by Default</h2>
+      </div>
+
+      <div>
+        <h2 class="text-2xl text-teal-300 font-semibold mb-2">5. Don’t Run as Admin by Default</h2>
         <p>Limit your day-to-day account privileges. Using a standard account reduces the damage if something malicious sneaks in. Save admin access for actual admin tasks.</p>
+      </div>
     </section>
-    <section class="bg-armadilloGray rounded-lg p-6 shadow-lg space-y-4">
-      <p class="text-armadilloGray">You don’t need to be paranoid—just prepared. These five moves offer major protection without costing you money or time. Think of it as locking the digital doors and windows before you leave the house.</p>
-      <a href="/services.html" class="inline-block text-oliveGreen underline font-semibold hover:text-oliveDark">Need help applying this at home or in your business? Let’s talk.</a>
+
+    <section class="bg-gray-800 rounded-lg p-6 shadow-lg space-y-4">
+      <p class="text-gray-300">You don’t need to be paranoid—just prepared. These five moves offer major protection without costing you money or time. Think of it as locking the digital doors and windows before you leave the house.</p>
+
+      <a href="/services.html" class="inline-block text-teal-400 underline font-semibold hover:text-teal-300">Need help applying this at home or in your business? Let’s talk.</a>
+    </section>
+
     <div class="text-center pt-8">
-      <a href="/blog.html" class="text-oliveGreen underline hover:text-oliveDark">&larr; Back to Blog</a>
+      <a href="/blog.html" class="text-teal-400 underline hover:text-teal-300">&larr; Back to Blog</a>
     </div>
   </main>
+
   <!-- Footer -->
-  <footer class="bg-armadilloGray text-armadilloGray text-center p-6 text-sm mt-auto">
+  <footer class="bg-gray-800 text-gray-500 text-center p-6 text-sm mt-auto">
     &copy; 2025 Iron Dillo. All rights reserved. |
-    <a href="/privacy.html" class="hover:underline text-oliveGreen">Privacy</a> |
-    <a href="/terms.html" class="hover:underline text-oliveGreen">Terms</a>
+    <a href="/privacy.html" class="hover:underline text-teal-400">Privacy</a> |
+    <a href="/terms.html" class="hover:underline text-teal-400">Terms</a>
   </footer>
+
 </body>
 </html>
