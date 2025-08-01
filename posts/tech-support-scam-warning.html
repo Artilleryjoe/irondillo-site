@@ -11,6 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- 🛡 Security Headers -->
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.tailwindcss.com https://unpkg.com https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; frame-src https://www.google.com; form-action 'self' https://formspree.io; object-src 'none'; base-uri 'self';">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
 <meta http-equiv="X-Frame-Options" content="DENY">
 <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
@@ -25,65 +26,48 @@
   <meta property="og:image" content="https://irondillo.com/assets/irondillo-preview.png" />
   <meta property="og:url" content="https://irondillo.com/posts/tech-support-scam-warning.html" />
   <meta name="twitter:card" content="summary_large_image" />
-  
   <script src="https://cdn.tailwindcss.com"></script>
+<script>
+ tailwind.config = { theme: { extend: { colors: { armadilloBlack: "#1A1A1A", armadilloGray: "#4A4A4A", oliveGreen: "#6B7B3C", oliveDark: "#55622F", offWhite: "#F8F9FA" }, fontFamily: { inter: ["Inter", "sans-serif"] } } } };
+</script>
 </head>
-<body class="bg-gray-900 text-gray-100 font-sans leading-relaxed px-6 max-w-3xl mx-auto py-10">
+<body class="flex flex-col min-h-screen bg-offWhite text-armadilloGray font-inter">
 
   <header class="text-center mb-10">
     <img loading="lazy" src="/assets/irondillo-preview.png" alt="IronDillo Logo" class="mx-auto w-28 mb-6" />
-    <h1 class="text-4xl font-extrabold text-teal-400 mb-2">How to Tell If That “Tech Support” Call Is a Scam</h1>
-    <time datetime="2025-10-22" class="text-gray-400 text-sm block mb-6">Published July 10, 2025</time>
-    <p class="text-gray-300 max-w-xl mx-auto">
+    <h1 class="text-4xl font-extrabold text-oliveGreen mb-2">How to Tell If That “Tech Support” Call Is a Scam</h1>
+    <time datetime="2025-10-22" class="text-armadilloGray text-sm block mb-6">Published July 10, 2025</time>
+    <p class="text-armadilloGray max-w-xl mx-auto">
       You’re relaxing, minding your business, when the phone rings. It’s “Microsoft” or “Amazon” or “your bank”—and something’s urgent. Suspicious login. Hacked account. Refund needed. They’ll fix it… if you just give them remote access or read off a code.
     </p>
   </header>
-
   <main class="space-y-8">
     <p><strong>🚨 Stop right there.</strong> No legit company cold-calls you to fix a problem you didn’t know about.</p>
     <p>Here’s how to spot the scam—and shut it down:</p>
-
     <section>
-      <h2 class="text-2xl text-teal-300 font-semibold mb-3">1. They Call You</h2>
+      <h2 class="text-2xl text-oliveGreen font-semibold mb-3">1. They Call You</h2>
       <p>Real tech support doesn’t call out of the blue. Ever. If you didn’t initiate contact, assume it’s fake.</p>
     </section>
-
-    <section>
-      <h2 class="text-2xl text-teal-300 font-semibold mb-3">2. They Want Access</h2>
+      <h2 class="text-2xl text-oliveGreen font-semibold mb-3">2. They Want Access</h2>
       <p>If they ask to install software or take over your device, don’t do it. That’s how they plant malware or steal your info.</p>
-    </section>
-
-    <section>
-      <h2 class="text-2xl text-teal-300 font-semibold mb-3">3. They Push Panic</h2>
+      <h2 class="text-2xl text-oliveGreen font-semibold mb-3">3. They Push Panic</h2>
       <p>Scammers want you to act fast so you don’t think. Stay calm. Ask questions. Say you'll call back—and then look up the company yourself.</p>
-    </section>
-
-    <section>
-      <h2 class="text-2xl text-teal-300 font-semibold mb-3">4. They Demand Weird Payment</h2>
+      <h2 class="text-2xl text-oliveGreen font-semibold mb-3">4. They Demand Weird Payment</h2>
       <p>Gift cards? Crypto? Wire transfer? No real business demands payment like that.</p>
-    </section>
-
-    <section>
-      <h2 class="text-2xl text-teal-300 font-semibold mb-3">5. They Sound Official—but Aren’t</h2>
+      <h2 class="text-2xl text-oliveGreen font-semibold mb-3">5. They Sound Official—but Aren’t</h2>
       <p>They might know your name or spoof a legit number. Doesn’t matter. Anyone can fake a caller ID. It’s the request that matters.</p>
-    </section>
-
-    <hr class="border-gray-700" />
-
+    <hr class="border-armadilloGray" />
     <p><strong>Bottom Line:</strong> Hang up. Block the number. Report it if you want—but don’t engage. And definitely don’t feel bad. These scams catch everyone, from college kids to grandmas.</p>
     <p>Your best defense? A healthy dose of skepticism and a refusal to panic.</p>
     <p><strong>Iron Dillo Rule:</strong> If someone calls you about tech problems you didn’t report, it’s a trap.</p>
-
     <div class="text-center mt-10">
-      <a href="/blog.html" class="text-teal-400 underline hover:text-teal-300">&larr; Back to Blog</a>
+      <a href="/blog.html" class="text-oliveGreen underline hover:text-oliveDark">&larr; Back to Blog</a>
     </div>
   </main>
-
-  <footer class="bg-gray-800 text-gray-500 text-center p-6 text-sm mt-16 rounded-md max-w-3xl mx-auto">
+  <footer class="bg-armadilloGray text-armadilloGray text-center p-6 text-sm mt-16 rounded-md max-w-3xl mx-auto">
     &copy; 2025 Iron Dillo. All rights reserved. |
-    <a href="/privacy.html" class="hover:underline text-teal-400">Privacy</a> |
-    <a href="/terms.html" class="hover:underline text-teal-400">Terms</a>
+    <a href="/privacy.html" class="hover:underline text-oliveGreen">Privacy</a> |
+    <a href="/terms.html" class="hover:underline text-oliveGreen">Terms</a>
   </footer>
-
 </body>
 </html>
