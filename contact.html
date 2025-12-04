@@ -29,11 +29,8 @@
     }
   </script>
 
-  <!-- Google reCAPTCHA v2 -->
-  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-
   <!-- 🛡 Security Headers -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.tailwindcss.com https://unpkg.com https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; frame-src https://www.google.com; form-action 'self' https://formspree.io; object-src 'none'; base-uri 'self';">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.tailwindcss.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; form-action 'self' https://formspree.io; object-src 'none'; base-uri 'self';">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta http-equiv="X-Frame-Options" content="DENY">
   <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
@@ -109,8 +106,8 @@
             <label for="message" class="text-sm font-semibold text-armadilloBlack">How can we help?</label>
             <textarea required name="message" id="message" rows="5" class="w-full mt-2 px-4 py-3 rounded-xl border border-armadilloGray/20 focus:outline-none focus:border-oliveGreen"></textarea>
           </div>
-          <div class="flex items-center justify-between flex-wrap gap-3">
-            <div class="g-recaptcha" data-sitekey="6LdwJ6clAAAAAH-SzwY1aUlmlLzQA1DajkpLS5o0"></div>
+          <input type="text" name="company" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+          <div class="flex items-center justify-end">
             <button type="submit" class="btn-primary">Send message</button>
           </div>
         </form>
