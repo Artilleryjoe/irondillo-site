@@ -8,6 +8,7 @@
 
   <!-- Fonts & Tailwind -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -35,170 +36,202 @@
   <link rel="icon" type="image/png" href="/assets/favicon.png" />
 </head>
 
-<body class="bg-offWhite text-armadilloGray font-inter flex flex-col min-h-screen">
-
-  <!-- Logo -->
-  <header class="pt-7 text-center sm:mb-4 md:mb-6">
-    <img src="/assets/irondillo-preview.png" alt="Iron Dillo logo"
-         class="mx-auto mb-3 w-28 h-auto drop-shadow" />
-  </header>
-
-  <!-- Navigation -->
-  <nav class="bg-armadilloBlack/95 rounded-full mb-5 w-full fade-in shadow-sm">
-    <div class="max-w-4xl mx-auto px-4">
-      <div class="flex justify-center gap-3 flex-wrap py-2 text-xs tracking-wide">
-        <a href="/index.html" class="py-2 px-3 text-offWhite font-semibold uppercase hover:text-oliveGreen hover:underline">Home</a>
-        <a href="/services.html" class="py-2 px-3 text-offWhite font-semibold uppercase hover:text-oliveGreen hover:underline">Services</a>
-        <a href="/about.html" class="py-2 px-3 text-offWhite font-semibold uppercase hover:text-oliveGreen hover:underline">About</a>
-        <a href="/contact.html" class="py-2 px-3 text-offWhite font-semibold uppercase hover:text-oliveGreen hover:underline">Contact</a>
+<body class="text-armadilloGray font-inter page-shell min-h-screen">
+  <div class="relative flex flex-col min-h-screen">
+    <!-- Top Bar -->
+    <header class="relative z-10 max-w-6xl mx-auto px-6 pt-8">
+      <div class="glass-panel nav-shell bg-armadilloBlack/90 rounded-2xl px-5 sm:px-8 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div class="flex items-center gap-4">
+          <img src="/assets/irondillo-preview.png" alt="Iron Dillo logo" class="w-14 h-14" />
+          <div>
+            <p class="pill">Veteran owned</p>
+            <p class="text-offWhite font-semibold text-lg">Iron Dillo Cybersecurity</p>
+            <p class="text-sm text-offWhite/80">Austin-based | Serving Texas businesses</p>
+          </div>
+        </div>
+        <nav class="flex flex-wrap items-center gap-3 text-sm">
+          <a href="/index.html" class="text-offWhite font-semibold px-3 py-2 rounded-xl hover:bg-white/10">Home</a>
+          <a href="/services.html" class="text-offWhite font-semibold px-3 py-2 rounded-xl hover:bg-white/10">Services</a>
+          <a href="/about.html" class="text-offWhite font-semibold px-3 py-2 rounded-xl hover:bg-white/10">About</a>
+          <a href="/contact.html" class="text-offWhite font-semibold px-3 py-2 rounded-xl hover:bg-white/10">Contact</a>
+          <a href="tel:19039331342" class="btn-primary text-sm">Call (903) 933-1342</a>
+        </nav>
       </div>
-    </div>
-  </nav>
+    </header>
 
-  <!-- Hero -->
-  <main class="text-center max-w-3xl mx-auto px-6 sm:mb-4 md:mb-6">
-    <h1 class="text-4xl font-extrabold text-oliveGreen mb-4">Iron Dillo Cybersecurity</h1>
-    <p class="text-base leading-relaxed mb-7">
-      <span class="text-oliveGreen font-medium">Iron Dillo Cybersecurity</span> protects
-      <span class="font-semibold text-armadilloBlack">individuals</span>,
-      <span class="font-semibold text-armadilloBlack">small businesses</span>, and
-      <span class="font-semibold text-armadilloBlack">rural operations</span> across Texas.
-      Every engagement is documented, risk-informed, and delivered with executive-ready clarity.
-    </p>
+    <main class="relative z-10 max-w-6xl mx-auto px-6 py-10 space-y-12">
+      <!-- Hero -->
+      <section class="glass-panel rounded-3xl p-8 md:p-12 shadow-xl">
+        <div class="flex flex-col lg:flex-row gap-10 items-center lg:items-start">
+          <div class="flex-1 space-y-5">
+            <span class="pill">Practical Cyber Defense</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold text-armadilloBlack leading-tight">Cybersecurity you can trust, delivered with executive clarity.</h1>
+            <p class="text-lg leading-relaxed text-armadilloGray">
+              We protect individuals, small businesses, and rural operations across Texas with actionable security guidance, rapid diagnostics, and documentation leaders can use. Every engagement is personal, transparent, and built for busy teams.
+            </p>
+            <div class="flex flex-wrap gap-3">
+              <a class="btn-primary" href="/contact.html">
+                Schedule a consult
+                <span aria-hidden="true">→</span>
+              </a>
+              <a class="btn-link" href="/services.html">View services</a>
+            </div>
+            <div class="badge-grid">
+              <div class="hero-accent rounded-xl p-4 flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-oliveGreen font-bold">24/7</div>
+                <div>
+                  <p class="text-armadilloBlack font-semibold">Response-ready</p>
+                  <p class="text-sm text-armadilloGray">Direct access when things feel off.</p>
+                </div>
+              </div>
+              <div class="hero-accent rounded-xl p-4 flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-oliveGreen font-bold">1:1</div>
+                <div>
+                  <p class="text-armadilloBlack font-semibold">Executive briefings</p>
+                  <p class="text-sm text-armadilloGray">Clear recommendations and next steps.</p>
+                </div>
+              </div>
+              <div class="hero-accent rounded-xl p-4 flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-oliveGreen font-bold">TX</div>
+                <div>
+                  <p class="text-armadilloBlack font-semibold">Rooted in Texas</p>
+                  <p class="text-sm text-armadilloGray">Austin-based, community-minded support.</p>
+                </div>
+              </div>
+            </div>
+          </div>
 
-    <div class="bg-white border border-armadilloGray/20 rounded-lg py-4 px-5 shadow-sm inline-block text-left max-w-sm">
-      <p class="text-xs font-semibold uppercase tracking-[0.25em] text-armadilloGray">Direct Support</p>
-      <a href="tel:19039331342" class="block text-xl font-semibold text-armadilloBlack mt-2 hover:text-oliveGreen">
-        (903) 933-1342
-      </a>
-      <p class="text-sm text-armadilloGray mt-3">Call for immediate cybersecurity assistance or to discuss your security needs.</p>
-      <p class="text-xs text-armadilloGray mt-3">Austin-based with a commitment to professional, reliable guidance.</p>
-    </div>
-  </main>
+          <div class="flex-1 w-full space-y-4">
+            <div class="glass-panel rounded-2xl p-6">
+              <p class="text-xs tracking-[0.2em] text-armadilloGray uppercase">Direct line</p>
+              <a href="tel:19039331342" class="block text-3xl font-extrabold text-armadilloBlack mt-2 hover:text-oliveGreen">
+                (903) 933-1342
+              </a>
+              <p class="text-sm text-armadilloGray mt-3">Call for immediate guidance or to book a security assessment.</p>
+              <div class="flex items-center gap-3 mt-5">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-oliveGreen" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M20.94 11c0 5.49-3.45 10-8.94 12-5.49-2-8.94-6.51-8.94-12S6.51 1 12 1s8.94 4.51 8.94 10ZM7 11a5 5 0 1 0 10 0A5 5 0 0 0 7 11Zm5-3a3 3 0 1 0 .001 6.001A3 3 0 0 0 12 8Z"/>
+                </svg>
+                <div>
+                  <p class="font-semibold text-armadilloBlack">Onsite or remote</p>
+                  <p class="text-sm text-armadilloGray">Choose the option that keeps your teams focused.</p>
+                </div>
+              </div>
+            </div>
+            <div class="rounded-2xl overflow-hidden hero-accent shadow-lg">
+              <img src="/assets/Bluebonnet.png" alt="Texas bluebonnet field" class="w-full h-52 object-cover" />
+              <div class="p-4 text-sm text-armadilloBlack">
+                Texas-owned, protecting the people and businesses our communities rely on.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-  <!-- Split Section with Bluebonnet Image -->
-  <section class="grid grid-cols-1 md:grid-cols-2 gap-0 my-10">
-    <div class="flex items-center justify-center bg-offWhite px-6 py-7">
-      <div class="max-w-md">
-        <h2 class="text-3xl font-bold text-armadilloBlack mb-3">Rooted in Texas</h2>
-        <p class="text-base text-armadilloGray leading-relaxed">
-          We protect the businesses and people our community depends on with cybersecurity that’s accessible, affordable, and reliable.
-        </p>
+      <!-- Value Props -->
+      <section class="space-y-6">
+        <div class="section-heading text-center space-y-2">
+          <h2 class="text-3xl font-bold text-armadilloBlack">What Iron Dillo delivers</h2>
+          <p class="text-base text-armadilloGray max-w-3xl mx-auto">From diagnostics to documentation, every engagement is designed to move you forward quickly and confidently.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="glass-panel rounded-2xl p-6">
+            <p class="pill mb-3">Assess</p>
+            <h3 class="text-xl font-semibold text-armadilloBlack">Remote & Onsite Assessments</h3>
+            <p class="text-sm leading-relaxed mt-2">Risk-informed reviews of your systems, networks, and processes with prioritized actions.</p>
+          </div>
+          <div class="glass-panel rounded-2xl p-6">
+            <p class="pill mb-3">Report</p>
+            <h3 class="text-xl font-semibold text-armadilloBlack">Executive-Ready Documentation</h3>
+            <p class="text-sm leading-relaxed mt-2">Plain-English reports, policy updates, and visuals your leadership can act on.</p>
+          </div>
+          <div class="glass-panel rounded-2xl p-6">
+            <p class="pill mb-3">Guide</p>
+            <h3 class="text-xl font-semibold text-armadilloBlack">Practical Implementation</h3>
+            <p class="text-sm leading-relaxed mt-2">Hands-on guidance to deploy fixes, train teams, and verify improvements.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Process -->
+      <section class="glass-panel rounded-3xl p-8 space-y-6">
+        <div class="section-heading space-y-2">
+          <h2 class="text-2xl md:text-3xl font-bold text-armadilloBlack">Engagement approach</h2>
+          <p class="text-base text-armadilloGray">A simple, accountable path that keeps decision-makers informed.</p>
+        </div>
+        <div class="timeline space-y-6">
+          <div class="timeline-step">
+            <h3 class="text-lg font-semibold text-armadilloBlack">1) Listen & align</h3>
+            <p class="text-sm text-armadilloGray">Clarify objectives, risks, and business constraints so recommendations fit your reality.</p>
+          </div>
+          <div class="timeline-step">
+            <h3 class="text-lg font-semibold text-armadilloBlack">2) Assess & validate</h3>
+            <p class="text-sm text-armadilloGray">Perform remote diagnostics or onsite reviews, verify findings, and capture clear evidence.</p>
+          </div>
+          <div class="timeline-step">
+            <h3 class="text-lg font-semibold text-armadilloBlack">3) Deliver & support</h3>
+            <p class="text-sm text-armadilloGray">Present executive-ready briefs, then work alongside your team to implement and measure.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Call to Action -->
+      <section class="glass-panel rounded-3xl p-8 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div>
+          <p class="pill mb-3">Ready to protect</p>
+          <h2 class="text-2xl font-bold text-armadilloBlack">Let’s secure what keeps your business running.</h2>
+          <p class="text-armadilloGray mt-2">Get an assessment date, understand the effort, and receive a clear path forward within days.</p>
+        </div>
+        <div class="flex flex-wrap gap-3">
+          <a class="btn-primary" href="mailto:contact@irondillo.com">Email the team</a>
+          <a class="btn-link" href="/contact.html">See contact options</a>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="relative z-10 bg-armadilloBlack text-offWhite py-12 mt-auto">
+      <div class="max-w-6xl mx-auto px-6 footer-grid">
+        <div>
+          <p class="text-oliveGreen font-semibold mb-3">Iron Dillo Cybersecurity</p>
+          <p class="text-sm text-offWhite/80">Trusted by Texas businesses. Veteran-owned. Mission-driven.</p>
+          <div class="flex gap-3 mt-4">
+            <a href="https://github.com/Artilleryjoe/Cybersecurity-Portfolio" target="_blank" aria-label="GitHub" class="hover:scale-110 transition-transform duration-300 text-oliveGreen hover:text-oliveDark">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.016-2.04-3.338.726-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.757-1.333-1.757-1.089-.745.084-.729.084-.729 1.205.084 1.84 1.236 1.84 1.236 1.07 1.835 2.809 1.304 3.495.997.108-.775.419-1.305.762-1.605-2.665-.305-5.466-1.334-5.466-5.93 0-1.31.469-2.38 1.236-3.22-.124-.303-.536-1.527.117-3.176 0 0 1.008-.322 3.3 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.655 1.649.243 2.873.119 3.176.77.84 1.236 1.91 1.236 3.22 0 4.61-2.807 5.625-5.479 5.921.43.372.823 1.102.823 2.222 0 1.606-.015 2.896-.015 3.286 0 .319.216.694.825.576C20.565 22.092 24 17.592 24 12.297 24 5.373 18.627.297 12 .297z"/>
+              </svg>
+            </a>
+            <a href="https://www.facebook.com/profile.php?id=61578181152347" target="_blank" aria-label="Facebook" class="hover:scale-110 transition-transform duration-300 text-oliveGreen hover:text-oliveDark">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M22.675 0h-21.35C.6 0 0 .6 0 1.342v21.316C0 23.4.6 24 1.325 24h11.494v-9.294H9.692v-3.622h3.127V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.466.099 2.797.143v3.24l-1.918.001c-1.504 0-1.796.716-1.796 1.765v2.315h3.59l-.467 3.622h-3.123V24h6.116C23.4 24 24 23.4 24 22.675V1.342C24 .6 23.4 0 22.675 0z"/>
+              </svg>
+            </a>
+            <a href="https://www.linkedin.com/company/iron-dillo/" target="_blank" aria-label="LinkedIn" class="hover:scale-110 transition-transform duration-300 text-oliveGreen hover:text-oliveDark">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.025-3.037-1.852-3.037-1.854 0-2.137 1.445-2.137 2.939v5.667H9.351V9h3.414v1.561h.049c.476-.9 1.637-1.852 3.37-1.852 3.604 0 4.271 2.37 4.271 5.452v6.291zM5.337 7.433c-1.144 0-2.07-.927-2.07-2.07 0-1.144.926-2.07 2.07-2.07 1.143 0 2.07.926 2.07 2.07 0 1.143-.927 2.07-2.07 2.07zm1.777 13.019H3.56V9h3.554v11.452zM22.225 0H1.771C.792 0 0 .792 0 1.77v20.451C0 23.207.792 24 1.77 24h20.451C23.208 24 24 23.207 24 22.222V1.77C24 .792 23.208 0 22.225 0z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <p class="uppercase text-xs tracking-widest text-oliveGreen mb-2">Contact</p>
+          <p class="font-semibold text-lg">(903) 933-1342</p>
+          <a href="mailto:contact@irondillo.com" class="block text-offWhite/80 hover:text-oliveGreen">contact@irondillo.com</a>
+          <p class="text-offWhite/70 mt-3">Tailored cybersecurity for Texas organizations, from remote diagnostics to onsite support.</p>
+        </div>
+
+        <div class="space-y-3 text-sm text-offWhite/80">
+          <p class="uppercase text-xs tracking-widest text-oliveGreen">Quick links</p>
+          <div class="flex flex-col gap-1">
+            <a href="/privacy.html" class="hover:text-oliveGreen">Privacy</a>
+            <a href="/terms.html" class="hover:text-oliveGreen">Terms</a>
+            <a href="/commitment.html" class="hover:text-oliveGreen">Our Commitment</a>
+          </div>
+          <p class="mt-4 text-offWhite/60">&copy; 2025 Iron Dillo. All rights reserved.</p>
+        </div>
       </div>
-    </div>
-    <div>
-      <img src="/assets/Bluebonnet.png" alt="Texas Bluebonnet Field"
-           class="w-full h-full object-cover" />
-    </div>
-  </section>
-
-  <!-- What We Do Section -->
-  <section class="max-w-4xl mx-auto text-center px-6 py-10">
-    <h2 class="text-3xl font-bold text-armadilloBlack mb-4">What Iron Dillo Delivers</h2>
-    <p class="mb-6 text-base text-armadilloGray leading-relaxed">
-      We believe every business deserves protection. That’s why we provide hands-on cybersecurity for Texas individuals, small businesses, and rural operations at a scale and cost that makes sense.
-    </p>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-      <div class="bg-white/80 border border-armadilloGray/10 p-5 rounded-lg shadow-sm">
-        <h3 class="font-semibold text-oliveGreen mb-2">Remote Assessments</h3>
-        <p class="text-sm text-armadilloGray leading-relaxed">Identify risks in your systems quickly and securely.</p>
-      </div>
-      <div class="bg-white/80 border border-armadilloGray/10 p-5 rounded-lg shadow-sm">
-        <h3 class="font-semibold text-oliveGreen mb-2">Actionable Reports</h3>
-        <p class="text-sm text-armadilloGray leading-relaxed">Plain-English documentation, not confusing jargon.</p>
-      </div>
-      <div class="bg-white/80 border border-armadilloGray/10 p-5 rounded-lg shadow-sm">
-        <h3 class="font-semibold text-oliveGreen mb-2">Practical Guidance</h3>
-        <p class="text-sm text-armadilloGray leading-relaxed">Steps tailored to your business so you can move forward confidently.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="bg-armadilloBlack text-offWhite text-center py-10 mt-auto">
-    <p class="text-oliveGreen font-semibold mb-6">Connect with me</p>
-
-    <!-- Social Icons -->
-    <div class="inline-flex justify-center space-x-10 mb-8">
-      <!-- GitHub -->
-      <a href="https://github.com/Artilleryjoe/Cybersecurity-Portfolio" target="_blank" aria-label="GitHub"
-         class="hover:scale-110 transition-transform duration-300 text-oliveGreen hover:text-oliveDark">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 .297c-6.63 0-12 5.373-12 12 
-            0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577
-            0-.285-.01-1.04-.016-2.04-3.338.726-4.042-1.61-4.042-1.61
-            -.546-1.387-1.333-1.757-1.333-1.757-1.089-.745.084-.729.084-.729
-            1.205.084 1.84 1.236 1.84 1.236 1.07 1.835 2.809 1.304 
-            3.495.997.108-.775.419-1.305.762-1.605-2.665-.305-5.466-1.334-5.466-5.93
-            0-1.31.469-2.38 1.236-3.22-.124-.303-.536-1.527.117-3.176
-            0 0 1.008-.322 3.3 1.23.957-.266 1.983-.399 3.003-.404 
-            1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 
-            3.297-1.23.655 1.649.243 2.873.119 3.176.77.84 
-            1.236 1.91 1.236 3.22 0 4.61-2.807 5.625-5.479 5.921
-            .43.372.823 1.102.823 2.222 0 1.606-.015 2.896-.015 3.286
-            0 .319.216.694.825.576C20.565 22.092 24 17.592 24 12.297
-            24 5.373 18.627.297 12 .297z"/>
-        </svg>
-      </a>
-
-      <!-- Facebook -->
-      <a href="https://www.facebook.com/profile.php?id=61578181152347" target="_blank" aria-label="Facebook"
-         class="hover:scale-110 transition-transform duration-300 text-oliveGreen hover:text-oliveDark">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M22.675 0h-21.35C.6 0 0 .6 0 1.342v21.316C0 
-            23.4.6 24 1.325 24h11.494v-9.294H9.692v-3.622h3.127V8.413
-            c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.466.099 
-            2.797.143v3.24l-1.918.001c-1.504 0-1.796.716-1.796 
-            1.765v2.315h3.59l-.467 3.622h-3.123V24h6.116
-            C23.4 24 24 23.4 24 22.675V1.342C24 
-            .6 23.4 0 22.675 0z"/>
-        </svg>
-      </a>
-
-      <!-- LinkedIn -->
-      <a href="https://www.linkedin.com/company/iron-dillo/" target="_blank" aria-label="LinkedIn"
-         class="hover:scale-110 transition-transform duration-300 text-oliveGreen hover:text-oliveDark">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.025-3.037-1.852-3.037
-            -1.854 0-2.137 1.445-2.137 2.939v5.667H9.351V9h3.414v1.561h.049
-            c.476-.9 1.637-1.852 3.37-1.852 3.604 0 4.271 2.37 
-            4.271 5.452v6.291zM5.337 7.433c-1.144 
-            0-2.07-.927-2.07-2.07 0-1.144.926-2.07 
-            2.07-2.07 1.143 0 2.07.926 
-            2.07 2.07 0 1.143-.927 2.07-2.07 
-            2.07zm1.777 13.019H3.56V9h3.554v11.452zM22.225 
-            0H1.771C.792 0 0 .792 0 1.77v20.451C0 
-            23.207.792 24 1.77 24h20.451C23.208 24 
-            24 23.207 24 22.222V1.77C24 .792 23.208 
-            0 22.225 0z"/>
-        </svg>
-      </a>
-    </div>
-
-    <div class="flex flex-col md:flex-row items-center justify-center gap-6 mb-8 text-sm sm:text-base">
-      <div class="text-center md:text-left">
-        <p class="uppercase text-xs tracking-widest text-oliveGreen mb-1">Phone</p>
-        <a href="tel:19039331342" class="text-offWhite text-lg font-semibold hover:text-oliveGreen transition">
-          (903) 933-1342
-        </a>
-      </div>
-      <span class="hidden md:inline-flex h-10 border-l border-offWhite/20"></span>
-      <div class="text-center md:text-left">
-        <p class="uppercase text-xs tracking-widest text-oliveGreen mb-1">Email</p>
-        <a href="mailto:contact@irondillo.com" class="text-offWhite text-lg font-semibold hover:text-oliveGreen transition">
-          contact@irondillo.com
-        </a>
-      </div>
-    </div>
-
-    <p class="italic mb-4">Trusted by Texas businesses. Veteran-owned. Mission-driven.</p>
-    <div class="space-x-4 mb-4">
-      <a href="/privacy.html" class="hover:underline">Privacy</a>
-      <a href="/terms.html" class="hover:underline">Terms</a>
-      <a href="/commitment.html" class="hover:underline">Our Commitment</a>
-    </div>
-    <p>&copy; 2025 Iron Dillo. All rights reserved.</p>
-  </footer>
-
+    </footer>
+  </div>
 </body>
 </html>
