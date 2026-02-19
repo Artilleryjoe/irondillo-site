@@ -3,12 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <title>Services | Iron Dillo Cybersecurity</title>
-  <meta name="description" content="Explore the cybersecurity services offered by Iron Dillo, focused on protecting Texas individuals and small businesses with practical, ethical solutions from an Austin-based team." />
+  <meta name="description" content="Streamlined cybersecurity services from Iron Dillo, including risk assessments, implementation support, and Post-Quantum Cryptography readiness planning." />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <!-- Fonts & Tailwind -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/styles.css">
   <script src="https://cdn.tailwindcss.com"></script>
@@ -17,42 +13,29 @@
       theme: {
         extend: {
           colors: {
-            armadilloBlack: "#1A1A1A",
-            armadilloGray: "#4A4A4A",
-            oliveGreen: "#6B7B3C",
-            oliveDark: "#55622F",
-            offWhite: "#F8F9FA"
+            armadilloBlack: "#16202a",
+            armadilloGray: "#52606d",
+            oliveGreen: "#395d44",
+            oliveDark: "#214131",
+            offWhite: "#f8fafb"
           },
-          fontFamily: {
-            inter: ["Inter", "sans-serif"]
-          }
+          fontFamily: { inter: ["Inter", "sans-serif"] }
         }
       }
     }
   </script>
-  <style>
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    .fade-in { animation: fadeIn 1s ease-out both; }
-  </style>
-  <!-- 🛡 Security Headers -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.tailwindcss.com https://unpkg.com https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; frame-src https://www.google.com; form-action 'self' https://formspree.io; object-src 'none'; base-uri 'self';">
-  <meta http-equiv="X-Content-Type-Options" content="nosniff">
-  <meta http-equiv="X-Frame-Options" content="DENY">
-  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
-  <meta http-equiv="Permissions-Policy" content="accelerometer=(), camera=(), geolocation=(), microphone=()">
-  <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
   <link rel="icon" type="image/png" href="/assets/favicon.png" />
 </head>
 <body class="flex flex-col min-h-screen text-armadilloGray font-inter page-shell">
   <div class="relative flex flex-col min-h-screen">
-    <header class="relative z-10 max-w-6xl mx-auto px-6 pt-8 fade-in">
+    <header class="relative z-10 max-w-6xl mx-auto px-6 pt-8">
       <div class="glass-panel nav-shell rounded-2xl px-5 sm:px-8 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div class="flex items-center gap-4">
-          <img loading="lazy" src="/assets/irondillo-preview.png" alt="IronDillo cybersecurity logo" class="w-14 h-14" />
+          <img src="/assets/irondillo-preview.png" alt="Iron Dillo cybersecurity logo" class="w-14 h-14" />
           <div>
             <p class="pill">Services</p>
-            <p class="text-offWhite font-semibold text-lg">Business-focused cybersecurity</p>
-            <p class="text-sm text-offWhite/80">Austin-based, serving Texas businesses</p>
+            <p class="text-offWhite font-semibold text-lg">Focused engagements. Fast outcomes.</p>
           </div>
         </div>
         <nav class="flex flex-wrap items-center gap-3 text-sm">
@@ -60,79 +43,51 @@
           <a href="/services.html" class="text-offWhite font-semibold px-3 py-2 rounded-xl hover:bg-white/10">Services</a>
           <a href="/about.html" class="text-offWhite font-semibold px-3 py-2 rounded-xl hover:bg-white/10">About</a>
           <a href="/contact.html" class="text-offWhite font-semibold px-3 py-2 rounded-xl hover:bg-white/10">Contact</a>
-          <a href="tel:19039331342" class="btn-primary text-sm">Call for consultation</a>
         </nav>
       </div>
     </header>
 
-    <main class="flex-grow max-w-6xl mx-auto px-6 py-10 space-y-10 fade-in">
-      <section class="glass-panel rounded-3xl p-8 md:p-12 flex flex-col md:flex-row gap-8 items-start">
-        <div class="flex-1 space-y-4">
-          <h1 class="text-4xl font-extrabold text-armadilloBlack">Our Services</h1>
-          <p class="text-base text-armadilloGray leading-relaxed">Practical, veteran-owned cybersecurity solutions for Texas businesses and individuals. Everything we deliver is built for clarity, speed, and leadership-ready decisions.</p>
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div class="hero-accent rounded-2xl p-4">
-              <p class="text-sm font-semibold text-armadilloBlack">Rapid discovery</p>
-              <p class="text-xs text-armadilloGray">Understand risk and priority in days.</p>
-            </div>
-            <div class="hero-accent rounded-2xl p-4">
-              <p class="text-sm font-semibold text-armadilloBlack">Clear next steps</p>
-              <p class="text-xs text-armadilloGray">Plain-English guidance for leaders.</p>
-            </div>
-            <div class="hero-accent rounded-2xl p-4">
-              <p class="text-sm font-semibold text-armadilloBlack">Hands-on help</p>
-              <p class="text-xs text-armadilloGray">Support through implementation.</p>
-            </div>
-          </div>
-        </div>
-        <div class="glass-panel rounded-2xl p-6 w-full md:w-80">
-          <p class="text-xs tracking-[0.2em] uppercase text-armadilloGray">Direct support</p>
-          <a href="tel:19039331342" class="block text-2xl font-bold text-armadilloBlack mt-2 hover:text-oliveGreen">(903) 933-1342</a>
-          <p class="text-sm text-armadilloGray mt-3">Call to discuss your current security posture or schedule an assessment window.</p>
-          <a class="btn-link mt-4 inline-block" href="mailto:contact@irondillo.com">Email us</a>
-        </div>
+    <main class="flex-grow max-w-6xl mx-auto px-6 py-10 space-y-8">
+      <section class="glass-panel rounded-3xl p-8 md:p-12 space-y-4">
+        <p class="pill">What we deliver</p>
+        <h1 class="text-4xl font-extrabold text-armadilloBlack">Security services designed for execution.</h1>
+        <p class="max-w-3xl">Every engagement is scoped for practical delivery: identify top risks, align leadership, and move improvements into production with minimal friction.</p>
       </section>
 
-      <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <article class="glass-panel rounded-2xl p-8 space-y-3">
-          <p class="pill w-fit">Assessment</p>
-          <h2 class="text-2xl font-semibold text-armadilloBlack">Security Consultations & Risk Assessments</h2>
-          <p class="text-armadilloGray leading-relaxed">Identify vulnerabilities, understand risks, and receive prioritized recommendations in plain English.</p>
+      <section class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <article class="glass-panel rounded-2xl p-7 space-y-2">
+          <h2 class="text-2xl font-semibold text-armadilloBlack">Risk Assessments</h2>
+          <p>Rapid assessments that produce prioritized remediation steps and clear business impact summaries.</p>
         </article>
-        <article class="glass-panel rounded-2xl p-8 space-y-3">
-          <p class="pill w-fit">Documentation</p>
-          <h2 class="text-2xl font-semibold text-armadilloBlack">Cybersecurity Policy & Documentation</h2>
-          <p class="text-armadilloGray leading-relaxed">Create and refine policies, procedures, and visuals that align with your regulators and leadership.</p>
+        <article class="glass-panel rounded-2xl p-7 space-y-2">
+          <h2 class="text-2xl font-semibold text-armadilloBlack">Security Program Documentation</h2>
+          <p>Policies, standards, and procedures refined for auditability, operational consistency, and leadership oversight.</p>
         </article>
-        <article class="glass-panel rounded-2xl p-8 space-y-3">
-          <p class="pill w-fit">Guidance</p>
-          <h2 class="text-2xl font-semibold text-armadilloBlack">Remote Support & Hands-On Advice</h2>
-          <p class="text-armadilloGray leading-relaxed">Step-by-step guidance to implement fixes without slowing down your team.</p>
+        <article class="glass-panel rounded-2xl p-7 space-y-2">
+          <h2 class="text-2xl font-semibold text-armadilloBlack">Implementation Support</h2>
+          <p>Hands-on guidance with your IT and operations teams to implement controls, validate results, and close gaps.</p>
         </article>
-        <article class="glass-panel rounded-2xl p-8 space-y-3">
-          <p class="pill w-fit">Training</p>
-          <h2 class="text-2xl font-semibold text-armadilloBlack">Executive & Staff Awareness</h2>
-          <p class="text-armadilloGray leading-relaxed">Concise training that shows teams what to watch for and how to respond.</p>
+        <article class="glass-panel rounded-2xl p-7 space-y-2">
+          <h2 class="text-2xl font-semibold text-armadilloBlack">Executive Cyber Briefings</h2>
+          <p>Decision-ready reporting for owners and leadership teams that links cyber risk to operational priorities.</p>
         </article>
       </section>
 
-      <section class="glass-panel rounded-3xl p-8 space-y-4">
-        <div class="section-heading space-y-1">
-          <h2 class="text-2xl font-bold text-armadilloBlack">How we work</h2>
-          <p class="text-sm text-armadilloGray">Built for accountability and speed.</p>
-        </div>
-        <div class="timeline space-y-5">
+      <section class="glass-panel pqc-callout rounded-3xl p-8 space-y-4">
+        <h2 class="text-3xl font-bold text-armadilloBlack">Post-Quantum Cryptography (PQC) Readiness</h2>
+        <p>Iron Dillo now offers a dedicated PQC readiness track to help organizations prepare for NIST migration timelines and customer/regulatory expectations.</p>
+        <div class="timeline space-y-4">
           <div class="timeline-step">
-            <h3 class="font-semibold text-armadilloBlack">Discovery</h3>
-            <p class="text-sm text-armadilloGray">Capture context, assets, and goals to focus on what matters most.</p>
+            <h3 class="font-semibold text-armadilloBlack">1. Cryptographic dependency baseline</h3>
+            <p class="text-sm">Identify where current public-key cryptography is used across your applications, infrastructure, and vendors.</p>
           </div>
           <div class="timeline-step">
-            <h3 class="font-semibold text-armadilloBlack">Action plan</h3>
-            <p class="text-sm text-armadilloGray">Deliver executive-ready recommendations with ownership, timelines, and risk impact.</p>
+            <h3 class="font-semibold text-armadilloBlack">2. Exposure and priority mapping</h3>
+            <p class="text-sm">Rank systems by data sensitivity, lifespan, and “harvest now, decrypt later” risk.</p>
           </div>
           <div class="timeline-step">
-            <h3 class="font-semibold text-armadilloBlack">Implementation</h3>
-            <p class="text-sm text-armadilloGray">Guide your team through remediation and validate progress.</p>
+            <h3 class="font-semibold text-armadilloBlack">3. Migration and governance plan</h3>
+            <p class="text-sm">Build a phased roadmap for algorithm transition, vendor requirements, and policy updates.</p>
           </div>
         </div>
       </section>
@@ -142,20 +97,12 @@
       <div class="max-w-6xl mx-auto px-6 footer-grid">
         <div>
           <p class="text-oliveGreen font-semibold mb-2">Iron Dillo Cybersecurity</p>
-          <p class="text-sm text-offWhite/80">Practical, trustworthy protection for Texas individuals, small businesses, and rural operations.</p>
+          <p class="text-sm text-offWhite/80">Built for organizations that need fast, practical cyber execution.</p>
         </div>
         <div>
           <p class="uppercase text-xs tracking-widest text-oliveGreen">Connect</p>
           <a href="tel:19039331342" class="block text-offWhite font-semibold">(903) 933-1342</a>
           <a href="mailto:contact@irondillo.com" class="text-offWhite/80 hover:text-oliveGreen">contact@irondillo.com</a>
-        </div>
-        <div class="text-sm text-offWhite/80 space-y-2">
-          <p class="uppercase text-xs tracking-widest text-oliveGreen">Legal</p>
-          <div class="flex flex-col gap-1">
-            <a href="/privacy.html" class="hover:text-oliveGreen">Privacy</a>
-            <a href="/terms.html" class="hover:text-oliveGreen">Terms</a>
-            <a href="/commitment.html" class="hover:text-oliveGreen">Our Commitment</a>
-          </div>
         </div>
       </div>
     </footer>
