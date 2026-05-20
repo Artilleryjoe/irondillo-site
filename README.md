@@ -1,6 +1,6 @@
 # Iron Dillo Cybersecurity Site
 
-Static marketing site for [Iron Dillo Cybersecurity](https://irondillo.com). The project is a collection of hand-crafted HTML pages powered by Tailwind via CDN with zero build tooling, making it easy to update and deploy through GitHub Pages.
+Static marketing site for [Iron Dillo Cybersecurity](https://irondillo.com). The project is a collection of hand-crafted HTML pages with a generated Tailwind output (`assets/tailwind.css`) deployed through GitHub Pages.
 
 ## Repository layout
 
@@ -23,13 +23,30 @@ Static marketing site for [Iron Dillo Cybersecurity](https://irondillo.com). The
 
 ## Local development
 
-Because the site is static, no build step is required. Use any HTTP server to preview the content locally. For example with Python:
+Use any HTTP server to preview the content locally. For example with Python:
 
 ```bash
 python -m http.server 8000
 ```
 
 Then browse to <http://localhost:8000> to view the site. Edits to the HTML files will hot-reload when you refresh the page.
+
+
+## Build and deploy guard (Tailwind)
+
+Tailwind output is committed to the repo at `assets/tailwind.css`. Any HTML class changes should be followed by a rebuild so published styles stay in sync.
+
+Run this local check before pushing:
+
+```bash
+npm ci
+npm run build:tailwind
+git diff --exit-code -- assets/tailwind.css
+```
+
+If the diff command reports changes, commit the regenerated `assets/tailwind.css` before opening or merging a PR.
+
+The GitHub Pages workflow also enforces this: deploy will fail if `npm run build:tailwind` produces changes that are not committed.
 
 ## Deployment
 
