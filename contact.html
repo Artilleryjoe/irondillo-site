@@ -83,15 +83,15 @@
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label for="name" class="text-sm font-semibold text-armadilloBlack">Name</label>
-              <input required name="name" id="name" class="w-full mt-2 px-4 py-3 rounded-xl border border-armadilloGray/20 focus:outline-none focus:border-oliveGreen" />
+              <input required minlength="2" maxlength="80" pattern="[A-Za-zÀ-ÿ0-9 .,&'-]{2,80}" name="name" id="name" class="w-full mt-2 px-4 py-3 rounded-xl border border-armadilloGray/20 focus:outline-none focus:border-oliveGreen" />
             </div>
             <div>
               <label for="email" class="text-sm font-semibold text-armadilloBlack">Email</label>
-              <input required type="email" name="email" id="email" class="w-full mt-2 px-4 py-3 rounded-xl border border-armadilloGray/20 focus:outline-none focus:border-oliveGreen" />
+              <input required type="email" maxlength="254" name="email" id="email" class="w-full mt-2 px-4 py-3 rounded-xl border border-armadilloGray/20 focus:outline-none focus:border-oliveGreen" />
             </div>
             <div>
               <label for="phone" class="text-sm font-semibold text-armadilloBlack">Phone</label>
-              <input name="phone" id="phone" class="w-full mt-2 px-4 py-3 rounded-xl border border-armadilloGray/20 focus:outline-none focus:border-oliveGreen" />
+              <input name="phone" id="phone" inputmode="tel" pattern="[0-9+()\-\s]{7,25}" maxlength="25" class="w-full mt-2 px-4 py-3 rounded-xl border border-armadilloGray/20 focus:outline-none focus:border-oliveGreen" />
             </div>
             <div>
               <label for="urgency" class="text-sm font-semibold text-armadilloBlack">Urgency</label>
@@ -104,10 +104,14 @@
           </div>
           <div>
             <label for="message" class="text-sm font-semibold text-armadilloBlack">How can we help?</label>
-            <textarea required name="message" id="message" rows="5" placeholder="Ask a question, describe the issue, or share what you want to protect." class="w-full mt-2 px-4 py-3 rounded-xl border border-armadilloGray/20 focus:outline-none focus:border-oliveGreen"></textarea>
+            <textarea required minlength="20" maxlength="2000" name="message" id="message" rows="5" placeholder="Ask a question, describe the issue, or share what you want to protect." class="w-full mt-2 px-4 py-3 rounded-xl border border-armadilloGray/20 focus:outline-none focus:border-oliveGreen"></textarea>
           </div>
-          <input type="text" name="company" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
-          <p class="text-xs text-armadilloGray">No pressure and no hard sell—just practical guidance based on your needs.</p>
+                    <input type="text" name="company" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+          <input type="hidden" name="_next" value="https://irondillo.com/thank-you.html" />
+          <input type="hidden" name="_subject" value="New Iron Dillo contact request" />
+          <input type="hidden" name="_spam_policy" value="honeypot+rate-limit+filter+challenge" />
+          <input type="hidden" name="_validation_profile" value="name:2-80,email:rfc,message:20-2000" />
+          <p class="text-xs text-armadilloGray">No pressure and no hard sell—just practical guidance based on your needs. Spam-prevention controls are active, and blocked submissions are processed according to our Privacy and Terms pages.</p>
           <div class="flex items-center justify-end">
             <button type="submit" class="btn-primary">Send message</button>
           </div>
