@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <title>Blog | Iron Dillo Cybersecurity</title>
+  <meta name="description" content="Technical notes and practical cybersecurity insights from Iron Dillo Cybersecurity." />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            armadilloBlack: "#16202a",
+            armadilloGray: "#52606d",
+            oliveGreen: "#395d44",
+            oliveDark: "#214131",
+            offWhite: "#f8fafb"
+          },
+          fontFamily: { inter: ["Inter", "sans-serif"] }
+        }
+      }
+    }
+  </script>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.tailwindcss.com https://unpkg.com https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; frame-src https://www.google.com; form-action 'self' https://formspree.io; object-src 'none'; base-uri 'self';">
+  <link rel="icon" type="image/png" href="/assets/favicon.png" />
+</head>
+<body class="text-armadilloGray font-inter page-shell min-h-screen">
+  <div class="relative flex flex-col min-h-screen">
+    <header class="relative z-10 max-w-6xl mx-auto px-6 pt-8">
+      <div class="glass-panel nav-shell rounded-2xl px-5 sm:px-8 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div class="flex items-center gap-4">
+          <img src="/assets/irondillo-preview.png" alt="Iron Dillo logo" class="w-14 h-14" />
+          <div>
+            <p class="pill">Veteran-owned</p>
+            <p class="text-offWhite font-semibold text-lg">Iron Dillo Cybersecurity</p>
+            <p class="text-sm text-offWhite/80">Independent cybersecurity consulting for underserved organizations, including rural communities.</p>
+          </div>
+        </div>
+        <nav class="flex flex-wrap items-center gap-3 text-sm">
+          <a href="/index.html" class="text-offWhite font-semibold px-3 py-2 rounded-xl hover:bg-white/10">Home</a>
+          <a href="/services.html" class="text-offWhite font-semibold px-3 py-2 rounded-xl hover:bg-white/10">Services</a>
+          <a href="/about.html" class="text-offWhite font-semibold px-3 py-2 rounded-xl hover:bg-white/10">About</a>
+          <a href="/contact.html" class="text-offWhite font-semibold px-3 py-2 rounded-xl hover:bg-white/10">Contact</a>
+          <a href="tel:19039331342" class="btn-primary text-sm">Call (903) 933-1342</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="relative z-10 max-w-6xl mx-auto px-6 py-10 space-y-8">
+      <section class="glass-panel rounded-3xl p-8 md:p-12 space-y-4">
+        <p class="pill">Private draft section</p>
+        <h1 class="text-4xl font-extrabold text-armadilloBlack">Blog</h1>
+        <p class="text-lg max-w-3xl">This section is ready as a draft area for future public posts. It is intentionally not linked from the homepage navigation yet.</p>
+      </section>
+
+      <section class="glass-panel rounded-3xl p-8 space-y-4">
+        <h2 class="text-2xl font-bold text-armadilloBlack">Planned content</h2>
+        <ul class="list-disc pl-6 space-y-2">
+          <li>Cybersecurity playbooks for rural organizations.</li>
+          <li>Practical incident readiness guidance.</li>
+          <li>Cryptographic resilience updates in plain language.</li>
+        </ul>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
