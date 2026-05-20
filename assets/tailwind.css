@@ -1,0 +1,10 @@
+/*
+ * Generated artifact target for Tailwind CLI output.
+ * In constrained/offline environments this placeholder is committed so
+ * HTML can reference a local static stylesheet path.
+ * Run: npm run build:tailwind
+ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
