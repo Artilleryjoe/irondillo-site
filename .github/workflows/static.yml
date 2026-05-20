@@ -31,6 +31,17 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - name: Install dependencies
+        run: npm install
+      - name: Verify Tailwind CSS is up to date
+        run: |
+          npm run build:tailwind
+          git diff --exit-code -- assets/tailwind.css
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
