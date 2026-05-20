@@ -1,5 +1,7 @@
+# robots.txt provides crawler guidance only; it does not enforce access control.
+# Protect sensitive files using authenticated storage/CDN controls and by keeping them out of public web roots.
 User-agent: *
 Disallow:
 Disallow: /maintenance.html
-Disallow: /assets/QML_Cybersecurity_WhitePaper%20(1).pdf
+
 Sitemap: https://irondillo.com/sitemap.xml
