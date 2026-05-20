@@ -41,3 +41,15 @@ Pushes to the `main` branch trigger the GitHub Actions workflow in `.github/work
 * Inline Tailwind classes control styling; no additional CSS build pipeline is necessary.
 * Forms post through Formspree—update the endpoint in `contact.html` if the integration changes.
 * For any metadata updates (Open Graph, SEO), update the relevant `<meta>` tags across the HTML pages.
+
+## Security headers policy
+
+A single canonical policy is defined in [`_headers`](_headers) and should be deployed at the CDN/proxy layer (Cloudflare Pages/Netlify-style header injection). Apply it to all routes (`/*`) so every page inherits the same baseline controls:
+
+- `Content-Security-Policy: default-src 'self'; script-src 'self' https://cdn.tailwindcss.com https://unpkg.com https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; frame-src https://www.google.com; form-action 'self' https://formspree.io; object-src 'none'; base-uri 'self'; frame-ancestors 'none'`
+- `X-Content-Type-Options: nosniff`
+- `Referrer-Policy: strict-origin-when-cross-origin`
+- `Permissions-Policy: accelerometer=(), camera=(), geolocation=(), gyroscope=(), microphone=(), payment=(), usb=()`
+- `X-Frame-Options: DENY`
+
+If the host cannot set response headers directly (for example, raw GitHub Pages without a proxy/CDN), keep matching `<meta http-equiv=...>` tags in every HTML page as a fallback baseline. When creating new pages, copy the same security meta block so policy stays consistent site-wide.
