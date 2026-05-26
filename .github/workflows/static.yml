@@ -37,7 +37,7 @@ jobs:
           node-version: 20
           cache: npm
       - name: Install dependencies
-        run: npm install
+        run: npm ci
       - name: Verify Tailwind CSS is up to date
         run: |
           npm run build:tailwind
