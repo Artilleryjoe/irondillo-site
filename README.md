@@ -59,6 +59,16 @@ Pushes to the `main` branch trigger the GitHub Actions workflow in `.github/work
 * Forms post through Formspree—update the endpoint in `contact.html` if the integration changes.
 * For any metadata updates (Open Graph, SEO), update the relevant `<meta>` tags across the HTML pages.
 
+### Testimonial updates
+
+When adding or revising testimonials, follow this checklist so updates stay consistent and reviewable:
+
+* Required fields: quote, client name, title/organization, and approval date.
+* Optional anonymization: if requested, replace identifying details with an approved alias (for example, first name + industry) while preserving the approved quote text.
+* Keep quotes exact as approved; only make wording edits when the client explicitly approves changes.
+* Avoid disclosing confidential project specifics, internal security details, or private business information in testimonial copy.
+* Edit location: `index.html` (testimonials section). Styling source: `styles.css` (testimonial-related classes).
+
 ## Security headers policy
 
 A single canonical policy is defined in [`_headers`](_headers) and should be deployed at the CDN/proxy layer (Cloudflare Pages/Netlify-style header injection). Apply it to all routes (`/*`) so every page inherits the same baseline controls:
