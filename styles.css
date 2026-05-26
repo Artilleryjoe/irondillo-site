@@ -136,6 +136,41 @@ body {
   background: #f1eee6;
 }
 
+
+.testimonial-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.testimonial-quote {
+  margin: 0;
+  color: var(--text);
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+.testimonial-quote::before {
+  content: "\201C";
+  color: var(--brand);
+  font-weight: 700;
+  margin-right: 0.25rem;
+}
+
+.testimonial-quote::after {
+  content: "\201D";
+  color: var(--brand);
+  font-weight: 700;
+  margin-left: 0.25rem;
+}
+
+.testimonial-attribution {
+  margin-top: 0.9rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+}
+
 @media (max-width: 768px) {
   .nav-shell {
     border-radius: 18px;
