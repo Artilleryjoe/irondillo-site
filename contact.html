@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="/styles.css">
   <link rel="stylesheet" href="/assets/tailwind.css">
 
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.tailwindcss.com https://unpkg.com https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; frame-src https://www.google.com; form-action 'self' https://formspree.io; object-src 'none'; base-uri 'self'; frame-ancestors 'none';">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.tailwindcss.com https://unpkg.com https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; frame-src https://www.google.com; form-action 'self' mailto:; object-src 'none'; base-uri 'self'; frame-ancestors 'none';">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
   <meta http-equiv="Permissions-Policy" content="accelerometer=(), camera=(), geolocation=(), gyroscope=(), microphone=(), payment=(), usb=()">
@@ -60,7 +60,7 @@
           </div>
         </div>
 
-        <form class="lg:col-span-2 glass-panel rounded-2xl p-6 space-y-4" action="https://formspree.io/f/xldnbpdg" method="POST">
+        <form class="lg:col-span-2 glass-panel rounded-2xl p-6 space-y-4" action="mailto:contact@irondillo.com" method="POST" enctype="text/plain">
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label for="name" class="text-sm font-semibold text-armadilloBlack">Name</label>
@@ -88,11 +88,8 @@
             <textarea required minlength="20" maxlength="2000" name="message" id="message" rows="5" placeholder="Ask a question, describe the issue, or share what you want to protect." class="w-full mt-2 px-4 py-3 rounded-xl border border-armadilloGray/20 focus:outline-none focus:border-oliveGreen"></textarea>
           </div>
                     <input type="text" name="company" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
-          <input type="hidden" name="_next" value="https://irondillo.com/thank-you.html" />
-          <input type="hidden" name="_subject" value="New Iron Dillo contact request" />
-          <input type="hidden" name="_spam_policy" value="honeypot+rate-limit+filter+challenge" />
-          <input type="hidden" name="_validation_profile" value="name:2-80,email:rfc,message:20-2000" />
-          <p class="text-xs text-armadilloGray">No pressure and no hard sell—just practical guidance based on your needs. Spam-prevention controls are active, and blocked submissions are processed according to our Privacy and Terms pages.</p>
+          <input type="hidden" name="subject" value="New Iron Dillo contact request" />
+          <p class="text-xs text-armadilloGray">No pressure and no hard sell—just practical guidance based on your needs. Submitting opens your email app so you can review the message before sending. If the button does not open your email app, email <a href="mailto:contact@irondillo.com" class="text-oliveGreen underline hover:text-oliveDark">contact@irondillo.com</a> directly.</p>
           <div class="flex items-center justify-end">
             <button type="submit" class="btn-primary">Send message</button>
           </div>
