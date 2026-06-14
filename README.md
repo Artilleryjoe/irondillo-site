@@ -10,7 +10,7 @@ Static marketing site for [Iron Dillo Cybersecurity](https://irondillo.com). The
 ├── index.html              # Home page
 ├── services.html           # Overview of offerings
 ├── about.html              # Background and mission statement
-├── contact.html            # Contact form powered by Formspree
+├── contact.html            # Contact form that opens the visitor’s email app
 ├── commitment.html         # Cybersecurity commitment and ethics
 ├── lindale-tyler-cybersecurity.html  # Local services landing page
 ├── privacy.html / terms.html          # Policy documents
@@ -56,7 +56,7 @@ Pushes to the `main` branch trigger the GitHub Actions workflow in `.github/work
 
 * Keep images in `assets/`. Remove unused media so the repository stays lightweight.
 * Inline Tailwind classes control styling; no additional CSS build pipeline is necessary.
-* Forms post through Formspree—update the endpoint in `contact.html` if the integration changes.
+* The contact form uses a `mailto:` action so visitors can review the message in their email app before sending. If a hosted form service is added later, update `contact.html`, the privacy/terms copy, and the `form-action` directives in `_headers` and page-level CSP meta tags.
 * For any metadata updates (Open Graph, SEO), update the relevant `<meta>` tags across the HTML pages.
 
 ### Testimonial updates
@@ -73,7 +73,7 @@ When adding or revising testimonials, follow this checklist so updates stay cons
 
 A single canonical policy is defined in [`_headers`](_headers) and should be deployed at the CDN/proxy layer (Cloudflare Pages/Netlify-style header injection). Apply it to all routes (`/*`) so every page inherits the same baseline controls:
 
-- `Content-Security-Policy: default-src 'self'; script-src 'self' https://cdn.tailwindcss.com https://unpkg.com https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; frame-src https://www.google.com; form-action 'self' https://formspree.io; object-src 'none'; base-uri 'self'; frame-ancestors 'none'`
+- `Content-Security-Policy: default-src 'self'; script-src 'self' https://cdn.tailwindcss.com https://unpkg.com https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; frame-src https://www.google.com; form-action 'self' mailto:; object-src 'none'; base-uri 'self'; frame-ancestors 'none'`
 - `X-Content-Type-Options: nosniff`
 - `Referrer-Policy: strict-origin-when-cross-origin`
 - `Permissions-Policy: accelerometer=(), camera=(), geolocation=(), gyroscope=(), microphone=(), payment=(), usb=()`
