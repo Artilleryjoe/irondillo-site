@@ -6,7 +6,7 @@ module.exports = {
       colors: {
         armadilloBlack: "#16202a",
         armadilloGray: "#52606d",
-        oliveGreen: "#62b6f0",
+        oliveGreen: "#1768ac",
         oliveDark: "#123f68",
         offWhite: "#f8fafb"
       },
