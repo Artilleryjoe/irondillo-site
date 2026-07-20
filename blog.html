@@ -2,9 +2,15 @@
 <html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
-  <title>Blog | Iron Dillo Cybersecurity</title>
-  <meta name="description" content="Technical notes and practical cybersecurity insights from Iron Dillo Cybersecurity." />
+  <title>Practical Cybersecurity Blog | Iron Dillo Cybersecurity</title>
+  <meta name="description" content="Practical cybersecurity guidance for small businesses, rural organizations, and individuals from Iron Dillo Cybersecurity." />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="canonical" href="https://irondillo.com/blog.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Practical Cybersecurity Blog | Iron Dillo Cybersecurity" />
+  <meta property="og:description" content="Clear, useful cybersecurity guidance built for real-world constraints." />
+  <meta property="og:url" content="https://irondillo.com/blog.html" />
+  <meta property="og:image" content="https://irondillo.com/assets/irondillo-preview.png" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/styles.css">
   <link rel="stylesheet" href="/assets/tailwind.css">
@@ -15,18 +21,19 @@
   <div class="relative flex flex-col min-h-screen">
     <header class="relative z-10 max-w-6xl mx-auto px-6 pt-8">
       <div class="glass-panel nav-shell rounded-2xl px-5 sm:px-8 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <div class="flex items-center gap-4">
+        <a href="/index.html" class="flex items-center gap-4" aria-label="Iron Dillo Cybersecurity home">
           <img src="/assets/irondillo-preview.png" alt="Iron Dillo logo" class="w-14 h-14" />
           <div>
             <p class="pill">Veteran-owned</p>
             <p class="text-offWhite font-semibold text-lg">Iron Dillo Cybersecurity</p>
-            <p class="text-sm text-offWhite/80">Independent cybersecurity consulting for underserved organizations, including rural communities.</p>
+            <p class="text-sm text-offWhite/80">Practical security for real-world organizations.</p>
           </div>
-        </div>
-        <nav class="flex flex-wrap items-center gap-3 text-sm">
+        </a>
+        <nav class="flex flex-wrap items-center gap-3 text-sm" aria-label="Primary navigation">
           <a href="/index.html" class="text-offWhite font-semibold px-3 py-2 rounded-xl hover:bg-white/10">Home</a>
           <a href="/services.html" class="text-offWhite font-semibold px-3 py-2 rounded-xl hover:bg-white/10">Services</a>
           <a href="/about.html" class="text-offWhite font-semibold px-3 py-2 rounded-xl hover:bg-white/10">About</a>
+          <a href="/blog.html" aria-current="page" class="text-offWhite font-semibold px-3 py-2 rounded-xl bg-white/10">Blog</a>
           <a href="/contact.html" class="text-offWhite font-semibold px-3 py-2 rounded-xl hover:bg-white/10">Contact</a>
           <a href="tel:19039331342" class="btn-primary text-sm">Call (903) 933-1342</a>
         </nav>
@@ -35,20 +42,37 @@
 
     <main class="relative z-10 max-w-6xl mx-auto px-6 py-10 space-y-8">
       <section class="glass-panel rounded-3xl p-8 md:p-12 space-y-4">
-        <p class="pill">Private draft section</p>
-        <h1 class="text-4xl font-extrabold text-armadilloBlack">Blog</h1>
-        <p class="text-lg max-w-3xl">This section is ready as a draft area for future public posts. It is intentionally not linked from the homepage navigation yet.</p>
+        <p class="pill">Field notes</p>
+        <h1 class="text-4xl md:text-5xl font-extrabold text-armadilloBlack">Practical cybersecurity, clearly explained.</h1>
+        <p class="text-lg leading-relaxed max-w-3xl">Useful guidance for small businesses, rural organizations, and individuals—without fear-based selling or unnecessary complexity.</p>
       </section>
 
-      <section class="glass-panel rounded-3xl p-8 space-y-4">
-        <h2 class="text-2xl font-bold text-armadilloBlack">Planned content</h2>
-        <ul class="list-disc pl-6 space-y-2">
-          <li>Cybersecurity playbooks for rural organizations.</li>
-          <li>Practical incident readiness guidance.</li>
-          <li>Cryptographic resilience updates in plain language.</li>
-        </ul>
+      <section aria-labelledby="latest-post">
+        <h2 id="latest-post" class="text-2xl font-bold text-armadilloBlack mb-4">Latest article</h2>
+        <article class="glass-panel rounded-3xl overflow-hidden grid md:grid-cols-5">
+          <div class="md:col-span-2 bg-armadilloBlack p-8 md:p-10 flex flex-col justify-between min-h-72">
+            <p class="pill">Cybersecurity fundamentals</p>
+            <div>
+              <p class="text-offWhite/70 text-sm">July 20, 2026 · 9 min read</p>
+              <p class="text-offWhite text-xl font-bold mt-3">Start where you are. Protect what matters. Keep improving.</p>
+            </div>
+          </div>
+          <div class="md:col-span-3 p-8 md:p-10 flex flex-col items-start justify-center">
+            <h3 class="text-3xl font-bold text-armadilloBlack leading-tight">Built for the Real World: Practical Cybersecurity for Small Businesses, Rural Organizations, and Individuals</h3>
+            <p class="mt-4 leading-relaxed">A realistic security baseline and the Iron Dillo GRIT model for organizations that need meaningful improvement—not an enterprise program they cannot afford or maintain.</p>
+            <a class="btn-primary mt-6" href="/built-for-the-real-world.html">Read the article <span aria-hidden="true">→</span></a>
+          </div>
+        </article>
       </section>
     </main>
+
+    <footer class="relative z-10 bg-armadilloBlack text-offWhite py-10 mt-auto">
+      <div class="max-w-6xl mx-auto px-6 footer-grid">
+        <div><p class="text-oliveGreen font-semibold mb-2">Iron Dillo Cybersecurity</p><p class="text-sm text-offWhite/80">Veteran-owned independent cybersecurity practice for rural businesses, communities, and families.</p></div>
+        <div><p class="uppercase text-xs tracking-widest text-oliveGreen">Contact</p><a href="tel:19039331342" class="block text-offWhite font-semibold">(903) 933-1342</a><a href="mailto:contact@irondillo.com" class="text-offWhite/80 hover:text-oliveGreen">contact@irondillo.com</a></div>
+        <div class="text-sm text-offWhite/80 space-y-2"><p class="uppercase text-xs tracking-widest text-oliveGreen">Legal</p><div class="flex flex-col gap-1"><a href="/privacy.html" class="hover:text-oliveGreen">Privacy</a><a href="/terms.html" class="hover:text-oliveGreen">Terms</a><a href="/commitment.html" class="hover:text-oliveGreen">Our Commitment</a></div></div>
+      </div>
+    </footer>
   </div>
 </body>
 </html>

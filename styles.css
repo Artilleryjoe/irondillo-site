@@ -136,6 +136,72 @@ body {
   background: #f1eee6;
 }
 
+.blog-article {
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+
+.blog-article > h2 {
+  color: var(--text);
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1.25;
+  margin-top: 2.6rem;
+  margin-bottom: 0.8rem;
+}
+
+.blog-article > h3 {
+  color: var(--text);
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-top: 2rem;
+  margin-bottom: 0.45rem;
+}
+
+.blog-article > p + p {
+  margin-top: 1rem;
+}
+
+.blog-article a:not(.btn-primary):not(.btn-link) {
+  color: var(--brand-strong);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.article-lead {
+  color: var(--text);
+  font-size: 1.25rem;
+  line-height: 1.7;
+}
+
+.article-callout {
+  background: var(--surface-soft);
+  border-left: 4px solid var(--brand);
+  margin: 2rem 0;
+  padding: 1.25rem 1.5rem;
+}
+
+.article-callout p + p {
+  margin-top: 0.4rem;
+}
+
+.article-cta {
+  background: #e8ece7;
+  border: 1px solid #c3cec6;
+}
+
+.article-cta h2 {
+  color: var(--text);
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.article-cta p:not(.pill) {
+  margin-top: 0.8rem;
+}
+
 
 .testimonial-card {
   background: var(--surface);
