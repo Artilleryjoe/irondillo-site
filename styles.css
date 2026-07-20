@@ -1,17 +1,17 @@
 :root {
-  --bg: #edeae3;
-  --surface: #f8f6f1;
-  --surface-soft: #f1eee7;
-  --text: #1f2a24;
-  --muted: #4d5a53;
-  --brand: #3f5c4b;
-  --brand-strong: #2f4739;
-  --border: #d3d0c7;
-  --shadow: 0 10px 24px rgba(21, 29, 24, 0.08);
+  --bg: #e9eef5;
+  --surface: #f8fafc;
+  --surface-soft: #edf3f9;
+  --text: #101c2b;
+  --muted: #4b5d70;
+  --brand: #1768ac;
+  --brand-strong: #0b3d6b;
+  --border: #cbd7e4;
+  --shadow: 0 14px 34px rgba(8, 26, 46, 0.09);
 }
 
 body {
-  background: linear-gradient(180deg, #f6f3ec 0%, #ebe7de 100%);
+  background: linear-gradient(180deg, #f4f7fb 0%, #e6edf5 100%);
   color: var(--muted);
 }
 
@@ -23,7 +23,7 @@ body {
   content: "";
   position: fixed;
   inset: 0;
-  background-image: radial-gradient(circle at 1px 1px, rgba(77, 90, 83, 0.1) 1px, transparent 0);
+  background-image: radial-gradient(circle at 1px 1px, rgba(23, 104, 172, 0.15) 1px, transparent 0);
   background-size: 26px 26px;
   opacity: 0.18;
   pointer-events: none;
@@ -37,9 +37,9 @@ body {
 }
 
 .nav-shell {
-  background: #27362e;
+  background: #0b1726;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 12px 24px rgba(26, 36, 30, 0.3);
+  box-shadow: 0 14px 30px rgba(3, 13, 25, 0.3);
 }
 
 .nav-shell .pill {
@@ -58,8 +58,8 @@ body {
   align-items: center;
   padding: 0.35rem 0.8rem;
   border-radius: 999px;
-  background: #e4e0d6;
-  color: #36453d;
+  background: #dceaf6;
+  color: #164f7f;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   font-size: 0.72rem;
@@ -70,6 +70,50 @@ body {
   background: var(--surface-soft);
   border: 1px solid var(--border);
 }
+
+.home-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(280px, 0.75fr);
+  color: #d7e5f2;
+  background: #091522;
+  border: 1px solid rgba(102, 178, 239, 0.25);
+  box-shadow: 0 24px 60px rgba(4, 17, 31, 0.24);
+}
+
+.home-hero-copy {
+  position: relative;
+  background: radial-gradient(circle at 90% 10%, rgba(31, 125, 204, 0.25), transparent 40%);
+}
+
+.home-hero h1 { color: #f7fbff; }
+.home-hero h1 span { color: #67b7f4; }
+.home-hero .pill { background: rgba(103, 183, 244, 0.13); color: #8dccfa; border: 1px solid rgba(103, 183, 244, 0.24); }
+.home-hero .btn-link { color: #dcefff; text-decoration-color: #3d8cca; }
+
+.home-hero-aside {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background: linear-gradient(155deg, #12365a, #07111d 72%);
+  border-left: 1px solid rgba(129, 194, 244, 0.18);
+}
+
+.signal-orbit { position: relative; width: 150px; height: 150px; margin: 0 auto 2rem; }
+.signal-orbit span { position: absolute; inset: 0; border: 1px solid rgba(113, 190, 246, 0.22); border-radius: 50%; }
+.signal-orbit span:nth-child(2) { inset: 20px; }
+.signal-orbit span:nth-child(3) { inset: 43px; }
+.signal-orbit i { position: absolute; width: 14px; height: 14px; top: 12px; left: 31px; border-radius: 50%; background: #68bcfa; box-shadow: 0 0 28px #46a8ed; }
+.home-hero-kicker { color: #76bff5; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; }
+.home-hero-points { margin-top: 0.75rem; }
+.home-hero-points div { display: grid; grid-template-columns: 2rem 1fr; gap: 0.5rem; padding: 0.7rem 0; border-top: 1px solid rgba(255, 255, 255, 0.1); font-size: 0.82rem; }
+.home-hero-points strong { color: #5eb5f4; }
+
+.texas-story { position: relative; min-height: 390px; background: #07111d; box-shadow: 0 20px 45px rgba(5, 19, 34, 0.18); }
+.texas-story img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 58%; }
+.texas-story::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(5, 15, 27, 0.92) 0%, rgba(5, 20, 35, 0.62) 44%, rgba(5, 15, 27, 0.06) 75%); }
+.texas-story-copy { position: absolute; z-index: 1; left: 0; bottom: 0; color: #dbe9f5; }
+.texas-story-copy h2 { color: #fff; }
+.texas-story .pill { background: rgba(89, 174, 239, 0.18); color: #93d0fc; }
 
 .glass-panel h1,
 .glass-panel h2,
@@ -296,4 +340,10 @@ body {
   .nav-shell {
     border-radius: 18px;
   }
+
+  .home-hero { grid-template-columns: 1fr; }
+  .home-hero-aside { border-left: 0; border-top: 1px solid rgba(129, 194, 244, 0.18); }
+  .signal-orbit { display: none; }
+  .texas-story { min-height: 430px; }
+  .texas-story::after { background: linear-gradient(0deg, rgba(5, 15, 27, 0.94) 0%, rgba(5, 20, 35, 0.32) 70%); }
 }
