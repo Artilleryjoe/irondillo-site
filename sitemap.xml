@@ -32,6 +32,17 @@
     <priority>0.6</priority>
     <changefreq>monthly</changefreq>
   </url>
+  <url>
+    <loc>https://irondillo.com/blog.html</loc>
+    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://irondillo.com/built-for-the-real-world.html</loc>
+    <lastmod>2026-07-20</lastmod>
+    <priority>0.8</priority>
+    <changefreq>yearly</changefreq>
+  </url>
 
   <!-- Legal Pages -->
   <url>
