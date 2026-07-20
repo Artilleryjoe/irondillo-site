@@ -205,25 +205,18 @@ main .glass-panel:not(.site-hero):not(.home-hero):hover {
   gap: 1rem;
 }
 
-.timeline {
-  border-left: 2px solid #9fc4e2;
-  padding-left: 1rem;
+.service-list {
+  list-style: disc;
+  padding-left: 1.5rem;
 }
 
-.timeline-step {
-  position: relative;
-  padding-left: 0.75rem;
+.service-list li {
+  padding-left: 0.25rem;
 }
 
-.timeline-step::before {
-  content: "";
-  position: absolute;
-  left: -1.47rem;
-  top: 0.35rem;
-  width: 10px;
-  height: 10px;
-  border-radius: 999px;
-  background: var(--brand);
+.service-list li::marker {
+  color: var(--brand);
+  font-size: 1.15em;
 }
 
 .btn-primary {
