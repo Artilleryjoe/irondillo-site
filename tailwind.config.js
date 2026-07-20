@@ -7,6 +7,7 @@ module.exports = {
         armadilloBlack: "#16202a",
         armadilloGray: "#52606d",
         oliveGreen: "#1768ac",
+        oliveLight: "#62b6f0",
         oliveDark: "#123f68",
         offWhite: "#f8fafb"
       },
