@@ -43,6 +43,12 @@
     <priority>0.8</priority>
     <changefreq>yearly</changefreq>
   </url>
+  <url>
+    <loc>https://irondillo.com/good-enough-cybersecurity-small-organizations.html</loc>
+    <lastmod>2026-07-27</lastmod>
+    <priority>0.8</priority>
+    <changefreq>yearly</changefreq>
+  </url>
 
   <!-- Legal Pages -->
   <url>
