@@ -6,7 +6,9 @@ Static marketing site for [Iron Dillo Cybersecurity](https://irondillo.com). The
 
 ```
 .
-├── assets/                 # Images, icons, and other static media
+├── assets/                 # Published images, icons, and generated CSS
+├── docs/                   # Project notes and historical reports
+├── src/styles/             # Source files used to build published CSS
 ├── index.html              # Home page
 ├── services.html           # Overview of offerings
 ├── about.html              # Background and mission statement
@@ -21,6 +23,12 @@ Static marketing site for [Iron Dillo Cybersecurity](https://irondillo.com). The
 └── .github/workflows/static.yml       # GitHub Pages deployment workflow
 ```
 
+The HTML entry points intentionally remain at the repository root because GitHub
+Pages maps those filenames directly to the site's public URLs. Moving them into a
+source directory without introducing a site build step would break existing links.
+Development-only material belongs in `docs/` and `src/`, while files referenced by
+the deployed pages retain their existing public paths.
+
 ## Local development
 
 Use any HTTP server to preview the content locally. For example with Python:
@@ -34,7 +42,9 @@ Then browse to <http://localhost:8000> to view the site. Edits to the HTML files
 
 ## Build and deploy guard (Tailwind)
 
-Tailwind output is committed to the repo at `assets/tailwind.css`. Any HTML class changes should be followed by a rebuild so published styles stay in sync.
+The Tailwind source lives at `src/styles/tailwind.css`, and its generated output is
+committed at `assets/tailwind.css`. Any HTML class changes should be followed by a
+rebuild so published styles stay in sync.
 
 Run this local check before pushing:
 
