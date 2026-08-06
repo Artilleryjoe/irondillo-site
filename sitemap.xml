@@ -49,6 +49,12 @@
     <priority>0.8</priority>
     <changefreq>yearly</changefreq>
   </url>
+  <url>
+    <loc>https://irondillo.com/cybersecurity-business-process.html</loc>
+    <lastmod>2026-08-08</lastmod>
+    <priority>0.8</priority>
+    <changefreq>yearly</changefreq>
+  </url>
 
   <!-- Legal Pages -->
   <url>

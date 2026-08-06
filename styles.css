@@ -284,6 +284,20 @@ main .glass-panel:not(.site-hero):not(.home-hero):hover {
   margin-top: 1.25rem;
 }
 
+.blog-article > ul {
+  list-style: disc;
+  margin: 1rem 0 1.75rem;
+  padding-left: 1.75rem;
+}
+
+.blog-article > ul li {
+  padding-left: 0.35rem;
+}
+
+.blog-article > ul li + li {
+  margin-top: 0.55rem;
+}
+
 .blog-article a:not(.btn-primary):not(.btn-link) {
   color: var(--brand-strong);
   font-weight: 600;
@@ -351,6 +365,11 @@ main .glass-panel:not(.site-hero):not(.home-hero):hover {
 
   .article-lead {
     font-size: 1.12rem;
+  }
+
+  .blog-article > ul {
+    margin-bottom: 1.5rem;
+    padding-left: 1.4rem;
   }
 
   .article-callout {
