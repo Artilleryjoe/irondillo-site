@@ -17,7 +17,6 @@ Static marketing site for [Iron Dillo Cybersecurity](https://irondillo.com). The
 ├── lindale-tyler-cybersecurity.html  # Local services landing page
 ├── privacy.html / terms.html          # Policy documents
 ├── maintenance.html        # Temporary maintenance notice page
-├── thank-you.html          # Post-form submission follow-up page
 ├── 404.html                # Custom error page for missing routes
 ├── sitemap.xml / robots.txt
 └── .github/workflows/static.yml       # GitHub Pages deployment workflow
