@@ -284,17 +284,27 @@ main .glass-panel:not(.site-hero):not(.home-hero):hover {
   margin-top: 1.25rem;
 }
 
-.blog-article > ul {
-  list-style: disc;
+.blog-article > ul,
+.blog-article > ol {
   margin: 1rem 0 1.75rem;
   padding-left: 1.75rem;
 }
 
-.blog-article > ul li {
+.blog-article > ul {
+  list-style: disc;
+}
+
+.blog-article > ol {
+  list-style: decimal;
+}
+
+.blog-article > ul li,
+.blog-article > ol li {
   padding-left: 0.35rem;
 }
 
-.blog-article > ul li + li {
+.blog-article > ul li + li,
+.blog-article > ol li + li {
   margin-top: 0.55rem;
 }
 
@@ -367,7 +377,8 @@ main .glass-panel:not(.site-hero):not(.home-hero):hover {
     font-size: 1.12rem;
   }
 
-  .blog-article > ul {
+  .blog-article > ul,
+  .blog-article > ol {
     margin-bottom: 1.5rem;
     padding-left: 1.4rem;
   }
