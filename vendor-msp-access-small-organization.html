@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <title>Who Else Has the Keys? Managing Vendor Access | Iron Dillo</title>
+  <meta name="description" content="Practical guidance for controlling vendor and MSP administrative access without giving away ownership of your systems." />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="Iron Dillo Cybersecurity" />
+  <link rel="canonical" href="https://irondillo.com/vendor-msp-access-small-organization.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Who Else Has the Keys? Managing Vendor and MSP Access in a Small Organization" />
+  <meta property="og:description" content="How small organizations can keep ownership, visibility, and an exit path while vendors manage their technology." />
+  <meta property="og:url" content="https://irondillo.com/vendor-msp-access-small-organization.html" />
+  <meta property="og:image" content="https://irondillo.com/assets/irondillo-preview.png" />
+  <meta property="article:published_time" content="2026-09-10" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Who Else Has the Keys? Managing Vendor and MSP Access in a Small Organization" />
+  <meta name="twitter:description" content="How small organizations can keep ownership, visibility, and an exit path while vendors manage their technology." />
+  <meta name="twitter:image" content="https://irondillo.com/assets/irondillo-preview.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/assets/tailwind.css">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://unpkg.com https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; frame-src https://www.google.com; form-action 'self' mailto:; object-src 'none'; base-uri 'self';">
+  <link rel="icon" type="image/png" href="/assets/favicon.png" />
+</head>
+<body class="sitewide-shell text-armadilloGray font-inter page-shell min-h-screen">
+  <div class="relative flex flex-col min-h-screen">
+    <header class="relative z-10 max-w-6xl mx-auto px-6 pt-8">
+      <div class="glass-panel nav-shell rounded-2xl px-5 sm:px-8 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <a href="/index.html" class="flex items-center gap-4" aria-label="Iron Dillo Cybersecurity home">
+          <img src="/assets/irondillo-preview.png" alt="Iron Dillo logo" class="w-14 h-14" />
+          <div><p class="pill">Veteran-owned</p><p class="text-offWhite font-semibold text-lg">Iron Dillo Cybersecurity</p><p class="text-sm text-offWhite/80">Practical security for real-world organizations.</p></div>
+        </a>
+        <nav class="flex flex-wrap items-center gap-3 text-sm" aria-label="Primary navigation">
+          <a href="/index.html" class="text-offWhite font-semibold px-3 py-2 rounded-xl hover:bg-white/10">Home</a><a href="/services.html" class="text-offWhite font-semibold px-3 py-2 rounded-xl hover:bg-white/10">Services</a><a href="/about.html" class="text-offWhite font-semibold px-3 py-2 rounded-xl hover:bg-white/10">About</a><a href="/blog.html" aria-current="page" class="text-offWhite font-semibold px-3 py-2 rounded-xl bg-white/10">Blog</a><a href="/contact.html" class="text-offWhite font-semibold px-3 py-2 rounded-xl hover:bg-white/10">Contact</a><a href="tel:19039331342" class="btn-primary text-sm">Call (903) 933-1342</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-10 md:py-14">
+      <article class="glass-panel rounded-3xl p-6 sm:p-10 md:p-14 blog-article">
+        <header class="blog-article-header border-b border-gray-300 pb-8 md:pb-10 mb-9 md:mb-12">
+          <a href="/blog.html" class="btn-link text-sm">← Back to the blog</a>
+          <p class="pill mt-6">Field Notes No. 6 · Vendor access</p>
+          <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-armadilloBlack mt-5 leading-tight">Who Else Has the Keys? Managing Vendor and MSP Access in a Small Organization</h1>
+          <p class="text-lg sm:text-xl leading-relaxed mt-6">Outside experts can run important technology without quietly becoming the only people who can control, recover, or transfer it.</p>
+          <p class="text-sm mt-6"><time datetime="2026-09-10">September 10, 2026</time> · 12 min read · Iron Dillo Cybersecurity</p>
+        </header>
+
+        <aside class="article-callout">
+          <p class="font-bold text-armadilloBlack">Related reading</p>
+          <ul class="list-disc pl-5 mt-2 space-y-2">
+            <li><a href="/account-recovery-primary-email-gone.html">The Account Recovery Trap: Can You Regain Control When Your Primary Email Is Gone?</a></li>
+            <li><a href="/cybersecurity-business-process.html">Cybersecurity Is a Business Process, Not an IT Project</a></li>
+            <li><a href="/good-enough-cybersecurity-small-organizations.html">What Does “Good Enough” Cybersecurity Look Like for a Small Organization?</a></li>
+          </ul>
+        </aside>
+
+        <p class="article-lead">A trusted technology provider may know more about your systems than anyone on your payroll. That can be useful. It should not make the provider the owner of your business technology.</p>
+        <p>Small organizations often depend on managed service providers, software consultants, website developers, alarm companies, accountants, copier vendors, and industry-specific support teams. These partners may need powerful access to keep systems running. Over time, however, temporary access becomes permanent, individual accounts become shared passwords, and services get registered under a vendor's name because that was the fastest way to finish a project.</p>
+        <p>The arrangement may work for years. The weakness appears when an account is compromised, the relationship deteriorates, a provider closes, or the one technician who understood everything leaves. The organization then discovers that it cannot sign in, contact support, restore a backup, renew a domain, or even identify what the vendor controlled.</p>
+        <aside class="article-callout"><p class="font-bold text-armadilloBlack">A vendor can manage your systems without becoming the owner of your systems.</p></aside>
+
+        <h2>Administrative access is not the same as ownership</h2>
+        <p>A provider needs enough authority to perform the work you hired it to do. That may include deploying software, supporting users, maintaining a firewall, reviewing alerts, or restoring data. It does not automatically need exclusive control of the cloud tenant, domain, billing relationship, licenses, recovery methods, or every administrator account.</p>
+        <p>Ownership means the organization is recognized as the customer, can see what it is paying for, has an independent route to support, and can authorize another qualified party to take over. Management means a provider uses delegated access to deliver a defined service. Keeping those roles separate is not a sign of distrust. It is basic continuity planning.</p>
+        <p>Contracts help, but technical reality matters too. A document saying the organization owns its data is of limited use during an outage if the only global administrator and MFA device belong to the vendor.</p>
+
+        <h2>Begin with a vendor-access inventory</h2>
+        <p>Start by asking a direct question: <strong>Which outside organizations and people can make consequential changes?</strong> Look beyond the MSP. Include software vendors, consultants, contractors, web developers, payment and payroll support, physical-security installers, former providers, and anyone offering remote support.</p>
+        <p>For each vendor, document:</p>
+        <ul>
+          <li>the service provided, business owner, and vendor contact;</li>
+          <li>the systems, sites, devices, and data the vendor can reach;</li>
+          <li>the accounts and roles used, including remote-management tools;</li>
+          <li>the authentication method, MFA owner, and recovery path;</li>
+          <li>when access was approved, last reviewed, and expected to end;</li>
+          <li>where activity logs and configuration records can be found; and</li>
+          <li>what operations could fail if the access were disabled.</li>
+        </ul>
+        <p>This does not need to become an enterprise database. A protected spreadsheet or register with a responsible owner can be enough. Do not place live passwords in it; keep credentials in an organizational password manager or other approved credential system.</p>
+        <p>The inventory should cover indirect access too. A vendor may not have an account in the email tenant but may control a remote-management platform that can run commands on every computer. Another may control DNS and redirect email or web traffic. Access should be measured by what it can accomplish, not only by the label on the account.</p>
+
+        <h2>Use named accounts instead of one shared “admin”</h2>
+        <p>Every person performing administrative work should normally use an identifiable account. Named accounts make it possible to grant the right role, require MFA, review activity, and remove one person's access without disrupting everyone else.</p>
+        <p>A shared administrator login creates ambiguity. When a setting changes, the log may show only “admin.” When a technician leaves the vendor, the organization must trust that the password was changed everywhere and that no saved copy remains. Shared MFA adds another problem: the approval prompt or recovery code may be routed to a phone, inbox, or vault the organization cannot see.</p>
+        <p>Some older systems support only one local administrator. When that limitation cannot be removed, document it, keep the credential in a controlled vault, rotate it after personnel or provider changes, and use compensating records such as work tickets and device logs. A product limitation may explain shared access; it should not make shared access opaque.</p>
+        <p>Vendor personnel should not use an employee's identity. Likewise, daily user accounts should not carry administrative privilege simply because it is convenient. Separate routine work from privileged work and grant only the roles needed for the service.</p>
+
+        <h2>Retain an organizational administrator account</h2>
+        <p>The organization should retain protected administrative access to critical services even when the provider handles daily operations. At least two authorized people should know that access exists and how to retrieve it under an approved process. That does not mean the owner should casually use a global administrator account for email and web browsing.</p>
+        <p>Emergency or owner access should use a unique credential, strong provider-supported authentication, and monitoring. Store recovery materials securely and independently from the system they recover. Test access periodically without making unnecessary production changes. Any use should generate an alert or review.</p>
+        <p>Be precise about what organizational access can do. A billing login may not administer users. A portal contact may not restore data. A reseller relationship may prevent direct support from the underlying provider. Confirm the account and role in the actual system rather than accepting a screenshot or an assurance that “you are listed.”</p>
+
+        <h2>Know who owns the control points</h2>
+        <p>A handful of systems can determine whether the organization remains operational and recoverable. Record each provider, account identifier, legal customer, billing contact, renewal method, primary administrator, and recovery process.</p>
+        <ul>
+          <li><strong>Domain and DNS:</strong> The domain should be registered to the organization with current organizational contact and payment details. The organization should know the registrar and DNS host.</li>
+          <li><strong>Email, identity, and cloud tenant:</strong> Confirm the tenant belongs to the organization and that it retains an administrator and an independent recovery path.</li>
+          <li><strong>Backups:</strong> Know where they are stored, who can delete them, how retention is configured, and whether restoration is possible without the incumbent provider.</li>
+          <li><strong>Licenses and subscriptions:</strong> Understand whether licenses are owned, leased, or bundled through a reseller and what happens to them at termination.</li>
+          <li><strong>MFA and recovery:</strong> Identify whose devices, phone numbers, addresses, security keys, and vaults hold the second factor or recovery codes.</li>
+          <li><strong>Network and security tools:</strong> Preserve current configurations, diagrams, encryption or recovery keys, warranty details, and vendor support information.</li>
+        </ul>
+        <p>An invoice is not always proof of technical control, and technical access is not always proof of legal ownership. Preserve both.</p>
+
+        <h2>Design access so it can be disabled safely</h2>
+        <p>Ask what would happen if you disabled the vendor's access today. If backups stop, security monitoring fails, licenses expire, employees cannot sign in, or nobody can administer the firewall, access and operations are too tightly coupled.</p>
+        <p>The goal is not a dramatic cutoff test in the middle of the workday. Map dependencies first. Separate vendor user accounts from service accounts, and identify automations that depend on vendor credentials. Service accounts should have a documented purpose, owner, credential location, rotation procedure, and replacement plan. Do not use a former technician's personal account to run a permanent business process.</p>
+        <p>Where platforms allow it, use time-limited or approval-based privileged access. Disable dormant accounts rather than leaving them available “just in case.” Restrict remote access to the systems and times needed, require MFA, and preserve logs somewhere the vendor cannot unilaterally erase.</p>
+        <aside class="article-callout"><p class="font-bold text-armadilloBlack">If removing a vendor account breaks the business, it is not merely an account. It is an undocumented dependency.</p></aside>
+
+        <h2>Plan the exit while the relationship is healthy</h2>
+        <p>Every vendor relationship ends eventually through a planned transition, acquisition, retirement, closure, performance problem, or emergency. Define the transition before pressure is high.</p>
+        <p>An offboarding plan should identify what the provider must return or transfer: administrator roles, credentials, configurations, diagrams, inventories, logs, backup data, encryption keys, licenses, warranties, open tickets, and support contacts. It should explain the format and timing of data exports, reasonable transition assistance, deletion of retained copies, final billing, and verification that remote tools and accounts were removed.</p>
+        <p>Confirm what will not transfer. A vendor may use its own ticketing, monitoring, backup, security, or documentation platform across many customers. The organization may receive its records rather than the platform itself. Knowing this early provides time to arrange replacements.</p>
+        <p>During a transition, coordinate changes instead of immediately deleting everything. Inventory service accounts and dependencies, create and test replacement access, export required records, rotate shared secrets, remove remote agents where appropriate, revoke sessions and tokens, and then review logs for unexpected activity. Keep a record of what was completed and who approved it.</p>
+
+        <h2>Create an escalation path that does not depend on one person</h2>
+        <p>Record the provider's normal support route, emergency number, after-hours process, service address, contract contact, and escalation point. Keep this information somewhere available during an email, internet, or identity outage. The vendor should also have more than one current authorized contact for the organization.</p>
+        <p>Identify what happens if the provider cannot be reached. Who can contact the software publisher, cloud provider, ISP, insurer, equipment manufacturer, or another qualified technician? Are customer or tenant numbers available? Can the organization prove it owns the account? Is there a current network diagram and a protected configuration backup?</p>
+        <p>A secondary provider does not need standing administrator access merely to be an emergency option. It needs a clear authorization process and enough maintained information to begin responsibly when called.</p>
+
+        <h2>Review access as a recurring business process</h2>
+        <p>Vendor access changes when projects finish, people change jobs, systems are retired, and contracts evolve. Review privileged vendor access at least periodically and after significant personnel, provider, or technology changes.</p>
+        <p>The review should bring together a business owner and someone who understands the technology. Confirm that each vendor is still engaged, each named user still works for the provider, each role is still necessary, MFA remains appropriate, and contact and recovery information is current. Investigate dormant accounts, unexpected logins, new remote tools, and privileges broader than the work requires.</p>
+        <p>Do not make the review a search for someone to blame. Treat findings as maintenance. Remove what is no longer needed, narrow what is too broad, document legitimate exceptions, and set a date to revisit them. As explained in <a href="/cybersecurity-business-process.html">Cybersecurity Is a Business Process, Not an IT Project</a>, ownership and repeatable routines matter more than a one-time cleanup.</p>
+
+        <h2>What a healthy vendor relationship looks like</h2>
+        <p>A capable provider should be able to explain what it can access, how its staff authenticate, how personnel changes are handled, where activity is logged, and how the organization can recover or transition. Reasonable questions about ownership and offboarding should not be treated as hostility.</p>
+        <p>The organization also has responsibilities. It should maintain current contacts, approve changes promptly, protect its own administrator access, pay for necessary documentation and transition work, and avoid demanding insecure shortcuts. Good governance supports the provider rather than obstructing it.</p>
+        <p>Trust and verification belong together. The objective is a relationship in which the provider can work efficiently while the organization retains visibility, authority, and a practical way forward.</p>
+
+        <h2>Apply GRIT</h2>
+        <ul>
+          <li><strong>Growth:</strong> Use every new service, contract renewal, and vendor change to improve the access inventory.</li>
+          <li><strong>Resilience:</strong> Keep organizational administrator access, recovery information, and critical records independent of any one provider.</li>
+          <li><strong>Instinct:</strong> Question shared accounts, unknown remote tools, unexplained MFA prompts, and services registered to somebody else.</li>
+          <li><strong>Tenacity:</strong> Review access, contacts, documentation, and exit procedures until they become routine.</li>
+        </ul>
+
+        <h2>A practical vendor-access checklist</h2>
+        <p>Can your organization confidently say:</p>
+        <ul>
+          <li>We know which vendors and individuals have administrative or remote access.</li>
+          <li>Vendor technicians use named accounts with appropriate roles and MFA.</li>
+          <li>We retain protected organizational administrator access to critical systems.</li>
+          <li>Our organization owns its domain, cloud tenant, data, backups, and essential records.</li>
+          <li>We know who controls licenses, MFA methods, recovery codes, and billing relationships.</li>
+          <li>We can disable vendor access without accidentally stopping undocumented services.</li>
+          <li>Our contract and technical plan explain how access and information transfer at the end.</li>
+          <li>We have an independently accessible emergency contact and escalation path.</li>
+          <li>Someone reviews vendor access and resolves what is no longer necessary.</li>
+        </ul>
+        <p>If one answer is no, begin with the domain, email or identity tenant, backups, and remote-management system. Those control points can affect nearly everything else.</p>
+
+        <h2>Keep the help; keep the keys</h2>
+        <p>Small organizations do not need to bring every technical skill in-house. A good vendor or MSP can provide depth, continuity, and experience that would otherwise be out of reach. The lesson is not to distrust outside help.</p>
+        <p>The lesson is to remain a capable owner. Know who has access, give each person only what is needed, retain an independent route back in, preserve the records required to recover, and make the exit path part of the relationship from the beginning.</p>
+
+        <section class="article-cta rounded-2xl p-7 md:p-9">
+          <p class="pill">Keep control of what you own</p>
+          <h2 class="mt-3">Make vendor access useful, visible, and removable.</h2>
+          <p>Iron Dillo Cybersecurity helps small businesses and rural organizations inventory third-party access, protect critical ownership and recovery paths, and build practical vendor transition plans.</p>
+          <a class="btn-primary mt-5" href="/contact.html">Start a conversation</a>
+        </section>
+      </article>
+    </main>
+
+    <footer class="relative z-10 bg-armadilloBlack text-offWhite py-10 mt-auto"><div class="max-w-6xl mx-auto px-6 footer-grid"><div><p class="text-oliveLight font-semibold mb-2">Iron Dillo Cybersecurity</p><p class="text-sm text-offWhite/80">Veteran-owned independent cybersecurity practice for rural businesses, communities, and families.</p></div><div><p class="uppercase text-xs tracking-widest text-oliveLight">Contact</p><a href="tel:19039331342" class="block text-offWhite font-semibold">(903) 933-1342</a><a href="mailto:contact@irondillo.com" class="text-offWhite/80 hover:text-oliveLight">contact@irondillo.com</a></div><div class="text-sm text-offWhite/80 space-y-2"><p class="uppercase text-xs tracking-widest text-oliveLight">Legal</p><div class="flex flex-col gap-1"><a href="/privacy.html" class="hover:text-oliveLight">Privacy</a><a href="/terms.html" class="hover:text-oliveLight">Terms</a><a href="/commitment.html" class="hover:text-oliveLight">Our Commitment</a></div></div></div></footer>
+  </div>
+</body>
+</html>
