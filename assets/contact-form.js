@@ -35,8 +35,16 @@
 
     button.disabled = true;
     status.textContent = "Sending…";
-    const data = Object.fromEntries(new FormData(form));
-    data.turnstileToken = token;
+    const formData = new FormData(form);
+    const data = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      phone: formData.get("phone"),
+      urgency: formData.get("urgency"),
+      message: formData.get("message"),
+      company: formData.get("company"),
+      turnstileToken: token,
+    };
 
     try {
       const response = await fetch("/api/contact", {
