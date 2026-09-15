@@ -65,7 +65,14 @@ Pushes to the `main` branch trigger the GitHub Actions workflow in `.github/work
 
 * Keep images in `assets/`. Remove unused media so the repository stays lightweight.
 * Inline Tailwind classes control styling; no additional CSS build pipeline is necessary.
-* The contact form uses local JavaScript to validate its fields and safely construct a `mailto:` draft, so visitors can review the message in their email app before sending and the site never receives or stores their details. If a hosted form service is added later, update `contact.html`, the privacy/terms copy, and the `form-action` directives in `_headers` and page-level CSP meta tags.
+### Contact-form data flow
+
+* Collected fields are name, email address, optional phone number, urgency, message, and a hidden anti-bot field that should remain empty. They are used to create and respond to an inquiry, understand its urgency, prevent abuse, and, where appropriate, begin a requested service conversation.
+* Local JavaScript performs validation, formatting, and the honeypot bot check, then creates a `mailto:` draft for the visitor to review. There is currently no hosted form processor or third-party bot-protection provider, so those provider categories do not receive the form fields.
+* Once the visitor sends the draft, the visitor’s email provider and Iron Dillo’s email provider process the fields and delivery metadata. The hosting/infrastructure provider may separately process IP addresses and standard request, error, and security-log data to deliver, troubleshoot, and protect the site.
+* Inquiry email is retained only as reasonably needed for the response, business/security records, disputes, and legal obligations, then deleted under normal mailbox practices; provider backups and security logs expire on provider schedules. Records connected to an engagement may be retained longer when legal, tax, insurance, contractual, or professional requirements apply.
+* A visitor may email `contact@irondillo.com` to request access, correction, or deletion of contact information held by Iron Dillo. Identity may need to be verified, and information subject to legal or legitimate recordkeeping/security needs may be retained. Requests for data controlled by a visitor’s own provider must go to that provider.
+* If the form, email, hosting/logging, or bot-protection implementation changes, update `contact.html`, `privacy.html`, `terms.html`, this section, and the `form-action`/related directives in `_headers` and page-level CSP meta tags before deployment.
 * For any metadata updates (Open Graph, SEO), update the relevant `<meta>` tags across the HTML pages.
 
 ### Testimonial updates
