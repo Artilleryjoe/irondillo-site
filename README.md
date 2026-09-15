@@ -65,7 +65,7 @@ The production Cloudflare Pages project should deploy the repository from `main`
 
 * Keep images in `assets/`. Remove unused media so the repository stays lightweight.
 * Inline Tailwind classes control styling; no additional CSS build pipeline is necessary.
-* The contact form posts URL-encoded data to FormSubmit over HTTPS. JavaScript enhances the form with in-page progress and result messages; ordinary HTML submission remains available without JavaScript. Keep `contact.html`, the privacy copy, and the `connect-src`/`form-action` directives in `_headers` and the page-level CSP aligned if the processor changes.
+* The contact form uses local JavaScript to validate its fields and safely construct a `mailto:` draft, so visitors can review the message in their email app before sending and the site never receives or stores their details. Opening the draft transfers those details to the visitor's email app; webmail and draft synchronization may give the email provider access before the visitor sends the message. If a hosted form service is added later, update `contact.html`, the privacy/terms copy, and the `form-action` directives in `_headers` and page-level CSP meta tags.
 * For any metadata updates (Open Graph, SEO), update the relevant `<meta>` tags across the HTML pages.
 
 ### Testimonial updates
