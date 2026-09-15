@@ -3,45 +3,57 @@
 
   const form = document.getElementById("contact-form");
   const status = document.getElementById("form-status");
+  const button = form?.querySelector('button[type="submit"]');
+  let widgetId;
 
-  if (!form || !status) return;
+  if (!form || !status || !button) return;
 
-  const clean = (value) => value.replace(/[\u0000\r]/g, "").trim();
+  window.onTurnstileLoad = async () => {
+    try {
+      const response = await fetch("/api/contact-config", { credentials: "same-origin" });
+      if (!response.ok) throw new Error();
+      const config = await response.json();
+      widgetId = window.turnstile.render("#turnstile-widget", { sitekey: config.turnstileSiteKey });
+      button.disabled = false;
+    } catch {
+      status.textContent = "The form is temporarily unavailable. Please email us directly.";
+    }
+  };
 
-  form.addEventListener("submit", (event) => {
+  form.addEventListener("submit", async (event) => {
     event.preventDefault();
-
     if (!form.reportValidity()) {
       status.textContent = "Please check the highlighted fields before continuing.";
       return;
     }
 
-    const data = new FormData(form);
-
-    // Silently discard automated submissions that fill the hidden honeypot.
-    if (clean(String(data.get("company") || ""))) {
-      form.reset();
-      status.textContent = "Thanks. Your message is ready for review.";
+    const token = window.turnstile?.getResponse(widgetId);
+    if (!token) {
+      status.textContent = "Please complete the verification challenge.";
       return;
     }
 
-    const name = clean(String(data.get("name") || ""));
-    const email = clean(String(data.get("email") || ""));
-    const phone = clean(String(data.get("phone") || "")) || "Not provided";
-    const urgency = clean(String(data.get("urgency") || "General question"));
-    const message = clean(String(data.get("message") || ""));
-    const body = [
-      `Name: ${name}`,
-      `Reply email: ${email}`,
-      `Phone: ${phone}`,
-      `Urgency: ${urgency}`,
-      "",
-      "How can we help?",
-      message,
-    ].join("\n");
-    const mailto = `mailto:contact@irondillo.com?subject=${encodeURIComponent("New Iron Dillo contact request")}&body=${encodeURIComponent(body)}`;
+    button.disabled = true;
+    status.textContent = "Sending…";
+    const data = Object.fromEntries(new FormData(form));
+    data.turnstileToken = token;
 
-    status.textContent = "Opening a private draft in your email app…";
-    window.location.assign(mailto);
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        credentials: "same-origin",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      if (!response.ok) throw new Error();
+      form.reset();
+      window.turnstile.reset(widgetId);
+      status.textContent = "Thanks. Your message was sent.";
+    } catch {
+      window.turnstile.reset(widgetId);
+      status.textContent = "We could not send your message. Please try again later or email us directly.";
+    } finally {
+      button.disabled = false;
+    }
   });
 })();

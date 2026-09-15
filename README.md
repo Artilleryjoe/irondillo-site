@@ -1,6 +1,6 @@
 # Iron Dillo Cybersecurity Site
 
-Static marketing site for [Iron Dillo Cybersecurity](https://irondillo.com). The project is a collection of hand-crafted HTML pages with a generated Tailwind output (`assets/tailwind.css`) deployed through GitHub Pages.
+Marketing site for [Iron Dillo Cybersecurity](https://irondillo.com). The project contains hand-crafted HTML pages, a generated Tailwind output (`assets/tailwind.css`), and a Cloudflare Pages Function for the contact form.
 
 ## Repository layout
 
@@ -12,7 +12,10 @@ Static marketing site for [Iron Dillo Cybersecurity](https://irondillo.com). The
 ├── index.html              # Home page
 ├── services.html           # Overview of offerings
 ├── about.html              # Background and mission statement
-├── contact.html            # Contact form that opens the visitor’s email app
+├── contact.html            # Contact form submitted to a Pages Function
+├── functions/api/          # Cloudflare Pages Function entry points
+├── server/                 # Testable server-side contact handler
+├── test/                   # Node endpoint tests
 ├── commitment.html         # Cybersecurity commitment and ethics
 ├── lindale-tyler-cybersecurity.html  # Local services landing page
 ├── privacy.html / terms.html          # Policy documents
@@ -55,17 +58,28 @@ git diff --exit-code -- assets/tailwind.css
 
 If the diff command reports changes, commit the regenerated `assets/tailwind.css` before opening or merging a PR.
 
-The GitHub Pages workflow also enforces this: deploy will fail if `npm run build:tailwind` produces changes that are not committed.
+The GitHub Actions validation workflow also enforces this and fails when the generated CSS is not committed.
 
 ## Deployment
 
-Pushes to the `main` branch trigger the GitHub Actions workflow in `.github/workflows/static.yml`, which publishes the repository to GitHub Pages. Ensure changes are committed and merged into `main` to update the live site.
+The production Cloudflare Pages project should deploy the repository from `main`; Pages Functions are required for `/api/contact`. GitHub Actions runs the build and endpoint tests as a deployment guard. Configure the secrets and binding below in the Pages project before enabling the form.
 
 ## Content guidelines
 
 * Keep images in `assets/`. Remove unused media so the repository stays lightweight.
 * Inline Tailwind classes control styling; no additional CSS build pipeline is necessary.
-* The contact form uses local JavaScript to validate its fields and safely construct a `mailto:` draft, so visitors can review the message in their email app before sending and the site never receives or stores their details. If a hosted form service is added later, update `contact.html`, the privacy/terms copy, and the `form-action` directives in `_headers` and page-level CSP meta tags.
+* The contact form posts JSON to `/api/contact`. The server independently validates every field, applies Cloudflare rate limiting and Turnstile verification, and delivers plain-text mail through Resend. Visitor values are never used to construct mail headers.
+
+### Contact endpoint deployment
+
+Deploy the site with Cloudflare Pages and configure these server-side secrets and bindings (never expose them in client code):
+
+* `TURNSTILE_SECRET_KEY`: the Turnstile secret for `irondillo.com`.
+* `TURNSTILE_SITE_KEY`: the corresponding public site key, exposed through `/api/contact-config`.
+* `RESEND_API_KEY`: an API key authorized to send from the verified `irondillo.com` domain.
+* `CONTACT_RATE_LIMITER`: a Cloudflare Rate Limiting binding. A recommended starting threshold is five submissions per IP per ten minutes, adjusted using aggregate operational metrics rather than message contents.
+
+`PRODUCTION_ORIGIN` may override the default `https://irondillo.com` origin for a controlled deployment. The Origin check is only browser defense in depth; Turnstile and rate limiting remain mandatory. Configure the provider so `contact-form@irondillo.com` is an authenticated sender (SPF, DKIM, and DMARC), and do not log request bodies.
 * For any metadata updates (Open Graph, SEO), update the relevant `<meta>` tags across the HTML pages.
 
 ### Testimonial updates
@@ -82,7 +96,7 @@ When adding or revising testimonials, follow this checklist so updates stay cons
 
 A single canonical policy is defined in [`_headers`](_headers) and should be deployed at the CDN/proxy layer (Cloudflare Pages/Netlify-style header injection). Apply it to all routes (`/*`) so every page inherits the same baseline controls:
 
-- `Content-Security-Policy: default-src 'self'; script-src 'self' https://cdn.tailwindcss.com https://unpkg.com https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; frame-src https://www.google.com; form-action 'self' mailto:; object-src 'none'; base-uri 'self'; frame-ancestors 'none'`
+- The canonical policy is in `_headers`. It permits the Turnstile script, frame, and verification connection only to `https://challenges.cloudflare.com`, and restricts form submissions to this origin.
 - `X-Content-Type-Options: nosniff`
 - `Referrer-Policy: strict-origin-when-cross-origin`
 - `Permissions-Policy: accelerometer=(), camera=(), geolocation=(), gyroscope=(), microphone=(), payment=(), usb=()`
