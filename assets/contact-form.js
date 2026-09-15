@@ -8,7 +8,9 @@
 
   const clean = (value) => value.replace(/[\u0000\r]/g, "").trim();
 
-  form.addEventListener("submit", (event) => {
+  const submitButton = form.querySelector('button[type="submit"]');
+
+  form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
     if (!form.reportValidity()) {
@@ -18,30 +20,54 @@
 
     const data = new FormData(form);
 
-    // Silently discard automated submissions that fill the hidden honeypot.
-    if (clean(String(data.get("company") || ""))) {
-      form.reset();
-      status.textContent = "Thanks. Your message is ready for review.";
+    // Do not send automated submissions that fill the hidden honeypot.
+    if (clean(String(data.get("_honey") || ""))) {
+      status.textContent = "Your message could not be submitted. Please check the form and try again.";
       return;
     }
 
-    const name = clean(String(data.get("name") || ""));
-    const email = clean(String(data.get("email") || ""));
-    const phone = clean(String(data.get("phone") || "")) || "Not provided";
-    const urgency = clean(String(data.get("urgency") || "General question"));
-    const message = clean(String(data.get("message") || ""));
-    const body = [
-      `Name: ${name}`,
-      `Reply email: ${email}`,
-      `Phone: ${phone}`,
-      `Urgency: ${urgency}`,
-      "",
-      "How can we help?",
-      message,
-    ].join("\n");
-    const mailto = `mailto:contact@irondillo.com?subject=${encodeURIComponent("New Iron Dillo contact request")}&body=${encodeURIComponent(body)}`;
+    const body = new URLSearchParams();
+    data.forEach((value, key) => body.append(key, clean(String(value))));
 
-    status.textContent = "Opening a private draft in your email app…";
-    window.location.assign(mailto);
+    if (submitButton) submitButton.disabled = true;
+    status.textContent = "Sending your message…";
+
+    try {
+      const response = await fetch(form.action, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+        },
+        body: body.toString(),
+      });
+
+      if (!response.ok) {
+        status.textContent = response.status >= 400 && response.status < 500
+          ? "Your message was not accepted. Please check the fields and try again."
+          : "The form service is temporarily unavailable. Please try again or use the email alternative.";
+        return;
+      }
+
+      let result;
+      try {
+        result = await response.json();
+      } catch {
+        status.textContent = "The form service could not confirm delivery. Please try again or use the email alternative.";
+        return;
+      }
+
+      if (result.success !== true && result.success !== "true") {
+        status.textContent = "The form service could not confirm delivery. Please try again or use the email alternative.";
+        return;
+      }
+
+      form.reset();
+      status.textContent = "Thanks—your message was sent successfully. We’ll be in touch soon.";
+    } catch {
+      status.textContent = "We couldn’t reach the form service. Check your connection and try again, or use the email alternative.";
+    } finally {
+      if (submitButton) submitButton.disabled = false;
+    }
   });
 })();
