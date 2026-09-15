@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="/styles.css">
   <link rel="stylesheet" href="/assets/tailwind.css">
 
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.tailwindcss.com https://unpkg.com https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; frame-src https://www.google.com; form-action 'self' mailto:; object-src 'none'; base-uri 'self'; frame-ancestors 'none';">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.tailwindcss.com https://unpkg.com https://www.google.com https://www.gstatic.com https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; frame-src https://www.google.com https://challenges.cloudflare.com; connect-src 'self' https://challenges.cloudflare.com; form-action 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none';">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
   <meta http-equiv="Permissions-Policy" content="accelerometer=(), camera=(), geolocation=(), gyroscope=(), microphone=(), payment=(), usb=()">
@@ -61,7 +61,7 @@
           </div>
         </div>
 
-        <form id="contact-form" class="lg:col-span-2 glass-panel rounded-2xl p-6 space-y-4" action="mailto:contact@irondillo.com" method="POST" enctype="text/plain">
+        <form id="contact-form" class="lg:col-span-2 glass-panel rounded-2xl p-6 space-y-4" action="/api/contact" method="POST">
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label for="name" class="text-sm font-semibold text-armadilloBlack">Name</label>
@@ -92,11 +92,11 @@
           <div class="sr-only" aria-hidden="true">
             <input type="text" name="company" id="company" tabindex="-1" autocomplete="off" />
           </div>
-          <p class="text-xs text-armadilloGray"><strong>Your form fields stay in your browser until you send the email.</strong> The button creates a properly formatted draft in your email app for you to review. Once sent, the message is handled by your email provider and ours as described in the Privacy Policy. If no draft opens, email <a href="mailto:contact@irondillo.com" class="text-oliveGreen underline hover:text-oliveDark">contact@irondillo.com</a> directly.</p>
+          <div id="turnstile-widget"></div>
+          <p class="text-xs text-armadilloGray">Your details are sent securely so we can respond to your request. If the form is unavailable, email <a href="mailto:contact@irondillo.com" class="text-oliveGreen underline hover:text-oliveDark">contact@irondillo.com</a> directly.</p>
           <p id="form-status" class="text-sm font-semibold text-armadilloGray" role="status" aria-live="polite"></p>
-          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-            <p class="text-xs text-armadilloGray">By continuing, you acknowledge our <a href="/privacy.html" class="text-oliveGreen underline hover:text-oliveDark">Privacy Policy</a>.</p>
-            <button type="submit" class="btn-primary">Send message</button>
+          <div class="flex items-center justify-end">
+            <button type="submit" class="btn-primary" disabled>Send message</button>
           </div>
         </form>
       </section>
@@ -125,5 +125,6 @@
     </footer>
   </div>
   <script src="/assets/contact-form.js" defer></script>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onTurnstileLoad&amp;render=explicit" defer></script>
 </body>
 </html>

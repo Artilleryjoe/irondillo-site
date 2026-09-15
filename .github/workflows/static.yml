@@ -1,4 +1,4 @@
-name: Deploy to Cloudflare Pages
+name: Validate site
 
 on:
   push:
@@ -9,22 +9,11 @@ permissions:
   contents: read
 
 concurrency:
-  group: cloudflare-pages-production
-  cancel-in-progress: false
+  group: "validate-${{ github.ref }}"
+  cancel-in-progress: true
 
 jobs:
-  https-preflight:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v5
-      - name: Confirm production names are HTTPS-capable before publishing HSTS
-        run: |
-          CHECK_HEADERS=false ./scripts/smoke-production.sh
-          CHECK_HEADERS=false DOMAIN=www.irondillo.com ./scripts/smoke-production.sh
-
-  deploy:
-    needs: https-preflight
+  test:
     runs-on: ubuntu-latest
     environment:
       name: production
@@ -43,25 +32,5 @@ jobs:
         run: |
           npm run build:tailwind
           git diff --exit-code -- assets/tailwind.css
-      - name: Assemble static site
-        run: |
-          mkdir dist
-          cp -- *.html CNAME _headers robots.txt sitemap.xml styles.css dist/
-          cp -R assets dist/assets
-      - name: Publish to Cloudflare Pages
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy dist --project-name=irondillo-site --branch=main
-
-  smoke:
-    needs: deploy
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v5
-      - name: Verify production HTTPS and security headers
-        run: |
-          ./scripts/smoke-production.sh
-          DOMAIN=www.irondillo.com ./scripts/smoke-production.sh
+      - name: Test contact endpoint
+        run: npm test
