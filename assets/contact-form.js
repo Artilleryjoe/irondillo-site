@@ -41,21 +41,18 @@
       return;
     }
 
-    const name = clean(String(data.get("name") || ""));
-    const email = clean(String(data.get("email") || ""));
-    const phone = clean(String(data.get("phone") || "")) || "Not provided";
-    const urgency = clean(String(data.get("urgency") || "General question"));
-    const message = clean(String(data.get("message") || ""));
-    const body = [
-      `Name: ${name}`,
-      `Reply email: ${email}`,
-      `Phone: ${phone}`,
-      `Urgency: ${urgency}`,
-      "",
-      "How can we help?",
-      message,
-    ].join("\n");
-    const mailto = `mailto:contact@irondillo.com?subject=${encodeURIComponent("New Iron Dillo contact request")}&body=${encodeURIComponent(body)}`;
+    button.disabled = true;
+    status.textContent = "Sending…";
+    const formData = new FormData(form);
+    const data = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      phone: formData.get("phone"),
+      urgency: formData.get("urgency"),
+      message: formData.get("message"),
+      company: formData.get("company"),
+      turnstileToken: token,
+    };
 
     status.textContent = "Transferring your details to your email app to open a draft…";
     window.location.assign(mailto);
