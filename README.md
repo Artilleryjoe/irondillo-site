@@ -12,7 +12,7 @@ Marketing site for [Iron Dillo Cybersecurity](https://irondillo.com). The projec
 ├── index.html              # Home page
 ├── services.html           # Overview of offerings
 ├── about.html              # Background and mission statement
-├── contact.html            # Contact form submitted through FormSubmit
+├── contact.html            # Contact form submitted to the same-origin API
 ├── commitment.html         # Cybersecurity commitment and ethics
 ├── lindale-tyler-cybersecurity.html  # Local services landing page
 ├── privacy.html / terms.html          # Policy documents
@@ -68,7 +68,7 @@ The production Cloudflare Pages project should deploy the repository from `main`
 
 * Keep images in `assets/`. Remove unused media so the repository stays lightweight.
 * Inline Tailwind classes control styling; no additional CSS build pipeline is necessary.
-* The contact form posts JSON to `/api/contact`. The server independently validates every field, applies Cloudflare rate limiting and Turnstile verification, and delivers plain-text mail through Resend. Visitor values are never used to construct mail headers.
+* When a visitor selects “Send message,” the contact form securely posts JSON to the same-origin `/api/contact` endpoint; it does not open an email draft. The server independently validates every field, applies Cloudflare rate limiting and Turnstile verification, and delivers plain-text mail to Iron Dillo through Resend, the configured email-delivery provider. Resend may process the submitted information to deliver the message. Visitor values are never used to construct mail headers, and visitors are warned not to submit secrets or regulated data.
 
 ### Contact endpoint deployment
 
@@ -104,10 +104,9 @@ processes that file during deployment and applies the policy to all routes (`/*`
 - `X-Frame-Options: DENY`
 - `Strict-Transport-Security: max-age=31536000`
 
-The `mailto:` allowance remains only because the current contact form opens an email
-client. When a hosted form endpoint is selected, replace it in `form-action` and add
-that exact origin to `connect-src`; remove `mailto:` after email-client submission is
-retired. Do not add wildcard origins. Page-level CSP meta tags are defense-in-depth,
-but `_headers` is the canonical production policy because Cloudflare sends it as an
+The form submits only to the same-origin `/api/contact` endpoint; the separate email
+alternative is a normal link and is not part of `form-action`. Do not add wildcard
+origins. Page-level CSP meta tags are defense-in-depth, but `_headers` is the
+canonical production policy because Cloudflare sends it as an
 HTTP response header (including directives such as `frame-ancestors` that meta CSP
 cannot enforce).
