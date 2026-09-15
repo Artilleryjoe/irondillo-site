@@ -1,6 +1,6 @@
 # Iron Dillo Cybersecurity Site
 
-Static marketing site for [Iron Dillo Cybersecurity](https://irondillo.com). The project is a collection of hand-crafted HTML pages with a generated Tailwind output (`assets/tailwind.css`) deployed through GitHub Pages.
+Static marketing site for [Iron Dillo Cybersecurity](https://irondillo.com). The project is a collection of hand-crafted HTML pages with a generated Tailwind output (`assets/tailwind.css`) deployed through Cloudflare Pages.
 
 ## Repository layout
 
@@ -19,11 +19,11 @@ Static marketing site for [Iron Dillo Cybersecurity](https://irondillo.com). The
 ├── maintenance.html        # Temporary maintenance notice page
 ├── 404.html                # Custom error page for missing routes
 ├── sitemap.xml / robots.txt
-└── .github/workflows/static.yml       # GitHub Pages deployment workflow
+└── .github/workflows/static.yml       # Cloudflare Pages deployment workflow
 ```
 
-The HTML entry points intentionally remain at the repository root because GitHub
-Pages maps those filenames directly to the site's public URLs. Moving them into a
+The HTML entry points intentionally remain at the repository root because the
+static host maps those filenames directly to the site's public URLs. Moving them into a
 source directory without introducing a site build step would break existing links.
 Development-only material belongs in `docs/` and `src/`, while files referenced by
 the deployed pages retain their existing public paths.
@@ -55,11 +55,24 @@ git diff --exit-code -- assets/tailwind.css
 
 If the diff command reports changes, commit the regenerated `assets/tailwind.css` before opening or merging a PR.
 
-The GitHub Pages workflow also enforces this: deploy will fail if `npm run build:tailwind` produces changes that are not committed.
+The Cloudflare Pages workflow also enforces this: deploy will fail if `npm run build:tailwind` produces changes that are not committed.
 
 ## Deployment
 
-Pushes to the `main` branch trigger the GitHub Actions workflow in `.github/workflows/static.yml`, which publishes the repository to GitHub Pages. Ensure changes are committed and merged into `main` to update the live site.
+Pushes to the `main` branch trigger `.github/workflows/static.yml`, which builds a
+minimal publish directory and deploys it to the `irondillo-site` Cloudflare Pages
+project. Configure the repository secrets `CLOUDFLARE_API_TOKEN` (with Pages edit
+permission) and `CLOUDFLARE_ACCOUNT_ID`, then attach `irondillo.com` and
+`www.irondillo.com` as Pages custom domains.
+
+Cloudflare Pages terminates TLS and redirects plain HTTP requests to HTTPS. Before
+switching production DNS, confirm that valid certificates are active for both custom
+domains and that both HTTP names redirect to HTTPS. A pre-deployment workflow job
+performs that gate before publishing the checked-in HSTS policy. The policy does not
+use `includeSubDomains`; add that directive only after every required subdomain
+has been inventoried and confirmed HTTPS-capable. The post-deployment smoke job runs
+`scripts/smoke-production.sh` against the apex and `www` domains and fails if an
+HTTPS redirect or security response header regresses.
 
 ## Content guidelines
 
@@ -80,12 +93,20 @@ When adding or revising testimonials, follow this checklist so updates stay cons
 
 ## Security headers policy
 
-A single canonical policy is defined in [`_headers`](_headers) and should be deployed at the CDN/proxy layer (Cloudflare Pages/Netlify-style header injection). Apply it to all routes (`/*`) so every page inherits the same baseline controls:
+A single canonical policy is defined in [`_headers`](_headers). Cloudflare Pages
+processes that file during deployment and applies the policy to all routes (`/*`):
 
-- `Content-Security-Policy: default-src 'self'; script-src 'self' https://cdn.tailwindcss.com https://unpkg.com https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; frame-src https://www.google.com; form-action 'self' mailto:; object-src 'none'; base-uri 'self'; frame-ancestors 'none'`
+- `Content-Security-Policy: default-src 'self'; script-src 'self'; connect-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; form-action 'self' mailto:; object-src 'none'; base-uri 'self'; frame-ancestors 'none'`
 - `X-Content-Type-Options: nosniff`
 - `Referrer-Policy: strict-origin-when-cross-origin`
 - `Permissions-Policy: accelerometer=(), camera=(), geolocation=(), gyroscope=(), microphone=(), payment=(), usb=()`
 - `X-Frame-Options: DENY`
+- `Strict-Transport-Security: max-age=31536000`
 
-If the host cannot set response headers directly (for example, raw GitHub Pages without a proxy/CDN), keep matching `<meta http-equiv=...>` tags in every HTML page as a fallback baseline. When creating new pages, copy the same security meta block so policy stays consistent site-wide.
+The `mailto:` allowance remains only because the current contact form opens an email
+client. When a hosted form endpoint is selected, replace it in `form-action` and add
+that exact origin to `connect-src`; remove `mailto:` after email-client submission is
+retired. Do not add wildcard origins. Page-level CSP meta tags are defense-in-depth,
+but `_headers` is the canonical production policy because Cloudflare sends it as an
+HTTP response header (including directives such as `frame-ancestors` that meta CSP
+cannot enforce).
