@@ -41,20 +41,51 @@
       return;
     }
 
-    button.disabled = true;
-    status.textContent = "Sending…";
-    const formData = new FormData(form);
-    const data = {
-      name: formData.get("name"),
-      email: formData.get("email"),
-      phone: formData.get("phone"),
-      urgency: formData.get("urgency"),
-      message: formData.get("message"),
-      company: formData.get("company"),
-      turnstileToken: token,
-    };
+    const body = new URLSearchParams();
+    data.forEach((value, key) => body.append(key, clean(String(value))));
 
-    status.textContent = "Transferring your details to your email app to open a draft…";
-    window.location.assign(mailto);
+    if (submitButton) submitButton.disabled = true;
+    status.textContent = "Sending your message…";
+
+    try {
+      const ajaxAction = new URL(form.action);
+      ajaxAction.pathname = `/ajax${ajaxAction.pathname}`;
+
+      const response = await fetch(ajaxAction, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+        },
+        body: body.toString(),
+      });
+
+      if (!response.ok) {
+        status.textContent = response.status >= 400 && response.status < 500
+          ? "Your message was not accepted. Please check the fields and try again."
+          : "The form service is temporarily unavailable. Please try again or use the email alternative.";
+        return;
+      }
+
+      let result;
+      try {
+        result = await response.json();
+      } catch {
+        status.textContent = "The form service could not confirm delivery. Please try again or use the email alternative.";
+        return;
+      }
+
+      if (result.success !== true && result.success !== "true") {
+        status.textContent = "The form service could not confirm delivery. Please try again or use the email alternative.";
+        return;
+      }
+
+      form.reset();
+      status.textContent = "Thanks—your message was sent successfully. We’ll be in touch soon.";
+    } catch {
+      status.textContent = "We couldn’t reach the form service. Check your connection and try again, or use the email alternative.";
+    } finally {
+      if (submitButton) submitButton.disabled = false;
+    }
   });
 })();
