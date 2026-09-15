@@ -41,14 +41,14 @@ async function readJson(request) {
   return JSON.parse(new TextDecoder("utf-8", { fatal: true }).decode(bytes));
 }
 
-async function verifyTurnstile(token, ip, secret, fetchImpl) {
+async function verifyTurnstile(token, ip, secret, expectedHostname, fetchImpl) {
   if (!secret) return false;
   const body = new URLSearchParams({ secret, response: token });
   if (ip) body.set("remoteip", ip);
   const response = await fetchImpl("https://challenges.cloudflare.com/turnstile/v0/siteverify", { method: "POST", body });
   if (!response.ok) return false;
   const result = await response.json();
-  return result.success === true && result.hostname === "irondillo.com";
+  return result.success === true && result.hostname === expectedHostname;
 }
 
 async function sendMail(submission, apiKey, fetchImpl) {
@@ -78,7 +78,10 @@ export async function handleContact(request, env, options = {}) {
   const fetchImpl = options.fetch || fetch;
   if (request.method !== "POST") return genericError(405);
   if (new URL(request.url).protocol !== "https:") return genericError(400);
-  if (request.headers.get("origin") !== (env.PRODUCTION_ORIGIN || ALLOWED_ORIGIN)) return genericError(403);
+  const allowedOrigin = env.PRODUCTION_ORIGIN || ALLOWED_ORIGIN;
+  if (request.headers.get("origin") !== allowedOrigin) return genericError(403);
+  let expectedHostname;
+  try { expectedHostname = new URL(allowedOrigin).hostname; } catch { return genericError(503); }
   if (request.headers.get("content-type")?.split(";", 1)[0].trim().toLowerCase() !== "application/json") return genericError(415);
 
   let raw;
@@ -94,7 +97,7 @@ export async function handleContact(request, env, options = {}) {
   }
 
   try {
-    if (!(await verifyTurnstile(submission.turnstileToken, ip, env.TURNSTILE_SECRET_KEY, fetchImpl))) return genericError(400);
+    if (!(await verifyTurnstile(submission.turnstileToken, ip, env.TURNSTILE_SECRET_KEY, expectedHostname, fetchImpl))) return genericError(400);
     if (!(await sendMail(submission, env.RESEND_API_KEY, fetchImpl))) return genericError(502);
   } catch {
     // Do not log the submission or provider response: both may contain personal data.
