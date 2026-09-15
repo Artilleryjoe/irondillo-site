@@ -12,10 +12,7 @@ Marketing site for [Iron Dillo Cybersecurity](https://irondillo.com). The projec
 ├── index.html              # Home page
 ├── services.html           # Overview of offerings
 ├── about.html              # Background and mission statement
-├── contact.html            # Contact form submitted to a Pages Function
-├── functions/api/          # Cloudflare Pages Function entry points
-├── server/                 # Testable server-side contact handler
-├── test/                   # Node endpoint tests
+├── contact.html            # Contact form submitted through FormSubmit
 ├── commitment.html         # Cybersecurity commitment and ethics
 ├── lindale-tyler-cybersecurity.html  # Local services landing page
 ├── privacy.html / terms.html          # Policy documents
@@ -68,18 +65,7 @@ The production Cloudflare Pages project should deploy the repository from `main`
 
 * Keep images in `assets/`. Remove unused media so the repository stays lightweight.
 * Inline Tailwind classes control styling; no additional CSS build pipeline is necessary.
-* The contact form posts JSON to `/api/contact`. The server independently validates every field, applies Cloudflare rate limiting and Turnstile verification, and delivers plain-text mail through Resend. Visitor values are never used to construct mail headers.
-
-### Contact endpoint deployment
-
-Deploy the site with Cloudflare Pages and configure these server-side secrets and bindings (never expose them in client code):
-
-* `TURNSTILE_SECRET_KEY`: the Turnstile secret for `irondillo.com`.
-* `TURNSTILE_SITE_KEY`: the corresponding public site key, exposed through `/api/contact-config`.
-* `RESEND_API_KEY`: an API key authorized to send from the verified `irondillo.com` domain.
-* `CONTACT_RATE_LIMITER`: a Cloudflare Rate Limiting binding. A recommended starting threshold is five submissions per IP per ten minutes, adjusted using aggregate operational metrics rather than message contents.
-
-`PRODUCTION_ORIGIN` may override the default `https://irondillo.com` origin for a controlled deployment. The Origin check is only browser defense in depth; Turnstile and rate limiting remain mandatory. Configure the provider so `contact-form@irondillo.com` is an authenticated sender (SPF, DKIM, and DMARC), and do not log request bodies.
+* The contact form uses local JavaScript to validate its fields and safely construct a `mailto:` draft, so visitors can review the message in their email app before sending and the site never receives or stores their details. Opening the draft transfers those details to the visitor's email app; webmail and draft synchronization may give the email provider access before the visitor sends the message. If a hosted form service is added later, update `contact.html`, the privacy/terms copy, and the `form-action` directives in `_headers` and page-level CSP meta tags.
 * For any metadata updates (Open Graph, SEO), update the relevant `<meta>` tags across the HTML pages.
 
 ### Testimonial updates

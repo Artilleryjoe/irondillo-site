@@ -20,6 +20,12 @@
     }
   };
 
+  if (!form || !status) return;
+
+  const clean = (value) => value.replace(/[\u0000\r]/g, "").trim();
+
+  const submitButton = form.querySelector('button[type="submit"]');
+
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
     if (!form.reportValidity()) {
@@ -27,9 +33,11 @@
       return;
     }
 
-    const token = window.turnstile?.getResponse(widgetId);
-    if (!token) {
-      status.textContent = "Please complete the verification challenge.";
+    const data = new FormData(form);
+
+    // Do not send automated submissions that fill the hidden honeypot.
+    if (clean(String(data.get("_honey") || ""))) {
+      status.textContent = "Your message could not be submitted. Please check the form and try again.";
       return;
     }
 
@@ -46,22 +54,7 @@
       turnstileToken: token,
     };
 
-    try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        credentials: "same-origin",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-      if (!response.ok) throw new Error();
-      form.reset();
-      window.turnstile.reset(widgetId);
-      status.textContent = "Thanks. Your message was sent.";
-    } catch {
-      window.turnstile.reset(widgetId);
-      status.textContent = "We could not send your message. Please try again later or email us directly.";
-    } finally {
-      button.disabled = false;
-    }
+    status.textContent = "Transferring your details to your email app to open a draft…";
+    window.location.assign(mailto);
   });
 })();
