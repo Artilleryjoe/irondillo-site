@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="/styles.css">
   <link rel="stylesheet" href="/assets/tailwind.css">
 
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.tailwindcss.com https://unpkg.com https://www.google.com https://www.gstatic.com https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; frame-src https://www.google.com https://challenges.cloudflare.com; connect-src 'self' https://challenges.cloudflare.com; form-action 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none';">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.tailwindcss.com https://unpkg.com https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; frame-src https://www.google.com; connect-src 'self' https://formsubmit.co; form-action 'self' https://formsubmit.co; object-src 'none'; base-uri 'self'; frame-ancestors 'none';">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
   <meta http-equiv="Permissions-Policy" content="accelerometer=(), camera=(), geolocation=(), gyroscope=(), microphone=(), payment=(), usb=()">
@@ -54,14 +54,16 @@
               <p class="text-xs text-armadilloGray">Call for immediate help or to ask a simple first question.</p>
             </div>
             <div class="hero-accent rounded-2xl p-4">
-              <p class="text-sm font-semibold text-armadilloBlack">Email</p>
+              <p class="text-sm font-semibold text-armadilloBlack">Email alternative</p>
               <a href="mailto:contact@irondillo.com" class="text-armadilloBlack font-semibold hover:text-oliveGreen">contact@irondillo.com</a>
               <p class="text-xs text-armadilloGray">Tell me what happened or what you want to improve.</p>
             </div>
           </div>
         </div>
 
-        <form id="contact-form" class="lg:col-span-2 glass-panel rounded-2xl p-6 space-y-4" action="/api/contact" method="POST">
+        <form id="contact-form" class="lg:col-span-2 glass-panel rounded-2xl p-6 space-y-4" action="https://formsubmit.co/ajax/contact@irondillo.com" method="POST">
+          <input type="hidden" name="_subject" value="New Iron Dillo contact request" />
+          <input type="hidden" name="_template" value="table" />
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label for="name" class="text-sm font-semibold text-armadilloBlack">Name</label>
@@ -90,13 +92,12 @@
             <p class="mt-2 text-xs text-armadilloGray">Please do not include passwords, authentication codes, private keys, regulated records, or other sensitive information that is not necessary for your question.</p>
           </div>
           <div class="sr-only" aria-hidden="true">
-            <input type="text" name="company" id="company" tabindex="-1" autocomplete="off" />
+            <input type="text" name="_honey" id="company" tabindex="-1" autocomplete="off" />
           </div>
-          <div id="turnstile-widget"></div>
-          <p class="text-xs text-armadilloGray">Your details are sent securely so we can respond to your request. If the form is unavailable, email <a href="mailto:contact@irondillo.com" class="text-oliveGreen underline hover:text-oliveDark">contact@irondillo.com</a> directly.</p>
+          <p class="text-xs text-armadilloGray"><strong>Your details are not sent to or stored by this website.</strong> When you open the draft, the details above are transferred to your email app. A webmail provider or an app that synchronizes drafts may receive and store them at that point. The email is not sent to Iron Dillo until you choose to send it. If no draft opens, email <a href="mailto:contact@irondillo.com" class="text-oliveGreen underline hover:text-oliveDark">contact@irondillo.com</a> directly.</p>
           <p id="form-status" class="text-sm font-semibold text-armadilloGray" role="status" aria-live="polite"></p>
           <div class="flex items-center justify-end">
-            <button type="submit" class="btn-primary" disabled>Send message</button>
+            <button type="submit" class="btn-primary">Open email draft</button>
           </div>
         </form>
       </section>

@@ -12,10 +12,7 @@ Marketing site for [Iron Dillo Cybersecurity](https://irondillo.com). The projec
 ├── index.html              # Home page
 ├── services.html           # Overview of offerings
 ├── about.html              # Background and mission statement
-├── contact.html            # Contact form submitted to a Pages Function
-├── functions/api/          # Cloudflare Pages Function entry points
-├── server/                 # Testable server-side contact handler
-├── test/                   # Node endpoint tests
+├── contact.html            # Contact form submitted through FormSubmit
 ├── commitment.html         # Cybersecurity commitment and ethics
 ├── lindale-tyler-cybersecurity.html  # Local services landing page
 ├── privacy.html / terms.html          # Policy documents
