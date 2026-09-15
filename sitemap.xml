@@ -68,6 +68,12 @@
     <priority>0.8</priority>
     <changefreq>yearly</changefreq>
   </url>
+  <url>
+    <loc>https://irondillo.com/shadow-it-small-organizations.html</loc>
+    <lastmod>2026-09-15</lastmod>
+    <priority>0.8</priority>
+    <changefreq>yearly</changefreq>
+  </url>
 
   <!-- Legal Pages -->
   <url>
