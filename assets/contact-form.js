@@ -48,7 +48,10 @@
     status.textContent = "Sending your message…";
 
     try {
-      const response = await fetch(form.action, {
+      const ajaxAction = new URL(form.action);
+      ajaxAction.pathname = `/ajax${ajaxAction.pathname}`;
+
+      const response = await fetch(ajaxAction, {
         method: "POST",
         headers: {
           Accept: "application/json",
