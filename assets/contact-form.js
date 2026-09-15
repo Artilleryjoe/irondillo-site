@@ -7,6 +7,7 @@
   if (!form || !status || !widget) return;
 
   const submitButton = form.querySelector('button[type="submit"]');
+  const contactEndpoint = "/api/contact";
   const clean = (value) => value.replace(/[\u0000\r]/g, "").trim();
   let turnstileReady;
 
@@ -82,7 +83,7 @@
       }
       body.turnstileToken = turnstileToken;
 
-      const response = await fetch(form.action, {
+      const response = await fetch(contactEndpoint, {
         method: "POST",
         headers: { Accept: "application/json", "Content-Type": "application/json" },
         body: JSON.stringify(body),

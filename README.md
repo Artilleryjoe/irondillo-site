@@ -97,8 +97,8 @@ When adding or revising testimonials, follow this checklist so updates stay cons
 A single canonical policy is defined in [`_headers`](_headers). Cloudflare Pages
 processes that file during deployment and applies the policy to all routes (`/*`):
 
-- `Content-Security-Policy: default-src 'self'; script-src 'self' https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; frame-src https://challenges.cloudflare.com; connect-src 'self' https://challenges.cloudflare.com; form-action 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'`
-- The script and frame allowlists contain only the external Turnstile origin used by the contact flow. Browser connections may reach the same origin and same-origin `/api/contact-config` and `/api/contact`; form fallback submission is restricted to the same origin.
+- `Content-Security-Policy: default-src 'self'; script-src 'self' https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; frame-src https://challenges.cloudflare.com; connect-src 'self' https://challenges.cloudflare.com; form-action 'self' https://irondillo.com; object-src 'none'; base-uri 'self'; frame-ancestors 'none'`
+- The script and frame allowlists contain only the external Turnstile origin used by the contact flow. Browser connections may reach the same origin and same-origin `/api/contact-config` and `/api/contact`; form fallback submission is restricted to the current origin and the canonical HTTPS production origin so an HTTP preview can never downgrade submitted form data.
 - `X-Content-Type-Options: nosniff`
 - `Referrer-Policy: strict-origin-when-cross-origin`
 - `Permissions-Policy: accelerometer=(), camera=(), geolocation=(), gyroscope=(), microphone=(), payment=(), usb=()`
