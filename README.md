@@ -68,7 +68,7 @@ The production Cloudflare Pages project should deploy the repository from `main`
 
 * Keep images in `assets/`. Remove unused media so the repository stays lightweight.
 * Inline Tailwind classes control styling; no additional CSS build pipeline is necessary.
-* The contact form posts JSON to `/api/contact`. The server independently validates every field, applies Cloudflare rate limiting and Turnstile verification, and delivers plain-text mail through Resend. Visitor values are never used to construct mail headers.
+* When a visitor selects “Send message,” the contact form securely posts JSON to the same-origin `/api/contact` endpoint; it does not open an email draft. The server independently validates every field, applies Cloudflare rate limiting and Turnstile verification, and delivers plain-text mail to Iron Dillo through Resend, the configured email-delivery provider. Resend may process the submitted information to deliver the message. Visitor values are never used to construct mail headers, and visitors are warned not to submit secrets or regulated data.
 
 ### Contact endpoint deployment
 
