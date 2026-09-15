@@ -89,6 +89,7 @@
           <div>
             <label for="message" class="text-sm font-semibold text-armadilloBlack">How can we help?</label>
             <textarea required minlength="20" maxlength="2000" name="message" id="message" rows="5" placeholder="Ask a question, describe the issue, or share what you want to protect." class="w-full mt-2 px-4 py-3 rounded-xl border border-armadilloGray/20 focus:outline-none focus:border-oliveGreen"></textarea>
+            <p class="mt-2 text-xs text-armadilloGray">Please do not include passwords, authentication codes, private keys, regulated records, or other sensitive information that is not necessary for your question.</p>
           </div>
           <div class="sr-only" aria-hidden="true">
             <input type="text" name="_honey" id="company" tabindex="-1" autocomplete="off" />
@@ -96,7 +97,7 @@
           <p class="text-xs text-armadilloGray"><strong>Your details are sent securely through FormSubmit so Iron Dillo can reply.</strong> Do not include passwords or other sensitive information. Prefer email? As an alternative, <a href="mailto:contact@irondillo.com" class="text-oliveGreen underline hover:text-oliveDark">email contact@irondillo.com directly</a>.</p>
           <p id="form-status" class="text-sm font-semibold text-armadilloGray" role="status" aria-live="polite"></p>
           <div class="flex items-center justify-end">
-            <button type="submit" class="btn-primary">Send message</button>
+            <button type="submit" class="btn-primary" disabled>Send message</button>
           </div>
         </form>
       </section>
@@ -125,5 +126,6 @@
     </footer>
   </div>
   <script src="/assets/contact-form.js" defer></script>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onTurnstileLoad&amp;render=explicit" defer></script>
 </body>
 </html>

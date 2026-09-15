@@ -3,6 +3,22 @@
 
   const form = document.getElementById("contact-form");
   const status = document.getElementById("form-status");
+  const button = form?.querySelector('button[type="submit"]');
+  let widgetId;
+
+  if (!form || !status || !button) return;
+
+  window.onTurnstileLoad = async () => {
+    try {
+      const response = await fetch("/api/contact-config", { credentials: "same-origin" });
+      if (!response.ok) throw new Error();
+      const config = await response.json();
+      widgetId = window.turnstile.render("#turnstile-widget", { sitekey: config.turnstileSiteKey });
+      button.disabled = false;
+    } catch {
+      status.textContent = "The form is temporarily unavailable. Please email us directly.";
+    }
+  };
 
   if (!form || !status) return;
 
@@ -12,7 +28,6 @@
 
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
-
     if (!form.reportValidity()) {
       status.textContent = "Please check the highlighted fields before continuing.";
       return;
