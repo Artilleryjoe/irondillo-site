@@ -65,7 +65,7 @@ Pushes to the `main` branch trigger the GitHub Actions workflow in `.github/work
 
 * Keep images in `assets/`. Remove unused media so the repository stays lightweight.
 * Inline Tailwind classes control styling; no additional CSS build pipeline is necessary.
-* The contact form uses a `mailto:` action so visitors can review the message in their email app before sending. If a hosted form service is added later, update `contact.html`, the privacy/terms copy, and the `form-action` directives in `_headers` and page-level CSP meta tags.
+* The contact form uses local JavaScript to validate its fields and safely construct a `mailto:` draft, so visitors can review the message in their email app before sending and the site never receives or stores their details. If a hosted form service is added later, update `contact.html`, the privacy/terms copy, and the `form-action` directives in `_headers` and page-level CSP meta tags.
 * For any metadata updates (Open Graph, SEO), update the relevant `<meta>` tags across the HTML pages.
 
 ### Testimonial updates

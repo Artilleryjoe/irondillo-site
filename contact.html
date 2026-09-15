@@ -61,19 +61,19 @@
           </div>
         </div>
 
-        <form class="lg:col-span-2 glass-panel rounded-2xl p-6 space-y-4" action="mailto:contact@irondillo.com" method="POST" enctype="text/plain">
+        <form id="contact-form" class="lg:col-span-2 glass-panel rounded-2xl p-6 space-y-4" action="mailto:contact@irondillo.com" method="POST" enctype="text/plain">
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label for="name" class="text-sm font-semibold text-armadilloBlack">Name</label>
-              <input required minlength="2" maxlength="80" pattern="[A-Za-zÀ-ÿ0-9 .,&'-]{2,80}" name="name" id="name" class="w-full mt-2 px-4 py-3 rounded-xl border border-armadilloGray/20 focus:outline-none focus:border-oliveGreen" />
+              <input required minlength="2" maxlength="80" pattern="[A-Za-zÀ-ÿ0-9 .,&'-]{2,80}" name="name" id="name" autocomplete="name" class="w-full mt-2 px-4 py-3 rounded-xl border border-armadilloGray/20 focus:outline-none focus:border-oliveGreen" />
             </div>
             <div>
               <label for="email" class="text-sm font-semibold text-armadilloBlack">Email</label>
-              <input required type="email" maxlength="254" name="email" id="email" class="w-full mt-2 px-4 py-3 rounded-xl border border-armadilloGray/20 focus:outline-none focus:border-oliveGreen" />
+              <input required type="email" maxlength="254" pattern="[^@\s]+@[^@\s]+\.[^@\s]{2,}" title="Enter a complete email address, such as name@example.com." name="email" id="email" autocomplete="email" class="w-full mt-2 px-4 py-3 rounded-xl border border-armadilloGray/20 focus:outline-none focus:border-oliveGreen" />
             </div>
             <div>
               <label for="phone" class="text-sm font-semibold text-armadilloBlack">Phone</label>
-              <input name="phone" id="phone" inputmode="tel" pattern="[0-9+()\-\s]{7,25}" maxlength="25" class="w-full mt-2 px-4 py-3 rounded-xl border border-armadilloGray/20 focus:outline-none focus:border-oliveGreen" />
+              <input type="tel" name="phone" id="phone" autocomplete="tel" pattern="[0-9+() .\-]{7,25}" title="Enter a phone number with 7 to 25 digits or common separators, or leave this field blank." maxlength="25" class="w-full mt-2 px-4 py-3 rounded-xl border border-armadilloGray/20 focus:outline-none focus:border-oliveGreen" />
             </div>
             <div>
               <label for="urgency" class="text-sm font-semibold text-armadilloBlack">Urgency</label>
@@ -88,9 +88,12 @@
             <label for="message" class="text-sm font-semibold text-armadilloBlack">How can we help?</label>
             <textarea required minlength="20" maxlength="2000" name="message" id="message" rows="5" placeholder="Ask a question, describe the issue, or share what you want to protect." class="w-full mt-2 px-4 py-3 rounded-xl border border-armadilloGray/20 focus:outline-none focus:border-oliveGreen"></textarea>
           </div>
-                    <input type="text" name="company" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
-          <input type="hidden" name="subject" value="New Iron Dillo contact request" />
-          <p class="text-xs text-armadilloGray">No pressure and no hard sell, just practical guidance based on your needs. Submitting opens your email app so you can review the message before sending. If the button does not open your email app, email <a href="mailto:contact@irondillo.com" class="text-oliveGreen underline hover:text-oliveDark">contact@irondillo.com</a> directly.</p>
+          <div class="sr-only" aria-hidden="true">
+            <label for="company">Company website (leave blank)</label>
+            <input type="text" name="company" id="company" tabindex="-1" autocomplete="off" />
+          </div>
+          <p class="text-xs text-armadilloGray"><strong>Your details are not sent to or stored by this website.</strong> The button creates a properly formatted draft in your email app for you to review and send. If no draft opens, email <a href="mailto:contact@irondillo.com" class="text-oliveGreen underline hover:text-oliveDark">contact@irondillo.com</a> directly.</p>
+          <p id="form-status" class="text-sm font-semibold text-armadilloGray" role="status" aria-live="polite"></p>
           <div class="flex items-center justify-end">
             <button type="submit" class="btn-primary">Send message</button>
           </div>
@@ -120,5 +123,6 @@
       </div>
     </footer>
   </div>
+  <script src="/assets/contact-form.js" defer></script>
 </body>
 </html>
