@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <title>The Software You Don’t Know You’re Using: Shadow IT | Iron Dillo</title>
+  <meta name="description" content="A practical process for finding and managing shadow IT in small organizations without blaming employees or banning every useful tool." />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="Iron Dillo Cybersecurity" />
+  <link rel="canonical" href="https://irondillo.com/shadow-it-small-organizations.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="The Software You Don’t Know You’re Using: Shadow IT in Small Organizations" />
+  <meta property="og:description" content="Shadow IT is often a visibility problem before it is an employee problem. Learn how to find it, understand it, and make practical decisions about it." />
+  <meta property="og:url" content="https://irondillo.com/shadow-it-small-organizations.html" />
+  <meta property="og:image" content="https://irondillo.com/assets/irondillo-preview.png" />
+  <meta property="article:published_time" content="2026-09-15" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="The Software You Don’t Know You’re Using: Shadow IT in Small Organizations" />
+  <meta name="twitter:description" content="A lightweight way for small organizations to find and manage unapproved software without driving it underground." />
+  <meta name="twitter:image" content="https://irondillo.com/assets/irondillo-preview.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/assets/tailwind.css">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://unpkg.com https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; frame-src https://www.google.com; form-action 'self' mailto:; object-src 'none'; base-uri 'self';">
+  <link rel="icon" type="image/png" href="/assets/favicon.png" />
+</head>
+<body class="sitewide-shell text-armadilloGray font-inter page-shell min-h-screen">
+  <div class="relative flex flex-col min-h-screen">
+    <header class="relative z-10 max-w-6xl mx-auto px-6 pt-8">
+      <div class="glass-panel nav-shell rounded-2xl px-5 sm:px-8 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <a href="/index.html" class="flex items-center gap-4" aria-label="Iron Dillo Cybersecurity home">
+          <img src="/assets/irondillo-preview.png" alt="Iron Dillo logo" class="w-14 h-14" />
+          <div><p class="pill">Veteran-owned</p><p class="text-offWhite font-semibold text-lg">Iron Dillo Cybersecurity</p><p class="text-sm text-offWhite/80">Practical security for real-world organizations.</p></div>
+        </a>
+        <nav class="flex flex-wrap items-center gap-3 text-sm" aria-label="Primary navigation">
+          <a href="/index.html" class="text-offWhite font-semibold px-3 py-2 rounded-xl hover:bg-white/10">Home</a><a href="/services.html" class="text-offWhite font-semibold px-3 py-2 rounded-xl hover:bg-white/10">Services</a><a href="/about.html" class="text-offWhite font-semibold px-3 py-2 rounded-xl hover:bg-white/10">About</a><a href="/blog.html" aria-current="page" class="text-offWhite font-semibold px-3 py-2 rounded-xl bg-white/10">Blog</a><a href="/contact.html" class="text-offWhite font-semibold px-3 py-2 rounded-xl hover:bg-white/10">Contact</a><a href="tel:19039331342" class="btn-primary text-sm">Call (903) 933-1342</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-10 md:py-14">
+      <article class="glass-panel rounded-3xl p-6 sm:p-10 md:p-14 blog-article">
+        <header class="blog-article-header border-b border-gray-300 pb-8 md:pb-10 mb-9 md:mb-12">
+          <a href="/blog.html" class="btn-link text-sm">← Back to the blog</a>
+          <p class="pill mt-6">Field Notes No. 7 · Shadow IT</p>
+          <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-armadilloBlack mt-5 leading-tight">The Software You Don’t Know You’re Using: Shadow IT in Small Organizations</h1>
+          <p class="text-lg sm:text-xl leading-relaxed mt-6">The first step is not punishment. It is finding the tools people rely on, understanding why they use them, and making deliberate decisions about the risk.</p>
+          <p class="text-sm mt-6"><time datetime="2026-09-15">September 15, 2026</time> · 10 min read · Iron Dillo Cybersecurity</p>
+        </header>
+
+        <aside class="article-callout">
+          <p class="font-bold text-armadilloBlack">Related reading</p>
+          <ul class="list-disc pl-5 mt-2 space-y-2">
+            <li><a href="/vendor-msp-access-small-organization.html">Who Else Has the Keys? Managing Vendor and MSP Access in a Small Organization</a></li>
+            <li><a href="/cybersecurity-business-process.html">Cybersecurity Is a Business Process, Not an IT Project</a></li>
+            <li><a href="/good-enough-cybersecurity-small-organizations.html">What Does “Good Enough” Cybersecurity Look Like for a Small Organization?</a></li>
+          </ul>
+        </aside>
+
+        <p class="article-lead">Shadow IT is often a visibility problem before it is an employee problem.</p>
+        <p>An employee needs to send a file that is too large for email, turn a PDF into a spreadsheet, take notes during a meeting, or coordinate with a customer. The approved system is slow, confusing, unavailable, or unknown. A quick search produces a free service, and the work gets done.</p>
+        <p>Nothing about that sequence necessarily feels reckless. People are usually trying to solve a business problem, not evade security. Yet the organization may now have customer records in an unknown cloud, an account tied to a personal email address, or a browser extension able to read every page an employee visits. Because nobody knows the tool exists, nobody can review, back up, transfer, or remove it.</p>
+        <p>That is the defining problem with shadow IT: technology used for organizational work without the visibility or review needed to manage it. The answer begins with discovery and a usable process—not a hunt for culprits.</p>
+
+        <h2>What shadow IT actually looks like</h2>
+        <p>Shadow IT is not limited to a department secretly buying a major platform. In a small organization, it is more likely to be a collection of ordinary conveniences:</p>
+        <ul>
+          <li>personal cloud drives used to move or store work files;</li>
+          <li>free or individually purchased project, scheduling, design, survey, or accounting software;</li>
+          <li>generative AI tools used to summarize meetings, draft documents, analyze data, or answer customer questions;</li>
+          <li>browser extensions that read pages, capture screens, manage downloads, or connect services;</li>
+          <li>personal email and consumer messaging apps used for business conversations;</li>
+          <li>online file converters, transcription sites, electronic-signature tools, and link-shortening services; and</li>
+          <li>employee-created vendor accounts for which the organization does not control the login, billing, or recovery method.</li>
+        </ul>
+        <p>A tool can become shadow IT even when its use began openly. A team may test a free service, come to depend on it, and never revisit who owns the account or what information it holds. A software feature may quietly expand into a critical workflow. An approved tool may also be used in an unapproved way, such as placing sensitive records in a workspace configured for public sharing.</p>
+        <p>The important questions are not simply “Did IT buy it?” or “Is it free?” Ask whether the organization knows the tool is being used, understands the data and business process involved, accepts the risk, and can administer or exit the service.</p>
+
+        <h2>Why people create it</h2>
+        <p>Employees adopt unsanctioned tools because there is a gap between the work they need to do and the tools they know how to use. The approved alternative may require several approvals for a five-minute task. It may work poorly on a phone, lack a necessary feature, or be licensed for only part of the team. Sometimes an approved alternative exists, but nobody explained it or provided training.</p>
+        <p>Small organizations are especially susceptible because technology decisions are often distributed. A bookkeeper, program director, salesperson, or volunteer may reasonably choose a service within a small budget without recognizing that the choice creates a new data location and access relationship. A free trial can become an operational dependency before anyone thinks to assign an owner.</p>
+        <p>These explanations do not erase the risk. They reveal how to reduce it. If ten people independently choose file-transfer sites, the organization may have a file-sharing problem to solve—not ten discipline problems. If staff use personal messaging because the approved channel excludes contractors, the workflow needs attention.</p>
+        <aside class="article-callout"><p class="font-bold text-armadilloBlack">Treat an unknown tool as evidence about an unmet need as well as a potential risk.</p></aside>
+
+        <h2>What risk it creates</h2>
+        <p>An organization cannot protect, recover, or govern what it cannot see. Shadow IT creates uncertainty about where information lives, who can reach it, and what happens when a person or service disappears.</p>
+        <ul>
+          <li><strong>Unknown data locations:</strong> Customer, employee, financial, health, or operational information may be copied into services outside normal access controls and retention practices.</li>
+          <li><strong>Weak account ownership:</strong> Accounts may use personal addresses, reused passwords, personal payment cards, or recovery methods the organization cannot control.</li>
+          <li><strong>Access that outlasts employment:</strong> A former employee may retain files, account access, API tokens, or ownership of a workspace after leaving.</li>
+          <li><strong>Unreviewed vendors:</strong> Nobody may have examined the provider’s security, availability, data-use terms, deletion options, or response to an incident.</li>
+          <li><strong>No dependable backup:</strong> The service may hold the only copy of important work, with limited exports or no tested restoration path.</li>
+          <li><strong>Inconsistent authentication:</strong> MFA may be unavailable, optional, routed to one person’s phone, or never enabled.</li>
+          <li><strong>Unexpected data use:</strong> Information entered into AI, conversion, transcription, and other online services may be retained or used under terms the organization has not assessed.</li>
+        </ul>
+        <p>Risk depends on context. A restaurant team using a new tool to plan a public event is different from a clinic uploading patient records to that same tool. The decision should reflect the data, permissions, business importance, and realistic consequences—not merely whether the product appears on an approved list.</p>
+
+        <h2>Do not solve it by banning everything</h2>
+        <p>A blanket prohibition may make a policy easier to write, but it does not eliminate the underlying work. If employees believe that asking will produce an automatic “no,” they learn not to ask. The activity becomes harder to see while the operational need remains.</p>
+        <p>Set clear boundaries around information that must never enter an unreviewed service, and explain those boundaries in language people can apply. Then provide approved options for common needs such as sharing large files, signing documents, communicating with partners, converting files, and using AI. Make the safe path at least reasonably convenient.</p>
+        <p>Create one simple route for questions: “Can I use this?” It might be a short form, an email address, a help-desk request, or a conversation with a designated owner. Ask for the tool, purpose, users, data involved, urgency, and cost. Do not demand a security questionnaire from an employee who is merely raising a need. The reviewer can gather the technical details.</p>
+        <p>Also make reporting an existing tool safe. A limited discovery period—focused on documenting and improving rather than punishing—can surface services that would otherwise stay hidden. Deliberate misconduct can still be handled appropriately, but routine discovery should not feel like an amnesty trap.</p>
+
+        <h2>Build a lightweight shadow-IT process</h2>
+        <p>A small organization does not need an enterprise software-governance program. It needs a repeatable set of decisions with enough documentation to remain useful.</p>
+
+        <h3>1. Inventory</h3>
+        <p>Ask teams which websites, apps, extensions, devices, and accounts they use to perform work. Review expense reports, purchasing cards, single sign-on applications, browser-management data, email forwarding, and existing vendor lists where appropriate and lawful. Explain what you are looking for and why. Technical discovery can help, but a respectful conversation will reveal workflows that logs cannot explain.</p>
+
+        <h3>2. Understand the purpose</h3>
+        <p>Record the business task, users, frequency, cost, and the approved tools that were considered. Identify what would stop if the service vanished tomorrow. This distinguishes a casual convenience from a critical dependency and exposes gaps in the official toolset.</p>
+
+        <h3>3. Classify the data and access</h3>
+        <p>Describe what goes into the tool and what the tool can reach. Is the information public, internal, confidential, regulated, or otherwise sensitive? Can the service read email, contacts, calendars, cloud files, browser pages, or customer systems? Does it create or store new records? Use a few understandable categories rather than a classification scheme nobody can apply.</p>
+
+        <h3>4. Approve, replace, or remove</h3>
+        <p>Make and record a proportionate decision. Low-risk use might be approved with basic conditions. A useful tool might be moved to an organization-owned account, configured with MFA, or covered by an appropriate paid plan. Duplicate tools can be replaced with an existing service. High-risk or unnecessary tools should be removed through a planned transition that preserves required records.</p>
+
+        <h3>5. Assign an owner</h3>
+        <p>Every approved service needs a named business owner. That person does not have to administer the technology alone, but should know why it exists, who uses it, how it is paid for, what data it holds, and who decides whether it continues. Use organizational email, billing, and recovery methods wherever possible, and keep administrative credentials in an approved password manager.</p>
+
+        <h3>6. Review periodically</h3>
+        <p>Set a sensible review date based on risk and importance. Confirm that the tool is still needed, users and permissions are current, MFA and recovery still work, charges remain expected, exports or backups are adequate, and the vendor’s terms or ownership have not materially changed. Review again when an owner leaves, a process changes, or the service has an incident.</p>
+
+        <aside class="article-callout">
+          <p class="font-bold text-armadilloBlack">A simple shadow-IT register</p>
+          <p class="mt-2">Tool → purpose → business owner → users → data and permissions → account owner → cost → decision and conditions → review date → exit or export path.</p>
+        </aside>
+
+        <h2>Start with the tools that matter most</h2>
+        <p>Do not wait for a perfect inventory. Prioritize services that hold sensitive or irreplaceable data, connect to other systems, control customer communications, support payments or payroll, or have broad browser and account permissions. Include tools owned by people who are leaving and any service that has become essential to daily operations.</p>
+        <p>For each, make immediate improvements that do not require a major project: move ownership to an organizational account, enable MFA, add a second administrator, remove former users, export important records, document renewal details, and decide when to review it again.</p>
+        <p>Measure progress by improved visibility and ownership, not by the number of tools prohibited. A shorter application list may reduce complexity, but the strongest outcome is that employees know where to go, decision-makers understand what the organization depends on, and useful technology can be adopted without becoming invisible.</p>
+
+        <h2>Apply GRIT</h2>
+        <ul>
+          <li><strong>Growth:</strong> Let discovered tools teach you where approved technology, training, or communication needs improvement.</li>
+          <li><strong>Resilience:</strong> Bring important accounts, records, recovery methods, and backups under organizational control.</li>
+          <li><strong>Instinct:</strong> Pause before placing sensitive information in a new service or granting an extension broad access.</li>
+          <li><strong>Tenacity:</strong> Keep the inventory and review cycle alive as people, vendors, and business processes change.</li>
+        </ul>
+
+        <h2>Visibility makes better choices possible</h2>
+        <p>Shadow IT will not be solved by one audit. New tools are cheap, accessible, and sometimes genuinely better for the work at hand. The organization’s task is to make responsible adoption easier than invisible adoption.</p>
+        <p>Invite people to show how work actually gets done. Understand the need before judging the tool. Set firm, understandable limits for sensitive information, offer practical alternatives, and keep a lightweight record of what has been accepted. When something must change, preserve the business process while removing the unnecessary risk.</p>
+        <p>The software you do not know about is difficult to manage. The employees who tell you about it are part of the solution.</p>
+
+        <section class="article-cta rounded-2xl p-7 md:p-9">
+          <p class="pill">Bring hidden technology into view</p>
+          <h2 class="mt-3">Build a process people will actually use.</h2>
+          <p>Iron Dillo Cybersecurity helps small businesses and rural organizations inventory technology, understand data and account risk, and create practical review processes that fit real-world operations.</p>
+          <a class="btn-primary mt-5" href="/contact.html">Start a conversation</a>
+        </section>
+      </article>
+    </main>
+
+    <footer class="relative z-10 bg-armadilloBlack text-offWhite py-10 mt-auto"><div class="max-w-6xl mx-auto px-6 footer-grid"><div><p class="text-oliveLight font-semibold mb-2">Iron Dillo Cybersecurity</p><p class="text-sm text-offWhite/80">Veteran-owned independent cybersecurity practice for rural businesses, communities, and families.</p></div><div><p class="uppercase text-xs tracking-widest text-oliveLight">Contact</p><a href="tel:19039331342" class="block text-offWhite font-semibold">(903) 933-1342</a><a href="mailto:contact@irondillo.com" class="text-offWhite/80 hover:text-oliveLight">contact@irondillo.com</a></div><div class="text-sm text-offWhite/80 space-y-2"><p class="uppercase text-xs tracking-widest text-oliveLight">Legal</p><div class="flex flex-col gap-1"><a href="/privacy.html" class="hover:text-oliveLight">Privacy</a><a href="/terms.html" class="hover:text-oliveLight">Terms</a><a href="/commitment.html" class="hover:text-oliveLight">Our Commitment</a></div></div></div></footer>
+  </div>
+</body>
+</html>
