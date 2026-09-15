@@ -4,17 +4,17 @@ import { handleContact } from "../server/contact-handler.mjs";
 
 const valid = { name: "Ada Lovelace", email: "ada@example.com", phone: "", urgency: "General question", message: "Hello\r\nthere", company: "", turnstileToken: "verified-token" };
 
-function request(body = valid, headers = {}) {
-  return new Request("https://irondillo.com/api/contact", { method: "POST", headers: { origin: "https://irondillo.com", "content-type": "application/json", "cf-connecting-ip": "192.0.2.1", ...headers }, body: JSON.stringify(body) });
+function request(body = valid, headers = {}, origin = "https://irondillo.com") {
+  return new Request(`${origin}/api/contact`, { method: "POST", headers: { origin, "content-type": "application/json", "cf-connecting-ip": "192.0.2.1", ...headers }, body: JSON.stringify(body) });
 }
 
-function dependencies({ limited = false, bot = true, mail = true } = {}) {
+function dependencies({ limited = false, bot = true, mail = true, hostname = "irondillo.com" } = {}) {
   const sent = [];
   return {
     env: { TURNSTILE_SECRET_KEY: "secret", RESEND_API_KEY: "secret", CONTACT_RATE_LIMITER: { async limit() { return { success: !limited }; } } },
     sent,
     fetch: async (url, init) => {
-      if (url.includes("siteverify")) return Response.json({ success: bot, hostname: "irondillo.com" });
+      if (url.includes("siteverify")) return Response.json({ success: bot, hostname });
       sent.push(JSON.parse(init.body));
       return new Response("", { status: mail ? 200 : 500 });
     },
@@ -31,6 +31,20 @@ test("accepts a valid submission and normalizes line endings", async () => {
   assert.equal(response.status, 202);
   assert.match(sent[0].text, /Hello\nthere/);
   assert.equal(sent[0].reply_to, undefined);
+});
+test("accepts Turnstile verification for the configured production origin hostname", async () => {
+  const origin = "https://staging.irondillo.example";
+  const deps = dependencies({ hostname: "staging.irondillo.example" });
+  deps.env.PRODUCTION_ORIGIN = origin;
+  const response = await handleContact(request(valid, {}, origin), deps.env, { fetch: deps.fetch });
+  assert.equal(response.status, 202);
+});
+test("rejects a Turnstile hostname that does not match the configured production origin", async () => {
+  const origin = "https://staging.irondillo.example";
+  const deps = dependencies({ hostname: "irondillo.com" });
+  deps.env.PRODUCTION_ORIGIN = origin;
+  const response = await handleContact(request(valid, {}, origin), deps.env, { fetch: deps.fetch });
+  assert.equal(response.status, 400);
 });
 test("rejects an invalid email", async () => assert.equal((await submit({ ...valid, email: "not-email" })).response.status, 400));
 test("rejects an unknown urgency", async () => assert.equal((await submit({ ...valid, urgency: "Emergency" })).response.status, 400));
