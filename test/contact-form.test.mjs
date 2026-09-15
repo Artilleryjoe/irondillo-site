@@ -5,14 +5,14 @@ import vm from "node:vm";
 
 const script = await readFile(new URL("../assets/contact-form.js", import.meta.url), "utf8");
 
-test("uses a secure fallback endpoint and appropriate autofill tokens", async () => {
+test("uses the same-origin fallback endpoint and appropriate autofill tokens", async () => {
   const html = await readFile(new URL("../contact.html", import.meta.url), "utf8");
   const form = html.match(/<form\b[^>]*id="contact-form"[^>]*>[\s\S]*?<\/form>/)?.[0];
 
   assert.ok(form, "contact form should be present");
   const action = form.match(/action="([^"]+)"/)?.[1];
-  assert.equal(action, "https://irondillo.com/api/contact");
-  assert.equal(new URL(action, "http://irondillo.com/contact.html").protocol, "https:");
+  assert.equal(action, "/api/contact");
+  assert.equal(new URL(action, "https://irondillo.com/contact.html").href, "https://irondillo.com/api/contact");
   assert.match(form, /name="name"[^>]*autocomplete="name"/);
   assert.match(form, /name="email"[^>]*autocomplete="email"/);
   assert.match(form, /name="phone"[^>]*autocomplete="tel"/);
@@ -95,7 +95,7 @@ for (const [code, expected] of [[400, /check the fields/], [429, /wait a few min
   });
 }
 
-test("restricts forms to same-origin and the secure canonical origin", async () => {
+test("restricts forms to the same origin", async () => {
   const [html, headers] = await Promise.all([
     readFile(new URL("../contact.html", import.meta.url), "utf8"),
     readFile(new URL("../_headers", import.meta.url), "utf8"),
@@ -104,7 +104,7 @@ test("restricts forms to same-origin and the secure canonical origin", async () 
     assert.match(policy, /script-src[^;]*https:\/\/challenges\.cloudflare\.com/);
     assert.match(policy, /frame-src[^;]*https:\/\/challenges\.cloudflare\.com/);
     assert.match(policy, /connect-src 'self' https:\/\/challenges\.cloudflare\.com/);
-    assert.match(policy, /form-action 'self' https:\/\/irondillo\.com;/);
+    assert.match(policy, /form-action 'self';/);
     assert.doesNotMatch(policy, /formsubmit\.co/i);
   }
 });
