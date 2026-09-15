@@ -41,7 +41,7 @@
     ].join("\n");
     const mailto = `mailto:contact@irondillo.com?subject=${encodeURIComponent("New Iron Dillo contact request")}&body=${encodeURIComponent(body)}`;
 
-    status.textContent = "Opening a private draft in your email app…";
+    status.textContent = "Transferring your details to your email app to open a draft…";
     window.location.assign(mailto);
   });
 })();
