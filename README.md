@@ -30,13 +30,16 @@ the deployed pages retain their existing public paths.
 
 ## Local development
 
-Use any HTTP server to preview the content locally. For example with Python:
+Use any HTTP server to preview the content locally. Because the production contact page is HTTPS-only, use a local HTTPS server when browser-testing its secure-context behavior. Create a self-signed certificate and start `http-server` with TLS enabled:
 
 ```bash
-python -m http.server 8000
+openssl req -x509 -newkey rsa:2048 -nodes -days 30 \
+  -keyout localhost-key.pem -out localhost.pem -subj "/CN=localhost" \
+  -addext "subjectAltName=DNS:localhost,IP:127.0.0.1"
+npx --yes http-server . -S -C localhost.pem -K localhost-key.pem -p 8000
 ```
 
-Then browse to <http://localhost:8000> to view the site. Edits to the HTML files will hot-reload when you refresh the page.
+Then browse to <https://localhost:8000/contact.html>. A browser warning is expected because the certificate is self-signed; accept it only for this local development certificate. Remove `localhost.pem` and `localhost-key.pem` when finished. Edits to the HTML files appear when you refresh the page.
 
 
 ## Build and deploy guard (Tailwind)
