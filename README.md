@@ -22,11 +22,11 @@ Marketing site for [Iron Dillo Cybersecurity](https://irondillo.com). The projec
 ├── maintenance.html        # Temporary maintenance notice page
 ├── 404.html                # Custom error page for missing routes
 ├── sitemap.xml / robots.txt
-└── .github/workflows/static.yml       # GitHub Pages deployment workflow
+└── .github/workflows/static.yml       # Cloudflare Pages deployment workflow
 ```
 
-The HTML entry points intentionally remain at the repository root because GitHub
-Pages maps those filenames directly to the site's public URLs. Moving them into a
+The HTML entry points intentionally remain at the repository root because the
+static host maps those filenames directly to the site's public URLs. Moving them into a
 source directory without introducing a site build step would break existing links.
 Development-only material belongs in `docs/` and `src/`, while files referenced by
 the deployed pages retain their existing public paths.
@@ -94,12 +94,20 @@ When adding or revising testimonials, follow this checklist so updates stay cons
 
 ## Security headers policy
 
-A single canonical policy is defined in [`_headers`](_headers) and should be deployed at the CDN/proxy layer (Cloudflare Pages/Netlify-style header injection). Apply it to all routes (`/*`) so every page inherits the same baseline controls:
+A single canonical policy is defined in [`_headers`](_headers). Cloudflare Pages
+processes that file during deployment and applies the policy to all routes (`/*`):
 
 - The canonical policy is in `_headers`. It permits the Turnstile script, frame, and verification connection only to `https://challenges.cloudflare.com`, and restricts form submissions to this origin.
 - `X-Content-Type-Options: nosniff`
 - `Referrer-Policy: strict-origin-when-cross-origin`
 - `Permissions-Policy: accelerometer=(), camera=(), geolocation=(), gyroscope=(), microphone=(), payment=(), usb=()`
 - `X-Frame-Options: DENY`
+- `Strict-Transport-Security: max-age=31536000`
 
-If the host cannot set response headers directly (for example, raw GitHub Pages without a proxy/CDN), keep matching `<meta http-equiv=...>` tags in every HTML page as a fallback baseline. When creating new pages, copy the same security meta block so policy stays consistent site-wide.
+The `mailto:` allowance remains only because the current contact form opens an email
+client. When a hosted form endpoint is selected, replace it in `form-action` and add
+that exact origin to `connect-src`; remove `mailto:` after email-client submission is
+retired. Do not add wildcard origins. Page-level CSP meta tags are defense-in-depth,
+but `_headers` is the canonical production policy because Cloudflare sends it as an
+HTTP response header (including directives such as `frame-ancestors` that meta CSP
+cannot enforce).
