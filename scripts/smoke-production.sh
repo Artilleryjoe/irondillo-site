@@ -37,7 +37,7 @@ curl --silent --show-error --dump-header "$redirect_headers" --output /dev/null 
 redirect_status="$(awk 'NR == 1 { print $2 }' "$redirect_headers")"
 [[ "$redirect_status" =~ ^30[1278]$ ]] || fail "HTTP returned ${redirect_status:-no status}, not a permanent/temporary redirect"
 redirect_location="$(awk 'BEGIN { IGNORECASE = 1 } /^location:/ { sub(/\r$/, ""); sub(/^[^:]*:[[:space:]]*/, ""); print; exit }' "$redirect_headers")"
-[[ "$redirect_location" == https://* ]] || fail "HTTP redirect does not target HTTPS: ${redirect_location:-missing Location header}"
+[[ "$redirect_location" == "$HTTPS_URL" ]] || fail "HTTP redirect does not target ${HTTPS_URL}: ${redirect_location:-missing Location header}"
 
 curl --silent --show-error --fail --dump-header "$headers_file" --output /dev/null \
   --max-time 20 "$HTTPS_URL"
