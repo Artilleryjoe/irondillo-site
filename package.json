@@ -4,7 +4,8 @@
   "version": "1.0.0",
   "scripts": {
     "build:tailwind": "tailwindcss -c tailwind.config.js -i ./src/styles/tailwind.css -o ./assets/tailwind.css --minify",
-    "build": "npm run build:tailwind"
+    "build": "npm run build:tailwind",
+    "test": "node --test"
   },
   "devDependencies": {
     "tailwindcss": "3.4.17"

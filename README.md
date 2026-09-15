@@ -1,6 +1,6 @@
 # Iron Dillo Cybersecurity Site
 
-Static marketing site for [Iron Dillo Cybersecurity](https://irondillo.com). The project is a collection of hand-crafted HTML pages with a generated Tailwind output (`assets/tailwind.css`) deployed through Cloudflare Pages.
+Marketing site for [Iron Dillo Cybersecurity](https://irondillo.com). The project contains hand-crafted HTML pages, a generated Tailwind output (`assets/tailwind.css`), and a Cloudflare Pages Function for the contact form.
 
 ## Repository layout
 
@@ -12,7 +12,7 @@ Static marketing site for [Iron Dillo Cybersecurity](https://irondillo.com). The
 ├── index.html              # Home page
 ├── services.html           # Overview of offerings
 ├── about.html              # Background and mission statement
-├── contact.html            # Contact form that opens the visitor’s email app
+├── contact.html            # Contact form submitted through FormSubmit
 ├── commitment.html         # Cybersecurity commitment and ethics
 ├── lindale-tyler-cybersecurity.html  # Local services landing page
 ├── privacy.html / terms.html          # Policy documents
@@ -55,24 +55,11 @@ git diff --exit-code -- assets/tailwind.css
 
 If the diff command reports changes, commit the regenerated `assets/tailwind.css` before opening or merging a PR.
 
-The Cloudflare Pages workflow also enforces this: deploy will fail if `npm run build:tailwind` produces changes that are not committed.
+The GitHub Actions validation workflow also enforces this and fails when the generated CSS is not committed.
 
 ## Deployment
 
-Pushes to the `main` branch trigger `.github/workflows/static.yml`, which builds a
-minimal publish directory and deploys it to the `irondillo-site` Cloudflare Pages
-project. Configure the repository secrets `CLOUDFLARE_API_TOKEN` (with Pages edit
-permission) and `CLOUDFLARE_ACCOUNT_ID`, then attach `irondillo.com` and
-`www.irondillo.com` as Pages custom domains.
-
-Cloudflare Pages terminates TLS and redirects plain HTTP requests to HTTPS. Before
-switching production DNS, confirm that valid certificates are active for both custom
-domains and that both HTTP names redirect to HTTPS. A pre-deployment workflow job
-performs that gate before publishing the checked-in HSTS policy. The policy does not
-use `includeSubDomains`; add that directive only after every required subdomain
-has been inventoried and confirmed HTTPS-capable. The post-deployment smoke job runs
-`scripts/smoke-production.sh` against the apex and `www` domains and fails if an
-HTTPS redirect or security response header regresses.
+The production Cloudflare Pages project should deploy the repository from `main`; Pages Functions are required for `/api/contact`. GitHub Actions runs the build and endpoint tests as a deployment guard. Configure the secrets and binding below in the Pages project before enabling the form.
 
 ## Content guidelines
 
@@ -96,7 +83,7 @@ When adding or revising testimonials, follow this checklist so updates stay cons
 A single canonical policy is defined in [`_headers`](_headers). Cloudflare Pages
 processes that file during deployment and applies the policy to all routes (`/*`):
 
-- `Content-Security-Policy: default-src 'self'; script-src 'self'; connect-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; form-action 'self' mailto:; object-src 'none'; base-uri 'self'; frame-ancestors 'none'`
+- The canonical policy is in `_headers`. It permits the Turnstile script, frame, and verification connection only to `https://challenges.cloudflare.com`, and restricts form submissions to this origin.
 - `X-Content-Type-Options: nosniff`
 - `Referrer-Policy: strict-origin-when-cross-origin`
 - `Permissions-Policy: accelerometer=(), camera=(), geolocation=(), gyroscope=(), microphone=(), payment=(), usb=()`
