@@ -34,3 +34,5 @@ jobs:
           git diff --exit-code -- assets/tailwind.css
       - name: Test contact endpoint
         run: npm test
+      - name: Verify canonical CSP matches production smoke test
+        run: node --test test/csp-sync.test.mjs

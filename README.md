@@ -62,13 +62,43 @@ The GitHub Actions validation workflow also enforces this and fails when the gen
 
 ## Deployment
 
-The production Cloudflare Pages project should deploy the repository from `main`. GitHub Actions runs the build and tests as a deployment guard.
+The production site is a **Cloudflare Pages** project deployed from `main`. In
+addition to serving the static files, Pages must deploy the first-party
+Functions in `functions/api/`: `/api/contact-config` publishes the Turnstile
+site key to the browser, and `/api/contact` is the canonical contact submission
+endpoint. Do not configure the form to post directly to Resend or another form
+service. GitHub Actions runs the build and tests as a deployment guard.
+
+Configure these values in the Pages project (secrets should be encrypted):
+
+| Name | Kind | Purpose |
+| --- | --- | --- |
+| `TURNSTILE_SITE_KEY` | variable | Public site key returned by `/api/contact-config`. |
+| `TURNSTILE_SECRET_KEY` | secret | Verifies each Turnstile token on the server. |
+| `RESEND_API_KEY` | secret | Authorizes the server-side delivery request to Resend. It is never exposed to the browser. |
+| `CONTACT_RATE_LIMITER` | Rate Limiting binding | Applies per-client abuse limits before verification or delivery. |
+| `PRODUCTION_ORIGIN` | variable | Exact allowed origin (for production, `https://irondillo.com`) and the hostname expected in Turnstile verification. |
+
+After deployment, run `scripts/smoke-production.sh`. It checks the production
+page and headers, reads `/api/contact-config`, and verifies that malformed and
+unverified submissions receive generic failures rather than successful delivery
+responses.
+
+## Contact form architecture
+
+The browser fetches the public `TURNSTILE_SITE_KEY` from the same-origin
+`/api/contact-config` Function. After Turnstile supplies a fresh token, it sends
+only the documented JSON fields to the same-origin `/api/contact` Function. That
+Function enforces HTTPS, `PRODUCTION_ORIGIN`, JSON shape and size, the honeypot,
+`CONTACT_RATE_LIMITER`, and Turnstile verification—in that order—before using
+`RESEND_API_KEY` to ask Resend to deliver the message. Invalid requests return a
+generic error and never reach the Resend delivery step.
 
 ## Content guidelines
 
 * Keep images in `assets/`. Remove unused media so the repository stays lightweight.
 * Inline Tailwind classes control styling; no additional CSS build pipeline is necessary.
-* When a visitor selects “Send message,” the contact form obtains a fresh Cloudflare Turnstile token and posts a JSON payload to the same-origin `/api/contact` Pages Function. The form deliberately has no HTML `action`, uses a `company` honeypot field, and warns visitors not to submit secrets or regulated data. Configure `TURNSTILE_SITE_KEY`, `TURNSTILE_SECRET_KEY`, `RESEND_API_KEY`, and the `CONTACT_RATE_LIMITER` binding in Cloudflare Pages.
+* When a visitor selects “Send message,” the contact form follows the first-party architecture documented above. The form deliberately has no HTML `action`, uses a `company` honeypot field, and warns visitors not to submit secrets or regulated data.
 * For any metadata updates (Open Graph, SEO), update the relevant `<meta>` tags across the HTML pages.
 
 ### Testimonial updates
