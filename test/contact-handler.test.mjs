@@ -8,13 +8,13 @@ function request(body = valid, headers = {}, origin = "https://irondillo.com") {
   return new Request(`${origin}/api/contact`, { method: "POST", headers: { origin, "content-type": "application/json", "cf-connecting-ip": "192.0.2.1", ...headers }, body: JSON.stringify(body) });
 }
 
-function dependencies({ limited = false, bot = true, mail = true, hostname = "irondillo.com" } = {}) {
+function dependencies({ limited = false, bot = true, mail = true, hostname = "irondillo.com", action = "contact_form" } = {}) {
   const sent = [];
   return {
     env: { TURNSTILE_SECRET_KEY: "secret", RESEND_API_KEY: "secret", CONTACT_RATE_LIMITER: { async limit() { return { success: !limited }; } } },
     sent,
     fetch: async (url, init) => {
-      if (url.includes("siteverify")) return Response.json({ success: bot, hostname });
+      if (url.includes("siteverify")) return Response.json({ success: bot, hostname, ...(action === null ? {} : { action }) });
       sent.push(JSON.parse(init.body));
       return new Response("", { status: mail ? 200 : 500 });
     },
@@ -31,6 +31,23 @@ test("accepts a valid submission and normalizes line endings", async () => {
   assert.equal(response.status, 202);
   assert.match(sent[0].text, /Hello\nthere/);
   assert.equal(sent[0].reply_to, undefined);
+});
+test("accepts Turnstile verification with the expected action", async () => {
+  const { response, sent } = await submit(valid, { action: "contact_form" });
+  assert.equal(response.status, 202);
+  assert.equal(sent.length, 1);
+});
+test("rejects Turnstile verification with a missing action as a generic validation failure", async () => {
+  const { response, sent } = await submit(valid, { action: null });
+  assert.equal(response.status, 400);
+  assert.deepEqual(await response.json(), { ok: false, error: "Unable to submit the form." });
+  assert.deepEqual(sent, []);
+});
+test("rejects Turnstile verification with the wrong action as a generic validation failure", async () => {
+  const { response, sent } = await submit(valid, { action: "newsletter_signup" });
+  assert.equal(response.status, 400);
+  assert.deepEqual(await response.json(), { ok: false, error: "Unable to submit the form." });
+  assert.deepEqual(sent, []);
 });
 test("accepts Turnstile verification for the configured production origin hostname", async () => {
   const origin = "https://staging.irondillo.example";

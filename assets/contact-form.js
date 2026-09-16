@@ -4,6 +4,7 @@
   const form = document.getElementById("contact-form");
   const status = document.getElementById("form-status");
   const turnstileContainer = document.getElementById("contact-turnstile");
+  const turnstileAction = "contact_form";
   if (!form || !status || !turnstileContainer) return;
 
   const fields = form.querySelector("[data-contact-fields]");
@@ -33,6 +34,7 @@
     await new Promise((resolve) => window.turnstile.ready(resolve));
     widgetId = window.turnstile.render(turnstileContainer, {
       sitekey: config.turnstileSiteKey,
+      action: turnstileAction,
       execution: "execute",
       appearance: "interaction-only",
       callback(token) {
