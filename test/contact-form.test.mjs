@@ -104,7 +104,7 @@ for (const [code, expected] of [
 test("CSP permits only the Turnstile origins needed by the widget", async () => {
   const headers = await readFile(new URL("../_headers", import.meta.url), "utf8");
   assert.match(headers, /script-src 'self' https:\/\/challenges\.cloudflare\.com/);
-  assert.match(headers, /connect-src 'self';/);
+  assert.match(headers, /connect-src 'self' https:\/\/challenges\.cloudflare\.com;/);
   assert.match(headers, /frame-src https:\/\/challenges\.cloudflare\.com/);
   assert.match(headers, /form-action 'self'/);
   assert.doesNotMatch(headers, /formspree\.io/i);
