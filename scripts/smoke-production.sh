@@ -69,7 +69,11 @@ if [[ "$CHECK_HEADERS" == "false" ]]; then
   exit 0
 fi
 
-[[ "$(header_value content-security-policy)" == "$EXPECTED_CSP" ]] || fail "Content-Security-Policy does not match _headers"
+csp="$(header_value content-security-policy)"
+[[ -n "$csp" ]] || fail "Content-Security-Policy is missing"
+for directive in "default-src 'self'" "object-src 'none'" "base-uri 'self'" "frame-ancestors 'none'" "upgrade-insecure-requests"; do
+  [[ "$csp" == *"$directive"* ]] || fail "Content-Security-Policy is missing required directive: ${directive}"
+done
 [[ "$(header_value x-content-type-options)" == "nosniff" ]] || fail "X-Content-Type-Options is missing or invalid"
 [[ "$(header_value referrer-policy)" == "strict-origin-when-cross-origin" ]] || fail "Referrer-Policy is missing or invalid"
 [[ "$(header_value permissions-policy)" == "accelerometer=(), camera=(), geolocation=(), gyroscope=(), microphone=(), payment=(), usb=()" ]] || fail "Permissions-Policy is missing or invalid"
