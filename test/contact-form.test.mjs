@@ -9,7 +9,9 @@ test("includes an explicitly rendered Turnstile container and secure form fields
   const html = await readFile(new URL("../contact.html", import.meta.url), "utf8");
   const form = html.match(/<form\b[^>]*id="contact-form"[^>]*>[\s\S]*?<\/form>/)?.[0];
   assert.ok(form);
-  assert.doesNotMatch(form, /\saction\s*=/i);
+  assert.match(form, /<form\b[^>]*\bmethod="post"[^>]*\baction="\/api\/contact"/i);
+  assert.match(form, /<fieldset\b[^>]*data-contact-fields[^>]*\bdisabled\b/i);
+  assert.match(form, /<noscript>[\s\S]*href="tel:19039331342"[\s\S]*href="mailto:contact@irondillo\.com"[\s\S]*<\/noscript>/i);
   assert.match(form, /id="contact-turnstile"/);
   assert.match(html, /https:\/\/challenges\.cloudflare\.com\/turnstile\/v0\/api\.js\?render=explicit/);
   assert.match(form, /name="company"[^>]*autocomplete="off"/);
@@ -22,6 +24,7 @@ function harness(contactStatus = 202, holdContact = false) {
     ["urgency", "General question"], ["message", "Please help with our security plan."], ["company", ""],
   ]);
   const button = { disabled: false };
+  const fields = { disabled: true };
   const status = { textContent: "" };
   const container = {};
   let submit;
@@ -32,7 +35,7 @@ function harness(contactStatus = 202, holdContact = false) {
   let callbacks;
   const form = {
     addEventListener(type, listener) { if (type === "submit") submit = listener; },
-    querySelector() { return button; }, reportValidity() { return true; }, reset() { resetForm = true; },
+    querySelector(selector) { return selector === "[data-contact-fields]" ? fields : button; }, reportValidity() { return true; }, reset() { resetForm = true; },
   };
   class FormDataMock { constructor(received) { assert.equal(received, form); } get(name) { return values.get(name); } }
   const turnstile = {
@@ -52,11 +55,12 @@ function harness(contactStatus = 202, holdContact = false) {
     FormData: FormDataMock, fetch, window: { turnstile }, Error, JSON, String,
   };
   vm.runInNewContext(script, context);
-  return { button, requests, get resetForm() { return resetForm; }, status, submit, turnstileCalls, release() { releaseContact(); } };
+  return { button, fields, requests, get resetForm() { return resetForm; }, status, submit, turnstileCalls, release() { releaseContact(); } };
 }
 
 test("fetches configuration and posts only accepted JSON fields to the same-origin endpoint", async () => {
   const run = harness();
+  assert.equal(run.fields.disabled, false);
   await run.submit({ preventDefault() {} });
   assert.equal(run.requests[0].url, "/api/contact-config");
   assert.equal(run.requests[1].url, "/api/contact");
