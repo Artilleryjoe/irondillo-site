@@ -32,7 +32,7 @@ jobs:
         run: |
           npm run build:tailwind
           git diff --exit-code -- assets/tailwind.css
-      - name: Test contact endpoint
+      - name: Run site tests
         run: npm test
       - name: Validate static HTML, links, and security controls
         run: npm run validate:static

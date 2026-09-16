@@ -86,8 +86,8 @@ When adding or revising testimonials, follow this checklist so updates stay cons
 A single canonical policy is defined in [`_headers`](_headers). Cloudflare Pages
 processes that file during deployment and applies the policy to all routes (`/*`):
 
-- `Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; frame-src 'none'; form-action 'none'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; upgrade-insecure-requests`
-- Browser connections remain same-origin, while frames and form submissions are disabled. Production must redirect HTTP to HTTPS.
+- `Content-Security-Policy: default-src 'self'; script-src 'self' https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; form-action 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; upgrade-insecure-requests`
+- Browser connections and form submissions remain same-origin. The legacy Turnstile origins remain in the production policy until a separately deployed header migration can be verified without racing the site deployment. Production must redirect HTTP to HTTPS.
 - `X-Content-Type-Options: nosniff`
 - `Referrer-Policy: strict-origin-when-cross-origin`
 - `Permissions-Policy: accelerometer=(), camera=(), geolocation=(), gyroscope=(), microphone=(), payment=(), usb=()`

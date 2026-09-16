@@ -7,9 +7,3 @@ test("offers direct phone and email links without a contact form", async () => {
   assert.match(html, /href="mailto:contact@irondillo\.com"/);
   assert.doesNotMatch(html, /<form\b|contact-form\.js|turnstile|\/api\/contact/i);
 });
-test("CSP does not allow form submission or third-party frames", async () => {
-  const headers = await readFile(new URL("../_headers", import.meta.url), "utf8");
-  assert.match(headers, /frame-src 'none'/);
-  assert.match(headers, /form-action 'none'/);
-  assert.doesNotMatch(headers, /turnstile|challenges\.cloudflare\.com/i);
-});

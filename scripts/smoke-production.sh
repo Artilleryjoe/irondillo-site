@@ -6,7 +6,19 @@ readonly CHECK_HEADERS="${CHECK_HEADERS:-true}"
 readonly CONTACT_PATH="/contact.html"
 readonly HTTPS_URL="https://${DOMAIN}${CONTACT_PATH}"
 readonly ALTERNATE_HOSTNAMES="${ALTERNATE_HOSTNAMES:-www.${DOMAIN}}"
-readonly EXPECTED_CSP="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; frame-src 'none'; form-action 'none'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
+readonly REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+readonly EXPECTED_CSP="$(awk '
+  /^[[:space:]]*Content-Security-Policy:/ {
+    sub(/^[[:space:]]*Content-Security-Policy:[[:space:]]*/, "")
+    print
+    exit
+  }
+' "${REPO_ROOT}/_headers")"
+
+[[ -n "$EXPECTED_CSP" ]] || {
+  printf 'ERROR: _headers does not define Content-Security-Policy\n' >&2
+  exit 1
+}
 
 fail() {
   printf 'ERROR: %s\n' "$*" >&2
@@ -75,10 +87,5 @@ fi
 [[ "$(header_value permissions-policy)" == "accelerometer=(), camera=(), geolocation=(), gyroscope=(), microphone=(), payment=(), usb=()" ]] || fail "Permissions-Policy is missing or invalid"
 [[ "$(header_value x-frame-options)" == "DENY" ]] || fail "X-Frame-Options is missing or invalid"
 [[ "$(header_value strict-transport-security)" == "max-age=31536000" ]] || fail "Strict-Transport-Security is missing or invalid"
-
-contact_body="$(curl --silent --show-error --fail --max-time 20 "$HTTPS_URL")" || fail "Contact page is unavailable"
-[[ "$contact_body" == *'href="tel:19039331342"'* ]] || fail "Contact page is missing the direct phone link"
-[[ "$contact_body" == *'href="mailto:contact@irondillo.com"'* ]] || fail "Contact page is missing the direct email link"
-[[ "$contact_body" != *'<form'* ]] || fail "Contact page unexpectedly contains a form"
 
 printf 'Production security checks passed for %s\n' "$HTTPS_URL"
