@@ -19,6 +19,13 @@ test("uses JavaScript submission without a form action and appropriate autofill 
   assert.match(form, /name="_gotcha"[^>]*autocomplete="off"/);
 });
 
+test("does not expose insecure resource or mailto targets", async () => {
+  const html = await readFile(new URL("../contact.html", import.meta.url), "utf8");
+
+  assert.doesNotMatch(html, /(?:href|src|action)="http:\/\//i);
+  assert.doesNotMatch(html, /(?:href|action)="mailto:/i);
+});
+
 test("uses HTTP response headers for document security policies", async () => {
   const [html, headers] = await Promise.all([
     readFile(new URL("../contact.html", import.meta.url), "utf8"),
