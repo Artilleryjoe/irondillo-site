@@ -56,7 +56,22 @@ test("rejects malformed content type", async () => {
   assert.equal(response.status, 415);
 });
 test("rate limits clients", async () => assert.equal((await submit(valid, { limited: true })).response.status, 429));
-test("rejects bot-verification failure", async () => assert.equal((await submit(valid, { bot: false })).response.status, 400));
+test("rejects bot-verification failure without attempting delivery", async () => {
+  const { response, sent } = await submit(valid, { bot: false });
+  assert.equal(response.status, 400);
+  assert.deepEqual(sent, []);
+});
+test("rejects malformed JSON without calling verification or delivery", async () => {
+  let providerCalls = 0;
+  const response = await handleContact(new Request("https://irondillo.com/api/contact", {
+    method: "POST",
+    headers: { origin: "https://irondillo.com", "content-type": "application/json" },
+    body: "{",
+  }), dependencies().env, { fetch: async () => { providerCalls += 1; } });
+  assert.equal(response.status, 400);
+  assert.equal(providerCalls, 0);
+  assert.deepEqual(await response.json(), { ok: false, error: "Unable to submit the form." });
+});
 test("returns a generic error on mail-provider failure", async () => {
   const { response } = await submit(valid, { mail: false });
   assert.equal(response.status, 502);

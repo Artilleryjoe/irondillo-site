@@ -6,7 +6,8 @@ readonly CHECK_HEADERS="${CHECK_HEADERS:-true}"
 readonly CONTACT_PATH="/contact.html"
 readonly HTTPS_URL="https://${DOMAIN}${CONTACT_PATH}"
 readonly ALTERNATE_HOSTNAMES="${ALTERNATE_HOSTNAMES:-www.${DOMAIN}}"
-readonly EXPECTED_CSP="default-src 'self'; script-src 'self' https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; frame-src https://challenges.cloudflare.com; connect-src 'self' https://challenges.cloudflare.com; form-action 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'"
+readonly EXPECTED_CSP="default-src 'self'; script-src 'self' https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; frame-src https://challenges.cloudflare.com; form-action 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'"
+readonly CONFIG_RESPONSE_PATTERN='^\{"turnstileSiteKey":"[^"]+"\}$'
 
 fail() {
   printf 'ERROR: %s\n' "$*" >&2
@@ -76,5 +77,29 @@ fi
 [[ "$(header_value permissions-policy)" == "accelerometer=(), camera=(), geolocation=(), gyroscope=(), microphone=(), payment=(), usb=()" ]] || fail "Permissions-Policy is missing or invalid"
 [[ "$(header_value x-frame-options)" == "DENY" ]] || fail "X-Frame-Options is missing or invalid"
 [[ "$(header_value strict-transport-security)" == "max-age=31536000" ]] || fail "Strict-Transport-Security is missing or invalid"
+
+config_body="$(curl --silent --show-error --fail --max-time 20 "https://${DOMAIN}/api/contact-config")" || fail "Contact configuration endpoint is unavailable"
+[[ "$config_body" =~ $CONFIG_RESPONSE_PATTERN ]] || fail "Contact configuration endpoint returned an invalid response"
+
+check_rejected_submission() {
+  local description="$1"
+  local body="$2"
+  local status response
+
+  response="$(mktemp)"
+  status="$(curl --silent --show-error --output "$response" --max-time 20 \
+    --write-out '%{http_code}' --request POST "https://${DOMAIN}/api/contact" \
+    --header "Origin: https://${DOMAIN}" --header 'Content-Type: application/json' \
+    --data-binary "$body")"
+  [[ "$status" == "400" ]] || { rm -f "$response"; fail "${description} contact submission returned HTTP ${status}"; }
+  [[ "$(cat "$response")" == '{"ok":false,"error":"Unable to submit the form."}' ]] || { rm -f "$response"; fail "${description} contact submission exposed an unexpected response"; }
+  rm -f "$response"
+}
+
+# Neither request can pass the gates that precede Resend: malformed JSON fails
+# parsing, while the syntactically valid request carries a deliberately invalid
+# Turnstile token and must fail verification.
+check_rejected_submission "Malformed" '{'
+check_rejected_submission "Unverified" '{"name":"Production smoke test","email":"noreply@example.com","phone":"","urgency":"General question","message":"This must never be delivered.","company":"","turnstileToken":"intentionally-invalid"}'
 
 printf 'Production security checks passed for %s\n' "$HTTPS_URL"
