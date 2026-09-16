@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="/styles.css">
   <link rel="stylesheet" href="/assets/tailwind.css">
 
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; frame-src https://challenges.cloudflare.com; connect-src 'self' https://challenges.cloudflare.com; form-action 'self'; object-src 'none'; base-uri 'self';">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://formspree.io; form-action 'self' https://formspree.io; object-src 'none'; base-uri 'self';">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
   <meta http-equiv="Permissions-Policy" content="accelerometer=(), camera=(), geolocation=(), gyroscope=(), microphone=(), payment=(), usb=()">
@@ -61,7 +61,7 @@
           </div>
         </div>
 
-        <form id="contact-form" class="lg:col-span-2 glass-panel rounded-2xl p-6 space-y-4" action="/api/contact" method="POST">
+        <form id="contact-form" class="lg:col-span-2 glass-panel rounded-2xl p-6 space-y-4" action="https://formspree.io/f/xldnbpdg" method="POST">
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label for="name" class="text-sm font-semibold text-armadilloBlack">Name</label>
@@ -90,10 +90,9 @@
             <p class="mt-2 text-xs text-armadilloGray">Please do not include passwords, authentication codes, private keys, regulated records, or other sensitive information that is not necessary for your question.</p>
           </div>
           <div class="sr-only" aria-hidden="true">
-            <input type="text" name="company" id="company" tabindex="-1" autocomplete="off" />
+            <input type="text" name="_gotcha" id="company" tabindex="-1" autocomplete="off" />
           </div>
-          <p class="text-xs text-armadilloGray">When you select “Send message,” your information is sent securely to Iron Dillo through our contact endpoint and may be processed by Resend, our configured email-delivery provider. Please do not submit passwords, authentication codes, private keys, regulated data, or other secrets. Review our <a href="/privacy.html" class="text-oliveGreen underline hover:text-oliveDark">privacy policy</a>, or email <a href="mailto:contact@irondillo.com" class="text-oliveGreen underline hover:text-oliveDark">contact@irondillo.com</a> if the form is unavailable.</p>
-          <div id="turnstile-widget"></div>
+          <p class="text-xs text-armadilloGray">When you select “Send message,” your information is securely submitted to Iron Dillo through Formspree. Please do not submit passwords, authentication codes, private keys, regulated data, or other secrets. Review our <a href="/privacy.html" class="text-oliveGreen underline hover:text-oliveDark">privacy policy</a>, or email <a href="mailto:contact@irondillo.com" class="text-oliveGreen underline hover:text-oliveDark">contact@irondillo.com</a> if the form is unavailable.</p>
           <p id="form-status" class="text-sm font-semibold text-armadilloGray" role="status" aria-live="polite"></p>
           <div class="flex items-center justify-end">
             <button type="submit" class="btn-primary">Send message</button>

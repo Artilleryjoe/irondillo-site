@@ -1,6 +1,6 @@
 # Iron Dillo Cybersecurity Site
 
-Marketing site for [Iron Dillo Cybersecurity](https://irondillo.com). The project contains hand-crafted HTML pages, a generated Tailwind output (`assets/tailwind.css`), and a Cloudflare Pages Function for the contact form.
+Marketing site for [Iron Dillo Cybersecurity](https://irondillo.com). The project contains hand-crafted HTML pages and a generated Tailwind output (`assets/tailwind.css`).
 
 ## Repository layout
 
@@ -12,7 +12,7 @@ Marketing site for [Iron Dillo Cybersecurity](https://irondillo.com). The projec
 ├── index.html              # Home page
 ├── services.html           # Overview of offerings
 ├── about.html              # Background and mission statement
-├── contact.html            # Contact form submitted to the Pages Function
+├── contact.html            # Contact form submitted to Formspree
 ├── commitment.html         # Cybersecurity commitment and ethics
 ├── lindale-tyler-cybersecurity.html  # Local services landing page
 ├── privacy.html / terms.html          # Policy documents
@@ -62,24 +62,13 @@ The GitHub Actions validation workflow also enforces this and fails when the gen
 
 ## Deployment
 
-The production Cloudflare Pages project should deploy the repository from `main`; Pages Functions are required for `/api/contact`. GitHub Actions runs the build and endpoint tests as a deployment guard. Configure the secrets and binding below in the Pages project before enabling the form.
+The production Cloudflare Pages project should deploy the repository from `main`. GitHub Actions runs the build and tests as a deployment guard.
 
 ## Content guidelines
 
 * Keep images in `assets/`. Remove unused media so the repository stays lightweight.
 * Inline Tailwind classes control styling; no additional CSS build pipeline is necessary.
-* When a visitor selects “Send message,” the contact form securely posts JSON to the same-origin `/api/contact` endpoint; it does not open an email draft. The server independently validates every field, applies Cloudflare rate limiting and Turnstile verification, and delivers plain-text mail to Iron Dillo through Resend, the configured email-delivery provider. Resend may process the submitted information to deliver the message. Visitor values are never used to construct mail headers, and visitors are warned not to submit secrets or regulated data.
-
-### Contact endpoint deployment
-
-Deploy the site with Cloudflare Pages and configure these server-side secrets and bindings (never expose them in client code):
-
-* `TURNSTILE_SECRET_KEY`: the Turnstile secret for the hostname used by `PRODUCTION_ORIGIN` (or `irondillo.com` when the override is unset).
-* `TURNSTILE_SITE_KEY`: the corresponding public site key, exposed through `/api/contact-config`.
-* `RESEND_API_KEY`: an API key authorized to send from the verified `irondillo.com` domain.
-* `CONTACT_RATE_LIMITER`: a Cloudflare Rate Limiting binding. A recommended starting threshold is five submissions per IP per ten minutes, adjusted using aggregate operational metrics rather than message contents.
-
-`PRODUCTION_ORIGIN` may override the default `https://irondillo.com` origin for a controlled deployment. Turnstile verification requires tokens issued for that origin's hostname. The Origin check is only browser defense in depth; Turnstile and rate limiting remain mandatory. Configure the provider so `contact-form@irondillo.com` is an authenticated sender (SPF, DKIM, and DMARC), and do not log request bodies.
+* When a visitor selects “Send message,” the contact form posts directly to the configured Formspree endpoint and requests a JSON response so the page can show its own success or error message. Formspree processes the submitted information to deliver the inquiry. The form retains a native POST action as a fallback, uses Formspree's `_gotcha` honeypot field, and warns visitors not to submit secrets or regulated data.
 * For any metadata updates (Open Graph, SEO), update the relevant `<meta>` tags across the HTML pages.
 
 ### Testimonial updates
@@ -97,8 +86,8 @@ When adding or revising testimonials, follow this checklist so updates stay cons
 A single canonical policy is defined in [`_headers`](_headers). Cloudflare Pages
 processes that file during deployment and applies the policy to all routes (`/*`):
 
-- `Content-Security-Policy: default-src 'self'; script-src 'self' https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; frame-src https://challenges.cloudflare.com; connect-src 'self' https://challenges.cloudflare.com; form-action 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'`
-- The script and frame allowlists contain only the external Turnstile origin used by the contact flow. Browser connections may reach the same origin and same-origin `/api/contact-config` and `/api/contact`; both scripted and fallback form submissions remain same-origin. Production must redirect HTTP to HTTPS so the document and those relative endpoints share a secure context. An ordinary HTTP preview remains insecure and may trigger browser autofill warnings; use HTTPS when browser-testing the form.
+- `Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://formspree.io; form-action 'self' https://formspree.io; object-src 'none'; base-uri 'self'; frame-ancestors 'none'`
+- Browser connections and fallback form submissions allow only the configured Formspree origin in addition to the site's own origin. Production must redirect HTTP to HTTPS. An ordinary HTTP preview remains insecure and may trigger browser autofill warnings; use HTTPS when browser-testing the form.
 - `X-Content-Type-Options: nosniff`
 - `Referrer-Policy: strict-origin-when-cross-origin`
 - `Permissions-Policy: accelerometer=(), camera=(), geolocation=(), gyroscope=(), microphone=(), payment=(), usb=()`

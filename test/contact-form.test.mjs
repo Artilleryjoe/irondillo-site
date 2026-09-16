@@ -4,64 +4,52 @@ import test from "node:test";
 import vm from "node:vm";
 
 const script = await readFile(new URL("../assets/contact-form.js", import.meta.url), "utf8");
+const endpoint = "https://formspree.io/f/xldnbpdg";
 
-test("uses the same-origin fallback endpoint and appropriate autofill tokens", async () => {
+test("uses the Formspree endpoint and appropriate autofill tokens", async () => {
   const html = await readFile(new URL("../contact.html", import.meta.url), "utf8");
   const form = html.match(/<form\b[^>]*id="contact-form"[^>]*>[\s\S]*?<\/form>/)?.[0];
 
   assert.ok(form, "contact form should be present");
-  const action = form.match(/action="([^"]+)"/)?.[1];
-  assert.equal(action, "/api/contact");
-  assert.equal(new URL(action, "https://irondillo.com/contact.html").href, "https://irondillo.com/api/contact");
+  assert.equal(form.match(/action="([^"]+)"/)?.[1], endpoint);
+  assert.match(form, /method="POST"/);
   assert.match(form, /name="name"[^>]*autocomplete="name"/);
   assert.match(form, /name="email"[^>]*autocomplete="email"/);
   assert.match(form, /name="phone"[^>]*autocomplete="tel"/);
-  assert.match(form, /name="company"[^>]*autocomplete="off"/);
-  assert.doesNotMatch(form, /formsubmit\.co|name="_honey"/i);
+  assert.match(form, /name="_gotcha"[^>]*autocomplete="off"/);
 });
 
-async function runSubmission(contactStatus = 202) {
+async function runSubmission(contactStatus = 200) {
   const values = new Map([
     ["name", " Ada Lovelace "], ["email", "ada@example.com"], ["phone", ""],
-    ["urgency", "General question"], ["message", "Please help with our security plan."], ["company", ""],
+    ["urgency", "General question"], ["message", "Please help with our security plan."], ["_gotcha", ""],
   ]);
   const button = { disabled: false };
   const status = { textContent: "" };
-  const widget = { textContent: "" };
   let submit;
   let reset = false;
   const requests = [];
   const form = {
-    action: "/api/contact",
+    action: endpoint,
     addEventListener(type, listener) { if (type === "submit") submit = listener; },
     querySelector() { return button; },
     reportValidity() { return true; },
     reset() { reset = true; },
   };
-  const turnstile = {
-    render(element, options) {
-      assert.equal(element, widget);
-      assert.equal(options.sitekey, "public-site-key");
-      options.callback("verified-token");
-      return "widget-id";
-    },
-    execute(id) { assert.equal(id, "widget-id"); },
-  };
+  class FormDataMock {
+    constructor(receivedForm) {
+      this.fields = [];
+      if (receivedForm) assert.equal(receivedForm, form);
+    }
+    get(name) { return values.get(name); }
+    append(name, value) { this.fields.push([name, value]); }
+  }
   const context = {
-    window: { turnstile },
-    document: {
-      head: { appendChild(node) { node.onload(); } },
-      createElement() { return {}; },
-      getElementById(id) { return id === "contact-form" ? form : id === "form-status" ? status : widget; },
-    },
-    FormData: class {
-      constructor(receivedForm) { assert.equal(receivedForm, form); }
-      get(name) { return values.get(name); }
-    },
+    document: { getElementById(id) { return id === "contact-form" ? form : status; } },
+    FormData: FormDataMock,
     fetch: async (url, options) => {
       requests.push({ url, options });
-      if (url === "/api/contact-config") return { ok: true, json: async () => ({ turnstileSiteKey: "public-site-key" }) };
-      return { status: contactStatus };
+      return { ok: contactStatus >= 200 && contactStatus < 300, status: contactStatus };
     },
   };
 
@@ -70,41 +58,38 @@ async function runSubmission(contactStatus = 202) {
   return { button, requests, reset, status };
 }
 
-test("loads Turnstile configuration and posts the expected same-origin JSON", async () => {
+test("posts cleaned form data to Formspree", async () => {
   const { button, requests, reset, status } = await runSubmission();
-  assert.equal(requests[0].url, "/api/contact-config");
+  assert.equal(requests.length, 1);
+  assert.equal(requests[0].url, endpoint);
+  assert.equal(requests[0].options.method, "POST");
   assert.deepEqual({ ...requests[0].options.headers }, { Accept: "application/json" });
-  assert.equal(requests[1].url, "/api/contact");
-  assert.equal(requests[1].options.method, "POST");
-  assert.equal(requests[1].options.headers["Content-Type"], "application/json");
-  assert.deepEqual(JSON.parse(requests[1].options.body), {
-    name: "Ada Lovelace", email: "ada@example.com", phone: "", urgency: "General question",
-    message: "Please help with our security plan.", company: "", turnstileToken: "verified-token",
-  });
+  assert.deepEqual(requests[0].options.body.fields, [
+    ["name", "Ada Lovelace"], ["email", "ada@example.com"], ["phone", ""],
+    ["urgency", "General question"], ["message", "Please help with our security plan."], ["_gotcha", ""],
+  ]);
   assert.equal(reset, true);
   assert.equal(button.disabled, false);
-  assert.match(status.textContent, /accepted/);
+  assert.match(status.textContent, /sent successfully/);
 });
 
-for (const [code, expected] of [[400, /check the fields/], [429, /wait a few minutes/], [503, /temporarily unavailable/], [502, /could not be delivered/]]) {
-  test(`handles a ${code} response without exposing server details`, async () => {
+for (const [code, expected] of [[400, /check the fields/], [429, /wait a few minutes/], [503, /temporarily unavailable/]]) {
+  test(`handles a ${code} response without exposing provider details`, async () => {
     const { reset, status } = await runSubmission(code);
     assert.equal(reset, false);
     assert.match(status.textContent, expected);
-    assert.doesNotMatch(status.textContent, /Turnstile|Resend|provider|configuration/i);
+    assert.doesNotMatch(status.textContent, /Formspree|provider|configuration/i);
   });
 }
 
-test("restricts forms to the same origin", async () => {
+test("allows only the configured Formspree origin for contact submissions", async () => {
   const [html, headers] = await Promise.all([
     readFile(new URL("../contact.html", import.meta.url), "utf8"),
     readFile(new URL("../_headers", import.meta.url), "utf8"),
   ]);
   for (const policy of [html, headers]) {
-    assert.match(policy, /script-src[^;]*https:\/\/challenges\.cloudflare\.com/);
-    assert.match(policy, /frame-src[^;]*https:\/\/challenges\.cloudflare\.com/);
-    assert.match(policy, /connect-src 'self' https:\/\/challenges\.cloudflare\.com/);
-    assert.match(policy, /form-action 'self';/);
-    assert.doesNotMatch(policy, /formsubmit\.co/i);
+    assert.match(policy, /connect-src 'self' https:\/\/formspree\.io/);
+    assert.match(policy, /form-action 'self' https:\/\/formspree\.io/);
+    assert.doesNotMatch(policy, /challenges\.cloudflare\.com|formsubmit\.co/i);
   }
 });
