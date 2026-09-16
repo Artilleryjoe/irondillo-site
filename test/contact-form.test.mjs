@@ -6,13 +6,13 @@ import vm from "node:vm";
 const script = await readFile(new URL("../assets/contact-form.js", import.meta.url), "utf8");
 const endpoint = "https://formspree.io/f/xldnbpdg";
 
-test("uses the Formspree endpoint and appropriate autofill tokens", async () => {
+test("uses JavaScript submission without a form action and appropriate autofill tokens", async () => {
   const html = await readFile(new URL("../contact.html", import.meta.url), "utf8");
   const form = html.match(/<form\b[^>]*id="contact-form"[^>]*>[\s\S]*?<\/form>/)?.[0];
 
   assert.ok(form, "contact form should be present");
-  assert.equal(form.match(/action="([^"]+)"/)?.[1], endpoint);
-  assert.match(form, /method="POST"/);
+  assert.doesNotMatch(form, /\saction\s*=/i);
+  assert.match(script, new RegExp(endpoint.replace(/[./]/g, "\\$&")));
   assert.match(form, /name="name"[^>]*autocomplete="name"/);
   assert.match(form, /name="email"[^>]*autocomplete="email"/);
   assert.match(form, /name="phone"[^>]*autocomplete="tel"/);
@@ -41,7 +41,6 @@ async function runSubmission(contactStatus = 200) {
   let reset = false;
   const requests = [];
   const form = {
-    action: endpoint,
     addEventListener(type, listener) { if (type === "submit") submit = listener; },
     querySelector() { return button; },
     reportValidity() { return true; },
