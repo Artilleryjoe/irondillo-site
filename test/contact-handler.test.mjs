@@ -94,3 +94,34 @@ test("returns a generic error on mail-provider failure", async () => {
   assert.equal(response.status, 502);
   assert.deepEqual(await response.json(), { ok: false, error: "Unable to submit the form." });
 });
+
+function pendingUntilAborted(signal) {
+  return new Promise((resolve, reject) => {
+    signal.addEventListener("abort", () => reject(signal.reason), { once: true });
+  });
+}
+
+test("times out a pending Turnstile request with a generic service error", async () => {
+  const deps = dependencies();
+  deps.fetch = async (url, init) => {
+    assert.match(url, /siteverify/);
+    return pendingUntilAborted(init.signal);
+  };
+
+  const response = await handleContact(request(), deps.env, { fetch: deps.fetch, turnstileTimeoutMs: 10 });
+  assert.equal(response.status, 503);
+  assert.deepEqual(await response.json(), { ok: false, error: "Unable to submit the form." });
+  assert.deepEqual(deps.sent, []);
+});
+
+test("times out a pending Resend request with a generic gateway error", async () => {
+  const deps = dependencies();
+  deps.fetch = async (url, init) => {
+    if (url.includes("siteverify")) return Response.json({ success: true, hostname: "irondillo.com", action: "contact_form" });
+    return pendingUntilAborted(init.signal);
+  };
+
+  const response = await handleContact(request(), deps.env, { fetch: deps.fetch, resendTimeoutMs: 10 });
+  assert.equal(response.status, 502);
+  assert.deepEqual(await response.json(), { ok: false, error: "Unable to submit the form." });
+});
