@@ -85,9 +85,10 @@
             <p class="mt-2 text-xs text-armadilloGray">Please do not include passwords, authentication codes, private keys, regulated records, or other sensitive information that is not necessary for your question.</p>
           </div>
           <div class="sr-only" aria-hidden="true">
-            <input type="text" name="_gotcha" id="company" tabindex="-1" autocomplete="off" />
+            <input type="text" name="company" id="company" tabindex="-1" autocomplete="off" />
           </div>
-          <p class="text-xs text-armadilloGray">When you select “Send message,” your information is securely submitted to Iron Dillo through Formspree. Please do not submit passwords, authentication codes, private keys, regulated data, or other secrets. Review our <a href="/privacy.html" class="text-oliveGreen underline hover:text-oliveDark">privacy policy</a>, or email <span class="text-oliveGreen font-semibold">contact@irondillo.com</span> if the form is unavailable.</p>
+          <div id="contact-turnstile" aria-label="Security verification"></div>
+          <p class="text-xs text-armadilloGray">When you select “Send message,” your information is securely submitted to Iron Dillo. Cloudflare Turnstile helps us prevent automated abuse. Please do not submit passwords, authentication codes, private keys, regulated data, or other secrets. Review our <a href="/privacy.html" class="text-oliveGreen underline hover:text-oliveDark">privacy policy</a>, or email <span class="text-oliveGreen font-semibold">contact@irondillo.com</span> if the form is unavailable.</p>
           <p id="form-status" class="text-sm font-semibold text-armadilloGray" role="status" aria-live="polite"></p>
           <div class="flex items-center justify-end">
             <button type="submit" class="btn-primary">Send message</button>
@@ -118,6 +119,7 @@
       </div>
     </footer>
   </div>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" defer></script>
   <script src="/assets/contact-form.js" defer></script>
 </body>
 </html>

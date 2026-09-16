@@ -12,7 +12,7 @@ Marketing site for [Iron Dillo Cybersecurity](https://irondillo.com). The projec
 ├── index.html              # Home page
 ├── services.html           # Overview of offerings
 ├── about.html              # Background and mission statement
-├── contact.html            # Contact form submitted to Formspree
+├── contact.html            # Contact form backed by a same-origin Pages Function
 ├── commitment.html         # Cybersecurity commitment and ethics
 ├── lindale-tyler-cybersecurity.html  # Local services landing page
 ├── privacy.html / terms.html          # Policy documents
@@ -68,7 +68,7 @@ The production Cloudflare Pages project should deploy the repository from `main`
 
 * Keep images in `assets/`. Remove unused media so the repository stays lightweight.
 * Inline Tailwind classes control styling; no additional CSS build pipeline is necessary.
-* When a visitor selects “Send message,” the contact form script posts directly to the configured HTTPS Formspree endpoint and requests a JSON response so the page can show its own success or error message. Formspree processes the submitted information to deliver the inquiry. The form deliberately has no HTML `action`; this prevents browsers from treating a non-HTTP handler as an insecure form target. It uses Formspree's `_gotcha` honeypot field and warns visitors not to submit secrets or regulated data.
+* When a visitor selects “Send message,” the contact form obtains a fresh Cloudflare Turnstile token and posts a JSON payload to the same-origin `/api/contact` Pages Function. The form deliberately has no HTML `action`, uses a `company` honeypot field, and warns visitors not to submit secrets or regulated data. Configure `TURNSTILE_SITE_KEY`, `TURNSTILE_SECRET_KEY`, `RESEND_API_KEY`, and the `CONTACT_RATE_LIMITER` binding in Cloudflare Pages.
 * For any metadata updates (Open Graph, SEO), update the relevant `<meta>` tags across the HTML pages.
 
 ### Testimonial updates
@@ -86,8 +86,8 @@ When adding or revising testimonials, follow this checklist so updates stay cons
 A single canonical policy is defined in [`_headers`](_headers). Cloudflare Pages
 processes that file during deployment and applies the policy to all routes (`/*`):
 
-- `Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://formspree.io; form-action 'self' https://formspree.io; object-src 'none'; base-uri 'self'; frame-ancestors 'none'`
-- Browser connections allow only the configured Formspree origin in addition to the site's own origin; `form-action` applies the same restriction if a native submission is added later. Production must redirect HTTP to HTTPS. An ordinary HTTP preview remains insecure and may trigger browser autofill warnings; use HTTPS when browser-testing the form.
+- `Content-Security-Policy: default-src 'self'; script-src 'self' https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; frame-src https://challenges.cloudflare.com; form-action 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'`
+- Browser connections and form submissions remain same-origin. The policy permits only Cloudflare's Turnstile script and challenge frame origins. Production must redirect HTTP to HTTPS. An ordinary HTTP preview remains insecure and may trigger browser autofill warnings; use HTTPS when browser-testing the form.
 - `X-Content-Type-Options: nosniff`
 - `Referrer-Policy: strict-origin-when-cross-origin`
 - `Permissions-Policy: accelerometer=(), camera=(), geolocation=(), gyroscope=(), microphone=(), payment=(), usb=()`
