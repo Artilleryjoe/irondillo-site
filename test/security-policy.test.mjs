@@ -9,6 +9,7 @@ const forbiddenOrigins = [
   "https://unpkg.com",
   "https://www.google.com",
   "https://www.gstatic.com",
+  "https://challenges.cloudflare.com",
 ];
 const securityMetaNames = [
   "content-security-policy",
@@ -31,9 +32,10 @@ test("_headers contains only approved CSP origins", async () => {
   for (const origin of forbiddenOrigins) {
     assert.ok(!csp.includes(origin), `${origin} is not authorized`);
   }
-  assert.match(csp, /script-src 'self' https:\/\/challenges\.cloudflare\.com(?:;|$)/);
-  assert.match(csp, /connect-src 'self' https:\/\/challenges\.cloudflare\.com(?:;|$)/);
-  assert.match(csp, /frame-src https:\/\/challenges\.cloudflare\.com(?:;|$)/);
+  assert.match(csp, /script-src 'self'(?:;|$)/);
+  assert.match(csp, /connect-src 'self'(?:;|$)/);
+  assert.match(csp, /frame-src 'none'(?:;|$)/);
+  assert.match(csp, /form-action 'none'(?:;|$)/);
   assert.doesNotMatch(csp, /\bmailto:/);
 });
 
