@@ -38,70 +38,51 @@
     </header>
 
     <main class="flex-grow max-w-6xl mx-auto px-6 py-10 space-y-10">
-      <section class="glass-panel rounded-3xl p-8 md:p-12 grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
-        <div class="lg:col-span-1 space-y-4">
+      <section class="contact-hero glass-panel rounded-3xl p-8 md:p-12">
+        <div class="contact-intro">
+          <p class="pill">A direct line to practical help</p>
           <h1 class="text-4xl font-extrabold text-armadilloBlack">Start with a conversation about what you’re trying to protect.</h1>
-          <p class="text-base text-armadilloGray leading-relaxed">Whether you have a quick question or an urgent concern, reach out and share your situation. No pressure, no jargon, just clear next steps you can understand and use.</p>
-          <div class="space-y-3">
-            <div class="hero-accent rounded-2xl p-4">
-              <p class="text-sm font-semibold text-armadilloBlack">Direct line</p>
-              <a href="tel:19039331342" class="block text-xl font-bold text-armadilloBlack hover:text-oliveGreen">(903) 933-1342</a>
-              <p class="text-xs text-armadilloGray">Call for immediate help or to ask a simple first question.</p>
-            </div>
-            <div class="hero-accent rounded-2xl p-4">
-              <p class="text-sm font-semibold text-armadilloBlack">Email alternative</p>
-              <span class="text-armadilloBlack font-semibold">contact@irondillo.com</span>
-              <p class="text-xs text-armadilloGray">Tell me what happened or what you want to improve.</p>
-            </div>
+          <p class="text-base text-armadilloGray leading-relaxed">Whether you have a quick question or an urgent concern, reach out directly. No form, no ticket queue, and no pressure—just a straightforward conversation about useful next steps.</p>
+          <div class="contact-promise" aria-label="What to expect">
+            <span>Independent guidance</span>
+            <span>Plain-language answers</span>
+            <span>Local, human response</span>
           </div>
         </div>
 
-        <form id="contact-form" method="post" action="/api/contact" class="lg:col-span-2 glass-panel rounded-2xl p-6 space-y-4">
-          <noscript>
-            <div class="hero-accent rounded-2xl p-4 text-armadilloBlack" role="note">
-              <p class="font-semibold">The contact form requires JavaScript and is unavailable right now.</p>
-              <p class="mt-1 text-sm">Please call <a href="tel:19039331342" class="text-oliveGreen underline hover:text-oliveDark">(903) 933-1342</a> or email <a href="mailto:contact@irondillo.com" class="text-oliveGreen underline hover:text-oliveDark">contact@irondillo.com</a> instead.</p>
-            </div>
-          </noscript>
-          <fieldset data-contact-fields disabled class="space-y-4">
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div class="contact-options" aria-label="Contact options">
+          <a href="tel:19039331342" class="contact-option">
+            <span class="contact-option-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.69 2.8a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.33 1.85.56 2.81.69A2 2 0 0 1 22 16.92Z"/></svg>
+            </span>
+            <span class="contact-option-copy">
+              <span class="contact-option-label">Call directly</span>
+              <strong>(903) 933-1342</strong>
+              <span>Best for urgent concerns or a quick first question.</span>
+            </span>
+            <span class="contact-option-arrow" aria-hidden="true">→</span>
+          </a>
+
+          <a href="mailto:contact@irondillo.com" class="contact-option">
+            <span class="contact-option-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a2 2 0 0 1-2.06 0L2 7"/></svg>
+            </span>
+            <span class="contact-option-copy">
+              <span class="contact-option-label">Send an email</span>
+              <strong>contact@irondillo.com</strong>
+              <span>Share what happened or what you would like to improve.</span>
+            </span>
+            <span class="contact-option-arrow" aria-hidden="true">→</span>
+          </a>
+
+          <div class="contact-note">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg>
             <div>
-              <label for="name" class="text-sm font-semibold text-armadilloBlack">Name</label>
-              <input required minlength="2" maxlength="80" pattern="[A-Za-zÀ-ÿ0-9 .,&'-]{2,80}" name="name" id="name" autocomplete="name" class="w-full mt-2 px-4 py-3 rounded-xl border border-armadilloGray/20 focus:border-oliveGreen" />
-            </div>
-            <div>
-              <label for="email" class="text-sm font-semibold text-armadilloBlack">Email</label>
-              <input required type="email" maxlength="254" pattern="[^@\s]+@[^@\s]+\.[^@\s]{2,}" title="Enter a complete email address, such as name@example.com." name="email" id="email" autocomplete="email" class="w-full mt-2 px-4 py-3 rounded-xl border border-armadilloGray/20 focus:border-oliveGreen" />
-            </div>
-            <div>
-              <label for="phone" class="text-sm font-semibold text-armadilloBlack">Phone</label>
-              <input type="tel" name="phone" id="phone" autocomplete="tel" pattern="[0-9+() .\-]{7,25}" title="Enter a phone number with 7 to 25 digits or common separators, or leave this field blank." maxlength="25" class="w-full mt-2 px-4 py-3 rounded-xl border border-armadilloGray/20 focus:border-oliveGreen" />
-            </div>
-            <div>
-              <label for="urgency" class="text-sm font-semibold text-armadilloBlack">Urgency</label>
-              <select name="urgency" id="urgency" class="w-full mt-2 px-4 py-3 rounded-xl border border-armadilloGray/20 focus:border-oliveGreen">
-                <option>General question</option>
-                <option>Within 48 hours</option>
-                <option>Immediate</option>
-              </select>
+              <p class="font-semibold text-armadilloBlack">A safer first conversation</p>
+              <p class="text-sm text-armadilloGray">Please don’t send passwords, authentication codes, private keys, or sensitive records by email. We can decide on a secure way to share details together.</p>
             </div>
           </div>
-          <div>
-            <label for="message" class="text-sm font-semibold text-armadilloBlack">How can we help?</label>
-            <textarea required minlength="20" maxlength="2000" name="message" id="message" rows="5" placeholder="Ask a question, describe the issue, or share what you want to protect." class="w-full mt-2 px-4 py-3 rounded-xl border border-armadilloGray/20 focus:border-oliveGreen"></textarea>
-            <p class="mt-2 text-xs text-armadilloGray">Please do not include passwords, authentication codes, private keys, regulated records, or other sensitive information that is not necessary for your question.</p>
-          </div>
-          <div class="sr-only" aria-hidden="true">
-            <input type="text" name="company" id="company" tabindex="-1" autocomplete="off" />
-          </div>
-          <div id="contact-turnstile" aria-label="Security verification"></div>
-          <p class="text-xs text-armadilloGray">When you select “Send message,” your information is securely submitted to Iron Dillo. Cloudflare Turnstile helps us prevent automated abuse. Please do not submit passwords, authentication codes, private keys, regulated data, or other secrets. Review our <a href="/privacy.html" class="text-oliveGreen underline hover:text-oliveDark">privacy policy</a>, or email <span class="text-oliveGreen font-semibold">contact@irondillo.com</span> if the form is unavailable.</p>
-          <p id="form-status" class="text-sm font-semibold text-armadilloGray" role="status" aria-live="polite"></p>
-          <div class="flex items-center justify-end">
-            <button type="submit" class="btn-primary">Send message</button>
-          </div>
-          </fieldset>
-        </form>
+        </div>
       </section>
     </main>
 
@@ -114,7 +95,7 @@
         <div>
           <p class="uppercase text-xs tracking-widest text-oliveLight">Call or email</p>
           <a href="tel:19039331342" class="block text-offWhite font-semibold">(903) 933-1342</a>
-          <span class="text-offWhite/80">contact@irondillo.com</span>
+          <a href="mailto:contact@irondillo.com" class="text-offWhite/80 hover:text-oliveLight">contact@irondillo.com</a>
         </div>
         <div class="text-sm text-offWhite/80 space-y-2">
           <p class="uppercase text-xs tracking-widest text-oliveLight">Links</p>
@@ -127,7 +108,5 @@
       </div>
     </footer>
   </div>
-  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" defer></script>
-  <script src="/assets/contact-form.js" defer></script>
 </body>
 </html>
