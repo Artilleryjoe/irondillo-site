@@ -40,7 +40,7 @@ function harness(contactStatus = 202, holdContact = false) {
   class FormDataMock { constructor(received) { assert.equal(received, form); } get(name) { return values.get(name); } }
   const turnstile = {
     ready(callback) { callback(); },
-    render(received, options) { assert.equal(received, container); callbacks = options; turnstileCalls.push(["render", options.sitekey]); return "widget-1"; },
+    render(received, options) { assert.equal(received, container); callbacks = options; turnstileCalls.push(["render", options.sitekey, options.action]); return "widget-1"; },
     reset(id) { turnstileCalls.push(["reset", id]); },
     execute(id) { turnstileCalls.push(["execute", id]); callbacks.callback("fresh-token"); },
   };
@@ -70,7 +70,7 @@ test("fetches configuration and posts only accepted JSON fields to the same-orig
     name: "Ada Lovelace", email: "ada@example.com", phone: "", urgency: "General question",
     message: "Please help with our security plan.", company: "", turnstileToken: "fresh-token",
   });
-  assert.deepEqual(run.turnstileCalls, [["render", "public-key"], ["reset", "widget-1"], ["execute", "widget-1"], ["reset", "widget-1"]]);
+  assert.deepEqual(run.turnstileCalls, [["render", "public-key", "contact_form"], ["reset", "widget-1"], ["execute", "widget-1"], ["reset", "widget-1"]]);
   assert.equal(run.resetForm, true);
   assert.match(run.status.textContent, /sent successfully/);
 });
