@@ -56,7 +56,14 @@
           </div>
         </div>
 
-        <form id="contact-form" class="lg:col-span-2 glass-panel rounded-2xl p-6 space-y-4">
+        <form id="contact-form" method="post" action="/api/contact" class="lg:col-span-2 glass-panel rounded-2xl p-6 space-y-4">
+          <noscript>
+            <div class="hero-accent rounded-2xl p-4 text-armadilloBlack" role="note">
+              <p class="font-semibold">The contact form requires JavaScript and is unavailable right now.</p>
+              <p class="mt-1 text-sm">Please call <a href="tel:19039331342" class="text-oliveGreen underline hover:text-oliveDark">(903) 933-1342</a> or email <a href="mailto:contact@irondillo.com" class="text-oliveGreen underline hover:text-oliveDark">contact@irondillo.com</a> instead.</p>
+            </div>
+          </noscript>
+          <fieldset data-contact-fields disabled class="space-y-4">
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label for="name" class="text-sm font-semibold text-armadilloBlack">Name</label>
@@ -93,6 +100,7 @@
           <div class="flex items-center justify-end">
             <button type="submit" class="btn-primary">Send message</button>
           </div>
+          </fieldset>
         </form>
       </section>
     </main>

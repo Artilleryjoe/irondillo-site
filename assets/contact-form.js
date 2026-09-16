@@ -6,6 +6,9 @@
   const turnstileContainer = document.getElementById("contact-turnstile");
   if (!form || !status || !turnstileContainer) return;
 
+  const fields = form.querySelector("[data-contact-fields]");
+  if (!fields) return;
+  fields.disabled = false;
   const submitButton = form.querySelector('button[type="submit"]');
   const clean = (value) => value.replace(/[\u0000\r]/g, "").trim();
   let submitting = false;
