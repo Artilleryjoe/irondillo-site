@@ -4,111 +4,104 @@ import test from "node:test";
 import vm from "node:vm";
 
 const script = await readFile(new URL("../assets/contact-form.js", import.meta.url), "utf8");
-const endpoint = "https://formspree.io/f/xldnbpdg";
 
-test("uses JavaScript submission without a form action and appropriate autofill tokens", async () => {
+test("includes an explicitly rendered Turnstile container and secure form fields", async () => {
   const html = await readFile(new URL("../contact.html", import.meta.url), "utf8");
   const form = html.match(/<form\b[^>]*id="contact-form"[^>]*>[\s\S]*?<\/form>/)?.[0];
-
-  assert.ok(form, "contact form should be present");
+  assert.ok(form);
   assert.doesNotMatch(form, /\saction\s*=/i);
-  assert.match(script, new RegExp(endpoint.replace(/[./]/g, "\\$&")));
-  assert.match(form, /name="name"[^>]*autocomplete="name"/);
-  assert.match(form, /name="email"[^>]*autocomplete="email"/);
-  assert.match(form, /name="phone"[^>]*autocomplete="tel"/);
-  assert.match(form, /name="_gotcha"[^>]*autocomplete="off"/);
+  assert.match(form, /id="contact-turnstile"/);
+  assert.match(html, /https:\/\/challenges\.cloudflare\.com\/turnstile\/v0\/api\.js\?render=explicit/);
+  assert.match(form, /name="company"[^>]*autocomplete="off"/);
+  assert.doesNotMatch(form, /_gotcha|Formspree/i);
 });
 
-test("does not expose insecure resource or mailto targets", async () => {
-  const html = await readFile(new URL("../contact.html", import.meta.url), "utf8");
-
-  assert.doesNotMatch(html, /(?:href|src|action)="http:\/\//i);
-  assert.doesNotMatch(html, /(?:href|action)="mailto:/i);
-});
-
-test("uses HTTP response headers for document security policies", async () => {
-  const [html, headers] = await Promise.all([
-    readFile(new URL("../contact.html", import.meta.url), "utf8"),
-    readFile(new URL("../_headers", import.meta.url), "utf8"),
-  ]);
-
-  assert.doesNotMatch(html, /http-equiv="(?:Content-Security-Policy|X-Frame-Options)"/i);
-  assert.match(headers, /Content-Security-Policy:[^\n]*frame-ancestors 'none'/);
-  assert.match(headers, /X-Frame-Options: DENY/);
-});
-
-async function runSubmission(contactStatus = 200) {
+function harness(contactStatus = 202, holdContact = false) {
   const values = new Map([
     ["name", " Ada Lovelace "], ["email", "ada@example.com"], ["phone", ""],
-    ["urgency", "General question"], ["message", "Please help with our security plan."], ["_gotcha", ""],
+    ["urgency", "General question"], ["message", "Please help with our security plan."], ["company", ""],
   ]);
   const button = { disabled: false };
   const status = { textContent: "" };
+  const container = {};
   let submit;
-  let reset = false;
+  let resetForm = false;
+  let releaseContact;
   const requests = [];
-  const errors = [];
+  const turnstileCalls = [];
+  let callbacks;
   const form = {
     addEventListener(type, listener) { if (type === "submit") submit = listener; },
-    querySelector() { return button; },
-    reportValidity() { return true; },
-    reset() { reset = true; },
+    querySelector() { return button; }, reportValidity() { return true; }, reset() { resetForm = true; },
   };
-  class FormDataMock {
-    constructor(receivedForm) {
-      this.fields = [];
-      if (receivedForm) assert.equal(receivedForm, form);
-    }
-    get(name) { return values.get(name); }
-    append(name, value) { this.fields.push([name, value]); }
-  }
+  class FormDataMock { constructor(received) { assert.equal(received, form); } get(name) { return values.get(name); } }
+  const turnstile = {
+    ready(callback) { callback(); },
+    render(received, options) { assert.equal(received, container); callbacks = options; turnstileCalls.push(["render", options.sitekey]); return "widget-1"; },
+    reset(id) { turnstileCalls.push(["reset", id]); },
+    execute(id) { turnstileCalls.push(["execute", id]); callbacks.callback("fresh-token"); },
+  };
+  const fetch = async (url, options = {}) => {
+    requests.push({ url, options });
+    if (url === "/api/contact-config") return { ok: true, async json() { return { turnstileSiteKey: "public-key" }; } };
+    if (holdContact) await new Promise((resolve) => { releaseContact = resolve; });
+    return { status: contactStatus };
+  };
   const context = {
-    console: { error(...args) { errors.push(args); } },
-    document: { getElementById(id) { return id === "contact-form" ? form : status; } },
-    FormData: FormDataMock,
-    fetch: async (url, options) => {
-      requests.push({ url, options });
-      return {
-        ok: contactStatus >= 200 && contactStatus < 300,
-        status: contactStatus,
-        async text() { return "Formspree diagnostic response"; },
-      };
-    },
+    document: { getElementById(id) { return id === "contact-form" ? form : id === "form-status" ? status : container; } },
+    FormData: FormDataMock, fetch, window: { turnstile }, Error, JSON, String,
   };
-
   vm.runInNewContext(script, context);
-  await submit({ preventDefault() {} });
-  return { button, errors, requests, reset, status };
+  return { button, requests, get resetForm() { return resetForm; }, status, submit, turnstileCalls, release() { releaseContact(); } };
 }
 
-test("posts cleaned form data to Formspree", async () => {
-  const { button, requests, reset, status } = await runSubmission();
-  assert.equal(requests.length, 1);
-  assert.equal(requests[0].url, endpoint);
-  assert.equal(requests[0].options.method, "POST");
-  assert.deepEqual({ ...requests[0].options.headers }, { Accept: "application/json" });
-  assert.deepEqual(requests[0].options.body.fields, [
-    ["name", "Ada Lovelace"], ["email", "ada@example.com"], ["phone", ""],
-    ["urgency", "General question"], ["message", "Please help with our security plan."], ["_gotcha", ""],
-  ]);
-  assert.equal(reset, true);
-  assert.equal(button.disabled, false);
-  assert.match(status.textContent, /sent successfully/);
+test("fetches configuration and posts only accepted JSON fields to the same-origin endpoint", async () => {
+  const run = harness();
+  await run.submit({ preventDefault() {} });
+  assert.equal(run.requests[0].url, "/api/contact-config");
+  assert.equal(run.requests[1].url, "/api/contact");
+  assert.equal(run.requests[1].options.method, "POST");
+  assert.deepEqual({ ...run.requests[1].options.headers }, { Accept: "application/json", "Content-Type": "application/json" });
+  assert.deepEqual(JSON.parse(run.requests[1].options.body), {
+    name: "Ada Lovelace", email: "ada@example.com", phone: "", urgency: "General question",
+    message: "Please help with our security plan.", company: "", turnstileToken: "fresh-token",
+  });
+  assert.deepEqual(run.turnstileCalls, [["render", "public-key"], ["reset", "widget-1"], ["execute", "widget-1"], ["reset", "widget-1"]]);
+  assert.equal(run.resetForm, true);
+  assert.match(run.status.textContent, /sent successfully/);
 });
 
-for (const [code, expected] of [[400, /check the fields/], [429, /wait a few minutes/], [503, /temporarily unavailable/]]) {
-  test(`handles a ${code} response without exposing provider details`, async () => {
-    const { errors, reset, status } = await runSubmission(code);
-    assert.equal(reset, false);
-    assert.match(status.textContent, expected);
-    assert.doesNotMatch(status.textContent, /Formspree|provider|configuration/i);
-    assert.deepEqual(errors, [["Formspree submission failed:", code, "Formspree diagnostic response"]]);
+test("prevents concurrent submissions", async () => {
+  const run = harness(202, true);
+  const first = run.submit({ preventDefault() {} });
+  await new Promise((resolve) => setImmediate(resolve));
+  await run.submit({ preventDefault() {} });
+  assert.equal(run.requests.filter(({ url }) => url === "/api/contact").length, 1);
+  assert.equal(run.button.disabled, true);
+  run.release();
+  await first;
+});
+
+for (const [code, expected] of [
+  [400, /check the fields/], [403, /could not be verified/], [415, /refresh the page/],
+  [429, /wait a few minutes/], [502, /temporarily unavailable/], [503, /temporarily unavailable/],
+]) {
+  test(`handles ${code}, preserves fields, and resets Turnstile`, async () => {
+    const run = harness(code);
+    await run.submit({ preventDefault() {} });
+    assert.equal(run.resetForm, false);
+    assert.equal(run.button.disabled, false);
+    assert.match(run.status.textContent, expected);
+    assert.doesNotMatch(run.status.textContent, /Formspree|Resend|provider|configuration/i);
+    assert.deepEqual(run.turnstileCalls.slice(-1), [["reset", "widget-1"]]);
   });
 }
 
-test("allows only the configured Formspree origin for contact submissions", async () => {
+test("CSP permits only the Turnstile origins needed by the widget", async () => {
   const headers = await readFile(new URL("../_headers", import.meta.url), "utf8");
-  assert.match(headers, /connect-src 'self' https:\/\/formspree\.io/);
-  assert.match(headers, /form-action 'self' https:\/\/formspree\.io/);
-  assert.doesNotMatch(headers, /challenges\.cloudflare\.com|formsubmit\.co/i);
+  assert.match(headers, /script-src 'self' https:\/\/challenges\.cloudflare\.com/);
+  assert.match(headers, /connect-src 'self';/);
+  assert.match(headers, /frame-src https:\/\/challenges\.cloudflare\.com/);
+  assert.match(headers, /form-action 'self'/);
+  assert.doesNotMatch(headers, /formspree\.io/i);
 });
