@@ -5,6 +5,7 @@
   "scripts": {
     "build:tailwind": "tailwindcss -c tailwind.config.js -i ./src/styles/tailwind.css -o ./assets/tailwind.css --minify",
     "build": "npm run build:tailwind",
+    "validate:static": "node scripts/validate-static.mjs",
     "test": "node --test"
   },
   "devDependencies": {

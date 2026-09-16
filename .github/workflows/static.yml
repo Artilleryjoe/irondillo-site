@@ -3,6 +3,8 @@ name: Validate site
 on:
   push:
     branches: ["main"]
+  pull_request:
+    branches: ["main"]
   workflow_dispatch:
 
 permissions:
@@ -13,11 +15,9 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  test:
+  pull-request-validation:
+    name: Pull request validation
     runs-on: ubuntu-latest
-    environment:
-      name: production
-      url: https://irondillo.com
     steps:
       - name: Checkout
         uses: actions/checkout@v5
@@ -34,5 +34,38 @@ jobs:
           git diff --exit-code -- assets/tailwind.css
       - name: Test contact endpoint
         run: npm test
-      - name: Verify canonical CSP matches production smoke test
-        run: node --test test/csp-sync.test.mjs
+      - name: Validate static HTML, links, and security controls
+        run: npm run validate:static
+
+  production-smoke:
+    name: Production smoke test
+    needs: pull-request-validation
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://irondillo.com
+    steps:
+      - name: Checkout trusted revision
+        uses: actions/checkout@v5
+      - name: Check the canonical production site
+        id: smoke
+        env:
+          DOMAIN: irondillo.com
+        run: |
+          set -o pipefail
+          if scripts/smoke-production.sh 2>&1 | tee production-smoke.log; then
+            echo "### Production smoke test passed for https://${DOMAIN}" >> "$GITHUB_STEP_SUMMARY"
+          else
+            status=$?
+            echo "::error title=Production smoke test failed::See the job log and production-smoke-log artifact for details."
+            echo "### Production smoke test failed for https://${DOMAIN}" >> "$GITHUB_STEP_SUMMARY"
+            exit "$status"
+          fi
+      - name: Upload production smoke log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: production-smoke-log
+          path: production-smoke.log
+          if-no-files-found: error
