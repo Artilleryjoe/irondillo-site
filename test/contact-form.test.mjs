@@ -19,6 +19,17 @@ test("uses the Formspree endpoint and appropriate autofill tokens", async () => 
   assert.match(form, /name="_gotcha"[^>]*autocomplete="off"/);
 });
 
+test("uses HTTP response headers for document security policies", async () => {
+  const [html, headers] = await Promise.all([
+    readFile(new URL("../contact.html", import.meta.url), "utf8"),
+    readFile(new URL("../_headers", import.meta.url), "utf8"),
+  ]);
+
+  assert.doesNotMatch(html, /http-equiv="(?:Content-Security-Policy|X-Frame-Options)"/i);
+  assert.match(headers, /Content-Security-Policy:[^\n]*frame-ancestors 'none'/);
+  assert.match(headers, /X-Frame-Options: DENY/);
+});
+
 async function runSubmission(contactStatus = 200) {
   const values = new Map([
     ["name", " Ada Lovelace "], ["email", "ada@example.com"], ["phone", ""],
@@ -83,13 +94,8 @@ for (const [code, expected] of [[400, /check the fields/], [429, /wait a few min
 }
 
 test("allows only the configured Formspree origin for contact submissions", async () => {
-  const [html, headers] = await Promise.all([
-    readFile(new URL("../contact.html", import.meta.url), "utf8"),
-    readFile(new URL("../_headers", import.meta.url), "utf8"),
-  ]);
-  for (const policy of [html, headers]) {
-    assert.match(policy, /connect-src 'self' https:\/\/formspree\.io/);
-    assert.match(policy, /form-action 'self' https:\/\/formspree\.io/);
-    assert.doesNotMatch(policy, /challenges\.cloudflare\.com|formsubmit\.co/i);
-  }
+  const headers = await readFile(new URL("../_headers", import.meta.url), "utf8");
+  assert.match(headers, /connect-src 'self' https:\/\/formspree\.io/);
+  assert.match(headers, /form-action 'self' https:\/\/formspree\.io/);
+  assert.doesNotMatch(headers, /challenges\.cloudflare\.com|formsubmit\.co/i);
 });
