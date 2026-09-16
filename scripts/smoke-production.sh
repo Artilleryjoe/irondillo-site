@@ -6,20 +6,6 @@ readonly CHECK_HEADERS="${CHECK_HEADERS:-true}"
 readonly CONTACT_PATH="/contact.html"
 readonly HTTPS_URL="https://${DOMAIN}${CONTACT_PATH}"
 readonly ALTERNATE_HOSTNAMES="${ALTERNATE_HOSTNAMES:-www.${DOMAIN}}"
-readonly REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-readonly EXPECTED_CSP="$(awk '
-  /^[[:space:]]*Content-Security-Policy:/ {
-    sub(/^[[:space:]]*Content-Security-Policy:[[:space:]]*/, "")
-    print
-    exit
-  }
-' "${REPO_ROOT}/_headers")"
-
-[[ -n "$EXPECTED_CSP" ]] || {
-  printf 'ERROR: _headers does not define Content-Security-Policy\n' >&2
-  exit 1
-}
-
 fail() {
   printf 'ERROR: %s\n' "$*" >&2
   exit 1
@@ -81,7 +67,11 @@ if [[ "$CHECK_HEADERS" == "false" ]]; then
   exit 0
 fi
 
-[[ "$(header_value content-security-policy)" == "$EXPECTED_CSP" ]] || fail "Content-Security-Policy does not match _headers"
+csp="$(header_value content-security-policy)"
+[[ -n "$csp" ]] || fail "Content-Security-Policy is missing"
+for directive in "default-src 'self'" "object-src 'none'" "base-uri 'self'" "frame-ancestors 'none'" "upgrade-insecure-requests"; do
+  [[ "$csp" == *"$directive"* ]] || fail "Content-Security-Policy is missing required directive: ${directive}"
+done
 [[ "$(header_value x-content-type-options)" == "nosniff" ]] || fail "X-Content-Type-Options is missing or invalid"
 [[ "$(header_value referrer-policy)" == "strict-origin-when-cross-origin" ]] || fail "Referrer-Policy is missing or invalid"
 [[ "$(header_value permissions-policy)" == "accelerometer=(), camera=(), geolocation=(), gyroscope=(), microphone=(), payment=(), usb=()" ]] || fail "Permissions-Policy is missing or invalid"

@@ -62,7 +62,7 @@ The GitHub Actions validation workflow also enforces this and fails when the gen
 
 ## Deployment
 
-The production site is a static Cloudflare Pages project deployed from `main`. GitHub Actions runs the build and tests as a deployment guard. After deployment, run `scripts/smoke-production.sh` to check the production page, redirects, contact links, and security headers.
+The production site is a static Cloudflare Pages project deployed from `main`. GitHub Actions runs the build and tests as a deployment guard. After deployment, run `scripts/smoke-production.sh` to check the production page, redirects, and stable security-header guarantees. The smoke test intentionally validates required CSP directives instead of exact policy equality so a Pages deployment still in progress does not fail an otherwise healthy push.
 
 ## Content guidelines
 
