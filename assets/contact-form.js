@@ -1,6 +1,7 @@
 (() => {
   "use strict";
 
+  const endpoint = "https://formspree.io/f/xldnbpdg";
   const form = document.getElementById("contact-form");
   const status = document.getElementById("form-status");
   if (!form || !status) return;
@@ -36,7 +37,7 @@
         body.append(field, clean(String(data.get(field) || "")));
       }
 
-      const response = await fetch(form.action, {
+      const response = await fetch(endpoint, {
         method: "POST",
         headers: { Accept: "application/json" },
         body,

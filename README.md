@@ -68,7 +68,7 @@ The production Cloudflare Pages project should deploy the repository from `main`
 
 * Keep images in `assets/`. Remove unused media so the repository stays lightweight.
 * Inline Tailwind classes control styling; no additional CSS build pipeline is necessary.
-* When a visitor selects “Send message,” the contact form posts directly to the configured Formspree endpoint and requests a JSON response so the page can show its own success or error message. Formspree processes the submitted information to deliver the inquiry. The form retains a native POST action as a fallback, uses Formspree's `_gotcha` honeypot field, and warns visitors not to submit secrets or regulated data.
+* When a visitor selects “Send message,” the contact form script posts directly to the configured HTTPS Formspree endpoint and requests a JSON response so the page can show its own success or error message. Formspree processes the submitted information to deliver the inquiry. The form deliberately has no HTML `action`; this prevents browsers from treating a non-HTTP handler as an insecure form target. It uses Formspree's `_gotcha` honeypot field and warns visitors not to submit secrets or regulated data.
 * For any metadata updates (Open Graph, SEO), update the relevant `<meta>` tags across the HTML pages.
 
 ### Testimonial updates
@@ -87,15 +87,14 @@ A single canonical policy is defined in [`_headers`](_headers). Cloudflare Pages
 processes that file during deployment and applies the policy to all routes (`/*`):
 
 - `Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://formspree.io; form-action 'self' https://formspree.io; object-src 'none'; base-uri 'self'; frame-ancestors 'none'`
-- Browser connections and fallback form submissions allow only the configured Formspree origin in addition to the site's own origin. Production must redirect HTTP to HTTPS. An ordinary HTTP preview remains insecure and may trigger browser autofill warnings; use HTTPS when browser-testing the form.
+- Browser connections allow only the configured Formspree origin in addition to the site's own origin; `form-action` applies the same restriction if a native submission is added later. Production must redirect HTTP to HTTPS. An ordinary HTTP preview remains insecure and may trigger browser autofill warnings; use HTTPS when browser-testing the form.
 - `X-Content-Type-Options: nosniff`
 - `Referrer-Policy: strict-origin-when-cross-origin`
 - `Permissions-Policy: accelerometer=(), camera=(), geolocation=(), gyroscope=(), microphone=(), payment=(), usb=()`
 - `X-Frame-Options: DENY`
 - `Strict-Transport-Security: max-age=31536000`
 
-Do not add wildcard or legacy provider origins. The page-level CSP meta tag in
-`contact.html` mirrors the browser-enforceable directives as defense in depth, but
-`_headers` is the canonical production policy because Cloudflare sends it as an HTTP
-response header. In particular, `frame-ancestors` is effective only in that HTTP
-response header and is therefore intentionally omitted from the meta policy.
+Do not add wildcard or legacy provider origins. `_headers` is the canonical
+production policy because Cloudflare sends it as an HTTP response header. In
+particular, `frame-ancestors` and `X-Frame-Options` must be delivered in the HTTP
+response rather than through page-level metadata.
