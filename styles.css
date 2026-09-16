@@ -8,6 +8,33 @@
   --brand-strong: #0b3d6b;
   --border: #cbd7e4;
   --shadow: 0 14px 34px rgba(8, 26, 46, 0.09);
+  --focus-outline: #075985;
+  --focus-outline-dark: #93c5fd;
+}
+
+/* Keep keyboard focus visible and consistent across every interactive control. */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+.btn-primary:focus-visible,
+.btn-link:focus-visible,
+nav a:focus-visible,
+footer a:focus-visible,
+a[aria-label="Facebook"]:focus-visible,
+a[aria-label="LinkedIn"]:focus-visible {
+  outline: 3px solid var(--focus-outline);
+  outline-offset: 3px;
+}
+
+/* A pale outline remains distinct from the dark navigation and footer shells. */
+.nav-shell a:focus-visible,
+body.sitewide-shell > nav a:focus-visible,
+footer a:focus-visible,
+a[aria-label="Facebook"]:focus-visible,
+a[aria-label="LinkedIn"]:focus-visible {
+  outline-color: var(--focus-outline-dark);
 }
 
 body {
@@ -236,6 +263,20 @@ main .glass-panel:not(.site-hero):not(.home-hero):hover {
 .btn-primary:hover {
   transform: translateY(-1px);
   box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.18), 0 8px 18px rgba(11, 61, 107, 0.28);
+}
+
+.btn-primary:disabled,
+.btn-primary[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: 0.55;
+  filter: grayscale(35%);
+  box-shadow: none;
+}
+
+.btn-primary:disabled:hover,
+.btn-primary[aria-disabled="true"]:hover {
+  transform: none;
+  box-shadow: none;
 }
 
 .btn-link {
