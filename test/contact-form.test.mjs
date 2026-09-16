@@ -29,6 +29,7 @@ async function runSubmission(contactStatus = 200) {
   let submit;
   let reset = false;
   const requests = [];
+  const errors = [];
   const form = {
     action: endpoint,
     addEventListener(type, listener) { if (type === "submit") submit = listener; },
@@ -45,17 +46,22 @@ async function runSubmission(contactStatus = 200) {
     append(name, value) { this.fields.push([name, value]); }
   }
   const context = {
+    console: { error(...args) { errors.push(args); } },
     document: { getElementById(id) { return id === "contact-form" ? form : status; } },
     FormData: FormDataMock,
     fetch: async (url, options) => {
       requests.push({ url, options });
-      return { ok: contactStatus >= 200 && contactStatus < 300, status: contactStatus };
+      return {
+        ok: contactStatus >= 200 && contactStatus < 300,
+        status: contactStatus,
+        async text() { return "Formspree diagnostic response"; },
+      };
     },
   };
 
   vm.runInNewContext(script, context);
   await submit({ preventDefault() {} });
-  return { button, requests, reset, status };
+  return { button, errors, requests, reset, status };
 }
 
 test("posts cleaned form data to Formspree", async () => {
@@ -75,10 +81,11 @@ test("posts cleaned form data to Formspree", async () => {
 
 for (const [code, expected] of [[400, /check the fields/], [429, /wait a few minutes/], [503, /temporarily unavailable/]]) {
   test(`handles a ${code} response without exposing provider details`, async () => {
-    const { reset, status } = await runSubmission(code);
+    const { errors, reset, status } = await runSubmission(code);
     assert.equal(reset, false);
     assert.match(status.textContent, expected);
     assert.doesNotMatch(status.textContent, /Formspree|provider|configuration/i);
+    assert.deepEqual(errors, [["Formspree submission failed:", code, "Formspree diagnostic response"]]);
   });
 }
 

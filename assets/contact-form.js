@@ -42,6 +42,7 @@
         body,
       });
       if (!response.ok) {
+        console.error("Formspree submission failed:", response.status, await response.text());
         status.textContent = responseMessage(response.status);
         return;
       }
