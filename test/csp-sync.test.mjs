@@ -13,4 +13,6 @@ test("production smoke test validates stable CSP guarantees without requiring de
   }
   assert.match(smoke, /for directive in "default-src 'self'"[\s\S]+"upgrade-insecure-requests"/);
   assert.doesNotMatch(smoke, /EXPECTED_CSP|does not match _headers/);
+  assert.match(smoke, /attempt < HEADER_ATTEMPTS/);
+  assert.match(smoke, /Content-Security-Policy is missing after \$\{HEADER_ATTEMPTS\} attempts/);
 });
