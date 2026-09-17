@@ -6,6 +6,8 @@ readonly CHECK_HEADERS="${CHECK_HEADERS:-true}"
 readonly CONTACT_PATH="/contact.html"
 readonly HTTPS_URL="https://${DOMAIN}${CONTACT_PATH}"
 readonly ALTERNATE_HOSTNAMES="${ALTERNATE_HOSTNAMES:-www.${DOMAIN}}"
+readonly HEADER_ATTEMPTS="${HEADER_ATTEMPTS:-12}"
+readonly HEADER_RETRY_SECONDS="${HEADER_RETRY_SECONDS:-15}"
 
 fail() {
   printf 'ERROR: %s\n' "$*" >&2
@@ -54,22 +56,40 @@ for hostname in $ALTERNATE_HOSTNAMES; do
   check_direct_redirect "https://${hostname}${CONTACT_PATH}"
 done
 
-read -r https_status final_url tls_verify_result < <(
-  curl --silent --show-error --fail --location --dump-header "$headers_file" \
-    --output /dev/null --max-time 20 \
-    --write-out '%{http_code} %{url_effective} %{ssl_verify_result}\n' "$HTTPS_URL"
-)
-[[ "$https_status" == "200" ]] || fail "${HTTPS_URL} returned HTTP ${https_status:-no status}"
-[[ "$final_url" == "$HTTPS_URL" ]] || fail "Final HTTPS URL is ${final_url:-missing}, expected ${HTTPS_URL}"
-[[ "$tls_verify_result" == "0" ]] || fail "TLS certificate verification failed for ${HTTPS_URL}: ${tls_verify_result:-unknown result}"
+fetch_https() {
+  local https_status final_url tls_verify_result
+
+  : > "$headers_file"
+  read -r https_status final_url tls_verify_result < <(
+    curl --silent --show-error --fail --location --dump-header "$headers_file" \
+      --output /dev/null --max-time 20 \
+      --write-out '%{http_code} %{url_effective} %{ssl_verify_result}\n' "$HTTPS_URL"
+  )
+  [[ "$https_status" == "200" ]] || fail "${HTTPS_URL} returned HTTP ${https_status:-no status}"
+  [[ "$final_url" == "$HTTPS_URL" ]] || fail "Final HTTPS URL is ${final_url:-missing}, expected ${HTTPS_URL}"
+  [[ "$tls_verify_result" == "0" ]] || fail "TLS certificate verification failed for ${HTTPS_URL}: ${tls_verify_result:-unknown result}"
+}
+
+fetch_https
 
 if [[ "$CHECK_HEADERS" == "false" ]]; then
   printf 'HTTPS preflight checks passed for %s\n' "$HTTPS_URL"
   exit 0
 fi
 
+# Cloudflare Pages deploys independently of this workflow. A push can therefore
+# reach this job while an edge location is briefly serving an incomplete response
+# during rollout. Retry only the missing-CSP case; an invalid policy still fails
+# immediately below rather than being hidden as a deployment race.
 csp="$(header_value content-security-policy)"
-[[ -n "$csp" ]] || fail "Content-Security-Policy is missing"
+for ((attempt = 1; attempt < HEADER_ATTEMPTS && ${#csp} == 0; attempt++)); do
+  printf 'Content-Security-Policy is missing (attempt %d/%d); retrying in %ss...\n' \
+    "$attempt" "$HEADER_ATTEMPTS" "$HEADER_RETRY_SECONDS" >&2
+  sleep "$HEADER_RETRY_SECONDS"
+  fetch_https
+  csp="$(header_value content-security-policy)"
+done
+[[ -n "$csp" ]] || fail "Content-Security-Policy is missing after ${HEADER_ATTEMPTS} attempts"
 for directive in "default-src 'self'" "object-src 'none'" "base-uri 'self'" "frame-ancestors 'none'" "upgrade-insecure-requests"; do
   [[ "$csp" == *"$directive"* ]] || fail "Content-Security-Policy is missing required directive: ${directive}"
 done
