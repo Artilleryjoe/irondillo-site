@@ -39,7 +39,15 @@ async function validateReference(page, attribute, reference) {
   }
 
   if (url.origin !== "https://irondillo.com") return;
-  const relativePath = decodeURIComponent(url.pathname).replace(/^\/+/, "") || "index.html";
+  let decodedPath;
+  try {
+    decodedPath = decodeURIComponent(url.pathname);
+  } catch {
+    fail(page, `${attribute} has invalid percent-encoding: ${reference}`);
+    return;
+  }
+
+  const relativePath = decodedPath.replace(/^\/+/, "") || "index.html";
   const target = path.resolve(root, relativePath);
   if (target !== root && !target.startsWith(`${root}${path.sep}`)) {
     fail(page, `${attribute} escapes the site root: ${reference}`);
