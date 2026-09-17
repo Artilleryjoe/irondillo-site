@@ -62,7 +62,7 @@ The GitHub Actions validation workflow also enforces this and fails when the gen
 
 ## Deployment
 
-The production site is a static Cloudflare Pages project deployed from `main`. GitHub Actions runs the build and tests as a deployment guard. After deployment, run `scripts/smoke-production.sh` to check the production page, redirects, and stable security-header guarantees. The smoke test intentionally validates required CSP directives instead of exact policy equality so a Pages deployment still in progress does not fail an otherwise healthy push.
+The production site is a static Cloudflare Pages project deployed from `main`. GitHub Actions runs the build and tests as a deployment guard. Cloudflare's advanced-mode `_worker.js` serves the static assets and attaches the required security headers to every response; `_headers` remains the declarative policy and fallback. After deployment, run `scripts/smoke-production.sh` to check the production page, redirects, and stable security-header guarantees.
 
 ## Content guidelines
 
@@ -83,8 +83,8 @@ When adding or revising testimonials, follow this checklist so updates stay cons
 
 ## Security headers policy
 
-A single canonical policy is defined in [`_headers`](_headers). Cloudflare Pages
-processes that file during deployment and applies the policy to all routes (`/*`):
+A single canonical policy is defined in [`_headers`](_headers) and enforced on
+all asset responses by [`_worker.js`](_worker.js):
 
 - `Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; frame-src 'none'; form-action 'none'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; upgrade-insecure-requests`
 - Browser connections remain same-origin, framing and form submissions are disabled, and production must redirect HTTP to HTTPS.
