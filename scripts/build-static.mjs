@@ -3,7 +3,6 @@ import { cp, mkdir, readdir, rm, writeFile } from "node:fs/promises";
 import { dirname, extname, resolve } from "node:path";
 import { promisify } from "node:util";
 import { fileURLToPath } from "node:url";
-import { readSecurityPolicy, renderHeaders, renderWorker } from "./security-policy.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const output = resolve(root, "dist");
@@ -12,7 +11,7 @@ const rootFiles = ["CNAME", "styles.css"];
 const execFileAsync = promisify(execFile);
 
 async function deploymentSha() {
-  const environmentSha = process.env.DEPLOYMENT_SHA || process.env.CF_PAGES_COMMIT_SHA || process.env.GITHUB_SHA;
+  const environmentSha = process.env.DEPLOYMENT_SHA || process.env.GITHUB_SHA;
   if (environmentSha) return environmentSha;
 
   const { stdout } = await execFileAsync("git", ["rev-parse", "HEAD"], { cwd: root });
@@ -33,10 +32,6 @@ for (const file of rootFiles) {
 }
 
 await cp(resolve(root, "assets"), resolve(output, "assets"), { recursive: true });
-
-const securityPolicy = await readSecurityPolicy();
-await writeFile(resolve(output, "_headers"), renderHeaders(securityPolicy));
-await writeFile(resolve(output, "_worker.js"), renderWorker(securityPolicy));
 
 const sha = await deploymentSha();
 if (!/^[0-9a-f]{40}$/i.test(sha)) {
