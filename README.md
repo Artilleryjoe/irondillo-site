@@ -8,7 +8,7 @@ Marketing site for [Iron Dillo Cybersecurity](https://irondillo.com). The projec
 .
 ├── assets/                 # Published images, icons, and generated CSS
 ├── docs/                   # Project notes and historical reports
-├── config/security-headers.json      # Reference security-header policy
+├── config/security-headers.json      # Canonical browser-enforced meta CSP
 ├── src/styles/             # Source files used to build published CSS
 ├── index.html              # Home page
 ├── services.html           # Overview of offerings
@@ -103,24 +103,25 @@ When adding or revising testimonials, follow this checklist so updates stay cons
 
 ## Security-policy reference
 
-[`config/security-headers.json`](config/security-headers.json) records the desired
-HTTP response-header policy and is checked for unsafe origins by the test suite.
+This site uses a GitHub Pages-compatible, document-delivered security model.
+[`config/security-headers.json`](config/security-headers.json) is the canonical
+source for the CSP embedded in every root HTML page. The test suite and static
+validator require each page to contain that exact policy before any governed
+resource, preventing page-to-page policy drift.
+
+The deployed CSP is:
+
+`default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; frame-src 'none'; form-action 'none'; object-src 'none'; base-uri 'self'; upgrade-insecure-requests`
+
+Only directives supported in CSP meta delivery belong in this policy. In
+particular, do not add `frame-ancestors`, `sandbox`, `report-uri`, or `report-to`:
+browsers do not enforce those directives from a CSP meta element. Keep the policy
+restrictive and do not add wildcard or legacy provider origins.
+
 GitHub Pages does not provide repository-level configuration for custom HTTP
-response headers, so `npm run build` does not copy this file or generate header
-configuration in `dist`. The policy is therefore documentation for a future edge,
-proxy, or hosting layer that can set response headers; it is not currently
-asserted as a property of the GitHub Pages response.
-
-The documented policy is:
-
-- `Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; frame-src 'none'; form-action 'none'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; upgrade-insecure-requests`
-- `X-Content-Type-Options: nosniff`
-- `Referrer-Policy: strict-origin-when-cross-origin`
-- `Permissions-Policy: accelerometer=(), camera=(), geolocation=(), gyroscope=(), microphone=(), payment=(), usb=()`
-- `X-Frame-Options: DENY`
-- `Strict-Transport-Security: max-age=31536000`
-
-Keep the JSON restrictive and do not add wildcard or legacy provider origins.
-Several controls, including `frame-ancestors`, `X-Frame-Options`, and HSTS, only
-work when delivered as HTTP response headers; adding similarly named HTML
-`http-equiv` metadata is not an equivalent substitute.
+response headers. Consequently, normal repository artifacts cannot configure
+response-only controls such as `X-Content-Type-Options`, `X-Frame-Options`,
+`Strict-Transport-Security`, or `Permissions-Policy`. This repository does not
+claim those headers are deployed. They may only be documented as deployed after
+an explicitly configured non-Cloudflare reverse proxy or another hosting
+platform actually supplies and verifies them; HTML meta tags are not substitutes.

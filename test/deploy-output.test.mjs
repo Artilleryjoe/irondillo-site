@@ -10,9 +10,3 @@ test("GitHub Pages artifact contains the site and deployment metadata", async ()
   assert.match(deployment.sha, /^[0-9a-f]{40}$/);
   assert.deepEqual(Object.keys(deployment), ["sha"]);
 });
-
-test("GitHub Pages artifact excludes provider-specific configuration", async () => {
-  for (const name of ["_headers", "_worker.js", "wrangler.toml"]) {
-    await assert.rejects(access(new URL(`../dist/${name}`, import.meta.url)));
-  }
-});

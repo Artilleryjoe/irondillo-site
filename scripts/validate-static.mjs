@@ -3,18 +3,19 @@
 import { access, readFile, readdir } from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
+import { readSecurityPolicy } from "./security-policy.mjs";
 
 const root = process.cwd();
 const pages = (await readdir(root)).filter((name) => name.endsWith(".html")).sort();
 const failures = [];
-const securityHeaders = new Set([
-  "content-security-policy",
+const responseOnlyHeaders = new Set([
   "permissions-policy",
   "referrer-policy",
   "strict-transport-security",
   "x-content-type-options",
   "x-frame-options",
 ]);
+const canonicalCsp = (await readSecurityPolicy())["Content-Security-Policy"];
 
 function fail(page, message) {
   failures.push(`${page}: ${message}`);
@@ -74,6 +75,20 @@ async function validateReference(page, attribute, reference) {
 for (const page of pages) {
   const html = await readFile(path.join(root, page), "utf8");
 
+  const cspTags = [...html.matchAll(/<meta\b[^>]*\bhttp-equiv=["']content-security-policy["'][^>]*>/gi)];
+  if (cspTags.length !== 1) {
+    fail(page, `must contain exactly one Content-Security-Policy meta tag (found ${cspTags.length})`);
+  } else {
+    const { values: cspAttributes } = attributes(cspTags[0][0]);
+    if (cspAttributes.get("content") !== canonicalCsp) {
+      fail(page, "Content-Security-Policy meta tag does not match config/security-headers.json");
+    }
+    const firstGovernedResource = html.search(/<(?:link|script|style)\b/i);
+    if (firstGovernedResource !== -1 && cspTags[0].index > firstGovernedResource) {
+      fail(page, "Content-Security-Policy meta tag must precede governed resources");
+    }
+  }
+
   if (!/<html\b[^>]*\blang=["'][^"']+["']/i.test(html)) fail(page, "missing an html lang attribute");
   if (!/<title>\s*[^<]+\s*<\/title>/i.test(html)) fail(page, "missing a non-empty title");
   if (!/<meta\b[^>]*\bname=["']description["'][^>]*\bcontent=["'][^"']+["'][^>]*>/i.test(html)) {
@@ -103,7 +118,7 @@ for (const page of pages) {
   }
 
   for (const match of html.matchAll(/<meta\b[^>]*\bhttp-equiv=["']([^"']+)["'][^>]*>/gi)) {
-    if (securityHeaders.has(match[1].toLowerCase())) {
+    if (responseOnlyHeaders.has(match[1].toLowerCase())) {
       fail(page, `must not emulate the ${match[1]} security header with a meta tag`);
     }
   }
