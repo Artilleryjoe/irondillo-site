@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { readdir, readFile } from "node:fs/promises";
 import test from "node:test";
+import { readSecurityPolicy } from "../scripts/security-policy.mjs";
 
 const root = new URL("../", import.meta.url);
 const forbiddenOrigins = [
@@ -24,10 +25,10 @@ async function rootHtmlFiles() {
   return (await readdir(root)).filter((name) => name.endsWith(".html"));
 }
 
-test("_headers contains only approved CSP origins", async () => {
-  const headers = await readFile(new URL("../_headers", import.meta.url), "utf8");
-  const csp = headers.match(/^\s*Content-Security-Policy:\s*(.+)$/m)?.[1];
-  assert.ok(csp, "_headers must define the production CSP");
+test("canonical policy contains only approved CSP origins", async () => {
+  const policy = await readSecurityPolicy();
+  const csp = policy["Content-Security-Policy"];
+  assert.ok(csp, "canonical policy must define the production CSP");
 
   for (const origin of forbiddenOrigins) {
     assert.ok(!csp.includes(origin), `${origin} is not authorized`);
@@ -46,7 +47,7 @@ test("root HTML neither duplicates security headers nor loads forbidden origins"
       .map((match) => match[1].toLowerCase());
 
     for (const header of securityMetaNames) {
-      assert.ok(!httpEquivValues.includes(header), `${name} must rely on _headers for ${header}`);
+      assert.ok(!httpEquivValues.includes(header), `${name} must rely on the generated response headers for ${header}`);
     }
     for (const origin of forbiddenOrigins) {
       assert.ok(!html.includes(origin), `${name} loads unauthorized origin ${origin}`);

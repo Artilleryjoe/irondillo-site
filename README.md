@@ -8,6 +8,7 @@ Marketing site for [Iron Dillo Cybersecurity](https://irondillo.com). The projec
 .
 ├── assets/                 # Published images, icons, and generated CSS
 ├── docs/                   # Project notes and historical reports
+├── config/security-headers.json      # Canonical production header policy
 ├── src/styles/             # Source files used to build published CSS
 ├── index.html              # Home page
 ├── services.html           # Overview of offerings
@@ -66,16 +67,16 @@ The GitHub Actions validation workflow also enforces this and fails when the gen
 The production site is a Cloudflare Pages project deployed from `main`. Configure
 Cloudflare's **Build command** as `npm run build` and **Build output directory** as
 `dist`. The matching `pages_build_output_dir` in `wrangler.toml` keeps the expected
-output explicit and reviewable. The build recreates `dist` and copies `_worker.js`
-and `_headers` to its root alongside the public site, so Pages detects the
+output explicit and reviewable. The build recreates `dist` and generates `_worker.js`
+and `_headers` at its root alongside the public site, so Pages detects the
 advanced-mode Worker rather than uploading static assets alone.
 
 The build writes the deployed commit to `dist/deployment.json`, using
 `CF_PAGES_COMMIT_SHA` in Cloudflare Pages (and the local Git commit as a fallback).
 GitHub Actions runs the build and tests as a deployment guard, then polls that
 marker until production serves the triggering commit. Only then does it check the
-production page, redirects, and every security header against `_headers`, which
-remains the declarative policy and fallback. To run the same check locally, use
+production page, redirects, and every security header against
+`config/security-headers.json`. To run the same check locally, use
 `EXPECTED_DEPLOYMENT_SHA=$(git rev-parse HEAD) scripts/smoke-production.sh`.
 
 ## Content guidelines
@@ -97,8 +98,12 @@ When adding or revising testimonials, follow this checklist so updates stay cons
 
 ## Security headers policy
 
-A single canonical policy is defined in [`_headers`](_headers) and enforced on
-all asset responses by [`_worker.js`](_worker.js):
+A single canonical, machine-readable policy is defined in
+[`config/security-headers.json`](config/security-headers.json). `npm run build`
+reads that file and generates both `dist/_headers` and the advanced-mode
+`dist/_worker.js`; the Worker enforces those generated values on every asset
+response. Edit the JSON policy—not either generated deployment artifact—then run
+`npm run build` and `npm test` to verify both outputs exactly match it:
 
 - `Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; frame-src 'none'; form-action 'none'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; upgrade-insecure-requests`
 - Browser connections remain same-origin, framing and form submissions are disabled, and production must redirect HTTP to HTTPS.
@@ -108,7 +113,7 @@ all asset responses by [`_worker.js`](_worker.js):
 - `X-Frame-Options: DENY`
 - `Strict-Transport-Security: max-age=31536000`
 
-Do not add wildcard or legacy provider origins. `_headers` is the canonical
-production policy because Cloudflare sends it as an HTTP response header. In
+Do not add wildcard or legacy provider origins. The JSON file is the canonical
+production policy, while both generated artifacts provide Cloudflare enforcement. In
 particular, `frame-ancestors` and `X-Frame-Options` must be delivered in the HTTP
 response rather than through page-level metadata.

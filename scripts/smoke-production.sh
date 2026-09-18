@@ -10,7 +10,7 @@ readonly DEPLOYMENT_URL="https://${DOMAIN}/deployment.json"
 readonly ALTERNATE_HOSTNAMES="${ALTERNATE_HOSTNAMES:-www.${DOMAIN}}"
 readonly DEPLOYMENT_ATTEMPTS="${DEPLOYMENT_ATTEMPTS:-20}"
 readonly DEPLOYMENT_RETRY_SECONDS="${DEPLOYMENT_RETRY_SECONDS:-15}"
-readonly EXPECTED_HEADERS_FILE="${EXPECTED_HEADERS_FILE:-_headers}"
+readonly EXPECTED_HEADERS_FILE="${EXPECTED_HEADERS_FILE:-config/security-headers.json}"
 
 fail() {
   printf 'ERROR: %s\n' "$*" >&2
@@ -117,16 +117,9 @@ while IFS=$'\t' read -r header_name expected_value; do
   actual_value="$(header_value "$header_name")"
   [[ "$actual_value" == "$expected_value" ]] || \
     fail "${header_name} does not match ${EXPECTED_HEADERS_FILE} (expected: ${expected_value}; actual: ${actual_value:-missing})"
-done < <(awk '
-  /^\/\*/ { in_rule = 1; next }
-  in_rule && /^[[:space:]]+[A-Za-z0-9-]+:/ {
-    line = $0
-    sub(/^[[:space:]]*/, "", line)
-    name = line
-    sub(/:.*/, "", name)
-    sub(/^[^:]*:[[:space:]]*/, "", line)
-    print name "\t" line
-  }
+done < <(node -e '
+  const policy = JSON.parse(require("node:fs").readFileSync(process.argv[1], "utf8"));
+  for (const [name, value] of Object.entries(policy)) console.log(`${name}\t${value}`);
 ' "$EXPECTED_HEADERS_FILE")
 ((expected_header_count > 0)) || fail "No security headers found in ${EXPECTED_HEADERS_FILE}"
 
