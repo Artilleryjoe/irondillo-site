@@ -26,7 +26,7 @@ Date: 2026-05-26 (UTC)
 - All scanned HTML pages included at least one `<h1>` heading.
 
 ### ✅ Security baseline
-- `_headers` includes CSP, X-Content-Type-Options, Referrer-Policy, Permissions-Policy, and X-Frame-Options.
+- `config/security-headers.json` records the preferred response-header policy for hosts that support custom headers.
 - No anchor tags using `target="_blank"` were found without `rel="noopener"`/`noreferrer` in the current scan.
 
 ### ⚠️ SEO gaps (fixed)

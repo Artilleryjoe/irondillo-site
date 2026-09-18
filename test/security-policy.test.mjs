@@ -10,7 +10,6 @@ const forbiddenOrigins = [
   "https://unpkg.com",
   "https://www.google.com",
   "https://www.gstatic.com",
-  "https://challenges.cloudflare.com",
 ];
 const securityMetaNames = [
   "content-security-policy",
@@ -47,7 +46,7 @@ test("root HTML neither duplicates security headers nor loads forbidden origins"
       .map((match) => match[1].toLowerCase());
 
     for (const header of securityMetaNames) {
-      assert.ok(!httpEquivValues.includes(header), `${name} must rely on the generated response headers for ${header}`);
+      assert.ok(!httpEquivValues.includes(header), `${name} must not emulate the ${header} response header with metadata`);
     }
     for (const origin of forbiddenOrigins) {
       assert.ok(!html.includes(origin), `${name} loads unauthorized origin ${origin}`);

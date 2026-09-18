@@ -8,7 +8,7 @@ Marketing site for [Iron Dillo Cybersecurity](https://irondillo.com). The projec
 .
 ├── assets/                 # Published images, icons, and generated CSS
 ├── docs/                   # Project notes and historical reports
-├── config/security-headers.json      # Canonical production header policy
+├── config/security-headers.json      # Reference security-header policy
 ├── src/styles/             # Source files used to build published CSS
 ├── index.html              # Home page
 ├── services.html           # Overview of offerings
@@ -20,8 +20,7 @@ Marketing site for [Iron Dillo Cybersecurity](https://irondillo.com). The projec
 ├── maintenance.html        # Temporary maintenance notice page
 ├── 404.html                # Custom error page for missing routes
 ├── sitemap.xml / robots.txt
-├── wrangler.toml            # Cloudflare Pages output-directory configuration
-└── .github/workflows/static.yml       # Build validation and production smoke tests
+└── .github/workflows/static.yml       # Validation and GitHub Pages deployment
 ```
 
 The HTML entry points intentionally remain at the repository root because the
@@ -44,44 +43,46 @@ npx --yes http-server . -S -C localhost.pem -K localhost-key.pem -p 8000
 Then browse to <https://localhost:8000/contact.html>. A browser warning is expected because the certificate is self-signed; accept it only for this local development certificate. Remove `localhost.pem` and `localhost-key.pem` when finished. Edits to the HTML files appear when you refresh the page.
 
 
-## Build and deploy guard (Tailwind)
+## Build and deploy guard
 
 The Tailwind source lives at `src/styles/tailwind.css`, and its generated output is
 committed at `assets/tailwind.css`. Any HTML class changes should be followed by a
 rebuild so published styles stay in sync.
 
-Run this local check before pushing:
+Run the same checks used by GitHub Actions before pushing:
 
 ```bash
 npm ci
 npm run build
 git diff --exit-code -- assets/tailwind.css
+npm test
+npm run validate:static
 ```
 
-If the diff command reports changes, commit the regenerated `assets/tailwind.css` before opening or merging a PR.
-
-The GitHub Actions validation workflow also enforces this and fails when the generated CSS is not committed.
+If the diff command reports changes, commit the regenerated `assets/tailwind.css`
+before opening or merging a pull request. The workflow builds the complete `dist`
+artifact, checks the committed CSS, runs the Node test suite, and validates the
+static HTML and internal links before deployment.
 
 ## Deployment
 
-The production site is a Cloudflare Pages project deployed from `main`. GitHub
-Actions builds `dist`, writes the workflow's `${{ github.sha }}` to the deployment
-metadata, and publishes that directory with Wrangler. The repository requires the
-`CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` Actions secrets. The matching
-`pages_build_output_dir` in `wrangler.toml` keeps the expected output explicit and
-reviewable. The build recreates `dist` and generates `_worker.js` and `_headers` at
-its root alongside the public site, so Pages detects the advanced-mode Worker
-rather than uploading static assets alone.
+The production site is deployed from `main` by
+[`.github/workflows/static.yml`](.github/workflows/static.yml). After validation,
+the workflow rebuilds `dist`, configures GitHub Pages with
+`actions/configure-pages`, uploads `dist` with `actions/upload-pages-artifact`, and
+publishes that artifact with `actions/deploy-pages`.
 
-The build writes the deployed commit to `dist/deployment.json`, using
-`DEPLOYMENT_SHA`, `CF_PAGES_COMMIT_SHA`, or `GITHUB_SHA` (and the local Git commit
-as a fallback). The deployment workflow explicitly rewrites the file with
-`${{ github.sha }}` immediately before publishing. GitHub Actions runs the build
-and tests as a deployment guard, deploys that exact output, then polls that
-marker until production serves the triggering commit. Only then does it check the
-production page, redirects, and every security header against
-`config/security-headers.json`. To run the same check locally, use
-`EXPECTED_DEPLOYMENT_SHA=$(git rev-parse HEAD) scripts/smoke-production.sh`.
+The repository must have **Settings → Pages → Build and deployment → Source** set
+to **GitHub Actions**. The workflow supplies the required `pages: write` and
+`id-token: write` permissions and deploys through the `github-pages` environment;
+it does not require repository or environment secrets. The `CNAME` file is copied
+into the artifact for `irondillo.com`, so the domain's DNS records must point to
+GitHub Pages and **Enforce HTTPS** should be enabled in the Pages settings.
+
+Each build recreates `dist` with the public HTML, XML, text, CSS, image, and custom
+domain files. It also writes the deployed commit to `dist/deployment.json`, using
+`DEPLOYMENT_SHA`, `GITHUB_SHA`, or the local Git commit. The deployment job uses
+the workflow-provided `GITHUB_SHA` automatically.
 
 ## Content guidelines
 
@@ -100,24 +101,26 @@ When adding or revising testimonials, follow this checklist so updates stay cons
 * Avoid disclosing confidential project specifics, internal security details, or private business information in testimonial copy.
 * Edit location: `index.html` (testimonials section). Styling source: `styles.css` (testimonial-related classes).
 
-## Security headers policy
+## Security-policy reference
 
-A single canonical, machine-readable policy is defined in
-[`config/security-headers.json`](config/security-headers.json). `npm run build`
-reads that file and generates both `dist/_headers` and the advanced-mode
-`dist/_worker.js`; the Worker enforces those generated values on every asset
-response. Edit the JSON policy—not either generated deployment artifact—then run
-`npm run build` and `npm test` to verify both outputs exactly match it:
+[`config/security-headers.json`](config/security-headers.json) records the desired
+HTTP response-header policy and is checked for unsafe origins by the test suite.
+GitHub Pages does not provide repository-level configuration for custom HTTP
+response headers, so `npm run build` does not copy this file or generate header
+configuration in `dist`. The policy is therefore documentation for a future edge,
+proxy, or hosting layer that can set response headers; it is not currently
+asserted as a property of the GitHub Pages response.
+
+The documented policy is:
 
 - `Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; frame-src 'none'; form-action 'none'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; upgrade-insecure-requests`
-- Browser connections remain same-origin, framing and form submissions are disabled, and production must redirect HTTP to HTTPS.
 - `X-Content-Type-Options: nosniff`
 - `Referrer-Policy: strict-origin-when-cross-origin`
 - `Permissions-Policy: accelerometer=(), camera=(), geolocation=(), gyroscope=(), microphone=(), payment=(), usb=()`
 - `X-Frame-Options: DENY`
 - `Strict-Transport-Security: max-age=31536000`
 
-Do not add wildcard or legacy provider origins. The JSON file is the canonical
-production policy, while both generated artifacts provide Cloudflare enforcement. In
-particular, `frame-ancestors` and `X-Frame-Options` must be delivered in the HTTP
-response rather than through page-level metadata.
+Keep the JSON restrictive and do not add wildcard or legacy provider origins.
+Several controls, including `frame-ancestors`, `X-Frame-Options`, and HSTS, only
+work when delivered as HTTP response headers; adding similarly named HTML
+`http-equiv` metadata is not an equivalent substitute.
