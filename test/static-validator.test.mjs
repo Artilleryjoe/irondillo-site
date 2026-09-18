@@ -36,3 +36,32 @@ test("reports malformed percent-encoding without crashing", async (t) => {
   assert.match(result.stderr, /index\.html: href has invalid percent-encoding: \/%E0%A4%A/);
   assert.doesNotMatch(result.stderr, /URIError|at decodeURIComponent/);
 });
+
+test("rejects duplicate attributes and validates the browser's first value", async (t) => {
+  const fixture = await mkdtemp(path.join(tmpdir(), "irondillo-static-validator-"));
+  t.after(() => rm(fixture, { recursive: true, force: true }));
+
+  await writeFile(
+    path.join(fixture, "index.html"),
+    `<!doctype html>
+<html lang="en">
+  <head>
+    <title>Test page</title>
+    <meta name="description" content="Validator regression fixture">
+  </head>
+  <body>
+    <h1>Test page</h1>
+    <a href="/missing.html" href="/index.html">Broken duplicate link</a>
+  </body>
+</html>`,
+  );
+
+  const result = spawnSync(process.execPath, [validator.pathname], {
+    cwd: fixture,
+    encoding: "utf8",
+  });
+
+  assert.equal(result.status, 1);
+  assert.match(result.stderr, /index\.html: a element has duplicate href attributes/);
+  assert.match(result.stderr, /index\.html: href points to a missing file: \/missing\.html/);
+});
