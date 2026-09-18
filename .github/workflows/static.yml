@@ -37,10 +37,42 @@ jobs:
       - name: Validate static HTML, links, and security controls
         run: npm run validate:static
 
-  production-smoke:
-    name: Production smoke test
+  production-deploy:
+    name: Production deployment
     needs: pull-request-validation
     if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://irondillo.com
+    steps:
+      - name: Checkout trusted revision
+        uses: actions/checkout@v5
+      - name: Setup Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: 20
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Build site
+        run: npm run build
+      - name: Write deployment metadata
+        env:
+          DEPLOYMENT_SHA: ${{ github.sha }}
+        run: |
+          printf '{"sha":"%s"}\n' "$DEPLOYMENT_SHA" > dist/deployment.json
+          node -e 'const value = require("./dist/deployment.json"); if (!/^[0-9a-f]{40}$/i.test(value.sha)) process.exit(1); console.log(value);'
+      - name: Publish to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy dist --project-name=irondillo-site --branch=main
+
+  production-smoke:
+    name: Production smoke test
+    needs: production-deploy
     runs-on: ubuntu-latest
     environment:
       name: production
