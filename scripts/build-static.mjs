@@ -3,11 +3,12 @@ import { cp, mkdir, readdir, rm, writeFile } from "node:fs/promises";
 import { dirname, extname, resolve } from "node:path";
 import { promisify } from "node:util";
 import { fileURLToPath } from "node:url";
+import { readSecurityPolicy, renderHeaders, renderWorker } from "./security-policy.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const output = resolve(root, "dist");
 const rootExtensions = new Set([".html", ".xml", ".txt"]);
-const rootFiles = ["_headers", "_worker.js", "CNAME", "styles.css"];
+const rootFiles = ["CNAME", "styles.css"];
 const execFileAsync = promisify(execFile);
 
 async function deploymentSha() {
@@ -32,6 +33,10 @@ for (const file of rootFiles) {
 }
 
 await cp(resolve(root, "assets"), resolve(output, "assets"), { recursive: true });
+
+const securityPolicy = await readSecurityPolicy();
+await writeFile(resolve(output, "_headers"), renderHeaders(securityPolicy));
+await writeFile(resolve(output, "_worker.js"), renderWorker(securityPolicy));
 
 const sha = await deploymentSha();
 if (!/^[0-9a-f]{40}$/i.test(sha)) {
