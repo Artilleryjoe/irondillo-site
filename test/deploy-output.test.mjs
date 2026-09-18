@@ -12,4 +12,8 @@ test("Cloudflare output contains advanced worker and headers at its root", async
   const sourceHeaders = await readFile(new URL("../_headers", import.meta.url), "utf8");
   const outputHeaders = await readFile(new URL("../dist/_headers", import.meta.url), "utf8");
   assert.equal(outputHeaders, sourceHeaders);
+
+  const deployment = JSON.parse(await readFile(new URL("../dist/deployment.json", import.meta.url), "utf8"));
+  assert.match(deployment.sha, /^[0-9a-f]{40}$/);
+  assert.deepEqual(Object.keys(deployment), ["sha"]);
 });

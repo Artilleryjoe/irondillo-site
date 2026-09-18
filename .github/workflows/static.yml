@@ -52,6 +52,7 @@ jobs:
         id: smoke
         env:
           DOMAIN: irondillo.com
+          EXPECTED_DEPLOYMENT_SHA: ${{ github.sha }}
         run: |
           set -o pipefail
           if scripts/smoke-production.sh 2>&1 | tee production-smoke.log; then

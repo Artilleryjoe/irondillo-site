@@ -3,11 +3,14 @@ set -euo pipefail
 
 readonly DOMAIN="${DOMAIN:-irondillo.com}"
 readonly CHECK_HEADERS="${CHECK_HEADERS:-true}"
+readonly EXPECTED_DEPLOYMENT_SHA="${EXPECTED_DEPLOYMENT_SHA:-}"
 readonly CONTACT_PATH="/contact.html"
 readonly HTTPS_URL="https://${DOMAIN}${CONTACT_PATH}"
+readonly DEPLOYMENT_URL="https://${DOMAIN}/deployment.json"
 readonly ALTERNATE_HOSTNAMES="${ALTERNATE_HOSTNAMES:-www.${DOMAIN}}"
-readonly HEADER_ATTEMPTS="${HEADER_ATTEMPTS:-12}"
-readonly HEADER_RETRY_SECONDS="${HEADER_RETRY_SECONDS:-15}"
+readonly DEPLOYMENT_ATTEMPTS="${DEPLOYMENT_ATTEMPTS:-20}"
+readonly DEPLOYMENT_RETRY_SECONDS="${DEPLOYMENT_RETRY_SECONDS:-15}"
+readonly EXPECTED_HEADERS_FILE="${EXPECTED_HEADERS_FILE:-_headers}"
 
 fail() {
   printf 'ERROR: %s\n' "$*" >&2
@@ -33,7 +36,35 @@ header_value() {
 
 redirect_headers="$(mktemp)"
 headers_file="$(mktemp)"
-trap 'rm -f "$redirect_headers" "$headers_file"' EXIT
+deployment_file="$(mktemp)"
+trap 'rm -f "$redirect_headers" "$headers_file" "$deployment_file"' EXIT
+
+[[ "$EXPECTED_DEPLOYMENT_SHA" =~ ^[0-9a-fA-F]{40}$ ]] || \
+  fail "EXPECTED_DEPLOYMENT_SHA must be the 40-character Git SHA being deployed"
+[[ -r "$EXPECTED_HEADERS_FILE" ]] || fail "Expected security policy is not readable: ${EXPECTED_HEADERS_FILE}"
+
+active_deployment_sha=""
+for ((attempt = 1; attempt <= DEPLOYMENT_ATTEMPTS; attempt++)); do
+  : > "$deployment_file"
+  if curl --silent --show-error --fail --location --max-time 20 \
+    --header 'Cache-Control: no-cache' --output "$deployment_file" \
+    "${DEPLOYMENT_URL}?release=${EXPECTED_DEPLOYMENT_SHA}&attempt=${attempt}"; then
+    active_deployment_sha="$(sed -n 's/^[[:space:]]*{"sha":"\([0-9a-fA-F]\{40\}\)"}[[:space:]]*$/\1/p' "$deployment_file")"
+  fi
+  if [[ "${active_deployment_sha,,}" == "${EXPECTED_DEPLOYMENT_SHA,,}" ]]; then
+    printf 'Confirmed production deployment %s (attempt %d/%d)\n' \
+      "$EXPECTED_DEPLOYMENT_SHA" "$attempt" "$DEPLOYMENT_ATTEMPTS"
+    break
+  fi
+  if (( attempt < DEPLOYMENT_ATTEMPTS )); then
+    printf 'Production deployment is %s, waiting for %s (attempt %d/%d); retrying in %ss...\n' \
+      "${active_deployment_sha:-unavailable}" "$EXPECTED_DEPLOYMENT_SHA" "$attempt" \
+      "$DEPLOYMENT_ATTEMPTS" "$DEPLOYMENT_RETRY_SECONDS" >&2
+    sleep "$DEPLOYMENT_RETRY_SECONDS"
+  fi
+done
+[[ "${active_deployment_sha,,}" == "${EXPECTED_DEPLOYMENT_SHA,,}" ]] || \
+  fail "Production deployment did not become ${EXPECTED_DEPLOYMENT_SHA} after ${DEPLOYMENT_ATTEMPTS} attempts (active: ${active_deployment_sha:-unavailable})"
 
 check_direct_redirect() {
   local source_url="$1"
@@ -77,26 +108,26 @@ if [[ "$CHECK_HEADERS" == "false" ]]; then
   exit 0
 fi
 
-# Cloudflare Pages deploys independently of this workflow. A push can therefore
-# reach this job while an edge location is briefly serving an incomplete response
-# during rollout. Retry only the missing-CSP case; an invalid policy still fails
-# immediately below rather than being hidden as a deployment race.
-csp="$(header_value content-security-policy)"
-for ((attempt = 1; attempt < HEADER_ATTEMPTS && ${#csp} == 0; attempt++)); do
-  printf 'Content-Security-Policy is missing (attempt %d/%d); retrying in %ss...\n' \
-    "$attempt" "$HEADER_ATTEMPTS" "$HEADER_RETRY_SECONDS" >&2
-  sleep "$HEADER_RETRY_SECONDS"
-  fetch_https
-  csp="$(header_value content-security-policy)"
-done
-[[ -n "$csp" ]] || fail "Content-Security-Policy is missing after ${HEADER_ATTEMPTS} attempts"
-for directive in "default-src 'self'" "object-src 'none'" "base-uri 'self'" "frame-ancestors 'none'" "upgrade-insecure-requests"; do
-  [[ "$csp" == *"$directive"* ]] || fail "Content-Security-Policy is missing required directive: ${directive}"
-done
-[[ "$(header_value x-content-type-options)" == "nosniff" ]] || fail "X-Content-Type-Options is missing or invalid"
-[[ "$(header_value referrer-policy)" == "strict-origin-when-cross-origin" ]] || fail "Referrer-Policy is missing or invalid"
-[[ "$(header_value permissions-policy)" == "accelerometer=(), camera=(), geolocation=(), gyroscope=(), microphone=(), payment=(), usb=()" ]] || fail "Permissions-Policy is missing or invalid"
-[[ "$(header_value x-frame-options)" == "DENY" ]] || fail "X-Frame-Options is missing or invalid"
-[[ "$(header_value strict-transport-security)" == "max-age=31536000" ]] || fail "Strict-Transport-Security is missing or invalid"
+# Compare every declared production security header byte-for-byte with the
+# trusted policy from this revision. This catches both missing directives and
+# unexpectedly loosened values rather than sampling a few CSP guarantees.
+expected_header_count=0
+while IFS=$'\t' read -r header_name expected_value; do
+  ((expected_header_count += 1))
+  actual_value="$(header_value "$header_name")"
+  [[ "$actual_value" == "$expected_value" ]] || \
+    fail "${header_name} does not match ${EXPECTED_HEADERS_FILE} (expected: ${expected_value}; actual: ${actual_value:-missing})"
+done < <(awk '
+  /^\/\*/ { in_rule = 1; next }
+  in_rule && /^[[:space:]]+[A-Za-z0-9-]+:/ {
+    line = $0
+    sub(/^[[:space:]]*/, "", line)
+    name = line
+    sub(/:.*/, "", name)
+    sub(/^[^:]*:[[:space:]]*/, "", line)
+    print name "\t" line
+  }
+' "$EXPECTED_HEADERS_FILE")
+((expected_header_count > 0)) || fail "No security headers found in ${EXPECTED_HEADERS_FILE}"
 
 printf 'Production security checks passed for %s\n' "$HTTPS_URL"
