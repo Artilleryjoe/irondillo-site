@@ -1,4 +1,4 @@
-name: Validate site
+name: Validate and deploy site
 
 on:
   push:
@@ -9,96 +9,74 @@ on:
 
 permissions:
   contents: read
+  pages: write
+  id-token: write
 
 concurrency:
-  group: "validate-${{ github.ref }}"
-  cancel-in-progress: true
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
-  pull-request-validation:
-    name: Pull request validation
+  validate:
+    name: Validate site
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v5
+
       - name: Setup Node
         uses: actions/setup-node@v5
         with:
           node-version: 20
           cache: npm
+
       - name: Install dependencies
         run: npm ci
+
       - name: Build deployable site
         run: |
           npm run build
           git diff --exit-code -- assets/tailwind.css
+
       - name: Run site tests
         run: npm test
-      - name: Validate static HTML, links, and security controls
+
+      - name: Validate static HTML and links
         run: npm run validate:static
 
-  production-deploy:
-    name: Production deployment
-    needs: pull-request-validation
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: validate
     if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
-    runs-on: ubuntu-latest
     environment:
-      name: production
-      url: https://irondillo.com
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout trusted revision
+      - name: Checkout
         uses: actions/checkout@v5
+
       - name: Setup Node
         uses: actions/setup-node@v5
         with:
           node-version: 20
           cache: npm
+
       - name: Install dependencies
         run: npm ci
+
       - name: Build site
         run: npm run build
-      - name: Write deployment metadata
-        env:
-          DEPLOYMENT_SHA: ${{ github.sha }}
-        run: |
-          printf '{"sha":"%s"}\n' "$DEPLOYMENT_SHA" > dist/deployment.json
-          node -e 'const value = require("./dist/deployment.json"); if (!/^[0-9a-f]{40}$/i.test(value.sha)) process.exit(1); console.log(value);'
-      - name: Publish to Cloudflare Pages
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy dist --project-name=irondillo-site --branch=main
 
-  production-smoke:
-    name: Production smoke test
-    needs: production-deploy
-    runs-on: ubuntu-latest
-    environment:
-      name: production
-      url: https://irondillo.com
-    steps:
-      - name: Checkout trusted revision
-        uses: actions/checkout@v5
-      - name: Check the canonical production site
-        id: smoke
-        env:
-          DOMAIN: irondillo.com
-          EXPECTED_DEPLOYMENT_SHA: ${{ github.sha }}
-        run: |
-          set -o pipefail
-          if scripts/smoke-production.sh 2>&1 | tee production-smoke.log; then
-            echo "### Production smoke test passed for https://${DOMAIN}" >> "$GITHUB_STEP_SUMMARY"
-          else
-            status=$?
-            echo "::error title=Production smoke test failed::See the job log and production-smoke-log artifact for details."
-            echo "### Production smoke test failed for https://${DOMAIN}" >> "$GITHUB_STEP_SUMMARY"
-            exit "$status"
-          fi
-      - name: Upload production smoke log
-        if: always()
-        uses: actions/upload-artifact@v5
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload GitHub Pages artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          name: production-smoke-log
-          path: production-smoke.log
-          if-no-files-found: error
+          path: ./dist
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
