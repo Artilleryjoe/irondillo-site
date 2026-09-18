@@ -2,24 +2,25 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-test("production smoke test validates stable CSP guarantees without requiring deployment synchronization", async () => {
+test("production smoke test waits for its release and compares the complete header policy", async () => {
   const headers = await readFile(new URL("../_headers", import.meta.url), "utf8");
   const smoke = await readFile(new URL("../scripts/smoke-production.sh", import.meta.url), "utf8");
   const workerSource = await readFile(new URL("../_worker.js", import.meta.url), "utf8");
-  const canonical = headers.match(/^\s*Content-Security-Policy:\s*(.+)$/m)?.[1];
+  const policyHeaders = [...headers.matchAll(/^\s{2}([^:\n]+):\s*(.+)$/gm)];
 
-  assert.ok(canonical, "_headers must define a canonical Content-Security-Policy");
-  for (const directive of ["default-src 'self'", "object-src 'none'", "base-uri 'self'", "frame-ancestors 'none'", "upgrade-insecure-requests"]) {
-    assert.ok(canonical.includes(directive), `_headers must include ${directive}`);
-  }
-  assert.match(smoke, /for directive in "default-src 'self'"[\s\S]+"upgrade-insecure-requests"/);
-  assert.doesNotMatch(smoke, /EXPECTED_CSP|does not match _headers/);
+  assert.ok(policyHeaders.length > 0, "_headers must define the production security policy");
+  assert.match(smoke, /EXPECTED_DEPLOYMENT_SHA/);
+  assert.match(smoke, /deployment\.json/);
+  assert.match(smoke, /active_deployment_sha/);
+  assert.match(smoke, /while IFS=\$'\\t' read -r header_name expected_value/);
+  assert.match(smoke, /actual_value="\$\(header_value "\$header_name"\)"/);
+  assert.doesNotMatch(smoke, /for directive in/);
 
   const worker = await import(`data:text/javascript,${encodeURIComponent(workerSource)}`);
   const response = await worker.default.fetch(new Request("https://irondillo.com/contact.html"), {
     ASSETS: { fetch: async () => new Response("contact", { status: 200, headers: { "Cache-Control": "public, max-age=60" } }) },
   });
-  for (const match of headers.matchAll(/^\s{2}([^:\n]+):\s*(.+)$/gm)) {
+  for (const match of policyHeaders) {
     assert.equal(response.headers.get(match[1]), match[2], `worker must enforce ${match[1]}`);
   }
   assert.equal(response.status, 200);

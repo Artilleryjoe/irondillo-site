@@ -70,11 +70,13 @@ output explicit and reviewable. The build recreates `dist` and copies `_worker.j
 and `_headers` to its root alongside the public site, so Pages detects the
 advanced-mode Worker rather than uploading static assets alone.
 
-GitHub Actions runs the build and tests as a deployment guard. After a production
-deployment, confirm its source commit is the current `main` SHA and that the
-deployment details show a Pages Functions/Worker bundle. Then run
-`scripts/smoke-production.sh` to check the production page, redirects, and stable
-security-header guarantees. `_headers` remains the declarative policy and fallback.
+The build writes the deployed commit to `dist/deployment.json`, using
+`CF_PAGES_COMMIT_SHA` in Cloudflare Pages (and the local Git commit as a fallback).
+GitHub Actions runs the build and tests as a deployment guard, then polls that
+marker until production serves the triggering commit. Only then does it check the
+production page, redirects, and every security header against `_headers`, which
+remains the declarative policy and fallback. To run the same check locally, use
+`EXPECTED_DEPLOYMENT_SHA=$(git rev-parse HEAD) scripts/smoke-production.sh`.
 
 ## Content guidelines
 
