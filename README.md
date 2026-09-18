@@ -64,16 +64,20 @@ The GitHub Actions validation workflow also enforces this and fails when the gen
 
 ## Deployment
 
-The production site is a Cloudflare Pages project deployed from `main`. Configure
-Cloudflare's **Build command** as `npm run build` and **Build output directory** as
-`dist`. The matching `pages_build_output_dir` in `wrangler.toml` keeps the expected
-output explicit and reviewable. The build recreates `dist` and generates `_worker.js`
-and `_headers` at its root alongside the public site, so Pages detects the
-advanced-mode Worker rather than uploading static assets alone.
+The production site is a Cloudflare Pages project deployed from `main`. GitHub
+Actions builds `dist`, writes the workflow's `${{ github.sha }}` to the deployment
+metadata, and publishes that directory with Wrangler. The repository requires the
+`CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` Actions secrets. The matching
+`pages_build_output_dir` in `wrangler.toml` keeps the expected output explicit and
+reviewable. The build recreates `dist` and generates `_worker.js` and `_headers` at
+its root alongside the public site, so Pages detects the advanced-mode Worker
+rather than uploading static assets alone.
 
 The build writes the deployed commit to `dist/deployment.json`, using
-`CF_PAGES_COMMIT_SHA` in Cloudflare Pages (and the local Git commit as a fallback).
-GitHub Actions runs the build and tests as a deployment guard, then polls that
+`DEPLOYMENT_SHA`, `CF_PAGES_COMMIT_SHA`, or `GITHUB_SHA` (and the local Git commit
+as a fallback). The deployment workflow explicitly rewrites the file with
+`${{ github.sha }}` immediately before publishing. GitHub Actions runs the build
+and tests as a deployment guard, deploys that exact output, then polls that
 marker until production serves the triggering commit. Only then does it check the
 production page, redirects, and every security header against
 `config/security-headers.json`. To run the same check locally, use
