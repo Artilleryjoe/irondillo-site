@@ -4,8 +4,9 @@
   "version": "1.0.0",
   "scripts": {
     "build:tailwind": "tailwindcss -c tailwind.config.js -i ./src/styles/tailwind.css -o ./assets/tailwind.css --minify",
-    "build": "npm run build:tailwind",
+    "build": "npm run build:tailwind && node scripts/build-static.mjs",
     "validate:static": "node scripts/validate-static.mjs",
+    "pretest": "node scripts/build-static.mjs",
     "test": "node --test"
   },
   "devDependencies": {

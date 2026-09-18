@@ -19,7 +19,8 @@ Marketing site for [Iron Dillo Cybersecurity](https://irondillo.com). The projec
 ├── maintenance.html        # Temporary maintenance notice page
 ├── 404.html                # Custom error page for missing routes
 ├── sitemap.xml / robots.txt
-└── .github/workflows/static.yml       # Cloudflare Pages deployment workflow
+├── wrangler.toml            # Cloudflare Pages output-directory configuration
+└── .github/workflows/static.yml       # Build validation and production smoke tests
 ```
 
 The HTML entry points intentionally remain at the repository root because the
@@ -52,7 +53,7 @@ Run this local check before pushing:
 
 ```bash
 npm ci
-npm run build:tailwind
+npm run build
 git diff --exit-code -- assets/tailwind.css
 ```
 
@@ -62,7 +63,18 @@ The GitHub Actions validation workflow also enforces this and fails when the gen
 
 ## Deployment
 
-The production site is a static Cloudflare Pages project deployed from `main`. GitHub Actions runs the build and tests as a deployment guard. Cloudflare's advanced-mode `_worker.js` serves the static assets and attaches the required security headers to every response; `_headers` remains the declarative policy and fallback. After deployment, run `scripts/smoke-production.sh` to check the production page, redirects, and stable security-header guarantees.
+The production site is a Cloudflare Pages project deployed from `main`. Configure
+Cloudflare's **Build command** as `npm run build` and **Build output directory** as
+`dist`. The matching `pages_build_output_dir` in `wrangler.toml` keeps the expected
+output explicit and reviewable. The build recreates `dist` and copies `_worker.js`
+and `_headers` to its root alongside the public site, so Pages detects the
+advanced-mode Worker rather than uploading static assets alone.
+
+GitHub Actions runs the build and tests as a deployment guard. After a production
+deployment, confirm its source commit is the current `main` SHA and that the
+deployment details show a Pages Functions/Worker bundle. Then run
+`scripts/smoke-production.sh` to check the production page, redirects, and stable
+security-header guarantees. `_headers` remains the declarative policy and fallback.
 
 ## Content guidelines
 
