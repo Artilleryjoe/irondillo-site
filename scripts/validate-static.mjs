@@ -21,10 +21,20 @@ function fail(page, message) {
 }
 
 function attributes(tag) {
-  return new Map(
-    [...tag.matchAll(/([\w:-]+)(?:\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+)))?/g)]
-      .map((match) => [match[1].toLowerCase(), match[2] ?? match[3] ?? match[4] ?? ""]),
-  );
+  const values = new Map();
+  const duplicates = new Set();
+  const attributeSource = tag.replace(/^<\/?[\w:-]+/, "");
+
+  for (const match of attributeSource.matchAll(/([\w:-]+)(?:\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+)))?/g)) {
+    const name = match[1].toLowerCase();
+    if (values.has(name)) {
+      duplicates.add(name);
+      continue;
+    }
+    values.set(name, match[2] ?? match[3] ?? match[4] ?? "");
+  }
+
+  return { values, duplicates };
 }
 
 async function validateReference(page, attribute, reference) {
@@ -73,7 +83,10 @@ for (const page of pages) {
 
   for (const match of html.matchAll(/<(a|img|script|link)\b[^>]*>/gi)) {
     const tagName = match[1].toLowerCase();
-    const attrs = attributes(match[0]);
+    const { values: attrs, duplicates } = attributes(match[0]);
+    for (const name of duplicates) {
+      fail(page, `${tagName} element has duplicate ${name} attributes`);
+    }
     const referenceAttribute = tagName === "a" || tagName === "link" ? "href" : "src";
     if (attrs.has(referenceAttribute)) {
       await validateReference(page, referenceAttribute, attrs.get(referenceAttribute));
